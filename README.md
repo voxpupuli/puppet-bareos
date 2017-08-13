@@ -1,7 +1,7 @@
 # Bareos Puppet Module
 [![Puppet Forge](http://img.shields.io/puppetforge/v/project0/bareos.svg)](https://forge.puppetlabs.com/project0/bareos)
 [![Puppet Forge score](https://img.shields.io/puppetforge/f/project0/bareos.svg)](https://forge.puppetlabs.com/project0/bareos)
-[![Build Status](https://travis-ci.org/project0/puppet-bareos.svg?branch=master)](https://travis-ci.org/project0/puppet-bareos)
+[![Build Status](https://travis-ci.org/Project0/puppet-bareos.svg?branch=master)](https://travis-ci.org/Project0/puppet-bareos)
 
 #### Table of Contents
 
