@@ -5,7 +5,7 @@
   "summary": "Manage and configure a Bareos installation",
   "license": "Apache-2.0",
   "source": "https://github.com/project0/puppet-bareos",
-  "project_page": "https://www.bareos.org/",
+  "project_page": "https://github.com/project0/puppet-bareos",
   "issues_url": "https://github.com/project0/puppet-bareos/issues",
   "tags": ["bareos", "backup"],
   "dependencies": [
