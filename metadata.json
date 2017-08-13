@@ -1,0 +1,62 @@
+{
+  "name": "project0-bareos",
+  "version": "0.1.0",
+  "author": "Richard Hillmann <richie@project0.de>",
+  "summary": "Manage and configure a Bareos installation",
+  "license": "Apache-2.0",
+  "source": "https://github.com/project0/puppet-bareos",
+  "project_page": "https://www.bareos.org/",
+  "issues_url": "https://github.com/project0/puppet-bareos/issues",
+  "tags": ["bareos", "backup"],
+  "dependencies": [
+    {"name": "puppetlabs/stdlib","version_requirement":">= 4.0.0"},
+    {"name": "puppetlabs/apt", "version_requirement": ">=2.0.0"},
+    {"name": "puppetlabs/concat", "version_requirement": ">=2.0.0"}
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">=3.6.0 < 6.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7",
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04",
+        "16.04"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [
+        "23",
+        "24"
+      ]
+    }
+  ]
+}

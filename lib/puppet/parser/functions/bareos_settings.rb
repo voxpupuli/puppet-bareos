@@ -1,0 +1,113 @@
+module Puppet::Parser::Functions
+  newfunction(:bareos_settings, type: :rvalue, doc: <<-'ENDHEREDOC') do |args|
+    Helper function to parse settings for bareos and return prepared lines for config file
+    ENDHEREDOC
+
+    final_settings = []
+    args.each do |setting|
+      begin
+        raise 'Invalid or incomplete setting' unless setting.length > 2 && setting.is_a?(Array)
+        value_setting = setting[0] # value for this setting
+        directive = setting[1] # Directive Keyword of this setting
+        type = setting[2] # bareos variable type
+        required = setting[3] # boolean, undef allowed or not
+        indent = setting[4] || '  ' # Internally used, just for beatufying
+
+        raise 'Name of directive config key is invalid' unless directive =~ %r{^[a-zA-z ]+$}
+
+        # check array if allowed
+        values = if (type == 'acl' || type =~ %r{[_-]list$}) && value_setting.is_a?(Array)
+                   value_setting
+                 else
+                   [value_setting]
+                 end
+        type.gsub!(%r{([_-]list)$}, '')
+
+        values.each do |value|
+          # ignore undef if not required
+          next if required == false && value == :undef
+          raise 'This directive is required, please set value' if value == :undef
+
+          # defaults:
+          # quote value
+          quote = false
+          # check regex
+          regex = nil
+          # check in array
+          value_in_array = nil
+          # required for addresses/hashes
+          hash_separator = ' '
+
+          # validation by type
+          case type
+          # maybe check more than it is an int
+          when 'int32', 'pint16', 'pint32', 'port', 'max_blocksize'
+            # type casting raise error
+            Integer(value)
+          when 'name', 'res', 'resource'
+            quote = true
+            regex = %r{^[a-z][a-z0-9\.\-_ \$]{0,126}$}i
+          # @todo validate net-address for domain name or ip
+          when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
+            raise 'Value need to be an string' unless value.is_a?(String)
+          # type md5password is missleading, it is an plain password and not md5 hashed
+          when 'audit-command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'address', 'device', 'plugin_names'
+            # array
+            quote = true
+            raise 'Value need to be an string' unless value.is_a?(String)
+          when 'speed'
+            regex = %r{^\d+\W*(k|kb|m|mb)\/s$}i
+          when 'size64'
+            regex = %r{^(\d+(\.\d+)?)\W*(k|kb|m|mb|g|gb)$}i
+          when 'time'
+            regex = %r{^(\d+|(\d+\W+(seconds|sec|s|minutes|min|hours|h|days|d|weeks|w|months|m|quarters|q|years|y)\W*)+)$}i
+          when 'boolean', 'bit'
+            value_in_array = %w[yes no on off true false]
+          when 'addresses'
+            hash_separator = ' = '
+            raise 'Please specify as Hash' unless value.is_a?(Hash)
+          when 'include_exclude_item', 'runscript', 'hash'
+            raise 'Please specify as Hash' unless value.is_a?(Hash)
+          when 'backup_level'
+            value_in_array = %w[full incremental differential virtualfull]
+          when 'io_direction'
+            value_in_array = %w[in out both]
+          when 'action_on_purge'
+            value_in_array = %w[truncate]
+          else
+            raise "Invalid setting type '#{type}'"
+          end
+
+          unless value_in_array.nil?
+            raise "Value '#{value}' needs to be one of #{value_in_array.inspect}" unless value_in_array.include? value.to_s.downcase
+          end
+          unless regex.nil?
+            raise "Value '#{value}' does not match regex #{regex}" unless value =~ Regexp.compile(regex)
+          end
+
+          if value.is_a?(Hash)
+            final_settings.push "#{indent}#{directive}#{hash_separator}{"
+            value.each do |k, v|
+              type_n = 'string_noquote'
+              type_n = "#{type_n}_list" if v.is_a?(Array)
+              # use same type again:
+              type_n = type if v.is_a?(Hash)
+              final_settings.push function_bareos_settings([[v, k, type_n, false, "#{indent}  "]])
+            end
+            final_settings.push "#{indent}}"
+          else
+            if quote
+              # value = value.gsub(/(")/, '\"')
+              value = "\"#{value}\""
+            end
+            final_settings.push "#{indent}#{directive} = #{value}"
+          end
+        end
+      rescue => error
+        raise Puppet::ParseError, "bareos_parse_settings(): #{setting.inspect}: #{error}."
+      end
+    end
+
+    return final_settings.join "\n"
+  end
+end

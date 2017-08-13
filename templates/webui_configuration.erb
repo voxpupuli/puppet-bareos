@@ -1,0 +1,23 @@
+# This file is managed by puppet
+[session]
+# Default: 3600 seconds
+timeout=<%= @session_timeout %>
+
+[tables]
+# Possible values for pagination
+# Default: 10,25,50,100
+pagination_values=<%= @pagination_values %>
+
+# Default number of rows per page
+# for possible values see pagination_values
+# Default: 25
+pagination_default_value=<%= @pagination_default_value %>
+
+# State saving - restore table state on page reload.
+# Default: false
+save_previous_state=<%= @save_previous_state %>
+
+[autochanger]
+# Pooltype for label to use as filter.
+# Default: none
+labelpooltype=<%= @label_pooltype %>

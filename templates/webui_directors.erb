@@ -1,0 +1,20 @@
+[<%= @name %>]
+; Enable or disable section. Possible values are "yes" or "no", the default is "yes".
+enabled = "<%= @enabled %>"
+; Fill in the IP-Address or FQDN of you director.
+diraddress = "<%= @dir_address %>"
+; Default value is 9101
+dirport	= <%= @dir_port %>
+<%- if @catalog -%>
+; Set catalog to explicit value if you have multiple catalogs
+catalog = "<%= @catalog %>"
+<%- end -%>
+; Note: TLS has not been tested and documented, yet.
+;tls_verify_peer = false
+;server_can_do_tls = false
+;server_requires_tls = false
+;client_can_do_tls = false
+;client_requires_tls = false
+;ca_file = ""
+;cert_file = ""
+;cert_file_passphrase =
