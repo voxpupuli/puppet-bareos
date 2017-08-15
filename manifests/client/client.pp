@@ -393,7 +393,7 @@ class bareos::client::client (
   }
 
   if $ensure == 'present' {
-    $_require_res_messages = $messages ? { undef => undef, default => Bareos::Director::Messages[$messages] }
+    $_require_res_messages = $messages ? { undef => undef, default => Bareos::Client::Messages[$messages] }
 
     $_require_resource = delete_undef_values([
       $_require_res_messages,
@@ -451,7 +451,7 @@ class bareos::client::client (
     $_require_res_messages = undef
   }
 
-  file { "${::bareos::client::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${::bareos::client::config_dir}/${_resource_dir}/${name_client}.conf":
     ensure  => $ensure,
     mode    => $::bareos::file_mode,
     owner   => $::bareos::file_owner,

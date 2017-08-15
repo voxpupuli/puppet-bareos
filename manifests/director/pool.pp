@@ -274,7 +274,7 @@ define bareos::director::pool (
     $_require_res_catalog = $catalog ? { undef => undef, default => Bareos::Director::Catalog[$catalog] }
     # check all configured pools
     $_pools = delete_undef_values([$next_pool, $recycle_pool, $scratch_pool])
-    $_require_res_pools = empty($_pools) ? { false => Bareos::Director::Job[$_pools], default => undef }
+    $_require_res_pools = empty($_pools) ? { false => Bareos::Director::Pool[$_pools], default => undef }
     $_require_res_storage = $storage ? { undef => undef, default => Bareos::Director::Storage[$storage]}
 
     $_require_resource = delete_undef_values([
@@ -283,9 +283,6 @@ define bareos::director::pool (
       $_require_res_storage,
     ])
 
-    unless $pool_type == undef or $pool_type in [ 'Backup', 'Archive', 'Cloned', 'Migration', 'Copy', 'Save', 'Scratch' ] {
-      fail("Invalid value for pool_type: ${pool_type}")
-    }
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
@@ -308,7 +305,7 @@ define bareos::director::pool (
       [$migration_time, 'Migration Time', 'time', false],
       [$minimum_block_size, 'Minimum Block Size', 'pint32', false],
       [$next_pool, 'Next Pool', 'res', false],
-      [$pool_type, 'Pool Type', 'type', false],
+      [$pool_type, 'Pool Type', 'pooltype', false],
       [$purge_oldest_volume, 'Purge Oldest Volume', 'boolean', false],
       [$recycle, 'Recycle', 'boolean', false],
       [$recycle_current_volume, 'Recycle Current Volume', 'boolean', false],

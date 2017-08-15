@@ -178,7 +178,6 @@ define bareos::director::catalog (
     )
   }
 
-  $_exec_create = "bareos catalog create database ${title}"
   file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $::bareos::file_mode,
@@ -187,13 +186,7 @@ define bareos::director::catalog (
     content => template('bareos/resource.erb'),
     notify  => [
       Service[$::bareos::director::service_name],
-      Exec[$_exec_create],
+      Exec['bareos director init catalog'],
     ]
-  }
-  # execute after all config files are written
-  File <| |> -> exec { $_exec_create:
-    command     => '/usr/lib/bareos/scripts/create_bareos_database && /usr/lib/bareos/scripts/make_bareos_tables && /usr/lib/bareos/scripts/grant_bareos_privileges',
-    notify      => Service[$::bareos::director::service_name],
-    refreshonly => true,
   }
 }

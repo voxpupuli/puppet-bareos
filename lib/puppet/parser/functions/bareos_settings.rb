@@ -51,7 +51,7 @@ module Puppet::Parser::Functions
           when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
             raise 'Value need to be an string' unless value.is_a?(String)
           # type md5password is missleading, it is an plain password and not md5 hashed
-          when 'audit-command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'address', 'device', 'plugin_names'
+          when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'address', 'device', 'plugin_names'
             # array
             quote = true
             raise 'Value need to be an string' unless value.is_a?(String)
@@ -69,11 +69,31 @@ module Puppet::Parser::Functions
           when 'include_exclude_item', 'runscript', 'hash'
             raise 'Please specify as Hash' unless value.is_a?(Hash)
           when 'backup_level'
-            value_in_array = %w[full incremental differential virtualfull]
+            value_in_array = %w[full incremental differential virtualfull initcatalog catalog volumetocatalog disktocatalog]
           when 'io_direction'
             value_in_array = %w[in out both]
           when 'action_on_purge'
             value_in_array = %w[truncate]
+          when 'encryption_cipher'
+            value_in_array = %w[aes128 aes192 aes256 camellia128 camellia192 camellia256 aes128hmacsha1 aes256hmacsha1 blowfish]
+          when 'auth_type'
+            value_in_array = %w[clear md5]
+          when 'auth_protocol_type', 'protocol_type'
+            value_in_array = %w[native ndmp]
+          when 'pooltype'
+            value_in_array = %w[backup archive cloned migration copy save scratch]
+          when 'label'
+            value_in_array = %w[ansi ibm bareos]
+          when 'migration_type'
+            value_in_array = %w[smallestvolume oldestvolume client volume job sqlquery pooloccupancy pooltime pooluncopiedjobs]
+          when 'job_type'
+            value_in_array = %w[backup restore verify admin migrate copy consolidate]
+          when 'replace_option'
+            value_in_array = %w[always ifnewer ifolder never]
+          when 'device_type'
+            value_in_array = %w[tape file fifo gfapi rados]
+          when 'compression_algorithm'
+            value_in_array = %w[gzip lzo lzfast lz4 lz4hc]
           else
             raise "Invalid setting type '#{type}'"
           end

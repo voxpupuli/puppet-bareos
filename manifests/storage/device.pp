@@ -508,12 +508,6 @@ define bareos::storage::device (
   }
 
   if $ensure == 'present' {
-    unless $device_type == undef or (downcase($device_type) in [ 'tape', 'file', 'fifo', 'gfapi', 'rados' ]) {
-      fail("Invalid value for device_type: ${device_type}")
-    }
-    unless $auto_deflate_algorithm == undef or (downcase($auto_deflate_algorithm) in [ 'gzip', 'lzo', 'lzfast', 'lz4', 'lz4hc' ]) {
-      fail("Invalid value for auto_deflate_algorithm: ${auto_deflate_algorithm}")
-    }
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
@@ -521,7 +515,7 @@ define bareos::storage::device (
       [$always_open, 'Always Open', 'bit', false],
       [$archive_device, 'Archive Device', 'strname', true],
       [$auto_deflate, 'Auto Deflate', 'io_direction', false],
-      [$auto_deflate_algorithm, 'Auto Deflate Algorithm', 'type', false],
+      [$auto_deflate_algorithm, 'Auto Deflate Algorithm', 'compression_algorithm', false],
       [$auto_deflate_level, 'Auto Deflate Level', 'pint16', false],
       [$auto_inflate, 'Auto Inflate', 'io_direction', false],
       [$auto_select, 'Auto Select', 'boolean', false],
@@ -538,7 +532,7 @@ define bareos::storage::device (
       [$close_on_poll, 'Close On Poll', 'bit', false],
       [$collect_statistics, 'Collect Statistics', 'boolean', false],
       [$device_options, 'Device Options', 'string', false],
-      [$device_type, 'Device Type', 'type', false],
+      [$device_type, 'Device Type', 'device_type', false],
       [$diagnostic_device, 'Diagnostic Device', 'strname', false],
       [$drive_crypto_enabled, 'Drive Crypto Enabled', 'boolean', false],
       [$drive_index, 'Drive Index', 'pint16', false],

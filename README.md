@@ -8,18 +8,18 @@
 1. [Description](#description)
 1. [Setup requirements](#setup-requirements)
 1. [Reference](#reference)
-  * [Bareos common](#class-bareos)
-  * [Client/Filedaemon](#client-filedaemon)
-  * [Console (bconsole)](#console)
-  * [Director](#director)
-  * [Monitor (Tray)](#monitor)
-  * [Storage](#storage)
-  * [Web UI](#webui)
+  1. [Bareos common](#class-bareos)
+  1. [Client/Filedaemon](#clientfiledaemon)
+  1. [Console (bconsole)](#console)
+  1. [Director](#director)
+  1. [Monitor (Tray)](#monitor)
+  1. [Storage](#storage)
+  1. [Web UI](#webui)
 1. [Limitations - OS compatibility, etc.](#limitations)
 
 ## Description
 
-Bareos is a 100% open source fork of the backup project from bacula.org.
+[Bareos](http://bareos.org/) is a 100% open source fork of the backup project from bacula.org.
 
 This puppet module configures and manage all aspects of an complex bareos installation. Unfortunately backups cannot be handled on an standard way, so this module tends to be flexible as possible. It is recommend to make familiar with the [documentation](http://doc.bareos.org/master/html/bareos-manual-main-reference.html) of the configuration.
 

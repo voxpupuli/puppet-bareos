@@ -80,8 +80,8 @@ define bareos::monitor::storage (
       [$address, 'Address', 'string', true],
       [$enable_ssl, 'Enable Ssl', 'boolean', false],
       [$password, 'Password', 'md5password', true],
-      [$sd_address, 'Sd Address', 'string', false],
-      [$sd_password, 'Sd Password', 'md5password', false],
+      [$sd_address, 'Sd Address', 'string', false], # alias? undocumented
+      [$sd_password, 'Sd Password', 'md5password', false], # alias? undocumented
       [$sd_port, 'Sd Port', 'pint32', false]
     )
   }

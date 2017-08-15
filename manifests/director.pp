@@ -59,4 +59,10 @@ class bareos::director(
     require => Package[$package_name],
     notify  => Service[$service_name],
   }
+
+  File <| |> -> exec { 'bareos director init catalog':
+    command     => '/usr/lib/bareos/scripts/create_bareos_database && /usr/lib/bareos/scripts/make_bareos_tables && /usr/lib/bareos/scripts/grant_bareos_privileges',
+    notify      => Service[$::bareos::director::service_name],
+    refreshonly => true,
+  }
 }
