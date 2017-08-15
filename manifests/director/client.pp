@@ -63,27 +63,6 @@
 #   Bareos Default: true
 #   Required: false
 #
-# [*fd_address*]
-#   Fd Address: Alias for Address.
-#
-#   Bareos Datatype: string
-#   Bareos Default: Not set
-#   Required: false
-#
-# [*fd_password*]
-#   Fd Password
-#
-#   Bareos Datatype: autopassword
-#   Bareos Default: Not set
-#   Required: false
-#
-# [*fd_port*]
-#   Fd Port
-#
-#   Bareos Datatype: pint32
-#   Bareos Default: 9102
-#   Required: false
-#
 # [*file_retention*]
 #   File Retention
 #
@@ -305,9 +284,6 @@ define bareos::director::client (
   $connection_from_director_to_client = undef,
   $description = undef,
   $enabled = undef,
-  $fd_address = undef,
-  $fd_password = undef,
-  $fd_port = undef,
   $file_retention = undef,
   $hard_quota = undef,
   $heartbeat_interval = undef,
@@ -355,25 +331,16 @@ define bareos::director::client (
       $_require_res_catalog,
     ])
 
-    unless $auth_type == undef or (downcase($auth_type) in [ 'Clear', 'md5' ]) {
-      fail('Invalid value for auth_type')
-    }
-    unless $protocol == undef or (downcase($protocol) in [ 'native', 'ndmp' ]) {
-      fail('Invalid value for protocol')
-    }
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
-      [$auth_type, 'Auth Type', 'type', false],
+      [$auth_type, 'Auth Type', 'auth_type', false],
       [$auto_prune, 'Auto Prune', 'boolean', false],
       [$catalog, 'Catalog', 'res', false],
       [$connection_from_client_to_director, 'Connection From Client To Director', 'boolean', false],
       [$connection_from_director_to_client, 'Connection From Director To Client', 'boolean', false],
       [$enabled, 'Enabled', 'boolean', false],
-      [$fd_address, 'Fd Address', 'string', false],
-      [$fd_password, 'Fd Password', 'autopassword', false],
-      [$fd_port, 'Fd Port', 'pint32', false],
       [$file_retention, 'File Retention', 'time', false],
       [$hard_quota, 'Hard Quota', 'size64', false],
       [$heartbeat_interval, 'Heartbeat Interval', 'time', false],
@@ -386,7 +353,7 @@ define bareos::director::client (
       [$passive, 'Passive', 'boolean', false],
       [$password, 'Password', 'autopassword', true],
       [$port, 'Port', 'pint32', false],
-      [$protocol, 'Protocol', 'type', false],
+      [$protocol, 'Protocol', 'auth_protocol_type', false],
       [$quota_include_failed_jobs, 'Quota Include Failed Jobs', 'boolean', false],
       [$soft_quota, 'Soft Quota', 'size64', false],
       [$soft_quota_grace_period, 'Soft Quota Grace Period', 'time', false],

@@ -60,13 +60,10 @@ define bareos::storage::ndmp (
   }
 
   if $ensure == 'present' {
-    unless $auth_type == undef or downcase($auth_type) in [ 'none', 'clear', 'md5' ] {
-      fail("Invalid value for auth_type: ${auth_type}")
-    }
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
-      [$auth_type, 'Auth Type', 'type', false],
+      [$auth_type, 'Auth Type', 'auth_type', false],
       [$log_level, 'Log Level', 'pint32', false],
       [$password, 'Password', 'autopassword', true],
       [$username, 'Username', 'string', true]

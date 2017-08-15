@@ -566,13 +566,6 @@
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*verify_job*]
-#   Verify Job
-#
-#   Bareos Datatype: res
-#   Bareos Default: Not set
-#   Required: false
-#
 # [*virtual_full_backup_pool*]
 #   Virtual Full Backup Pool
 #
@@ -682,7 +675,6 @@ define bareos::director::job (
   $storage = undef,
   $strip_prefix = undef,
   $type = undef,
-  $verify_job = undef,
   $virtual_full_backup_pool = undef,
   $where = undef,
   $write_bootstrap = undef,
@@ -711,7 +703,7 @@ define bareos::director::job (
     $_require_res_client = $client ? { undef => undef, default => Bareos::Director::Client[$client] }
     $_require_res_file_set = $file_set ? { undef => undef, default => Bareos::Director::Fileset[$file_set] }
     # note: verify_job is an alias to job_to_verify
-    $_jobs = delete_undef_values([$base, $job_to_verify, $verify_job])
+    $_jobs = delete_undef_values([$base, $job_to_verify])
     $_require_res_jobs = empty($_jobs) ? { false => Bareos::Director::Job[$_jobs], default => undef }
     $_require_res_job_defs = $job_defs ? { undef => undef, default => Bareos::Director::Jobdefs[$job_defs] }
     $_require_res_message = $messages ? { undef => undef, default => Bareos::Director::Messages[$messages] }
@@ -732,19 +724,6 @@ define bareos::director::job (
       $_require_res_schedule,
       $_require_res_storage,
     ])
-
-    unless $level == undef or (downcase($level) in [ 'full', 'incremental', 'differential', 'virtualfull', 'initcatalog', 'catalog', 'volumetocatalog', 'disktocatalog' ]) {
-      fail("Invalid value for level: ${level}")
-    }
-    unless $protocol == undef or (downcase($protocol) in [ 'native', 'ndmp' ]) {
-      fail('Invalid value for protocol')
-    }
-    unless $selection_type == undef or (downcase($selection_type) in [ 'smallestvolume', 'oldestvolume', 'client', 'volume', 'job', 'sqlquery', 'pooloccupancy', 'pooltime', 'pooluncopiedjobs' ]) {
-      fail('Invalid value for selection_type')
-    }
-    unless $type == undef or (downcase($type) in [ 'backup', 'restore', 'verify', 'admin', 'migrate', 'copy', 'consolidate' ]) {
-      fail("Invalid value for type: ${type}")
-    }
 
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
@@ -782,7 +761,7 @@ define bareos::director::job (
       [$incremental_max_runtime, 'Incremental Max Runtime', 'time', false],
       [$job_defs, 'Job Defs', 'res', false],
       [$job_to_verify, 'Job To Verify', 'res', false],
-      [$level, 'Level', 'type', false],
+      [$level, 'Level', 'backup_level', false],
       [$max_concurrent_copies, 'Max Concurrent Copies', 'pint32', false],
       [$max_diff_interval, 'Max Diff Interval', 'time', false],
       [$max_full_consolidations, 'Max Full Consolidations', 'pint32', false],
@@ -800,7 +779,7 @@ define bareos::director::job (
       [$prefer_mounted_volumes, 'Prefer Mounted Volumes', 'boolean', false],
       [$prefix_links, 'Prefix Links', 'boolean', false],
       [$priority, 'Priority', 'pint32', false],
-      [$protocol, 'Protocol', 'type', false],
+      [$protocol, 'Protocol', 'protocol_type', false],
       [$prune_files, 'Prune Files', 'boolean', false],
       [$prune_jobs, 'Prune Jobs', 'boolean', false],
       [$prune_volumes, 'Prune Volumes', 'boolean', false],
@@ -820,14 +799,13 @@ define bareos::director::job (
       [$schedule_res, 'Schedule', 'res', false],
       [$sd_plugin_options, 'Sd Plugin Options', 'string_list', false],
       [$selection_pattern, 'Selection Pattern', 'string', false],
-      [$selection_type, 'Selection Type', 'type', false],
+      [$selection_type, 'Selection Type', 'migration_type', false],
       [$spool_attributes, 'Spool Attributes', 'boolean', false],
       [$spool_data, 'Spool Data', 'boolean', false],
       [$spool_size, 'Spool Size', 'size64', false],
       [$storage, 'Storage', 'resource_list', false],
       [$strip_prefix, 'Strip Prefix', 'string', false],
-      [$type, 'Type', 'type', $_require_res],
-      [$verify_job, 'Verify Job', 'res', false],
+      [$type, 'Type', 'job_type', $_require_res],
       [$virtual_full_backup_pool, 'Virtual Full Backup Pool', 'res', false],
       [$where, 'Where', 'directory', false],
       [$write_bootstrap, 'Write Bootstrap', 'directory', false],

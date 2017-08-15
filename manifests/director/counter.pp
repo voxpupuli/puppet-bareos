@@ -59,6 +59,12 @@ define bareos::director::counter (
   }
 
   if $ensure == 'present' {
+    $_require_res_catalog = $catalog ? { undef => undef, default => Bareos::Director::Catalog[$catalog] }
+
+    $_require_resource = delete_undef_values([
+      $_require_res_catalog,
+    ])
+
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
@@ -67,6 +73,8 @@ define bareos::director::counter (
       [$minimum, 'Minimum', 'int32', false],
       [$wrap_counter, 'Wrap Counter', 'res', false]
     )
+  } else {
+    $_require_resource = undef
   }
 
   file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
@@ -76,5 +84,6 @@ define bareos::director::counter (
     group   => $::bareos::file_group,
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::director::service_name],
+    require => $_require_resource,
   }
 }

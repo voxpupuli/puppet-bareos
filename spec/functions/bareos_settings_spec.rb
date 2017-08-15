@@ -48,7 +48,7 @@ describe 'bareos_settings' do
   end
 
   context 'type is an string with quotes' do
-    %w[audit-command runscript_short autopassword md5password directory string strname address device plugin_names].each do |type|
+    %w[audit_command runscript_short autopassword md5password directory string strname address device plugin_names].each do |type|
       it 'runs with compatible values' do
         ['Not a number', 'MyString', '23 free usage of Text.!', 'Special ".-,= Chars'].each do |val|
           is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = \"#{val}\"")
@@ -109,7 +109,6 @@ describe 'bareos_settings' do
     end
   end
 
-  # add addresss
   context 'type is an hashed addresses value' do
     %w[addresses].each do |type|
       it 'runs with compatible values' do
@@ -202,6 +201,156 @@ describe 'bareos_settings' do
       end
       it 'not runs with incompatible values' do
         ['wrong', ' truncate'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is encryption_cipher' do
+    %w[encryption_cipher].each do |type|
+      it 'runs with compatible values' do
+        %w[aes128 AES192 aes256 camellia128 camellia192 camellia256 aes128hmacsha1 aes256hmacsha1 blowfish].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' aes'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is auth_type' do
+    %w[auth_type].each do |type|
+      it 'runs with compatible values' do
+        %w[clear MD5].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' clear'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is auth_protocol_type' do
+    %w[auth_protocol_type].each do |type|
+      it 'runs with compatible values' do
+        %w[native NDMP].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' ndmp'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is pooltype' do
+    %w[pooltype].each do |type|
+      it 'runs with compatible values' do
+        %w[backup ARCHIVE cloned migration copy save scratch].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' backup'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is label' do
+    %w[label].each do |type|
+      it 'runs with compatible values' do
+        %w[ansi IBM bareos].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' bareos'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is migration_type' do
+    %w[migration_type].each do |type|
+      it 'runs with compatible values' do
+        %w[smallestvolume oldestvolume client volume Job sqlquery pooloccupancy pooltime pooluncopiedjobs].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' JOB'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is job_type' do
+    %w[job_type].each do |type|
+      it 'runs with compatible values' do
+        %w[backup restore verify ADMIN migrate copy consolidate].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' backup'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is replace_option' do
+    %w[replace_option].each do |type|
+      it 'runs with compatible values' do
+        %w[Always ifnewer ifolder never].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' never'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is device_type' do
+    %w[device_type].each do |type|
+      it 'runs with compatible values' do
+        %w[TAPE file fifo gfapi rados].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' File'].each do |val|
+          is_expected.not_to run.with_params([val, 'Test', type, true])
+        end
+      end
+    end
+  end
+
+  context 'type is compression_algorithm' do
+    %w[compression_algorithm].each do |type|
+      it 'runs with compatible values' do
+        %w[GZIP LZO lzfast lz4 lz4hc].each do |val|
+          is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
+        end
+      end
+      it 'not runs with incompatible values' do
+        ['wrong', ' gzip'].each do |val|
           is_expected.not_to run.with_params([val, 'Test', type, true])
         end
       end

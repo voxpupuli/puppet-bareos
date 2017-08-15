@@ -199,12 +199,12 @@ define bareos::client::director (
   if $ensure == 'present' {
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
+      [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', false],
       [$allowed_job_command, 'Allowed Job Command', 'string_list', false],
       [$allowed_script_dir, 'Allowed Script Dir', 'directory_list', false],
       [$connection_from_client_to_director, 'Connection From Client To Director', 'boolean', false],
       [$connection_from_director_to_client, 'Connection From Director To Client', 'boolean', false],
-      [$description, 'Description', 'string', false],
       [$maximum_bandwidth_per_job, 'Maximum Bandwidth Per Job', 'speed', false],
       [$monitor, 'Monitor', 'boolean', false],
       [$password, 'Password', 'md5password', true],

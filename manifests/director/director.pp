@@ -371,7 +371,7 @@ class bareos::director::director (
   $omit_defaults = undef,
   $optimize_for_size = undef,
   $optimize_for_speed = undef,
-  $password = 'set',
+  $password = 'PleaseChangeMe',
   $pid_directory = undef,
   $plugin_directory = undef,
   $plugin_names = undef,

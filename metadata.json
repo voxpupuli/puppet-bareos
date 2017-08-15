@@ -1,6 +1,6 @@
 {
   "name": "project0-bareos",
-  "version": "CHANGE_ME",
+  "version": "0.0.0",
   "author": "Richard Hillmann <richie@project0.de>",
   "summary": "Manage and configure a Bareos installation",
   "license": "Apache-2.0",

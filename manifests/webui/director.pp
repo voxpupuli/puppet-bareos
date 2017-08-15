@@ -51,7 +51,7 @@ define bareos::webui::director (
       [$enabled, 'Enabled', 'bit', true],
       [$name, 'Dir Name', 'res', true]
     )
-    concat::fragment{ 'bareos-fd.conf initial':
+    concat::fragment{ "bareos webui director ${title}":
       target  => "${::bareos::webui::config_dir}/directors.ini",
       content =>  template('bareos/webui_directors.erb'),
       notify  => Service[$::bareos::webui::service_name],

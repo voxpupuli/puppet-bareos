@@ -139,27 +139,6 @@
 #   Bareos Default: Native
 #   Required: false
 #
-# [*sd_address*]
-#   Sd Address: Alias for Address.
-#
-#   Bareos Datatype: string
-#   Bareos Default: Not set
-#   Required: false
-#
-# [*sd_password*]
-#   Sd Password: Alias for Password.
-#
-#   Bareos Datatype: autopassword
-#   Bareos Default: Not set
-#   Required: false
-#
-# [*sd_port*]
-#   Sd Port: Alias for Port.
-#
-#   Bareos Datatype: pint32
-#   Bareos Default: 9103
-#   Required: false
-#
 # [*tape_device*]
 #   Tape Device
 #
@@ -281,9 +260,6 @@ define bareos::director::storage (
   $password = undef,
   $port = undef,
   $protocol = undef,
-  $sd_address = undef,
-  $sd_password = undef,
-  $sd_port = undef,
   $tape_device = undef,
   $tls_allowed_cn = undef,
   $tls_authenticate = undef,
@@ -315,18 +291,12 @@ define bareos::director::storage (
       $_require_res_storage,
     ])
 
-    unless $auth_type == undef or $auth_type in [ undef ] {
-      fail('Invalid value for auth_type')
-    }
-    unless $protocol == undef or $protocol in [ undef ] {
-      fail('Invalid value for protocol')
-    }
     $_settings = bareos_settings(
       [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
       [$allow_compression, 'Allow Compression', 'boolean', false],
-      [$auth_type, 'Auth Type', 'type', false],
+      [$auth_type, 'Auth Type', 'auth_type', false],
       [$auto_changer, 'Auto Changer', 'boolean', false],
       [$cache_status_interval, 'Cache Status Interval', 'time', false],
       [$changer_device, 'Changer Device', 'strname', false],
@@ -341,10 +311,7 @@ define bareos::director::storage (
       [$paired_storage, 'Paired Storage', 'res', false],
       [$password, 'Password', 'autopassword', true],
       [$port, 'Port', 'pint32', false],
-      [$protocol, 'Protocol', 'type', false],
-      [$sd_address, 'Sd Address', 'string', false],
-      [$sd_password, 'Sd Password', 'autopassword', false],
-      [$sd_port, 'Sd Port', 'pint32', false],
+      [$protocol, 'Protocol', 'auth_protocol_type', false],
       [$tape_device, 'Tape Device', 'string_list', false],
       [$tls_allowed_cn, 'Tls Allowed Cn', 'string_list', false],
       [$tls_authenticate, 'Tls Authenticate', 'boolean', false],
