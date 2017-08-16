@@ -133,7 +133,7 @@ describe 'bareos_settings' do
       end
     end
   end
-  # add include_exclude_time / hash
+
   context 'type is an hashed value' do
     %w[include_exclude_item runscript hash].each do |type|
       it 'runs with compatible values' do
@@ -362,6 +362,36 @@ describe 'bareos_settings' do
       it 'raise error' do
         is_expected.to run.with_params([1, 'Test', type, true]).and_raise_error(Puppet::ParseError, %r{Invalid setting type})
       end
+    end
+  end
+
+  context 'value can be an array' do
+    it 'any type with _list suffix' do
+      val = %w[first second]
+      result = "#{indent_default}Test = first
+#{indent_default}Test = second"
+      is_expected.to run.with_params([val, 'Test', 'string_noquote_list', true]).and_return(result)
+    end
+
+    it 'type is acl' do
+      val = %w[first second]
+      result = "#{indent_default}Test = first
+#{indent_default}Test = second"
+      is_expected.to run.with_params([val, 'Test', 'acl', true]).and_return(result)
+    end
+
+    it 'type is runcsript' do
+      val = [
+        { 'Test A' => 'value' },
+        { 'Test B' => 'value' }
+      ]
+      result = "#{indent_default}Test {
+#{indent_default}#{indent_default}Test A = value
+#{indent_default}}
+#{indent_default}Test {
+#{indent_default}#{indent_default}Test B = value
+#{indent_default}}"
+      is_expected.to run.with_params([val, 'Test', 'runscript', true]).and_return(result)
     end
   end
 end
