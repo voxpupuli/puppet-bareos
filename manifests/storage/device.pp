@@ -1,7 +1,7 @@
 # == Define: bareos::storage::device
-# The Device Resource speciﬁes the details of each device (normally a tape drive) that can be used by the Storage daemon.
+# The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon.
 # There may be multiple Device resources for a single Storage daemon.
-# In general, the properties speciﬁed within the Device resource are speciﬁc to the Device.
+# In general, the properties specified within the Device resource are specific to the Device.
 #
 # == Parameters
 # [*ensure*]

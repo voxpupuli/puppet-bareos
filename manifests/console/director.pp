@@ -1,6 +1,6 @@
 # == Define: bareos:console::director
-# The Director resource deﬁnes the attributes of the Director running on the network.
-# You may have multiple Director resource speciﬁcations in a single Console conﬁguration ﬁle.
+# The Director resource defines the attributes of the Director running on the network.
+# You may have multiple Director resource specifications in a single Console configuration file.
 # If you have more than one, you will be prompted to choose one when you start the Console program.
 #
 # == Parameters

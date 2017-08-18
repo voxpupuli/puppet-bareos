@@ -1,6 +1,6 @@
 # == Define: bareos::director::storage
-# To deﬁne on what physical device the Volumes should be mounted.
-# You may have one or more Storage deﬁnitions.
+# To define on what physical device the Volumes should be mounted.
+# You may have one or more Storage definitions.
 #
 # == Parameters
 # [*ensure*]

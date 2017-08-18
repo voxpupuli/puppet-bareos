@@ -1,5 +1,5 @@
 # == Define: bareos::monitor::client
-# The Client resource deﬁnes the attributes of the Clients that are monitored by this Monitor.
+# The Client resource defines the attributes of the Clients that are monitored by this Monitor.
 #
 # == Parameters
 # [*ensure*]

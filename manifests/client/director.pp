@@ -1,5 +1,5 @@
 # == Define: bareos::client::director
-# The Director resource deﬁnes the name and password of the Directors that are permitted to contact this Client.
+# The Director resource defines the name and password of the Directors that are permitted to contact this Client.
 #
 # == Parameters
 # [*ensure*]

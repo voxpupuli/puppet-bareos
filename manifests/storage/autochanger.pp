@@ -1,7 +1,7 @@
 # == Define: bareos::storage::autochanger
 # The Autochanger resource supports single or multiple drive autochangers
 # by grouping one or more Device resources into one unit called an autochanger in Bareos
-# (often referred to as a ”tape library” by autochanger manufacturers).
+# (often referred to as a "tape library" by autochanger manufacturers).
 #
 # == Parameters
 # [*ensure*]

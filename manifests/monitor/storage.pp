@@ -1,5 +1,5 @@
 # == Define: bareos::monitor::storage
-# The Storage resource deﬁnes the attributes of the Storages that are monitored by this Monitor.
+# The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
 #
 # == Parameters
 # [*ensure*]

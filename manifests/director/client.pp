@@ -1,6 +1,6 @@
 # == Define: bareos::director::client
-# To deﬁne what Client is to be backed up.
-# You will generally have multiple Client deﬁnitions.
+# To define what Client is to be backed up.
+# You will generally have multiple Client definitions.
 # Each Job will reference only a single client.
 #
 # == Parameters

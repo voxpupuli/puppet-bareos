@@ -1,5 +1,5 @@
 # == Define: bareos::client::messages
-# The Messages resource deﬁnes how messages are to be handled and destinations to which they should be sent.
+# The Messages resource defines how messages are to be handled and destinations to which they should be sent.
 #
 # == Parameters
 # [*ensure*]

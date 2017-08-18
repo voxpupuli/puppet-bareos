@@ -1,7 +1,7 @@
 # == Define: bareos::monitor::monitor
-# The Monitor resource deﬁnes the attributes of the Monitor running on the network.
-# The parameters you deﬁne here must be conﬁgured as a Director resource
-# in Clients and Storages conﬁguration ﬁles, and as a Console resource in Directors conﬁguration ﬁles.
+# The Monitor resource defines the attributes of the Monitor running on the network.
+# The parameters you define here must be configured as a Director resource
+# in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
 #
 # == Parameters
 # [*ensure*]

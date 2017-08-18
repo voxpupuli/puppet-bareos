@@ -1,5 +1,5 @@
 # == Define: bareos::director::counter
-# The Counter Resource deﬁnes a counter variable that can be accessed by variable expansion used
+# The Counter Resource defines a counter variable that can be accessed by variable expansion used
 # for creating Volume labels with the Label Format Dir Pool directive.
 #
 # == Parameters
