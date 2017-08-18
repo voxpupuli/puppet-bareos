@@ -1,6 +1,6 @@
 # == Class: bareos::director::director
-# To deﬁne the Director’s name and its access password used for authenticating the Console program.
-# Only a single Director resource deﬁnition may appear in the Director’s conﬁguration ﬁle.
+# To define the Director's name and its access password used for authenticating the Console program.
+# Only a single Director resource definition may appear in the Director's configuration file.
 #
 # == Parameters
 # [*ensure*]

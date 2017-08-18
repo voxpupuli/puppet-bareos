@@ -1,6 +1,6 @@
 # == Define: bareos::director::profile
-# The Proﬁle Resource deﬁnes a set of ACLs.
-# Console Resources can be tight to one or more proﬁles, making it easier to use a common set of ACLs.
+# The Profile Resource defines a set of ACLs.
+# Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
 #
 # == Parameters
 # [*ensure*]

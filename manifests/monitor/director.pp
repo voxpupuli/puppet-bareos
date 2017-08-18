@@ -1,5 +1,5 @@
 # == Define: bareos::monitor::director
-# The Director resource deﬁnes the attributes of the Directors that are monitored by this Monitor.
+# The Director resource defines the attributes of the Directors that are monitored by this Monitor.
 #
 # == Parameters
 # [*ensure*]

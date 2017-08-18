@@ -1,5 +1,5 @@
 # == Class: bareos::client::client
-# The Client Resource (or FileDaemon) resource deﬁnes the name of the Client (as used by the Director)
+# The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director)
 # as well as the port on which the Client listens for Director connections.
 #
 # == Parameters

@@ -1,5 +1,5 @@
 # == Class: bareos::storage::storage
-# In general, the properties speciﬁed under the Storage resource deﬁne global properties of the Storage daemon.
+# In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
 #
 # == Parameters
 # [*ensure*]

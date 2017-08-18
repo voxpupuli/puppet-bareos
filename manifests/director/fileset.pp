@@ -1,5 +1,5 @@
 # == Define: bareos::director::fileset
-# To define the set of ﬁles to be backed up for each Client.
+# To define the set of files to be backed up for each Client.
 # You may have any number of FileSets but each Job will reference only one.
 #
 # == Parameters

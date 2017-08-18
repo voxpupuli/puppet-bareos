@@ -46,6 +46,8 @@ desc 'Validate manifests, templates, and ruby files'
 task :validate do
   Dir['manifests/**/*.pp'].each do |manifest|
     sh "puppet parser validate --noop #{manifest}"
+    # check if none us ascii chars exists
+    sh "tr -d \\\\000-\\\\177 < #{manifest} | wc -c | grep -q 0"
   end
   Dir['spec/**/*.rb', 'lib/**/*.rb'].each do |ruby_file|
     sh "ruby -c #{ruby_file}" unless ruby_file =~ %r{spec/fixtures}

@@ -1,7 +1,7 @@
 # == Define: bareos::director::job
-# To deﬁne the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
-# Normally, you will Jobs of diﬀerent names corresponding to each client
-# (i.e. one Job per client, but a diﬀerent one with a diﬀerent name for each client).
+# To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
+# Normally, you will Jobs of different names corresponding to each client
+# (i.e. one Job per client, but a different one with a different name for each client).
 #
 # == Parameters
 # [*ensure*]
