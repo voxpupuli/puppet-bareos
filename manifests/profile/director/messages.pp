@@ -19,7 +19,7 @@ class bareos::profile::director::messages {
     operator         => 'root@localhost = mount',
     mail             => 'root@localhost = all, !skipped, !saved, !audit',
     console          => 'all, !skipped, !saved, !audit',
-    append           => '/var/log/bareos/bareos.log" = all, !skipped, !saved, !audit',
+    append           => '/var/log/bareos/bareos.log = all, !skipped, !saved, !audit',
     catalog          => 'all, !skipped, !saved, !audit'
   }
 }
