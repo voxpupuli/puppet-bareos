@@ -6,11 +6,16 @@ class bareos::profile::director::fileset {
       description => 'Backup the catalog dump and Bareos configuration files.',
       include     => {
         'Options' => {
-          'Signature' => 'MD5',
-          'WildFile'  => '/var/lib/bareos/*.sql'
+          'Signature' => 'MD5'
         },
         'File'    => [
           '/etc/bareos', # configuration
+          '/var/lib/bareos'
+        ]
+      },
+      exclude     => {
+        'File'    => [
+          '/var/lib/bareos/storage'
         ]
       }
     }
