@@ -11,7 +11,7 @@ class bareos::repository(
   $url = "http://download.bareos.org/bareos/release/${release}/"
 
   $os = $::operatingsystem
-  $osrelease = ${::os[release][major]}
+  $osrelease = $::os[release][major]
 
   case $os {
       /(?i:redhat|centos|fedora)/: {
