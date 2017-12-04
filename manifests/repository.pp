@@ -11,7 +11,7 @@ class bareos::repository(
   $url = "http://download.bareos.org/bareos/release/${release}/"
 
   $os = $::operatingsystem
-  $osrelease = $::operatingsystemrelease
+  $osrelease = $::os[release][major]
 
   case $os {
       /(?i:redhat|centos|fedora)/: {
@@ -33,7 +33,7 @@ class bareos::repository(
           name     => 'bareos',
           baseurl  => $location,
           gpgcheck => '1',
-          gpgkey   => "${location}repodata/repomd.xml.key",
+          gpgkey   => "${location}/repodata/repomd.xml.key",
           priority => '1',
         }
     }
