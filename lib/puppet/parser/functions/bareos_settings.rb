@@ -51,9 +51,13 @@ module Puppet::Parser::Functions
           when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
             raise 'Value need to be an string' unless value.is_a?(String)
           # type md5password is missleading, it is an plain password and not md5 hashed
-          when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'address', 'device', 'plugin_names'
+          when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'device', 'plugin_names'
             # array
             quote = true
+            raise 'Value need to be an string' unless value.is_a?(String)
+          # address must stay unquoted. regex may be done to improve the control
+          when 'address'
+            quote = false
             raise 'Value need to be an string' unless value.is_a?(String)
           when 'speed'
             regex = %r{^\d+\W*(k|kb|m|mb)\/s$}i
