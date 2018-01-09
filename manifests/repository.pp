@@ -12,18 +12,19 @@ class bareos::repository(
 
   $os = $::operatingsystem
   $osrelease = $::operatingsystemrelease
+  $osmajrelease = $::operatingsystemmajrelease
 
   case $os {
       /(?i:redhat|centos|fedora)/: {
         case $os {
           'RedHat': {
-            $location = "${url}RHEL_${osrelease}"
+            $location = "${url}RHEL_${osmajrelease}"
           }
           'Centos': {
-            $location = "${url}CentOS_${osrelease}"
+            $location = "${url}CentOS_${osmajrelease}"
           }
           'Fedora': {
-            $location = "${url}Fedora_${osrelease}"
+            $location = "${url}Fedora_${osmajrelease}"
           }
           default: {
             fail('Operatingsystem is not supported by this module')
