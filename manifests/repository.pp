@@ -10,20 +10,27 @@ class bareos::repository(
 
   $url = "http://download.bareos.org/bareos/release/${release}/"
 
-  $os = $::operatingsystem
-  $osrelease = $::operatingsystemrelease
+  if versioncmp($::puppetversion, '4.0.0') >= 0 {
+    $os = $facts['os']['name']
+    $osrelease = $facts['os']['release']['full']
+    $osmajrelease = $facts['os']['release']['major']
+  } else {
+    $os = $::operatingsystem
+    $osrelease = $::operatingsystemrelease
+    $osmajrelease = $::operatingsystemmajrelease
+  }
 
   case $os {
       /(?i:redhat|centos|fedora)/: {
         case $os {
           'RedHat': {
-            $location = "${url}RHEL_${osrelease}"
+            $location = "${url}RHEL_${osmajrelease}"
           }
           'Centos': {
-            $location = "${url}CentOS_${osrelease}"
+            $location = "${url}CentOS_${osmajrelease}"
           }
           'Fedora': {
-            $location = "${url}Fedora_${osrelease}"
+            $location = "${url}Fedora_${osmajrelease}"
           }
           default: {
             fail('Operatingsystem is not supported by this module')
