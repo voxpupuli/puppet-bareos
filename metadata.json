@@ -24,7 +24,8 @@
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
         "7",
-        "8"
+        "8",
+        "9"
       ]
     },
     {
@@ -54,9 +55,16 @@
     {
       "operatingsystem": "Fedora",
       "operatingsystemrelease": [
+        "21",
+        "22",
         "23",
-        "24"
+        "24",
+        "25",
+        "26"
       ]
+    },
+    {
+      "operatingsystem": "Gentoo"
     }
   ]
 }

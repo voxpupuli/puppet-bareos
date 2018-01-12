@@ -39,6 +39,7 @@ The module depends on the following puppet modules:
 * [Puppetlabs/concat](https://forge.puppet.com/puppetlabs/concat) - Only used for the `webui` configuration.
 * [Puppetlabs/apt](https://forge.puppet.com/puppetlabs/apt) - Repository management for Debian based systems.
 * [Darin/zypprepo](https://forge.puppetlabs.com/darin/zypprepo) - Repository management for OpenSuSE/SLES
+* [Gentoo/portage](https://forge.puppet.com/gentoo/portage) - Internal repository for Gentoo
 
 ## Usage with profiles
 
