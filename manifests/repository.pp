@@ -14,7 +14,7 @@ class bareos::repository(
 
   $os = $::operatingsystem
   $osrelease = $::operatingsystemrelease
-  if defined($::operatingsystemmajrelease) {
+  if defined('$::operatingsystemmajrelease') {
     $osmajrelease = $::operatingsystemmajrelease
   } else {
     $osmajrelease = split($osrelease, '.')
