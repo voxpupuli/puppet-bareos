@@ -6,21 +6,23 @@
 # Richard Hillmann <richie@project0.de>
 #
 class bareos (
-  $config_dir       = $::bareos::params::config_dir,
-  $config_dir_webui = $::bareos::params::config_dir_webui,
-  $file_owner       = $::bareos::params::file_owner,
-  $file_group       = $::bareos::params::file_group,
-  $file_mode        = $::bareos::params::file_mode,
-  $file_dir_mode    = $::bareos::params::file_dir_mode,
-  $repo_release     = $::bareos::params::repo_release,
-  $manage_repo      = $::bareos::params::manage_repo,
-  $manage_user      = $::bareos::params::manage_user,
-  $manage_package   = $::bareos::params::manage_package,
-  $manage_service   = $::bareos::params::manage_service,
-  $package_name     = $::bareos::params::package_name, # base/common package only
-  $package_ensure   = $::bareos::params::package_ensure,
-  $service_ensure   = $::bareos::params::service_ensure,
-  $service_enable   = $::bareos::params::service_enable,
+  $config_dir          = $::bareos::params::config_dir,
+  $config_dir_webui    = $::bareos::params::config_dir_webui,
+  $file_owner          = $::bareos::params::file_owner,
+  $file_group          = $::bareos::params::file_group,
+  $file_mode           = $::bareos::params::file_mode,
+  $file_dir_mode       = $::bareos::params::file_dir_mode,
+  $repo_release        = $::bareos::params::repo_release,
+  $manage_repo         = $::bareos::params::manage_repo,
+  $repo_avail_release  = $::bareos::params::repo_avail_release,
+  $manage_repo_release = $::bareos::params::manage_repo_release,
+  $manage_user         = $::bareos::params::manage_user,
+  $manage_package      = $::bareos::params::manage_package,
+  $manage_service      = $::bareos::params::manage_service,
+  $package_name        = $::bareos::params::package_name, # base/common package only
+  $package_ensure      = $::bareos::params::package_ensure,
+  $service_ensure      = $::bareos::params::service_ensure,
+  $service_enable      = $::bareos::params::service_enable,
 
   $console_package_name  = $::bareos::params::console_package_name,
   $monitor_package_name  = $::bareos::params::monitor_package_name,
@@ -34,7 +36,9 @@ class bareos (
 
   if $manage_repo {
     class {'::bareos::repository':
-      release => $repo_release,
+      release                => $repo_release,
+      repo_avail_release => $repo_avail_release,
+      manage_repo_release    => $manage_repo_release
     }
   }
 

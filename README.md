@@ -111,6 +111,7 @@ Here you can define various behaviours for your setup.
 class { '::bareos':
   repo_release => '16.2', # Highly recommend to fix your bareos release. Defaults to 'latest'
   manage_repo => true, # use the internally shipped repo management
+  manage_repo_release = { "RedHat" => [ "5", "6" ], "CentOS" => [ "all" ] }, # manage the repository only for redhat 5 and 6 and all centos distribution. undef to manage it all
   manage_user => true, # manage the bareos user and group (usually also created by the package)
   manage_package => true, # setup the bareos-common packge
   package_name => 'bareos-common', # change the common package name (can be an array as well),
@@ -391,8 +392,25 @@ Additional configuration is required on the **Director** server.
 }
 ```
 
+## Repositories
+
+OS Limitations hardly depends on the availability of the bareos packages in the bareos [repository](http://download.bareos.org/bareos/release/) and the available release. Currently it has been tested on Ubuntu 14.04 and 16.04, CentOS 6 and Debian 8.
+
+The Bareos repository is not meant to support all operating system releases. Each Bareos version will support a certain list of os. `$repo_avail_release` is meant to keep a full array of the supported os from upstream. If the os family and/or the release is not supported, it will be skipped.
+
+In the repositories, as by [Bareos statement](https://www.bareos.org/en/download.html), are *released only for the first version of each major release*. Implicitly, no security or bug fix are explicitly planned into this repository.
+As result, it is recommended to follow the package from your distribution, if any.
+
+To apply the class only to a certain os family and/or version, you may use the `$manage_repo_release` hash. If this hash is defined, this will look up for os you want to manage through the repository.
+
+An example of this hash may be the following
+```
+{ "RedHat" => [ "5", "6" ], "CentOS" => [ "all" ] }
+```
+This will make use of the repository only for RedHat 5 and 6, but all of the CentOS.
+
+
 ## Limitations
 
 This module is built upon and tested against the versions of Puppet listed in the metadata.json file (i.e. the listed compatible versions on the Puppet Forge).
 
-OS Limitations hardly depends on the availability of the bareos packages in the bareos [repository](http://download.bareos.org/bareos/release/) and the available release. Currently it has been tested on Ubuntu 14.04 and 16.04.
