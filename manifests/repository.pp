@@ -14,7 +14,11 @@ class bareos::repository(
 
   $os = $::operatingsystem
   $osrelease = $::operatingsystemrelease
-  $osmajrelease = $::operatingsystemmajrelease
+  if defined($::operatingsystemmajrelease) {
+    $osmajrelease = $::operatingsystemmajrelease
+  } else {
+    $osmajrelease = split($osrelease, '.')
+  }
 
   # Internal repositories, no other checks
   if ( $os == 'Gentoo' ) {
