@@ -22,25 +22,25 @@ class bareos::repository(
     # latest version available is 16.2
     $internal_repository = true
 
-    if ($release == 'latest' or $release > "16.2" ) {
+    if ($release == 'latest' or $release > '16.2' ) {
       $gentoorelease = '16.2'
     } else {
       $gentoorelease = '15.2'
     }
 
     portage::package {'app-backup/bareos':
+      ensure           => present,
       target           => 'puppet-bareos',
       keywords         => ['~amd64', '~x86'],
       keywords_version => "=${gentoorelease}*",
-      ensure           => present,
     }
   }
 
   # Bareos repositories
   # bareos name convention make use of major version for most distribution, while make use of full version for Ubuntu. Checking both.
   if ( $internal_repository != true ) and ( $os != undef and $osrelease != undef and $osmajrelease != undef ) and
-     ( $release in $repo_avail_release[$os][$osmajrelease] or $release in $repo_avail_release[$os][$osrelease] ) and
-       ( ( $manage_repo_release == undef ) or ( 'all' in $manage_repo_release[$os] or $osmajrelease in $manage_repo_release[$os] or $osrelease in $manage_repo_release[$os] ) ) {
+    ( $release in $repo_avail_release[$os][$osmajrelease] or $release in $repo_avail_release[$os][$osrelease] ) and
+    ( ( $manage_repo_release == undef ) or ( 'all' in $manage_repo_release[$os] or $osmajrelease in $manage_repo_release[$os] or $osrelease in $manage_repo_release[$os] ) ) {
     case $os {
         /(?i:redhat|centos|fedora)/: {
           case $os {

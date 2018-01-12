@@ -36,9 +36,9 @@ class bareos (
 
   if $manage_repo {
     class {'::bareos::repository':
-      release                => $repo_release,
-      repo_avail_release => $repo_avail_release,
-      manage_repo_release    => $manage_repo_release
+      release             => $repo_release,
+      repo_avail_release  => $repo_avail_release,
+      manage_repo_release => $manage_repo_release
     }
   }
 
