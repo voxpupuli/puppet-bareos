@@ -23,11 +23,14 @@ class bareos::repository(
 
   # extract current array associated to the os release
   if ( has_key($repo_avail_hash, $os) ) {
+    notify {"repo_avail_hash has a os match": loglevel => debug, }
     if ( has_key($repo_avail_hash[$os], $osmajrelease) and ( $release in $repo_avail_hash[$os][$osmajrelease] ) ) {
-      $repo_avail_bareos = $repo_avail_hash[$os][$osmajrelease]
+      notify {"repo_avail_hash has a osmajrelease match": loglevel => debug, }
+      $repo_avail_bareos = true
       $osreleasekey = $osmajrelease
     } elsif ( has_key($repo_avail_hash[$os], $osrelease) and ( $release in $repo_avail_hash[$os][$osrelease] ) ) {
-      $repo_avail_bareos = $repo_avail_hash[$os][$osrelease]
+      notify {"repo_avail_hash has a osrelease match": loglevel => debug, }
+      $repo_avail_bareos = true
       $osreleasekey = $osrelease
     } else {
       $repo_avail_bareos = false
@@ -44,9 +47,12 @@ class bareos::repository(
       ( ( has_key($repo_manage_hash, $os ) and ( 'all' in $repo_manage_hash[$os] or $osreleasekey in $repo_manage_hash[$os] ) ) ) ) {
     # manage the repository
     $repo_manage_bareos = true
+    notify {"repo_manage_hash has a os match": loglevel => debug, }
   } else {
     $repo_manage_bareos = false
   }
+
+  notify {"repo_avail_bareos: '$repo_avail_bareos', repo_manage_bareos: '$repo_manage_bareos'": loglevel => debug, }
 
   # Bareos repositories
   # bareos name convention make use of major version for most distribution, while make use of full version for Ubuntu. Checking both.
