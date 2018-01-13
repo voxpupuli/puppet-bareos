@@ -17,7 +17,7 @@ describe 'bareos_settings' do
     end
   end
 
-  context 'type is an resource name' do
+  context 'type is a resource name' do
     %w[name res resource].each do |type|
       it 'runs with compatible values and is quoted' do
         ['This is an string', 'combatible Res_Name-7.9', 'a' * 127].each do |val|
@@ -32,8 +32,8 @@ describe 'bareos_settings' do
     end
   end
 
-  context 'type is an string' do
-    %w[acl messages type string_noquote schedule_run_command].each do |type|
+  context 'type is a string' do
+    %w[acl messages type string_noquote schedule_run_command address].each do |type|
       it 'runs with compatible values' do
         ['Not a number', 'MyString', '23 free usage of Text.!', 'Special ".-,= Chars'].each do |val|
           is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
@@ -47,8 +47,8 @@ describe 'bareos_settings' do
     end
   end
 
-  context 'type is an string with quotes' do
-    %w[audit_command runscript_short autopassword md5password directory string strname address device plugin_names].each do |type|
+  context 'type is a string with quotes' do
+    %w[audit_command runscript_short autopassword md5password directory string strname device plugin_names].each do |type|
       it 'runs with compatible values' do
         ['Not a number', 'MyString', '23 free usage of Text.!', 'Special ".-,= Chars'].each do |val|
           is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = \"#{val}\"")

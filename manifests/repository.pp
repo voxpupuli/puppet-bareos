@@ -6,8 +6,8 @@
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::repository(
   $release = 'latest',
-  $repo_avail_release = undef,
-  $manage_repo_release = undef,
+  $repo_avail_hash = {},
+  $repo_manage_hash = undef,
 ) {
 
   $url = "http://download.bareos.org/bareos/release/${release}/"
@@ -17,64 +17,76 @@ class bareos::repository(
   if defined('$::operatingsystemmajrelease') {
     $osmajrelease = $::operatingsystemmajrelease
   } else {
+    # old revision of facter. trying to guess. alternative is to leverage on lsb.
     $osmajrelease = split($osrelease, '.')
   }
 
-  # Internal repositories, no other checks
-  if ( $os == 'Gentoo' ) {
-    # bareos is not yet stable, we need to keyword it
-    # latest version available is 16.2
-    $internal_repository = true
-
-    if ($release == 'latest' or $release > '16.2' ) {
-      $gentoorelease = '16.2'
+  # extract current array associated to the os release
+  if ( has_key($repo_avail_hash, $os) ) {
+    if ( has_key($repo_avail_hash[$os], $osmajrelease) and ( $release in $repo_avail_hash[$os][$osmajrelease] ) ) {
+      $repo_avail_bareos = $repo_avail_hash[$os][$osmajrelease]
+      $osreleasekey = $osmajrelease
+    } elsif ( has_key($repo_avail_hash[$os], $osrelease) and ( $release in $repo_avail_hash[$os][$osrelease] ) ) {
+      $repo_avail_bareos = $repo_avail_hash[$os][$osrelease]
+      $osreleasekey = $osrelease
     } else {
-      $gentoorelease = '15.2'
+      $repo_avail_bareos = false
+      $osreleasekey = undef
     }
+  } else {
+    $repo_avail_bareos = false
+    $osreleasekey = undef
+  }
 
-    portage::package {'app-backup/bareos':
-      ensure           => present,
-      target           => 'puppet-bareos',
-      keywords         => ['~amd64', '~x86'],
-      keywords_version => "=${gentoorelease}*",
-    }
+  # check if it has been asked to manage this os as revision
+  if ( $repo_avail_bareos == true ) and
+    ( ( $repo_manage_hash == undef ) or
+      ( ( has_key($repo_manage_hash, $os ) and ( 'all' in $repo_manage_hash[$os] or $osreleasekey in $repo_manage_hash[$os] ) ) ) ) {
+    # manage the repository
+    $repo_manage_bareos = true
+  } else {
+    $repo_manage_bareos = false
   }
 
   # Bareos repositories
   # bareos name convention make use of major version for most distribution, while make use of full version for Ubuntu. Checking both.
-  if ( $internal_repository != true ) and ( $os != undef and $osrelease != undef and $osmajrelease != undef ) and
-    ( $release in $repo_avail_release[$os][$osmajrelease] or $release in $repo_avail_release[$os][$osrelease] ) and
-    ( ( $manage_repo_release == undef ) or ( 'all' in $manage_repo_release[$os] or $osmajrelease in $manage_repo_release[$os] or $osrelease in $manage_repo_release[$os] ) ) {
-    case $os {
-        /(?i:redhat|centos|fedora)/: {
-          case $os {
-            'RedHat': {
-              $location = "${url}RHEL_${osmajrelease}"
-            }
-            'Centos': {
-              $location = "${url}CentOS_${osmajrelease}"
-            }
-            'Fedora': {
-              $location = "${url}Fedora_${osmajrelease}"
-            }
-            default: {
-              fail('Operatingsystem is not supported by this module')
-            }
-          }
-          yumrepo { 'bareos':
-            name     => 'bareos',
-            baseurl  => $location,
-            gpgcheck => '1',
-            gpgkey   => "${location}repodata/repomd.xml.key",
-            priority => '1',
-          }
-      }
-      /(?i:debian|ubuntu)/: {
-        if $os  == 'Ubuntu' {
-          $location = "${url}xUbuntu_${osrelease}"
-        } else {
-          $location = "${url}Debian_${osmajrelease}.0"
+  #if ( $internal_repository != true ) and ( defined ('$os') and defined('$osrelease') and defined('$osmajrelease') ) and
+  #  ( $release in $repo_avail_hash[$os][$osmajrelease] or $release in $repo_avail_hash[$os][$osrelease] ) and
+  #  ( ( $repo_manage_hash == undef ) or ( 'all' in $repo_manage_hash[$os] or $osmajrelease in $repo_manage_hash[$os] or $osrelease in $repo_manage_hash[$os] ) ) {
+  case $os {
+    /(?i:redhat|centos|fedora)/: {
+      case $os {
+        'RedHat': {
+          $location = "${url}RHEL_${osmajrelease}"
         }
+        'Centos': {
+          $location = "${url}CentOS_${osmajrelease}"
+        }
+        'Fedora': {
+          $location = "${url}Fedora_${osmajrelease}"
+        }
+        default: {
+          fail('Operatingsystem is not supported by this module')
+        }
+      }
+      if $repo_manage_bareos {
+        yumrepo { 'bareos':
+          name     => 'bareos',
+          baseurl  => $location,
+          gpgcheck => '1',
+          gpgkey   => "${location}repodata/repomd.xml.key",
+          priority => '1',
+        }
+      }
+    }
+    # backports repositories may be considered
+    /(?i:debian|ubuntu)/: {
+      if $os  == 'Ubuntu' {
+        $location = "${url}xUbuntu_${osrelease}"
+      } else {
+        $location = "${url}Debian_${osmajrelease}.0"
+      }
+      if $repo_manage_bareos {
         include ::apt
         ::apt::source { 'bareos':
           location => $location,
@@ -88,9 +100,26 @@ class bareos::repository(
         Apt::Source['bareos'] -> Package<|tag == 'bareos'|>
         Class['Apt::Update']  -> Package<|tag == 'bareos'|>
       }
-      default: {
-        fail('Operatingsystem is not supported by this module')
+    }
+    /(?i:gentoo)/: {
+      # no bareos repository
+      # bareos is not yet marked as stable in Gentoo, we need to keyword it
+      # latest version available is 16.2
+      if ($release == 'latest' or $release > '16.2' ) {
+        $gentoorelease = '16.2'
+      } else {
+        $gentoorelease = '15.2'
       }
+
+      portage::package {'app-backup/bareos':
+        ensure           => present,
+        target           => 'puppet-bareos',
+        keywords         => ['~amd64', '~x86'],
+        keywords_version => "=${gentoorelease}*",
+      }
+    }
+    default: {
+      fail('Operatingsystem is not supported by this module')
     }
   }
 }

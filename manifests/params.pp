@@ -11,7 +11,7 @@ class bareos::params {
   $repo_release = 'latest'
 
   # supported release for each version
-  $repo_avail_release = {
+  $repo_avail_hash = {
     'Debian' => {
       '6' => [ '15.2', ],
       '7' => [ '15.2', '16.2', '17.2', 'latest', ],
@@ -42,7 +42,7 @@ class bareos::params {
       '7' => [ '15.2', '16.2', '17.2', 'latest', ],
     },
   }
-  $manage_repo_release = undef
+  $repo_manage_hash = undef
 
   # base
   $manage_repo = true
