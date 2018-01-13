@@ -53,7 +53,7 @@ class bareos::repository(
       ( ( has_key($repo_manage_hash, $os ) and ( 'all' in $repo_manage_hash[$os] or $osreleasekey in $repo_manage_hash[$os] ) ) ) ) {
     # manage the repository
     $repo_manage_bareos = true
-    notify {"repo_manage_hash has a os match": loglevel => debug, }
+    notify {'repo_manage_hash has a os match': loglevel => debug, }
   } else {
     $repo_manage_bareos = false
   }
