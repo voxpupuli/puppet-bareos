@@ -12,24 +12,30 @@ class bareos::repository(
 
   $url = "http://download.bareos.org/bareos/release/${release}/"
 
-  $os = $::operatingsystem
-  $osrelease = $::operatingsystemrelease
-  if defined('$::operatingsystemmajrelease') {
-    $osmajrelease = $::operatingsystemmajrelease
+  if versioncmp($::puppetversion, '4.0.0') >= 0 {
+    $os = $facts['os']['name']
+    $osrelease = $facts['os']['release']['full']
+    $osmajrelease = $facts['os']['release']['major']
   } else {
-    # old revision of facter. trying to guess. alternative is to leverage on lsb.
-    $osmajrelease = split($osrelease, '.')
+    $os = $::operatingsystem
+    $osrelease = $::operatingsystemrelease
+    if defined('$::operatingsystemmajrelease') {
+      $osmajrelease = $::operatingsystemmajrelease
+    } else {
+      # old revision of facter. trying to guess. alternative is to leverage on lsb.
+      $osmajrelease = split($osrelease, '.')
+    }
   }
 
   # extract current array associated to the os release
   if ( has_key($repo_avail_hash, $os) ) {
-    notify {"repo_avail_hash has a os match": loglevel => debug, }
+    notify {'repo_avail_hash has a os match': loglevel => debug, }
     if ( has_key($repo_avail_hash[$os], $osmajrelease) and ( $release in $repo_avail_hash[$os][$osmajrelease] ) ) {
-      notify {"repo_avail_hash has a osmajrelease match": loglevel => debug, }
+      notify {'repo_avail_hash has a osmajrelease match': loglevel => debug, }
       $repo_avail_bareos = true
       $osreleasekey = $osmajrelease
     } elsif ( has_key($repo_avail_hash[$os], $osrelease) and ( $release in $repo_avail_hash[$os][$osrelease] ) ) {
-      notify {"repo_avail_hash has a osrelease match": loglevel => debug, }
+      notify {'repo_avail_hash has a osrelease match': loglevel => debug, }
       $repo_avail_bareos = true
       $osreleasekey = $osrelease
     } else {
@@ -52,7 +58,7 @@ class bareos::repository(
     $repo_manage_bareos = false
   }
 
-  notify {"repo_avail_bareos: '$repo_avail_bareos', repo_manage_bareos: '$repo_manage_bareos'": loglevel => debug, }
+  notify {"repo_avail_bareos: '${repo_avail_bareos}', repo_manage_bareos: '${repo_manage_bareos}'": loglevel => debug, }
 
   # Bareos repositories
   # bareos name convention make use of major version for most distribution, while make use of full version for Ubuntu. Checking both.
