@@ -38,6 +38,7 @@ class bareos::repository(
         }
         yumrepo { 'bareos':
           name     => 'bareos',
+          descr    => 'Bareos Repository',
           baseurl  => $location,
           gpgcheck => '1',
           gpgkey   => "${location}/repodata/repomd.xml.key",
