@@ -84,9 +84,10 @@ class bareos::repository(
       if $repo_manage_bareos {
         yumrepo { 'bareos':
           name     => 'bareos',
+          descr    => 'Bareos Repository',
           baseurl  => $location,
           gpgcheck => '1',
-          gpgkey   => "${location}repodata/repomd.xml.key",
+          gpgkey   => "${location}/repodata/repomd.xml.key",
           priority => '1',
         }
       }
