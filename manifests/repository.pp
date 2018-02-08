@@ -41,7 +41,7 @@ class bareos::repository(
           descr    => 'Bareos Repository',
           baseurl  => $location,
           gpgcheck => '1',
-          gpgkey   => "${location}repodata/repomd.xml.key",
+          gpgkey   => "${location}/repodata/repomd.xml.key",
           priority => '1',
         }
     }
