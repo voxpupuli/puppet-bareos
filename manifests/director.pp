@@ -12,7 +12,8 @@ class bareos::director(
   $service_name   = $::bareos::director_service_name,
   $service_ensure = $::bareos::service_ensure,
   $service_enable = $::bareos::service_enable,
-  $config_dir     = "${::bareos::config_dir}/bareos-dir.d"
+  $config_dir     = "${::bareos::config_dir}/bareos-dir.d",
+  $exec_option    = $::bareos::exec_option,
 ) inherits ::bareos {
   include ::bareos::director::director
 
@@ -61,7 +62,7 @@ class bareos::director(
   }
 
   File <| |> -> exec { 'bareos director init catalog':
-    command     => '/usr/lib/bareos/scripts/create_bareos_database && /usr/lib/bareos/scripts/make_bareos_tables && /usr/lib/bareos/scripts/grant_bareos_privileges',
+    command     => "/usr/lib/bareos/scripts/create_bareos_database ${exec_option} && /usr/lib/bareos/scripts/make_bareos_tables ${exec_option} && /usr/lib/bareos/scripts/grant_bareos_privileges ${exec_option}",
     notify      => Service[$::bareos::director::service_name],
     refreshonly => true,
   }

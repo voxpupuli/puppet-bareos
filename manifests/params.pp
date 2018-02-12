@@ -53,4 +53,7 @@ class bareos::params {
   # webui
   $webui_package_name = 'bareos-webui'
   $webui_service_name = 'apache2'
+
+  # exec options
+  $exec_option = ''
 }
