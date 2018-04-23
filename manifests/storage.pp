@@ -16,14 +16,14 @@ class bareos::storage(
 ) inherits ::bareos {
   include ::bareos::storage::storage
 
-  if $manage_service {
+  if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
       tag    => 'bareos',
     }
   }
 
-  if $manage_package {
+  if $manage_service {
     service { $service_name:
       ensure => $service_ensure,
       enable => $service_enable,
