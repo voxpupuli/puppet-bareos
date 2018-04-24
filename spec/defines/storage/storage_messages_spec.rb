@@ -21,12 +21,12 @@ describe 'bareos::storage::messages' do
       param('console', 'Console', 'messages_list').
       param('director', 'Director', 'messages_list').
       param('file', 'File', 'messages_list').
-      param('mail', 'Mail', 'messages_list').
       param('mail_command', 'Mail Command', 'string').
+      param('mail', 'Mail', 'messages_list').
       param('mail_on_error', 'Mail On Error', 'messages_list').
       param('mail_on_success', 'Mail On Success', 'messages_list').
-      param('operator', 'Operator', 'messages_list').
       param('operator_command', 'Operator Command', 'string').
+      param('operator', 'Operator', 'messages_list').
       param('stderr', 'Stderr', 'messages_list').
       param('stdout', 'Stdout', 'messages_list').
       param('syslog', 'Syslog', 'messages_list').
