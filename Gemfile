@@ -17,5 +17,5 @@ gem 'metadata-json-lint', RUBY_VERSION < '2.0' ? '= 0.0.19' : '>= 1.2.2'
 gem 'puppet', puppetversion
 gem 'puppet-lint', '>= 2.0.0'
 gem 'puppetlabs_spec_helper', '>= 1.0.0'
-gem 'rspec-puppet'
+gem 'rspec-puppet', '<=2.6.9'
 gem 'rubocop', RUBY_VERSION < '2.0' ? '= 0.41.0' : '>= 0.41.0'
