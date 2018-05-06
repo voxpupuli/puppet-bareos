@@ -1,3 +1,5 @@
+require 'resolv'
+
 module Puppet::Parser::Functions
   newfunction(:bareos_settings, type: :rvalue, doc: <<-'ENDHEREDOC') do |args|
     Helper function to parse settings for bareos and return prepared lines for config file
@@ -47,11 +49,10 @@ module Puppet::Parser::Functions
           when 'name', 'res', 'resource'
             quote = true
             regex = %r{^[a-z][a-z0-9\.\-_ \$]{0,126}$}i
-          # @todo validate net-address for domain name or ip
           when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
             raise 'Value need to be an string' unless value.is_a?(String)
           # type md5password is missleading, it is an plain password and not md5 hashed
-          when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'address', 'device', 'plugin_names'
+          when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'device', 'plugin_names'
             # array
             quote = true
             raise 'Value need to be an string' unless value.is_a?(String)
@@ -63,6 +64,11 @@ module Puppet::Parser::Functions
             regex = %r{^(\d+|(\d+\W+(seconds|sec|s|minutes|min|hours|h|days|d|weeks|w|months|m|quarters|q|years|y)\W*)+)$}i
           when 'boolean', 'bit'
             value_in_array = %w[yes no on off true false]
+          when 'address'
+            raise 'Value need to be an string' unless value.is_a?(String)
+            # validate net-address for domain name or ip
+            regex_hostname = %r{^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$}i
+            raise 'Value needs to be an ip or host address' unless value =~ Resolv::IPv4::Regex or value =~ Resolv::IPv6::Regex or value =~ Regexp.compile(regex_hostname)
           when 'addresses'
             hash_separator = ' = '
             raise 'Please specify as Hash' unless value.is_a?(Hash)

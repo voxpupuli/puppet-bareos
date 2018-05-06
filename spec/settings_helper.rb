@@ -26,7 +26,7 @@ class BareosResourceHelper
     # maybe check more than it is an int
     when 'int32', 'pint16', 'pint32', 'port', 'max_blocksize'
       val = 42
-    when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'address', 'device', 'plugin_names'
+    when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'device', 'plugin_names'
       val = 'Example Value'
       result = '"Example Value"'
     when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
@@ -39,6 +39,8 @@ class BareosResourceHelper
       val = '1337 sec'
     when 'boolean', 'bit'
       val = false
+    when 'address'
+      val = 'host.name.com'  
     when 'addresses', 'include_exclude_item', 'runscript', 'hash'
       sep = ' ' unless type == 'addresses'
       val = {
