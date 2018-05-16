@@ -501,7 +501,7 @@ class bareos::storage::storage (
     $_require_resource = undef
   }
 
-  file { "${::bareos::storage::config_dir}/${_resource_dir}/${name_storage}.conf":
+  file { "${::bareos::storage::config_dir}/${_resource_dir}/bareos-sd.conf":
     ensure  => $ensure,
     mode    => $::bareos::file_mode,
     owner   => $::bareos::file_owner,

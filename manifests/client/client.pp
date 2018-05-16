@@ -451,7 +451,7 @@ class bareos::client::client (
     $_require_res_messages = undef
   }
 
-  file { "${::bareos::client::config_dir}/${_resource_dir}/${name_client}.conf":
+  file { "${::bareos::client::config_dir}/${_resource_dir}/bareos-fd.conf":
     ensure  => $ensure,
     mode    => $::bareos::file_mode,
     owner   => $::bareos::file_owner,
