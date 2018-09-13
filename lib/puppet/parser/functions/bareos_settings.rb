@@ -72,7 +72,10 @@ module Puppet::Parser::Functions
           when 'addresses'
             hash_separator = ' = '
             raise 'Please specify as Hash' unless value.is_a?(Hash)
-          when 'include_exclude_item', 'runscript', 'hash'
+          when 'runscript', 'hash'
+            raise 'Please specify as Hash' unless value.is_a?(Hash)
+          when 'include_exclude_item'
+            quote = true
             raise 'Please specify as Hash' unless value.is_a?(Hash)
           when 'backup_level'
             value_in_array = %w[full incremental differential virtualfull initcatalog catalog volumetocatalog disktocatalog]
@@ -115,6 +118,7 @@ module Puppet::Parser::Functions
             final_settings.push "#{indent}#{directive}#{hash_separator}{"
             value.each do |k, v|
               type_n = 'string_noquote'
+              type_n = 'string' if quote
               type_n = "#{type_n}_list" if v.is_a?(Array)
               # use same type again:
               type_n = type if v.is_a?(Hash)
