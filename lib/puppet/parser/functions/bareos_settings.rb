@@ -15,7 +15,7 @@ module Puppet::Parser::Functions
         required = setting[3] # boolean, undef allowed or not
         indent = setting[4] || '  ' # Internally used, just for beatufying
 
-        raise 'Name of directive config key is invalid' unless directive =~ %r{^[a-zA-z0-9 ]+$}
+        raise 'Name of directive config key is invalid' unless directive =~ %r{^[a-zA-Z0-9 ]+$}
 
         # check array if allowed
         values = if (%w[acl runscript].include?(type) || type =~ %r{[_-]list$}) && value_setting.is_a?(Array)
@@ -27,8 +27,8 @@ module Puppet::Parser::Functions
 
         values.each do |value|
           # ignore undef if not required
-          next if required == false && value == :undef
-          raise 'This directive is required, please set value' if value == :undef
+          next if required == false && (value == nil || value == :undef)
+          raise 'This directive is required, please set value' if (value == nil || value == :undef)
 
           # defaults:
           # quote value
