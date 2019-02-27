@@ -27,8 +27,8 @@ module Puppet::Parser::Functions
 
         values.each do |value|
           # ignore undef if not required
-          next if required == false && value == nil
-          raise 'This directive is required, please set value' if value == nil
+          next if required == false && (value == nil || value == :undef)
+          raise 'This directive is required, please set value' if (value == nil || value == :undef)
 
           # defaults:
           # quote value
