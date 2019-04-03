@@ -130,7 +130,7 @@ module Puppet::Parser::Functions
           end
         end
       rescue => error
-        raise Puppet::ParseError, "bareos_parse_settings(): #{setting.inspect}: #{error}."
+        raise Puppet::ParseError, "bareos_settings(): #{setting.inspect}: #{error}."
       end
     end
 
