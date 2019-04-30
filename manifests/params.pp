@@ -19,6 +19,7 @@ class bareos::params {
   # defaults for the different services and base/common package
   $manage_package = true
   $manage_service = true
+  $manage_database = true
   $package_ensure = present
   $service_ensure = running
   $service_enable = true
