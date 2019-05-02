@@ -17,6 +17,7 @@ class bareos (
   $manage_user      = $::bareos::params::manage_user,
   $manage_package   = $::bareos::params::manage_package,
   $manage_service   = $::bareos::params::manage_service,
+  $manage_database  = $::bareos::params::manage_database,
   $package_name     = $::bareos::params::package_name, # base/common package only
   $package_ensure   = $::bareos::params::package_ensure,
   $service_ensure   = $::bareos::params::service_ensure,

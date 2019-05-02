@@ -186,7 +186,9 @@ define bareos::director::catalog (
     content => template('bareos/resource.erb'),
     notify  => [
       Service[$::bareos::director::service_name],
-      Exec['bareos director init catalog'],
     ]
+  }
+  if $::bareos::manage_database {
+    File["${::bareos::director::config_dir}/${_resource_dir}/${name}.conf"] ~> Exec['bareos director init catalog']
   }
 }
