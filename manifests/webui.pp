@@ -23,7 +23,7 @@ class bareos::webui(
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
-      tag    => 'bareos',
+      tag    => ['bareos', 'bareos_webui'],
     }
   }
 
@@ -31,6 +31,7 @@ class bareos::webui(
     service { $service_name:
       ensure => $service_ensure,
       enable => $service_enable,
+      tag    => ['bareos', 'bareos_webui'],
     }
   }
 
@@ -44,6 +45,7 @@ class bareos::webui(
     owner   => 'root',
     group   => 'root',
     require => Package[$package_name],
+    tag     => ['bareos', 'bareos_webui'],
   }
 
   file { "${::bareos::webui::config_dir}/configuration.ini":
@@ -53,6 +55,7 @@ class bareos::webui(
     group   => 'root',
     content => template('bareos/webui_configuration.erb'),
     notify  => Service[$::bareos::webui::service_name],
+    tag     => ['bareos', 'bareos_webui'],
   }
 
   concat { "${::bareos::webui::config_dir}/directors.ini":
@@ -60,6 +63,7 @@ class bareos::webui(
     mode   => '0644',
     owner  => 'root',
     group  => 'root',
+    tag    => ['bareos', 'bareos_webui'],
   }
 
   if $manage_local_dir {

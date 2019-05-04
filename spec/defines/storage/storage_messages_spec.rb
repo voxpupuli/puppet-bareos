@@ -10,6 +10,7 @@ describe 'bareos::storage::messages' do
     it { is_expected.to contain_class('bareos::storage') }
     it { is_expected.to contain_file(filename).with_content(%r{^Messages \{$}) }
     it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
+    it { is_expected.to contain_file(filename).with_tag(['bareos', 'bareos_storage']) }
   end
 
   context 'with all params set' do

@@ -8,6 +8,7 @@ describe 'bareos::client::client' do
     it { is_expected.to contain_class('bareos::client') }
     it { is_expected.to contain_file(filename).with_content(%r{^Client \{$}) }
     it { is_expected.to contain_file(filename).with_content(%r{Name = "bareos-fd"$}) }
+    it { is_expected.to contain_file(filename).with_tag(['bareos', 'bareos_client']) }
   end
 
   context 'with all params set' do

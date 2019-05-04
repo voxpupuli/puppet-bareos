@@ -20,7 +20,7 @@ class bareos::director(
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
-      tag    => 'bareos',
+      tag    => ['bareos', 'bareos_director'],
     }
   }
 
@@ -28,6 +28,7 @@ class bareos::director(
     service { $service_name:
       ensure => $service_ensure,
       enable => $service_enable,
+      tag    => ['bareos', 'bareos_director'],
     }
   }
 
@@ -59,13 +60,15 @@ class bareos::director(
     group   => $::bareos::file_group,
     require => Package[$package_name],
     notify  => Service[$service_name],
+    tag     => ['bareos', 'bareos_director'],
   }
 
   if $manage_database {
-    File <| |> -> exec { 'bareos director init catalog':
+    File <| tag == 'bareos_director' |> -> exec { 'bareos director init catalog':
       command     => '/usr/lib/bareos/scripts/create_bareos_database && /usr/lib/bareos/scripts/make_bareos_tables && /usr/lib/bareos/scripts/grant_bareos_privileges',
       notify      => Service[$::bareos::director::service_name],
       refreshonly => true,
+      tag         => ['bareos', 'bareos_director'],
     }
   }
 }

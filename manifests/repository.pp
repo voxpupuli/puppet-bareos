@@ -5,7 +5,8 @@
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::repository(
-  $release = 'latest'
+  $release = 'latest',
+  $gpg_key_fingerprint = undef,
 ) {
 
   $url = "http://download.bareos.org/bareos/release/${release}/"
@@ -18,6 +19,16 @@ class bareos::repository(
     $os = $::operatingsystem
     $osrelease = $::operatingsystemrelease
     $osmajrelease = $::operatingsystemmajrelease
+  }
+
+  if $gpg_key_fingerprint {
+    $_gpg_key_fingerprint = $gpg_key_fingerprint
+  } elsif $release == 'latest' or versioncmp($release, '18.2') >= 0 {
+    # >= bareos-18.2
+    $_gpg_key_fingerprint = 'A0CF E15F 71F7 9857 4AB3 63DD 1182 83D9 A786 2CEE'
+  } else {
+    # >= bareos-15.2
+    $_gpg_key_fingerprint = '0143 857D 9CE8 C2D1 82FE 2631 F93C 028C 093B FBA2'
   }
 
   case $os {
@@ -60,7 +71,7 @@ class bareos::repository(
         release  => '/',
         repos    => '',
         key      => {
-          id     => '0143857D9CE8C2D182FE2631F93C028C093BFBA2',
+          id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
           source => "${location}/Release.key",
         },
       }

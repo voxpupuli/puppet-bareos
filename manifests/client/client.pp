@@ -459,5 +459,6 @@ class bareos::client::client (
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::client::service_name],
     require => $_require_res_messages,
+    tag     => ['bareos', 'bareos_client'],
   }
 }

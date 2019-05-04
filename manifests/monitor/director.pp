@@ -65,5 +65,6 @@ define bareos::monitor::director (
     owner   => $::bareos::file_owner,
     group   => $::bareos::file_group,
     content => template('bareos/resource.erb'),
+    tag     => ['bareos', 'bareos_monitor'],
   }
 }

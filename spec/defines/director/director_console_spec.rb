@@ -20,6 +20,7 @@ describe 'bareos::director::console' do
     it { is_expected.to contain_class('bareos::director') }
     it { is_expected.to contain_file(filename).with_content(%r{^Console \{$}) }
     it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
+    it { is_expected.to contain_file(filename).with_tag(['bareos', 'bareos_director']) }
   end
 
   context 'with all params set' do

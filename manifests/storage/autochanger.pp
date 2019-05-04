@@ -75,5 +75,6 @@ define bareos::storage::autochanger (
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::storage::service_name],
     require => $_require_resource,
+    tag     => ['bareos', 'bareos_storage'],
   }
 }

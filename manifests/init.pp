@@ -42,7 +42,7 @@ class bareos (
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
-      tag    => 'bareos',
+      tag    => ['bareos', 'bareos_core'],
     }
   }
 
@@ -51,6 +51,7 @@ class bareos (
       ensure     => present,
       forcelocal => true,
       system     => true,
+      tag        => ['bareos', 'bareos_core'],
     }
     -> user { $file_owner:
       ensure     => present,
@@ -60,6 +61,7 @@ class bareos (
       shell      => '/bin/false',
       groups     => ['disk', 'tape', $file_group],
       system     => true,
+      tag        => ['bareos', 'bareos_core'],
     }
   }
 
@@ -71,5 +73,6 @@ class bareos (
     mode    => $::bareos::file_dir_mode,
     owner   => $::bareos::file_owner,
     group   => $::bareos::file_group,
+    tag     => ['bareos', 'bareos_core'],
   }
 }
