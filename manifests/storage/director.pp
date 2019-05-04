@@ -186,5 +186,6 @@ define bareos::storage::director (
     group   => $::bareos::file_group,
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::storage::service_name],
+    tag     => ['bareos', 'bareos_storage'],
   }
 }

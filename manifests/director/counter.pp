@@ -85,5 +85,6 @@ define bareos::director::counter (
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::director::service_name],
     require => $_require_resource,
+    tag     => ['bareos', 'bareos_director'],
   }
 }

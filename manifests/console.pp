@@ -14,7 +14,8 @@ class bareos::console(
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
-      tag    => 'bareos',
+      tag    => ['bareos', 'bareos_console'],
+
     }
   }
 
@@ -34,5 +35,6 @@ class bareos::console(
     owner   => $::bareos::file_owner,
     group   => $::bareos::file_group,
     require => Package[$package_name],
+    tag     => ['bareos', 'bareos_console'],
   }
 }

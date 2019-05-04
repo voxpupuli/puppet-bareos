@@ -76,5 +76,6 @@ define bareos::director::fileset (
     group   => $::bareos::file_group,
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::director::service_name],
+    tag     => ['bareos', 'bareos_director'],
   }
 }

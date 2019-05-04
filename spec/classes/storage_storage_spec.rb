@@ -8,6 +8,7 @@ describe 'bareos::storage::storage' do
     it { is_expected.to contain_class('bareos::storage') }
     it { is_expected.to contain_file(filename).with_content(%r{^Storage \{$}) }
     it { is_expected.to contain_file(filename).with_content(%r{Name = "bareos-sd"$}) }
+    it { is_expected.to contain_file(filename).with_tag(['bareos', 'bareos_storage']) }
   end
 
   context 'with all params set' do

@@ -55,6 +55,7 @@ define bareos::webui::director (
       target  => "${::bareos::webui::config_dir}/directors.ini",
       content =>  template('bareos/webui_directors.erb'),
       notify  => Service[$::bareos::webui::service_name],
+      tag     => ['bareos', 'bareos_webui'],
     }
   }
 }

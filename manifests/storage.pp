@@ -19,7 +19,7 @@ class bareos::storage(
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
-      tag    => 'bareos',
+      tag    => ['bareos', 'bareos_storage'],
     }
   }
 
@@ -27,6 +27,7 @@ class bareos::storage(
     service { $service_name:
       ensure => $service_ensure,
       enable => $service_enable,
+      tag    => ['bareos', 'bareos_storage'],
     }
   }
 
@@ -51,5 +52,6 @@ class bareos::storage(
     group   => $::bareos::file_group,
     require => Package[$package_name],
     notify  => Service[$service_name],
+    tag     => ['bareos', 'bareos_storage'],
   }
 }

@@ -231,5 +231,6 @@ define bareos::client::director (
     group   => $::bareos::file_group,
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::client::service_name],
+    tag     => ['bareos', 'bareos_client'],
   }
 }
