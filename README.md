@@ -1,7 +1,7 @@
 # Bareos Puppet Module
-[![Puppet Forge](http://img.shields.io/puppetforge/v/project0/bareos.svg)](https://forge.puppetlabs.com/project0/bareos)
-[![Puppet Forge score](https://img.shields.io/puppetforge/f/project0/bareos.svg)](https://forge.puppetlabs.com/project0/bareos)
-[![Build Status](https://travis-ci.org/Project0/puppet-bareos.svg?branch=master)](https://travis-ci.org/Project0/puppet-bareos)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/voxpupuli/bareos.svg)](https://forge.puppetlabs.com/voxpupuli/bareos)
+[![Puppet Forge score](https://img.shields.io/puppetforge/f/voxpupuli/bareos.svg)](https://forge.puppetlabs.com/voxpupuli/bareos)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-bareos.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-bareos)
 
 #### Table of Contents
 
@@ -396,3 +396,7 @@ Additional configuration is required on the **Director** server.
 This module is built upon and tested against the versions of Puppet listed in the metadata.json file (i.e. the listed compatible versions on the Puppet Forge).
 
 OS Limitations hardly depends on the availability of the bareos packages in the bareos [repository](http://download.bareos.org/bareos/release/) and the available release. Currently it has been tested on Ubuntu 14.04 and 16.04.
+
+## Module Migration 
+
+This puppet module was originally hosted at https://github.com/Project0/puppet-bareos and has been migrated to Vox Pupuli.
