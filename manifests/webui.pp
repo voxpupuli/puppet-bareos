@@ -18,6 +18,7 @@ class bareos::webui(
   $pagination_default_value = 25,
   $save_previous_state = false,
   $label_pooltype = '',
+  $directors = {},
 ) inherits ::bareos {
 
   if $manage_package {
@@ -71,4 +72,6 @@ class bareos::webui(
       dir_address => 'localhost'
     }
   }
+
+  create_resources(::bareos::webui::director, $directors)
 }
