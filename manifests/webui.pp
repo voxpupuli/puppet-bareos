@@ -69,7 +69,7 @@ class bareos::webui(
 
   if $manage_local_dir {
     bareos::webui::director { 'localhost':
-      dir_address => 'localhost'
+      dir_address => 'localhost',
     }
   }
 
