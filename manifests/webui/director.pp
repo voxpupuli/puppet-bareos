@@ -36,7 +36,7 @@ define bareos::webui::director (
   $dir_port = 9101,
   $enabled = 'yes',
 ) {
-  include ::bareos::webui
+  include bareos::webui
 
   unless $ensure in [ 'present', 'absent' ] {
     fail('Invalid value for ensure')

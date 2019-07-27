@@ -427,7 +427,7 @@ class bareos::storage::storage (
   $ver_id = undef,
   $working_directory = undef,
 ) {
-  include ::bareos::storage
+  include bareos::storage
 
   $_resource = 'Storage'
   $_resource_dir = 'storage'
