@@ -1,61 +1,47 @@
-
 ---
-notifications:
-  email: false
+dist: xenial
 language: ruby
-rvm:
-  - 1.9.3
-  - 2.1
-  - 2.3
-  - 2.4
 cache: bundler
-script: bundle exec rake test
-env:
-  - PUPPET_GEM_VERSION="~> 3.4.0"
-  - PUPPET_GEM_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
-  - PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes
-  - PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes FUTURE_PARSER=yes
-  - PUPPET_GEM_VERSION="~> 4.0.0" STRICT_VARIABLES=yes
-  - PUPPET_GEM_VERSION="~> 4.4.0" STRICT_VARIABLES=yes
-  - PUPPET_GEM_VERSION="~> 4.6.0" STRICT_VARIABLES=yes
-  - PUPPET_GEM_VERSION="~> 5.0.1" STRICT_VARIABLES=yes
+before_install:
+  - gem update --system
+  - gem update bundler
+  - bundle --version
+script:
+  - 'bundle exec rake $CHECK'
 matrix:
   fast_finish: true
-  exclude:
-  # exclude all puppet 4.x 5.x for ruby 1.9.3
-  - rvm: 1.9.3
-    env: PUPPET_GEM_VERSION="~> 4.0.0" STRICT_VARIABLES=yes
-  - rvm: 1.9.3
-    env: PUPPET_GEM_VERSION="~> 4.4.0" STRICT_VARIABLES=yes
-  - rvm: 1.9.3
-    env: PUPPET_GEM_VERSION="~> 4.6.0" STRICT_VARIABLES=yes
-  - rvm: 1.9.3
-    env: PUPPET_GEM_VERSION="~> 5.0.1" STRICT_VARIABLES=yes
-  - rvm: 2.1
-    env: PUPPET_GEM_VERSION="~> 3.4.0"
-  # eclude all puppet 3.x 5.x for ruby 2.3
-  - rvm: 2.3
-    env: PUPPET_GEM_VERSION="~> 3.4.0"
-  - rvm: 2.3
-    env: PUPPET_GEM_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
-  - rvm: 2.3
-    env: PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes
-  - rvm: 2.3
-    env: PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes FUTURE_PARSER=yes
-  - rvm: 2.3
-    env: PUPPET_GEM_VERSION="~> 5.0.1" STRICT_VARIABLES=yes
-  # eclude all puppet 3.x 4.x for ruby 2.4
-  - rvm: 2.4
-    env: PUPPET_GEM_VERSION="~> 3.4.0"
-  - rvm: 2.4
-    env: PUPPET_GEM_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
-  - rvm: 2.4
-    env: PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes
-  - rvm: 2.4
-    env: PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes FUTURE_PARSER=yes
-  - rvm: 2.4
-    env: PUPPET_GEM_VERSION="~> 4.0.0" STRICT_VARIABLES=yes
-  - rvm: 2.4
-    env: PUPPET_GEM_VERSION="~> 4.4.0" STRICT_VARIABLES=yes
-  - rvm: 2.4
-    env: PUPPET_GEM_VERSION="~> 4.6.0" STRICT_VARIABLES=yes
+  include:
+  - rvm: 2.4.4
+    bundler_args: --without system_tests development release
+    env: PUPPET_VERSION="~> 5.0" CHECK=test
+  - rvm: 2.5.3
+    bundler_args: --without system_tests development release
+    env: PUPPET_VERSION="~> 6.0" CHECK=test_with_coveralls
+  - rvm: 2.5.3
+    bundler_args: --without system_tests development release
+    env: PUPPET_VERSION="~> 6.0" CHECK=rubocop
+  - rvm: 2.4.4
+    bundler_args: --without system_tests development release
+    env: PUPPET_VERSION="~> 5.0" CHECK=build DEPLOY_TO_FORGE=yes
+branches:
+  only:
+  - master
+  - /^v\d/
+notifications:
+  email: false
+  irc:
+    on_success: always
+    on_failure: always
+    channels:
+      - "chat.freenode.org#voxpupuli-notifications"
+deploy:
+  provider: puppetforge
+  user: puppet
+  password:
+    secure: ""
+  on:
+    tags: true
+    # all_branches is required to use tags
+    all_branches: true
+    # Only publish the build marked with "DEPLOY_TO_FORGE"
+    condition: "$DEPLOY_TO_FORGE = yes"
