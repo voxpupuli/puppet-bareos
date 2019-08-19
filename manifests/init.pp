@@ -38,6 +38,7 @@ class bareos (
   $file_group                         = $bareos::params::file_group,
   $file_mode                          = $bareos::params::file_mode,
   $file_dir_mode                      = $bareos::params::file_dir_mode,
+  $user_groups                        = $bareos::params::user_groups,
   String  $repo_release               = '21',
   Boolean $repo_subscription          = false,
   Optional[String[1]]  $repo_username = undef,
@@ -92,7 +93,7 @@ class bareos (
       comment    => 'Bareos system user',
       home       => '/var/lib/bareos',
       shell      => '/bin/false',
-      groups     => ['disk', 'tape', $file_group],
+      groups     => ['disk', 'tape', $file_group] + $user_groups,
       system     => true,
       tag        => ['bareos', 'bareos_core'],
     }
