@@ -467,14 +467,30 @@ class bareos::director::director (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/bareos-dir.conf":
+  $daemon_args = "-c ${::bareos::director::config_dir}/${_resource_dir}/bareos-dir.conf"
+
+  file { "/etc/default/bareos-dir":
+    ensure  => $ensure,
+    mode    => '0644',
+    owner   => $::bareos::file_owner,
+    group   => $::bareos::file_group,
+    content => template('bareos/bareos_dir_default.erb'),
+    notify  => Service[$::bareos::directory::service_name],
+    require => $_require_resource,
+    tag     => ['bareos', 'bareos_director', 'bareos_defaults']
+  }
+
+  file { "${::bareos::director::config_dir}/${_resource_dir}/bareos-dir.conf":
     ensure  => $ensure,
     mode    => $::bareos::file_mode,
     owner   => $::bareos::file_owner,
     group   => $::bareos::file_group,
     content => template('bareos/resource.erb'),
     notify  => Service[$::bareos::director::service_name],
-    require => $_require_resource,
+    require => [
+      $_require_resource,
+      File['/etc/default/bareos-dir'],
+    ],
     tag     => ['bareos', 'bareos_director'],
   }
 }
