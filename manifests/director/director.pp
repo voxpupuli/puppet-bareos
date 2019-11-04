@@ -467,7 +467,7 @@ class bareos::director::director (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/bareos-dir.conf":
+  file { "${::bareos::director::config_dir}/bareos-dir.conf":
     ensure  => $ensure,
     mode    => $::bareos::file_mode,
     owner   => $::bareos::file_owner,
