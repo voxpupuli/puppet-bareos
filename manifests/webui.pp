@@ -3,14 +3,14 @@
 #
 # This class will be automatically included when a resource is defined.
 class bareos::webui(
-  $manage_service = $::bareos::manage_service,
-  $manage_package = $::bareos::manage_package,
-  $package_name   = $::bareos::webui_package_name,
-  $package_ensure = $::bareos::package_ensure,
-  $service_name   = $::bareos::webui_service_name,
-  $service_ensure = $::bareos::service_ensure,
-  $service_enable = $::bareos::service_enable,
-  $config_dir     = $::bareos::config_dir_webui,
+  $manage_service = $bareos::manage_service,
+  $manage_package = $bareos::manage_package,
+  $package_name   = $bareos::webui_package_name,
+  $package_ensure = $bareos::package_ensure,
+  $service_name   = $bareos::webui_service_name,
+  $service_ensure = $bareos::service_ensure,
+  $service_enable = $bareos::service_enable,
+  $config_dir     = $bareos::config_dir_webui,
 
   $manage_local_dir = true, # setup local bareos director
   $session_timeout = 3600,
@@ -49,17 +49,17 @@ class bareos::webui(
     tag     => ['bareos', 'bareos_webui'],
   }
 
-  file { "${::bareos::webui::config_dir}/configuration.ini":
+  file { "${bareos::webui::config_dir}/configuration.ini":
     ensure  => file,
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
     content => template('bareos/webui_configuration.erb'),
-    notify  => Service[$::bareos::webui::service_name],
+    notify  => Service[$bareos::webui::service_name],
     tag     => ['bareos', 'bareos_webui'],
   }
 
-  concat { "${::bareos::webui::config_dir}/directors.ini":
+  concat { "${bareos::webui::config_dir}/directors.ini":
     ensure => present,
     mode   => '0644',
     owner  => 'root',
@@ -69,7 +69,7 @@ class bareos::webui(
 
   if $manage_local_dir {
     ::bareos::webui::director { 'localhost':
-      dir_address => 'localhost'
+      dir_address => 'localhost',
     }
   }
 

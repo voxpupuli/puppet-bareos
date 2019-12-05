@@ -49,7 +49,7 @@ define bareos::director::counter (
   $minimum = undef,
   $wrap_counter = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Counter'
   $_resource_dir = 'counter'
@@ -77,13 +77,13 @@ define bareos::director::counter (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_director'],
   }

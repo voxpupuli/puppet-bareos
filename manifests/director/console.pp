@@ -219,7 +219,7 @@ define bareos::director::console (
   $tls_verify_peer = undef,
   $where_acl = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Console'
   $_resource_dir = 'console'
@@ -268,13 +268,13 @@ define bareos::director::console (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_director'],
   }

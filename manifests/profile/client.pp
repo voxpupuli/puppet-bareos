@@ -7,7 +7,7 @@ class bareos::profile::client(
 ) {
 
   # default client
-  class { '::bareos::client::client':
+  class { 'bareos::client::client':
     name_client => $name_client,
   }
 

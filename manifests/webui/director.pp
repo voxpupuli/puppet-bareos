@@ -36,7 +36,7 @@ define bareos::webui::director (
   $dir_port = 9101,
   $enabled = 'yes',
 ) {
-  include ::bareos::webui
+  include bareos::webui
 
   unless $ensure in [ 'present', 'absent' ] {
     fail('Invalid value for ensure')
@@ -52,9 +52,9 @@ define bareos::webui::director (
       [$name, 'Dir Name', 'res', true]
     )
     concat::fragment{ "bareos webui director ${title}":
-      target  => "${::bareos::webui::config_dir}/directors.ini",
+      target  => "${bareos::webui::config_dir}/directors.ini",
       content =>  template('bareos/webui_directors.erb'),
-      notify  => Service[$::bareos::webui::service_name],
+      notify  => Service[$bareos::webui::service_name],
       tag     => ['bareos', 'bareos_webui'],
     }
   }

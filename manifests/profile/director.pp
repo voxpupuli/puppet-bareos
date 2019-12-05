@@ -19,7 +19,7 @@ class bareos::profile::director(
   }
 
   # configure director itself and set password
-  class { '::bareos::director::director':
+  class { 'bareos::director::director':
     messages => 'Daemon', # set in profile
     password => $password,
     auditing => true,
@@ -31,17 +31,17 @@ class bareos::profile::director(
     }
   )
 
-  class { '::bareos::profile::director::storage':
+  class { 'bareos::profile::director::storage':
     address  => $storage_address,
     password => $storage_password,
   }
 
   # Add all default configs
-  include ::bareos::profile::director::client
-  include ::bareos::profile::director::fileset
-  include ::bareos::profile::director::jobdefs
-  include ::bareos::profile::director::messages
-  include ::bareos::profile::director::pool
-  include ::bareos::profile::director::profile
-  include ::bareos::profile::director::schedule
+  include bareos::profile::director::client
+  include bareos::profile::director::fileset
+  include bareos::profile::director::jobdefs
+  include bareos::profile::director::messages
+  include bareos::profile::director::pool
+  include bareos::profile::director::profile
+  include bareos::profile::director::schedule
 }

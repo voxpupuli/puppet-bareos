@@ -147,7 +147,7 @@ define bareos::storage::director (
   $tls_require = undef,
   $tls_verify_peer = undef,
 ) {
-  include ::bareos::storage
+  include bareos::storage
 
   $_resource = 'Director'
   $_resource_dir = 'director'
@@ -179,13 +179,13 @@ define bareos::storage::director (
     )
   }
 
-  file { "${::bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::storage::service_name],
+    notify  => Service[$bareos::storage::service_name],
     tag     => ['bareos', 'bareos_storage'],
   }
 }

@@ -49,7 +49,7 @@ define bareos::director::fileset (
   $ignore_file_set_changes = undef,
   $include = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'FileSet'
   $_resource_dir = 'fileset'
@@ -69,13 +69,13 @@ define bareos::director::fileset (
     )
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     tag     => ['bareos', 'bareos_director'],
   }
 }

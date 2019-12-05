@@ -7,7 +7,7 @@ class bareos::profile::storage(
   $archive_device = '/var/lib/bareos/storage',
 ) {
 
-  class { '::bareos::storage::storage':
+  class { 'bareos::storage::storage':
     name_storage => $name_storage,
     messages     => 'Standard',
   }

@@ -65,7 +65,7 @@ class bareos::repository(
       } else {
         $location = "${url}Debian_${osmajrelease}.0"
       }
-      include ::apt
+      include apt
       ::apt::source { 'bareos':
         location => $location,
         release  => '/',

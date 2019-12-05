@@ -383,7 +383,7 @@ class bareos::client::client (
   $ver_id = undef,
   $working_directory = undef,
 ) {
-  include ::bareos::client
+  include bareos::client
 
   $_resource = 'Client'
   $_resource_dir = 'client'
@@ -451,13 +451,13 @@ class bareos::client::client (
     $_require_res_messages = undef
   }
 
-  file { "${::bareos::client::config_dir}/${_resource_dir}/bareos-fd.conf":
+  file { "${bareos::client::config_dir}/${_resource_dir}/bareos-fd.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::client::service_name],
+    notify  => Service[$bareos::client::service_name],
     require => $_require_res_messages,
     tag     => ['bareos', 'bareos_client'],
   }

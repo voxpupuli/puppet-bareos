@@ -48,7 +48,7 @@ define bareos::monitor::client (
   $fd_port = undef,
   $password = undef,
 ) {
-  include ::bareos::monitor
+  include bareos::monitor
 
   $_resource = 'Client'
   $_resource_dir = 'client'
@@ -68,11 +68,11 @@ define bareos::monitor::client (
     )
   }
 
-  file { "${::bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
     tag     => ['bareos', 'bareos_monitor'],
   }

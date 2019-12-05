@@ -187,7 +187,7 @@ define bareos::client::director (
   $tls_require = undef,
   $tls_verify_peer = undef,
 ) {
-  include ::bareos::client
+  include bareos::client
 
   $_resource = 'Director'
   $_resource_dir = 'director'
@@ -224,13 +224,13 @@ define bareos::client::director (
     )
   }
 
-  file { "${::bareos::client::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::client::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::client::service_name],
+    notify  => Service[$bareos::client::service_name],
     tag     => ['bareos', 'bareos_client'],
   }
 }

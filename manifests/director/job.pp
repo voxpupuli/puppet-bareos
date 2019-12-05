@@ -680,7 +680,7 @@ define bareos::director::job (
   $write_bootstrap = undef,
   $write_verify_list = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Job'
   $_resource_dir = 'job'
@@ -704,12 +704,12 @@ define bareos::director::job (
     $_require_res_file_set = $file_set ? { undef => undef, default => Bareos::Director::Fileset[$file_set] }
     # note: verify_job is an alias to job_to_verify
     $_jobs = delete_undef_values([$base, $job_to_verify])
-    $_require_res_jobs = empty($_jobs) ? { false => Bareos::Director::Job[$_jobs], default => undef }
+    $_require_res_jobs = empty($_jobs) ? { false => 'Bareos::Director::Job'[$_jobs], default => undef }
     $_require_res_job_defs = $job_defs ? { undef => undef, default => Bareos::Director::Jobdefs[$job_defs] }
     $_require_res_message = $messages ? { undef => undef, default => Bareos::Director::Messages[$messages] }
     # check all configured pools
     $_pools = delete_undef_values([$differential_backup_pool, $incremental_backup_pool, $next_pool,$pool, $virtual_full_backup_pool])
-    $_require_res_pools = empty($_pools) ? { false => Bareos::Director::Pool[$_pools], default => undef }
+    $_require_res_pools = empty($_pools) ? { false => 'Bareos::Director::Pool'[$_pools], default => undef }
     $_require_res_schedule = $schedule_res ? { undef => undef, default => Bareos::Director::Schedule[$schedule_res] }
     $_require_res_storage = $storage ? { undef => undef, default => Bareos::Director::Storage[$storage] }
 
@@ -815,13 +815,13 @@ define bareos::director::job (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_director'],
   }

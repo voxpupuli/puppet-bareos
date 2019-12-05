@@ -40,7 +40,7 @@ define bareos::monitor::director (
   $dir_port = undef,
   $enable_ssl = undef,
 ) {
-  include ::bareos::monitor
+  include bareos::monitor
 
   $_resource = 'Director'
   $_resource_dir = 'director'
@@ -59,11 +59,11 @@ define bareos::monitor::director (
     )
   }
 
-  file { "${::bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
     tag     => ['bareos', 'bareos_monitor'],
   }

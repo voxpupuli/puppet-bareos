@@ -149,7 +149,7 @@ define bareos::director::messages (
   $syslog = undef,
   $timestamp_format = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Messages'
   $_resource_dir = 'messages'
@@ -180,13 +180,13 @@ define bareos::director::messages (
     )
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     tag     => ['bareos', 'bareos_director'],
   }
 }
