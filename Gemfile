@@ -1,22 +1,83 @@
-source ENV['GEM_SOURCE'] || 'https://rubygems.org'
-puppetversion = ENV.key?('PUPPET_GEM_VERSION') ? (ENV['PUPPET_GEM_VERSION']).to_s : ['>= 3.3']
+source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
-if RUBY_VERSION >= '1.8.7' && RUBY_VERSION < '1.9'
-  gem 'rake', '~> 10.0'
-  gem 'rspec', '~> 2.0'
-elsif RUBY_VERSION < '2.0'
-  # json 2.x requires ruby 2.0. Lock to 1.8
-  gem 'json', '= 1.8'
-  # json_pure 2.0.2 requires ruby 2.0, and 2.0.1 requires ruby 1.9. Lock to 1.8.3.
-  gem 'json_pure', '= 1.8.3'
-  gem 'public_suffix', '= 1.4.6'
+def location_for(place, fake_version = nil)
+  if place =~ /^(git[:@][^#]*)#(.*)/
+    [fake_version, { :git => $1, :branch => $2, :require => false }].compact
+  elsif place =~ /^file:\/\/(.*)/
+    ['>= 0', { :path => File.expand_path($1), :require => false }]
+  else
+    [place, { :require => false }]
+  end
 end
 
-gem 'facter', '>= 1.7.0'
-gem 'metadata-json-lint', RUBY_VERSION < '2.0' ? '= 0.0.19' : '>= 1.2.2'
-gem 'puppet', puppetversion
-gem 'puppet-lint', '>= 2.0.0'
-gem 'puppetlabs_spec_helper', '>= 1.0.0'
-gem 'rspec-puppet', '<=2.6.9'
-gem 'sync'
-gem 'rubocop', RUBY_VERSION < '2.0' ? '= 0.41.0' : '>= 0.41.0'
+group :test do
+  gem 'puppetlabs_spec_helper', '>= 2.14.0',                        :require => false
+  gem 'rspec-puppet-facts', '>= 1.8.0',                             :require => false
+  gem 'rspec-puppet-utils',                                         :require => false
+  gem 'puppet-lint-leading_zero-check',                             :require => false
+  gem 'puppet-lint-trailing_comma-check',                           :require => false
+  gem 'puppet-lint-version_comparison-check',                       :require => false
+  gem 'puppet-lint-classes_and_types_beginning_with_digits-check',  :require => false
+  gem 'puppet-lint-unquoted_string-check',                          :require => false
+  gem 'puppet-lint-variable_contains_upcase',                       :require => false
+  gem 'puppet-lint-absolute_classname-check',                       :require => false
+  gem 'puppet-lint-topscope-variable-check',                        :require => false
+  gem 'metadata-json-lint',                                         :require => false
+  gem 'redcarpet',                                                  :require => false
+  gem 'rubocop', '~> 0.49.1',                                       :require => false
+  gem 'rubocop-rspec', '~> 1.15.0',                                 :require => false
+  gem 'mocha', '~> 1.4.0',                                          :require => false
+  gem 'coveralls',                                                  :require => false
+  gem 'simplecov-console',                                          :require => false
+  gem 'parallel_tests',                                             :require => false
+end
+
+group :development do
+  gem 'travis',                   :require => false
+  gem 'travis-lint',              :require => false
+  gem 'guard-rake',               :require => false
+  gem 'overcommit', '>= 0.39.1',  :require => false
+end
+
+group :system_tests do
+  gem 'winrm',                              :require => false
+  if beaker_version = ENV['BEAKER_VERSION']
+    gem 'beaker', *location_for(beaker_version)
+  else
+    gem 'beaker', '>= 4.2.0', :require => false
+  end
+  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
+    gem 'beaker-rspec', *location_for(beaker_rspec_version)
+  else
+    gem 'beaker-rspec',  :require => false
+  end
+  gem 'serverspec',                         :require => false
+  gem 'beaker-hostgenerator', '>= 1.1.22',  :require => false
+  gem 'beaker-docker',                      :require => false
+  gem 'beaker-puppet',                      :require => false
+  gem 'beaker-puppet_install_helper',       :require => false
+  gem 'beaker-module_install_helper',       :require => false
+  gem 'rbnacl', '>= 4',                     :require => false
+  gem 'rbnacl-libsodium',                   :require => false
+  gem 'bcrypt_pbkdf',                       :require => false
+end
+
+group :release do
+  gem 'github_changelog_generator',  :require => false, :git => 'https://github.com/github-changelog-generator/github-changelog-generator'
+  gem 'puppet-blacksmith',           :require => false
+  gem 'voxpupuli-release',           :require => false, :git => 'https://github.com/voxpupuli/voxpupuli-release-gem'
+  gem 'puppet-strings', '>= 2.2',    :require => false
+end
+
+
+
+if facterversion = ENV['FACTER_GEM_VERSION']
+  gem 'facter', facterversion.to_s, :require => false, :groups => [:test]
+else
+  gem 'facter', :require => false, :groups => [:test]
+end
+
+ENV['PUPPET_VERSION'].nil? ? puppetversion = '~> 6.0' : puppetversion = ENV['PUPPET_VERSION'].to_s
+gem 'puppet', puppetversion, :require => false, :groups => [:test]
+
+# vim: syntax=ruby
