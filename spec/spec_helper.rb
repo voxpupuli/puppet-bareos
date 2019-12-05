@@ -42,3 +42,5 @@ RSpec.configure do |c|
     RSpec::Puppet::Coverage.report!
   end
 end
+
+require_relative './settings_helper.rb'
