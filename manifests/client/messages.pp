@@ -181,11 +181,11 @@ define bareos::client::messages (
 
   file { "${::bareos::client::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::client::service_name],
+    notify  => Service[$bareos::client::service_name],
     tag     => ['bareos', 'bareos_client'],
   }
 }

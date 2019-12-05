@@ -148,7 +148,7 @@ define bareos::storage::messages (
   $syslog = undef,
   $timestamp_format = undef,
 ) {
-  include ::bareos::storage
+  include bareos::storage
 
   $_resource = 'Messages'
   $_resource_dir = 'messages'
