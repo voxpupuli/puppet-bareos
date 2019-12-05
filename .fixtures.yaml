@@ -1,10 +1,9 @@
+---
 fixtures:
-  symlinks:
-    bareos: "#{source_dir}"
   repositories:
-    stdlib:
-      repo: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-      ref: "4.18.0"
-    concat:
-      repo: "git://github.com/puppetlabs/puppetlabs-concat.git"
-      ref: "2.2.1"
+    apt: 'https://github.com/puppetlabs/puppetlabs-apt'
+    concat: 'https://github.com/puppetlabs/puppetlabs-concat'
+    stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
+    yumrepo_core:
+      repo: 'https://github.com/puppetlabs/puppetlabs-yumrepo_core'
+      puppet_version: '>= 6.0.0'
