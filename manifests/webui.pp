@@ -19,7 +19,7 @@ class bareos::webui(
   $save_previous_state = false,
   $label_pooltype = '',
   $directors = {},
-) inherits ::bareos {
+) inherits bareos {
 
   if $manage_package {
     package { $package_name:
@@ -68,10 +68,10 @@ class bareos::webui(
   }
 
   if $manage_local_dir {
-    ::bareos::webui::director { 'localhost':
+    bareos::webui::director { 'localhost':
       dir_address => 'localhost',
     }
   }
 
-  create_resources(::bareos::webui::director, $directors)
+  create_resources(bareos::webui::director, $directors)
 }

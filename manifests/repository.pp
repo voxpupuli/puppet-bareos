@@ -32,9 +32,9 @@ class bareos::repository(
   }
 
   case $os {
-      /(?i:redhat|centos|fedora)/: {
+      /(?i:redhat|centos|fedora|virtuozzolinux)/: {
         case $os {
-          'RedHat': {
+          'RedHat', 'VirtuozzoLinux': {
             $location = "${url}RHEL_${osmajrelease}"
           }
           'Centos': {
