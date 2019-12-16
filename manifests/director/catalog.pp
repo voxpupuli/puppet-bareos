@@ -180,16 +180,16 @@ define bareos::director::catalog (
 
   file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
     notify  => [
-      Service[$::bareos::director::service_name],
+      Service[$bareos::director::service_name],
     ],
     tag     => ['bareos', 'bareos_director'],
   }
-  if $::bareos::manage_database {
+  if $bareos::manage_database {
     File["${::bareos::director::config_dir}/${_resource_dir}/${name}.conf"] ~> Exec['bareos director init catalog']
   }
 }

@@ -4,7 +4,7 @@ class bareos::profile::director::client {
   $password = fqdn_rand_string(20,'','bareos-fd-password')
 
   # setup filedaemon
-  class { 'bareos::profile::client':
+  class { '::bareos::profile::client':
     name_client => 'bareos-director-fd',
     password    => $password,
   }
