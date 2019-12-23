@@ -106,7 +106,11 @@ class bareos::director(
     }
   }
 
-  create_resources(::bareos::director::catalog, $catalogs)
+$catalogs.each |String $resource, Hash $attributes| {
+  Resource[::bareos::director::catalog] {
+    $resource: * => $attributes;
+  }
+}
   create_resources(::bareos::director::client, $clients)
   create_resources(::bareos::director::consoles, $consoles)
   create_resources(::bareos::director::counters, $counters)
