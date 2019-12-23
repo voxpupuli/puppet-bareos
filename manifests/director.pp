@@ -81,8 +81,8 @@ class bareos::director(
     }
   }
 
-  create_resources(::bareos::director::client, $clients)
   create_resources(::bareos::director::catalog, $catalogs)
+  create_resources(::bareos::director::client, $clients)
   create_resources(::bareos::director::consoles, $consoles)
   create_resources(::bareos::director::counters, $counters)
   create_resources(::bareos::director::directors, $directors)
