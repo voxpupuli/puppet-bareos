@@ -5,6 +5,7 @@
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::director(
+<<<<<<< HEAD
   $manage_service             = $::bareos::manage_service,
   $manage_package             = $::bareos::manage_package,
   $manage_database            = $::bareos::manage_database,
@@ -28,6 +29,30 @@ class bareos::director(
   Optional[Hash] $profiles    = {},
   Optional[Hash] $schedules   = {},
   Optional[Hash] $storages    = {},
+=======
+  $manage_service           = $::bareos::manage_service,
+  $manage_package           = $::bareos::manage_package,
+  $manage_database          = $::bareos::manage_database,
+  $package_name             = $::bareos::director_package_name,
+  $package_ensure           = $::bareos::package_ensure,
+  $service_name             = $::bareos::director_service_name,
+  $service_ensure           = $::bareos::service_ensure,
+  $service_enable           = $::bareos::service_enable,
+  $config_dir               = "${::bareos::config_dir}/bareos-dir.d",
+  Optional[Hash] $catalogs  = {},
+  Optional[Hash] $clients   = {},
+  Optional[Hash] $consoles  = {},
+  Optional[Hash] $counters  = {},
+  Optional[Hash] $directors = {},
+  Optional[Hash] $filesets  = {},
+  Optional[Hash] $jobs      = {},
+  Optional[Hash] $jobdefs   = {},
+  Optional[Hash] $messages  = {},
+  Optional[Hash] $pools     = {},
+  Optional[Hash] $profiles  = {},
+  Optional[Hash] $schedules = {},
+  Optional[Hash] $storages  = {},
+>>>>>>> fixup typo
 ) inherits ::bareos {
   include ::bareos::director::director
 
