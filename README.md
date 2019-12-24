@@ -15,6 +15,7 @@
   1. [Monitor (Tray)](#monitor)
   1. [Storage](#storage)
   1. [Web UI](#webui)
+  1. [Hiera](#hiera)
 1. [Limitations - OS compatibility, etc.](#limitations)
 
 ## Description
@@ -390,6 +391,31 @@ Additional configuration is required on the **Director** server.
   where_acl          => '*all*',
 }
 ```
+
+### Hiera
+Since define ressource are used in the module they can not be used directly via hiera. Execptions are ofcourse the three classes mentioned in [Reference](#reference).
+But there exist hashes for the configuration directives in the `bareos::director` and the `bareos::webui` classes which can be used via hiera.
+
+```
+classes:
+  - bareos::director
+bareos::director::director::name_director: 'example'
+bareos::director::director::password: 'foobar'
+bareos::director::catalogs:
+  'testing':
+    db_driver: 'postgresql'
+    db_name: 'test'
+bareos::director::clients:
+  'alice':
+    address: foo.bar
+    password: foobar
+bareos::director::jobs:
+  'backup-alice':
+    messages: testing
+    pool: testing
+    type: backup
+    client: alice
+    file_set: testing
 
 ## Limitations
 

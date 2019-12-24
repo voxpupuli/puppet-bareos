@@ -81,11 +81,6 @@ class bareos::director(
     }
   }
 
-<<<<<<< HEAD
-$catalogs.each |String $resource, Hash $attributes| {
-  Resource[::bareos::director::catalog] {
-    $resource: * => $attributes;
-=======
   $catalogs.each |String $resource, Hash $attributes| {
     Resource[::bareos::director::catalog] {
       $resource: * => $attributes;
@@ -140,9 +135,7 @@ $catalogs.each |String $resource, Hash $attributes| {
     Resource[::bareos::director::storage] {
       $resource: * => $attributes;
     }
->>>>>>> fix typo
   }
-}
   create_resources(::bareos::director::client, $clients)
   create_resources(::bareos::director::consoles, $consoles)
   create_resources(::bareos::director::counters, $counters)
