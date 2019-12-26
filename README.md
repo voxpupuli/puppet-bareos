@@ -397,6 +397,6 @@ This module is built upon and tested against the versions of Puppet listed in th
 
 OS Limitations hardly depends on the availability of the bareos packages in the bareos [repository](http://download.bareos.org/bareos/release/) and the available release. Currently it has been tested on Ubuntu 14.04 and 16.04.
 
-## Module Migration 
+## Module Migration
 
 This puppet module was originally hosted at https://github.com/Project0/puppet-bareos and has been migrated to Vox Pupuli.

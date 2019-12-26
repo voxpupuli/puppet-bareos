@@ -27,6 +27,7 @@ class bareos (
   $monitor_package_name  = $::bareos::params::monitor_package_name,
   $director_package_name = $::bareos::params::director_package_name,
   $director_service_name = $::bareos::params::director_service_name,
+  $director_managed_dirs = $::bareos::params::director_managed_dirs,
   $client_package_name   = $::bareos::params::client_package_name,
   $client_service_name   = $::bareos::params::client_service_name,
   $storage_package_name  = $::bareos::params::storage_package_name,
@@ -66,13 +67,13 @@ class bareos (
   }
 
   file { $config_dir:
-    ensure  => directory,
-    purge   => true,
-    recurse => true,
-    force   => true,
-    mode    => $::bareos::file_dir_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
-    tag     => ['bareos', 'bareos_core'],
+    ensure       => directory,
+    purge        => true,
+    recurse      => true,
+    recurselimit => 1,
+    mode         => $::bareos::file_dir_mode,
+    owner        => $::bareos::file_owner,
+    group        => $::bareos::file_group,
+    tag          => ['bareos', 'bareos_core'],
   }
 }
