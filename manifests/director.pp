@@ -82,57 +82,57 @@ class bareos::director(
   }
 
   $catalogs.each |String $resource, Hash $attributes| {
-    bareos::director::catalog {
+    bareos::director::catalog { $resource:
       * => $attributes;
     }
   }
   $clients.each |String $resource, Hash $attributes| {
-    bareos::director::client {
+    bareos::director::client { $resource:
       * => $attributes;
     }
   }
   $consoles.each |String $resource, Hash $attributes| {
-    bareos::director::console {
+    bareos::director::console { $resource:
       * => $attributes;
     }
   }
   $filesets.each |String $resource, Hash $attributes| {
-    bareos::director::fileset {
+    bareos::director::fileset { $resource:
       * => $attributes;
     }
   }
   $jobs.each |String $resource, Hash $attributes| {
-    bareos::director::job {
+    bareos::director::job { $resource:
       * => $attributes;
     }
   }
   $jobdefs.each |String $resource, Hash $attributes| {
-    bareos::director::jobdefs {
+    bareos::director::jobdefs { $resource:
       * => $attributes;
     }
   }
   $messages.each |String $resource, Hash $attributes| {
-    bareos::director::messages {
+    bareos::director::messages { $resource:
       * => $attributes;
     }
   }
   $pools.each |String $resource, Hash $attributes| {
-    bareos::director::pool {
+    bareos::director::pool { $resource:
       * => $attributes;
     }
   }
   $profiles.each |String $resource, Hash $attributes| {
-    bareos::director::profile {
+    bareos::director::profile { $resource:
       * => $attributes;
     }
   }
   $schedules.each |String $resource, Hash $attributes| {
-    bareos::director::schedule {
+    bareos::director::schedule { $resource:
       * => $attributes;
     }
   }
   $storages.each |String $resource, Hash $attributes| {
-    bareos::director::storage {
+    bareos::director::storage { $resource:
       * => $attributes;
     }
   }
