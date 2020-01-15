@@ -15,19 +15,19 @@ class bareos::director(
   $service_enable             = $::bareos::service_enable,
   $config_dir                 = "${::bareos::config_dir}/bareos-dir.d",
   Array[String] $managed_dirs = $::bareos::director_managed_dirs,
-  Optional[Hash] $catalogs    = {},
-  Optional[Hash] $clients     = {},
-  Optional[Hash] $consoles    = {},
-  Optional[Hash] $counters    = {},
-  Optional[Hash] $directors   = {},
-  Optional[Hash] $filesets    = {},
-  Optional[Hash] $jobs        = {},
-  Optional[Hash] $jobdefs     = {},
-  Optional[Hash] $messages    = {},
-  Optional[Hash] $pools       = {},
-  Optional[Hash] $profiles    = {},
-  Optional[Hash] $schedules   = {},
-  Optional[Hash] $storages    = {},
+  Hash $catalogs              = {},
+  Hash $clients               = {},
+  Hash $consoles              = {},
+  Hash $counters              = {},
+  Hash $directors             = {},
+  Hash $filesets              = {},
+  Hash $jobs                  = {},
+  Hash $jobdefs               = {},
+  Hash $messages              = {},
+  Hash $pools                 = {},
+  Hash $profiles              = {},
+  Hash $schedules             = {},
+  Hash $storages              = {},
 ) inherits ::bareos {
   include ::bareos::director::director
 
@@ -82,70 +82,58 @@ class bareos::director(
   }
 
   $catalogs.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::catalog] {
-      $resource: * => $attributes;
+    bareos::director::catalog {
+      * => $attributes;
     }
   }
   $clients.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::client] {
-      $resource: * => $attributes;
+    bareos::director::client {
+      * => $attributes;
     }
   }
   $consoles.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::console] {
-      $resource: * => $attributes;
+    bareos::director::console {
+      * => $attributes;
     }
   }
   $filesets.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::fileset] {
-      $resource: * => $attributes;
+    bareos::director::fileset {
+      * => $attributes;
     }
   }
   $jobs.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::job] {
-      $resource: * => $attributes;
+    bareos::director::job {
+      * => $attributes;
     }
   }
   $jobdefs.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::jobdefs] {
-      $resource: * => $attributes;
+    bareos::director::jobdefs {
+      * => $attributes;
     }
   }
   $messages.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::messages] {
-      $resource: * => $attributes;
+    bareos::director::messages {
+      * => $attributes;
     }
   }
   $pools.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::pool] {
-      $resource: * => $attributes;
+    bareos::director::pool {
+      * => $attributes;
     }
   }
   $profiles.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::profile] {
-      $resource: * => $attributes;
+    bareos::director::profile {
+      * => $attributes;
     }
   }
   $schedules.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::schedule] {
-      $resource: * => $attributes;
+    bareos::director::schedule {
+      * => $attributes;
     }
   }
   $storages.each |String $resource, Hash $attributes| {
-    Resource[::bareos::director::storage] {
-      $resource: * => $attributes;
+    bareos::director::storage {
+      * => $attributes;
     }
   }
-  create_resources(::bareos::director::client, $clients)
-  create_resources(::bareos::director::consoles, $consoles)
-  create_resources(::bareos::director::counters, $counters)
-  create_resources(::bareos::director::directors, $directors)
-  create_resources(::bareos::director::filesets, $filesets)
-  create_resources(::bareos::director::jobs, $jobs)
-  create_resources(::bareos::director::jobdefs, $jobdefs)
-  create_resources(::bareos::director::messages, $messages)
-  create_resources(::bareos::director::pools, $pools)
-  create_resources(::bareos::director::profiles, $profiles)
-  create_resources(::bareos::director::schedules, $schedules)
-  create_resources(::bareos::director::storages, $storages)
 }
