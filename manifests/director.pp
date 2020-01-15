@@ -15,6 +15,19 @@ class bareos::director(
   $service_enable             = $::bareos::service_enable,
   $config_dir                 = "${::bareos::config_dir}/bareos-dir.d",
   Array[String] $managed_dirs = $::bareos::director_managed_dirs,
+  Optional[Hash] $catalogs    = {},
+  Optional[Hash] $clients     = {},
+  Optional[Hash] $consoles    = {},
+  Optional[Hash] $counters    = {},
+  Optional[Hash] $directors   = {},
+  Optional[Hash] $filesets    = {},
+  Optional[Hash] $jobs        = {},
+  Optional[Hash] $jobdefs     = {},
+  Optional[Hash] $messages    = {},
+  Optional[Hash] $pools       = {},
+  Optional[Hash] $profiles    = {},
+  Optional[Hash] $schedules   = {},
+  Optional[Hash] $storages    = {},
 ) inherits ::bareos {
   include ::bareos::director::director
 
@@ -67,4 +80,18 @@ class bareos::director(
       tag         => ['bareos', 'bareos_director'],
     }
   }
+
+  create_resources(::bareos::director::client, $clients)
+  create_resources(::bareos::director::catalog, $catalogs)
+  create_resources(::bareos::director::consoles, $consoles)
+  create_resources(::bareos::director::counters, $counters)
+  create_resources(::bareos::director::directors, $directors)
+  create_resources(::bareos::director::filesets, $filesets)
+  create_resources(::bareos::director::jobs, $jobs)
+  create_resources(::bareos::director::jobdefs, $jobdefs)
+  create_resources(::bareos::director::messages, $messages)
+  create_resources(::bareos::director::pools, $pools)
+  create_resources(::bareos::director::profiles, $profiles)
+  create_resources(::bareos::director::schedules, $schedules)
+  create_resources(::bareos::director::storages, $storages)
 }
