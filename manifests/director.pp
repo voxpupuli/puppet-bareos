@@ -95,6 +95,11 @@ class bareos::director(
       * => $attributes;
     }
   }
+  $counters.each |String $resource, Hash $attributes| {
+    bareos::director::counter { $resource:
+      * => $attributes;
+    }
+  }
   $filesets.each |String $resource, Hash $attributes| {
     bareos::director::fileset { $resource:
       * => $attributes;
