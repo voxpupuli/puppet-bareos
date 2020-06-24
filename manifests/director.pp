@@ -19,7 +19,6 @@ class bareos::director(
   Hash $clients               = {},
   Hash $consoles              = {},
   Hash $counters              = {},
-  Hash $directors             = {},
   Hash $filesets              = {},
   Hash $jobs                  = {},
   Hash $jobdefs               = {},
