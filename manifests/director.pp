@@ -19,7 +19,6 @@ class bareos::director(
   Hash $clients               = {},
   Hash $consoles              = {},
   Hash $counters              = {},
-  Hash $directors             = {},
   Hash $filesets              = {},
   Hash $jobs                  = {},
   Hash $jobdefs               = {},
@@ -93,6 +92,11 @@ class bareos::director(
   }
   $consoles.each |String $resource, Hash $attributes| {
     bareos::director::console { $resource:
+      * => $attributes;
+    }
+  }
+  $counters.each |String $resource, Hash $attributes| {
+    bareos::director::counter { $resource:
       * => $attributes;
     }
   }
