@@ -5,10 +5,22 @@
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::repository (
-  $release = 'latest',
-  $gpg_key_fingerprint = undef,
+  String           $release             = 'latest',
+  Optional[String] $gpg_key_fingerprint = undef,
+  Boolean          $subscription        = false,
+  String           $username            = absent,
+  String           $password            = absent,
 ) {
-  $url = "http://download.bareos.org/bareos/release/${release}/"
+  if $subscription {
+    if $username and $password {
+      # note the .com
+      $url = "http://download.bareos.com/bareos/release/${release}/"
+    } else {
+      fail('For Bareos subscription repos both username and password are required.')
+    }
+  } else {
+    $url = "http://download.bareos.org/bareos/release/${release}/"
+  }
 
   $os = $facts['os']['name']
   $osrelease = $facts['os']['release']['full']
@@ -43,6 +55,8 @@ class bareos::repository (
       yumrepo { 'bareos':
         name     => 'bareos',
         descr    => 'Bareos Repository',
+        username => $username,
+        password => $password,
         baseurl  => $location,
         gpgcheck => '1',
         gpgkey   => "${location}/repodata/repomd.xml.key",

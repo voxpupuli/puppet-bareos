@@ -9,6 +9,9 @@ class bareos::params {
   $config_dir_webui = '/etc/bareos-webui'
 
   $repo_release = 'latest'
+  $repo_subscription = false
+  $repo_username = absent
+  $repo_password = absent
 
   # base
   $manage_repo = true
