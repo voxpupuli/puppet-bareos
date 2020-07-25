@@ -4,11 +4,10 @@
 #
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
-class bareos::repository(
+class bareos::repository (
   $release = 'latest',
   $gpg_key_fingerprint = undef,
 ) {
-
   $url = "http://download.bareos.org/bareos/release/${release}/"
 
   if versioncmp($::puppetversion, '4.0.0') >= 0 {
@@ -16,9 +15,9 @@ class bareos::repository(
     $osrelease = $facts['os']['release']['full']
     $osmajrelease = $facts['os']['release']['major']
   } else {
-    $os = $::operatingsystem
-    $osrelease = $::operatingsystemrelease
-    $osmajrelease = $::operatingsystemmajrelease
+    $os = $facts['os']['name']
+    $osrelease = $facts['os']['release']['full']
+    $osmajrelease = $facts['os']['release']['major']
   }
 
   if $gpg_key_fingerprint {
@@ -32,29 +31,29 @@ class bareos::repository(
   }
 
   case $os {
-      /(?i:redhat|centos|fedora|virtuozzolinux)/: {
-        case $os {
-          'RedHat', 'VirtuozzoLinux': {
-            $location = "${url}RHEL_${osmajrelease}"
-          }
-          'Centos': {
-            $location = "${url}CentOS_${osmajrelease}"
-          }
-          'Fedora': {
-            $location = "${url}Fedora_${osmajrelease}"
-          }
-          default: {
-            fail('Operatingsystem is not supported by this module')
-          }
+    /(?i:redhat|centos|fedora|virtuozzolinux)/: {
+      case $os {
+        'RedHat', 'VirtuozzoLinux': {
+          $location = "${url}RHEL_${osmajrelease}"
         }
-        yumrepo { 'bareos':
-          name     => 'bareos',
-          descr    => 'Bareos Repository',
-          baseurl  => $location,
-          gpgcheck => '1',
-          gpgkey   => "${location}/repodata/repomd.xml.key",
-          priority => '1',
+        'Centos': {
+          $location = "${url}CentOS_${osmajrelease}"
         }
+        'Fedora': {
+          $location = "${url}Fedora_${osmajrelease}"
+        }
+        default: {
+          fail('Operatingsystem is not supported by this module')
+        }
+      }
+      yumrepo { 'bareos':
+        name     => 'bareos',
+        descr    => 'Bareos Repository',
+        baseurl  => $location,
+        gpgcheck => '1',
+        gpgkey   => "${location}/repodata/repomd.xml.key",
+        priority => '1',
+      }
     }
     /(?i:debian|ubuntu)/: {
       if $os  == 'Ubuntu' {
@@ -65,7 +64,7 @@ class bareos::repository(
       } else {
         $location = "${url}Debian_${osmajrelease}.0"
       }
-      include ::apt
+      include apt
       ::apt::source { 'bareos':
         location => $location,
         release  => '/',

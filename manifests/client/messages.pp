@@ -148,18 +148,17 @@ define bareos::client::messages (
   $syslog = undef,
   $timestamp_format = undef,
 ) {
-  include ::bareos::client
+  include bareos::client
 
   $_resource = 'Messages'
   $_resource_dir = 'messages'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$append, 'Append', 'messages_list', false],
       [$catalog, 'Catalog', 'messages_list', false],
@@ -179,7 +178,7 @@ define bareos::client::messages (
     )
   }
 
-  file { "${::bareos::client::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::client::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $bareos::file_mode,
     owner   => $bareos::file_owner,

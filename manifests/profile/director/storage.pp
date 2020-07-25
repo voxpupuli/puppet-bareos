@@ -1,6 +1,6 @@
 # == Class: bareos::profile::director::storage
 # Default storage daemon
-class bareos::profile::director::storage(
+class bareos::profile::director::storage (
   $address = 'localhost',
   $password = 'BareosStoragePleaseChangeMe',
 ) {

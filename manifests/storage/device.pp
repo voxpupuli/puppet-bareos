@@ -503,13 +503,12 @@ define bareos::storage::device (
   $_resource = 'Device'
   $_resource_dir = 'device'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$alert_command, 'Alert Command', 'strname', false],
       [$always_open, 'Always Open', 'bit', false],
@@ -576,9 +575,9 @@ define bareos::storage::device (
 
   file { "${bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
     notify  => Service[$bareos::storage::service_name],
     tag     => ['bareos', 'bareos_storage'],

@@ -1,7 +1,6 @@
 # == Class: bareos::profile::director::schedule
 # Default schedules
 class bareos::profile::director::schedule {
-
   # Default Cycles
   ::bareos::director::schedule { 'WeeklyCycle':
     description => 'Default Backup shedule.',

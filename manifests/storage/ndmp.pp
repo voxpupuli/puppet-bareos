@@ -50,18 +50,17 @@ define bareos::storage::ndmp (
   $password = undef,
   $username = undef,
 ) {
-  include ::bareos::storage
+  include bareos::storage
 
   $_resource = 'Ndmp'
   $_resource_dir = 'ndmp'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$auth_type, 'Auth Type', 'auth_type', false],
       [$log_level, 'Log Level', 'pint32', false],
@@ -70,13 +69,13 @@ define bareos::storage::ndmp (
     )
   }
 
-  file { "${::bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::storage::service_name],
+    notify  => Service[$bareos::storage::service_name],
     tag     => ['bareos', 'bareos_storage'],
   }
 }

@@ -9,15 +9,15 @@
 # Learn more about module testing here:
 # https://docs.puppet.com/guides/tests_smoke.html
 #
-class { '::bareos':
+class { 'bareos':
   manage_repo => false,
 }
 class { 'bareos::director::director':
   password => 'pw',
 }
-class { '::bareos::client::client':
+class { 'bareos::client::client':
 }
-class { '::bareos::storage::storage':
+class { 'bareos::storage::storage':
 }
-include ::bareos::console
-include ::bareos::monitor
+include bareos::console
+include bareos::monitor
