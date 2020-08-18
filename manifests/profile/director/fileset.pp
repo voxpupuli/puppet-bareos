@@ -6,18 +6,18 @@ class bareos::profile::director::fileset {
       description => 'Backup the catalog dump and Bareos configuration files.',
       include     => {
         'Options' => {
-          'Signature' => 'MD5'
+          'Signature' => 'MD5',
         },
         'File'    => [
           '/etc/bareos', # configuration
-          '/var/lib/bareos'
-        ]
+          '/var/lib/bareos',
+        ],
       },
       exclude     => {
         'File'    => [
-          '/var/lib/bareos/storage'
-        ]
-      }
+          '/var/lib/bareos/storage',
+        ],
+      },
     }
 
     ::bareos::director::fileset {'LinuxAll':
@@ -36,12 +36,12 @@ class bareos::profile::director::fileset {
             'reiserfs',
             'jfs',
             'xfs',
-            'zfs'
+            'zfs',
           ],
         },
         'File'    => [
           '/',
-        ]
+        ],
       },
       # Things that usually have to be excluded
       # You have to exclude /var/lib/bareos/storage
@@ -64,8 +64,8 @@ class bareos::profile::director::fileset {
           '/var/lib/mysql',
           '/var/lib/postgresql',
           '/var/lib/ldap',
-        ]
-      }
+        ],
+      },
     }
 
     ::bareos::director::fileset {'WindowsAll':
@@ -79,13 +79,13 @@ class bareos::profile::director::fileset {
           'WildDir'     => [
             '"[A-Z]:/RECYCLER"',
             '"[A-Z]:/$RECYCLE.BIN"',
-            '"[A-Z]:/System Volume Information"'
+            '"[A-Z]:/System Volume Information"',
           ],
           'Exclude'     => 'yes',
         },
         'File'    => [
           '/',
-        ]
-      }
+        ],
+      },
     }
 }

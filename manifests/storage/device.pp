@@ -498,7 +498,7 @@ define bareos::storage::device (
   $volume_capacity = undef,
   $volume_poll_interval = undef,
 ) {
-  include ::bareos::storage
+  include bareos::storage
 
   $_resource = 'Device'
   $_resource_dir = 'device'
@@ -574,13 +574,13 @@ define bareos::storage::device (
     )
   }
 
-  file { "${::bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $::bareos::file_mode,
     owner   => $::bareos::file_owner,
     group   => $::bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::storage::service_name],
+    notify  => Service[$bareos::storage::service_name],
     tag     => ['bareos', 'bareos_storage'],
   }
 }
