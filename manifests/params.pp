@@ -43,6 +43,20 @@ class bareos::params {
     'bareos-database-tools',
   ]
   $director_service_name = 'bareos-dir'
+  $director_managed_dirs = [ 'catalog',
+                            'client',
+                            'console',
+                            'counter',
+                            'director',
+                            'fileset',
+                            'job',
+                            'jobdefs',
+                            'messages',
+                            'pool',
+                            'profile',
+                            'schedule',
+                            'storage',
+                          ]
 
   # filedaemon/client
   $client_package_name = ['bareos-filedaemon', 'bareos-filedaemon-python-plugin']
