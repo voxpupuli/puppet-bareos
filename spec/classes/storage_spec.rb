@@ -5,7 +5,7 @@ describe 'bareos::storage' do
     it { is_expected.to contain_class('bareos') }
   end
 
-  context 'with autochangers => { test: { changer_command => "foo", changer_device => "/dev/foo", device => "dev01" }}}' do
+  context 'with autochangers => { test: { changer_command => "foo", changer_device => "/dev/foo", device => "dev01" }}, devices => { dev01: { archive_device => "/mnt/test", media_type => "file" }}}' do
     let(:params) do
       {
         autochangers: {
@@ -13,6 +13,12 @@ describe 'bareos::storage' do
             changer_command: "foo",
             changer_device: "/dev/foo",
             device: "dev01",
+          }
+        },
+        devices: {
+          dev01: {
+            archive_device: "/mnt/test",
+            media_type: "file",
           }
         }
       }
@@ -23,23 +29,7 @@ describe 'bareos::storage' do
         .with_changer_command('foo')
         .with_changer_device('/dev/foo')
         .with_device('dev01')
-    end
-  end
-
-  context 'with devices => { test: { archive_device => "/mnt/test", media_type => "file" }}}' do
-    let(:params) do
-      {
-        devices: {
-          test: {
-            archive_device: "/mnt/test",
-            media_type: "file",
-          }
-        }
-      }
-    end
-    it { is_expected.to compile }
-    it do
-      is_expected.to contain_bareos__storage__device('test')
+      is_expected.to contain_bareos__storage__device('dev01')
         .with_archive_device('/mnt/test')
         .with_media_type('file')
     end
