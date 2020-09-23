@@ -74,7 +74,7 @@ describe 'bareos::storage' do
     end
     it { is_expected.to compile }
     it do
-      is_expected.to contain_bareos__storage__message('test')
+      is_expected.to contain_bareos__storage__messages('test')
         .with_description('test')
     end
   end

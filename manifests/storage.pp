@@ -76,7 +76,7 @@ class bareos::storage(
     }
   }
   $messages.each |String $resource, Hash $attributes| {
-    bareos::storage::message { $resource:
+    bareos::storage::messages { $resource:
       * => $attributes;
     }
   }
