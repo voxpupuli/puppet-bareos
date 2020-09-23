@@ -14,10 +14,10 @@ class bareos::storage(
   $service_enable    = $::bareos::service_enable,
   $config_dir        = "${::bareos::config_dir}/bareos-sd.d",
   Hash $autochangers = {},
-  Has$devices        = {},
-  Has$directors      = {},
-  Has$messages       = {},
-  Has$ndmps          = {},
+  Hash $devices      = {},
+  Hash $directors    = {},
+  Hash $messages     = {},
+  Hash $ndmps        = {},
 ) inherits ::bareos {
   include ::bareos::storage::storage
 
