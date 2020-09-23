@@ -18,4 +18,5 @@ gem 'puppet', puppetversion
 gem 'puppet-lint', '>= 2.0.0'
 gem 'puppetlabs_spec_helper', '>= 1.0.0'
 gem 'rspec-puppet', '<=2.6.9'
+gem 'sync'
 gem 'rubocop', RUBY_VERSION < '2.0' ? '= 0.41.0' : '>= 0.41.0'

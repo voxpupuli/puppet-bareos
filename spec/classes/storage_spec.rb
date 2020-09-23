@@ -22,7 +22,7 @@ describe 'bareos::storage' do
       is_expected.to contain_bareos__storage__autochanger('test')
         .with_changer_command('foo')
         .with_changer_device('/dev/foo')
-        .with_device('dev01'),
+        .with_device('dev01')
     end
   end
 
@@ -40,8 +40,8 @@ describe 'bareos::storage' do
     it { is_expected.to compile }
     it do
       is_expected.to contain_bareos__storage__device('test')
-        .with_archive_device('/mnt/test'),
-        .with_media_type('file'),
+        .with_archive_device('/mnt/test')
+        .with_media_type('file')
     end
   end
 
@@ -58,7 +58,7 @@ describe 'bareos::storage' do
     it { is_expected.to compile }
     it do
       is_expected.to contain_bareos__storage__director('test')
-        .with_password('foobar'),
+        .with_password('foobar')
     end
   end
 
@@ -75,27 +75,27 @@ describe 'bareos::storage' do
     it { is_expected.to compile }
     it do
       is_expected.to contain_bareos__storage__message('test')
-        .with_description('test'),
+        .with_description('test')
     end
   end
 
-  context 'with ndmps => { test: { username => "test", password => "foobar" }}}' do
-    let(:params) do
-      {
-        ndmps: {
-          test: {
-            username: "test",
-            password: "foobar",
-          }
-        }
-      }
-    end
-    it { is_expected.to compile }
-    it do
-      is_expected.to contain_bareos__storage__ndmp('test')
-        .with_username('test'),
-        .with_password('password'),
-    end
-  end
+#  context 'with ndmps => { test: { username => "test", password => "foobar" }}}' do
+#    let(:params) do
+#      {
+#        ndmps: {
+#          test: {
+#            username: "test",
+#            password: "foobar",
+#          }
+#        }
+#      }
+#    end
+#    it { is_expected.to compile }
+#    it do
+#      is_expected.to contain_bareos__storage__ndmp('test')
+#        .with_username('test')
+#        .with_password('password')
+#    end
+#  end
 
 end
