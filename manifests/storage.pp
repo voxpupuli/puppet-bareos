@@ -5,14 +5,19 @@
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::storage(
-  $manage_service = $::bareos::manage_service,
-  $manage_package = $::bareos::manage_package,
-  $package_name   = $::bareos::storage_package_name,
-  $package_ensure = $::bareos::package_ensure,
-  $service_name   = $::bareos::storage_service_name,
-  $service_ensure = $::bareos::service_ensure,
-  $service_enable = $::bareos::service_enable,
-  $config_dir     = "${::bareos::config_dir}/bareos-sd.d"
+  $manage_service    = $::bareos::manage_service,
+  $manage_package    = $::bareos::manage_package,
+  $package_name      = $::bareos::storage_package_name,
+  $package_ensure    = $::bareos::package_ensure,
+  $service_name      = $::bareos::storage_service_name,
+  $service_ensure    = $::bareos::service_ensure,
+  $service_enable    = $::bareos::service_enable,
+  $config_dir        = "${::bareos::config_dir}/bareos-sd.d",
+  Hash $autochangers = {},
+  Hash $devices      = {},
+  Hash $directors    = {},
+  Hash $messages     = {},
+  Hash $ndmps        = {},
 ) inherits ::bareos {
   include ::bareos::storage::storage
 
@@ -53,5 +58,31 @@ class bareos::storage(
     require => Package[$package_name],
     notify  => Service[$service_name],
     tag     => ['bareos', 'bareos_storage'],
+  }
+
+  $autochangers.each |String $resource, Hash $attributes| {
+    bareos::storage::autochanger { $resource:
+      * => $attributes;
+    }
+  }
+  $devices.each |String $resource, Hash $attributes| {
+    bareos::storage::device { $resource:
+      * => $attributes;
+    }
+  }
+  $directors.each |String $resource, Hash $attributes| {
+    bareos::storage::director { $resource:
+      * => $attributes;
+    }
+  }
+  $messages.each |String $resource, Hash $attributes| {
+    bareos::storage::messages { $resource:
+      * => $attributes;
+    }
+  }
+  $ndmps.each |String $resource, Hash $attributes| {
+    bareos::storage::ndmp { $resource:
+      * => $attributes;
+    }
   }
 }
