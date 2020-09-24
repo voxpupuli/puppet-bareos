@@ -10,15 +10,9 @@ class bareos::repository (
 ) {
   $url = "http://download.bareos.org/bareos/release/${release}/"
 
-  if versioncmp($::puppetversion, '4.0.0') >= 0 {
-    $os = $facts['os']['name']
-    $osrelease = $facts['os']['release']['full']
-    $osmajrelease = $facts['os']['release']['major']
-  } else {
-    $os = $facts['os']['name']
-    $osrelease = $facts['os']['release']['full']
-    $osmajrelease = $facts['os']['release']['major']
-  }
+  $os = $facts['os']['name']
+  $osrelease = $facts['os']['release']['full']
+  $osmajrelease = $facts['os']['release']['major']
 
   if $gpg_key_fingerprint {
     $_gpg_key_fingerprint = $gpg_key_fingerprint
