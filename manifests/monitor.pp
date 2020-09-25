@@ -4,13 +4,12 @@
 #
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
-class bareos::monitor(
-  $manage_package = $::bareos::manage_package,
-  $package_name   = $::bareos::monitor_package_name,
-  $package_ensure = $::bareos::package_ensure,
-  $config_dir     = "${::bareos::config_dir}/tray-monitor.d"
+class bareos::monitor (
+  $manage_package = $bareos::manage_package,
+  $package_name   = $bareos::monitor_package_name,
+  $package_ensure = $bareos::package_ensure,
+  $config_dir     = "${bareos::config_dir}/tray-monitor.d"
 ) inherits ::bareos {
-
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
@@ -32,11 +31,10 @@ class bareos::monitor(
     purge   => true,
     recurse => true,
     force   => true,
-    mode    => $::bareos::file_dir_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_dir_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     require => Package[$package_name],
     tag     => ['bareos', 'bareos_monitor'],
-
   }
 }

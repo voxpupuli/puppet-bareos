@@ -2,7 +2,7 @@
 # This class manages the bareos webui service, package and configuration.
 #
 # This class will be automatically included when a resource is defined.
-class bareos::webui(
+class bareos::webui (
   $manage_service = $bareos::manage_service,
   $manage_package = $bareos::manage_package,
   $package_name   = $bareos::webui_package_name,
@@ -20,7 +20,6 @@ class bareos::webui(
   $label_pooltype = '',
   $directors = {},
 ) inherits bareos {
-
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,
@@ -55,7 +54,7 @@ class bareos::webui(
     owner   => 'root',
     group   => 'root',
     content => template('bareos/webui_configuration.erb'),
-    notify  => Service[$::bareos::webui::service_name],
+    notify  => Service[$bareos::webui::service_name],
     tag     => ['bareos', 'bareos_webui'],
   }
 

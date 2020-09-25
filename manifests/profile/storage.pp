@@ -1,13 +1,12 @@
 # == Class: bareos::profile::storage
 #
-class bareos::profile::storage(
+class bareos::profile::storage (
   $name_storage = 'bareos-sd',
   $name_dir = 'bareos-dir',
   $password = 'BareosStoragePleaseChangeMe',
   $archive_device = '/var/lib/bareos/storage',
 ) {
-
-  class { '::bareos::storage::storage':
+  class { 'bareos::storage::storage':
     name_storage => $name_storage,
     messages     => 'Standard',
   }

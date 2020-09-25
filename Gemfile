@@ -1,22 +1,48 @@
-source ENV['GEM_SOURCE'] || 'https://rubygems.org'
-puppetversion = ENV.key?('PUPPET_GEM_VERSION') ? (ENV['PUPPET_GEM_VERSION']).to_s : ['>= 3.3']
+source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
-if RUBY_VERSION >= '1.8.7' && RUBY_VERSION < '1.9'
-  gem 'rake', '~> 10.0'
-  gem 'rspec', '~> 2.0'
-elsif RUBY_VERSION < '2.0'
-  # json 2.x requires ruby 2.0. Lock to 1.8
-  gem 'json', '= 1.8'
-  # json_pure 2.0.2 requires ruby 2.0, and 2.0.1 requires ruby 1.9. Lock to 1.8.3.
-  gem 'json_pure', '= 1.8.3'
-  gem 'public_suffix', '= 1.4.6'
+def location_for(place, fake_version = nil)
+  if place =~ /^(git[:@][^#]*)#(.*)/
+    [fake_version, { :git => $1, :branch => $2, :require => false }].compact
+  elsif place =~ /^file:\/\/(.*)/
+    ['>= 0', { :path => File.expand_path($1), :require => false }]
+  else
+    [place, { :require => false }]
+  end
 end
 
-gem 'facter', '>= 1.7.0'
-gem 'metadata-json-lint', RUBY_VERSION < '2.0' ? '= 0.0.19' : '>= 1.2.2'
-gem 'puppet', puppetversion
-gem 'puppet-lint', '>= 2.0.0'
-gem 'puppetlabs_spec_helper', '>= 1.0.0'
-gem 'rspec-puppet', '<=2.6.9'
-gem 'sync'
-gem 'rubocop', RUBY_VERSION < '2.0' ? '= 0.41.0' : '>= 0.41.0'
+group :test do
+  gem 'voxpupuli-test', '~> 2.1',  :require => false
+  gem 'coveralls',                 :require => false
+  gem 'simplecov-console',         :require => false
+end
+
+group :development do
+  gem 'travis',                   :require => false
+  gem 'travis-lint',              :require => false
+  gem 'guard-rake',               :require => false
+  gem 'overcommit', '>= 0.39.1',  :require => false
+end
+
+group :system_tests do
+  gem 'voxpupuli-acceptance',  :require => false
+end
+
+group :release do
+  gem 'github_changelog_generator',  :require => false, :git => 'https://github.com/voxpupuli/github-changelog-generator', :branch => 'voxpupuli_essential_fixes'
+  gem 'puppet-blacksmith',           :require => false
+  gem 'voxpupuli-release',           :require => false
+  gem 'puppet-strings', '>= 2.2',    :require => false
+end
+
+
+
+if facterversion = ENV['FACTER_GEM_VERSION']
+  gem 'facter', facterversion.to_s, :require => false, :groups => [:test]
+else
+  gem 'facter', :require => false, :groups => [:test]
+end
+
+ENV['PUPPET_VERSION'].nil? ? puppetversion = '~> 6.0' : puppetversion = ENV['PUPPET_VERSION'].to_s
+gem 'puppet', puppetversion, :require => false, :groups => [:test]
+
+# vim: syntax=ruby

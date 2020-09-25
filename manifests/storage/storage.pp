@@ -432,7 +432,7 @@ class bareos::storage::storage (
   $_resource = 'Storage'
   $_resource_dir = 'storage'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -440,11 +440,10 @@ class bareos::storage::storage (
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Storage::Messages[$messages] }
 
     $_require_resource = delete_undef_values([
-      $_require_res_messages,
+        $_require_res_messages,
     ])
 
-    $_settings = bareos_settings(
-      [$name_storage, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name_storage, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$absolute_job_timeout, 'Absolute Job Timeout', 'pint32', false],
       [$allow_bandwidth_bursting, 'Allow Bandwidth Bursting', 'boolean', false],
@@ -501,13 +500,13 @@ class bareos::storage::storage (
     $_require_resource = undef
   }
 
-  file { "${::bareos::storage::config_dir}/${_resource_dir}/bareos-sd.conf":
+  file { "${bareos::storage::config_dir}/${_resource_dir}/bareos-sd.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::storage::service_name],
+    notify  => Service[$bareos::storage::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_storage'],
   }

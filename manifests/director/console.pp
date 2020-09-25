@@ -219,12 +219,12 @@ define bareos::director::console (
   $tls_verify_peer = undef,
   $where_acl = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Console'
   $_resource_dir = 'console'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -232,11 +232,10 @@ define bareos::director::console (
     $_require_res_profiles = $profile ? { undef => undef, default => Bareos::Director::Profile[$profile] }
 
     $_require_resource = delete_undef_values([
-      $_require_res_profiles,
+        $_require_res_profiles,
     ])
 
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$catalog_acl, 'Catalog ACL', 'acl', false],
       [$client_acl, 'Client ACL', 'acl', false],
@@ -268,7 +267,7 @@ define bareos::director::console (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $bareos::file_mode,
     owner   => $bareos::file_owner,
