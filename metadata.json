@@ -1,17 +1,29 @@
 {
   "name": "puppet-bareos",
-  "version": "1.0.0",
+  "version": "1.0.1-rc0",
   "author": "Vox Pupulii <voxpupuli@groups.io>",
   "summary": "Manage and configure a Bareos installation",
   "license": "Apache-2.0",
   "source": "https://github.com/voxpupuli/puppet-bareos",
   "project_page": "https://github.com/voxpupuli/puppet-bareos",
   "issues_url": "https://github.com/voxpupuli/puppet-bareos/issues",
-  "tags": ["bareos", "backup"],
+  "tags": [
+    "bareos",
+    "backup"
+  ],
   "dependencies": [
-    {"name": "puppetlabs/apt", "version_requirement": ">= 2.0.0 < 8.0.0"},
-    {"name": "puppetlabs/concat", "version_requirement": ">= 4.1.0 < 7.0.0"},
-    {"name": "puppetlabs/stdlib","version_requirement":">= 4.25.0 < 7.0.0"}
+    {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">= 2.0.0 < 8.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 4.1.0 < 7.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.25.0 < 7.0.0"
+    }
   ],
   "requirements": [
     {
