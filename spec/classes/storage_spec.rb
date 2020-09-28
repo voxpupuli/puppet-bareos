@@ -78,24 +78,25 @@ describe 'bareos::storage' do
         end
       end
 
-      #  context 'with ndmps => { test: { username => "test", password => "foobar" }}}' do
-      #    let(:params) do
-      #      {
-      #        ndmps: {
-      #          test: {
-      #            username: "test",
-      #            password: "foobar",
-      #          }
-      #        }
-      #      }
-      #    end
-      #    it { is_expected.to compile }
-      #    it do
-      #      is_expected.to contain_bareos__storage__ndmp('test')
-      #        .with_username('test')
-      #        .with_password('password')
-      #    end
-      #  end
+      context 'with ndmps => { test: { username => "test", password => "foobar" }}}' do
+        let(:params) do
+          {
+            ndmps: {
+              test: {
+                username: 'test',
+                password: 'foobar'
+              }
+            }
+          }
+        end
+
+        it { is_expected.to compile }
+        it do
+          is_expected.to contain_bareos__storage__ndmp('test').
+            with_username('test').
+            with_password('foobar')
+        end
+      end
     end
   end
 end
