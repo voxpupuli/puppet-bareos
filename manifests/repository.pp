@@ -1,15 +1,29 @@
 # == Class: bareos::repository
-# This class manages the bareos repository
-# Parameters should be configured in the upper class `::bareos`.
 #
-# This class will be automatically included when a resource is defined.
-# It is not intended to be used directly by external resources like node definitions or other modules.
+# @summary
+#   This class manages the bareos repository
+#   Parameters should be configured in the upper class `::bareos`.
+#
+#   This class will be automatically included when a resource is defined.
+#   It is not intended to be used directly by external resources like node definitions or other modules.
+#
+# @param release
+#   The major bareos release version which should be used
+# @param gpg_key_fingerprint
+#   The GPG fingerprint of the repos key
+# @param subscription
+#   Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
+# @param username
+#   The major bareos release version which should be used
+# @param password
+#   The major bareos release version which should be used
+#
 class bareos::repository (
-  String           $release             = 'latest',
-  Optional[String] $gpg_key_fingerprint = undef,
-  Boolean          $subscription        = false,
-  String           $username            = absent,
-  String           $password            = absent,
+  String              $release             = 'latest',
+  Optional[String[1]] $gpg_key_fingerprint = undef,
+  Boolean             $subscription        = false,
+  String              $username            = absent,
+  String              $password            = absent,
 ) {
   if $subscription {
     if $username and $password {

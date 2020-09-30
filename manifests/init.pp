@@ -1,30 +1,55 @@
-# Class: bareos
+# @summary This puppet module configures and manage all aspects of an complex bareos installation
 #
-# Authors
-# -------
+# @author Richard Hillmann <richie@project0.de>
 #
-# Richard Hillmann <richie@project0.de>
+# @param repo_release
+#   The major bareos release version which should be used
+# @param repo_subscription
+#   Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
+# @param repo_username
+#   The major bareos release version which should be used
+# @param repo_password
+#   The major bareos release version which should be used
+# @param manage_package
+#   Whether puppet should handle the installation ob bareos packages
+# @param manage_service
+#   Whether puppet should activate the bareos system services
+# @param manage_database
+#   Whether puppet should call the bareos DB creation and configuration scripts
+# @param package_ensure
+#   Package version to be installed
+# @param service_ensure
+#   Service state which should be ensured
+# @param service_enable
+#   Wheter puppet should enable the bareos services
+# @param manage_repo
+#   Wheter puppet should manage the bareos package repository
+# @param manage_user
+#   Wheter puppet should manage the bareos user
+# @param package_name
+#   Name of the package which should be installed
 #
 class bareos (
-  $config_dir            = $bareos::params::config_dir,
-  $config_dir_webui      = $bareos::params::config_dir_webui,
-  $file_owner            = $bareos::params::file_owner,
-  $file_group            = $bareos::params::file_group,
-  $file_mode             = $bareos::params::file_mode,
-  $file_dir_mode         = $bareos::params::file_dir_mode,
-  $repo_release          = $bareos::params::repo_release,
-  $repo_subscription     = $bareos::params::repo_subscription,
-  $repo_username         = $bareos::params::repo_username,
-  $repo_password         = $bareos::params::repo_password,
-  $manage_repo           = $bareos::params::manage_repo,
-  $manage_user           = $bareos::params::manage_user,
-  $manage_package        = $bareos::params::manage_package,
-  $manage_service        = $bareos::params::manage_service,
-  $manage_database       = $bareos::params::manage_database,
-  $package_name          = $bareos::params::package_name, # base/common package only
-  $package_ensure        = $bareos::params::package_ensure,
-  $service_ensure        = $bareos::params::service_ensure,
-  $service_enable        = $bareos::params::service_enable,
+  $config_dir                = $bareos::params::config_dir,
+  $config_dir_webui          = $bareos::params::config_dir_webui,
+  $file_owner                = $bareos::params::file_owner,
+  $file_group                = $bareos::params::file_group,
+  $file_mode                 = $bareos::params::file_mode,
+  $file_dir_mode             = $bareos::params::file_dir_mode,
+  String  $repo_release      = 'latest',
+  Boolean $repo_subscription = false,
+  String  $repo_username     = absent,
+  String  $repo_password     = absent,
+  Boolean $manage_package    = true,
+  Boolean $manage_service    = true,
+  Boolean $manage_database   = true,
+  String  $package_ensure    = present,
+  String  $service_ensure    = running,
+  Boolean $service_enable    = true,
+  Boolean $manage_repo       = true,
+  Boolean $manage_user       = true,
+  String  $package_name      = 'bareos-common',
+
   $console_package_name  = $bareos::params::console_package_name,
   $monitor_package_name  = $bareos::params::monitor_package_name,
   $director_package_name = $bareos::params::director_package_name,
