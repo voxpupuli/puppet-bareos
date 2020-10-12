@@ -10,6 +10,22 @@ describe 'bareos::repository' do
         it { is_expected.to compile }
         it { is_expected.to contain_class('bareos::repository') }
       end
+
+      context 'with username: "test", password: "test"' do
+        let(:params) do
+          {
+            username: 'test',
+            password: 'test'
+          }
+        end
+
+        it { is_expected.to compile }
+        it do
+          is_expected.to contain_yumrepo('bareos').
+            with_username('test').
+            with_password('test')
+        end
+      end
     end
   end
 end
