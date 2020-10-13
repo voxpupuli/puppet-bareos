@@ -22,18 +22,19 @@ class bareos::repository (
   String              $release             = 'latest',
   Optional[String[1]] $gpg_key_fingerprint = undef,
   Boolean             $subscription        = false,
-  String              $username            = absent,
-  String              $password            = absent,
+  String              $username            = undef,
+  String              $password            = undef,
 ) {
+  $scheme = 'http://'
   if $subscription {
     if $username and $password {
       # note the .com
-      $url = "http://download.bareos.com/bareos/release/${release}/"
+      $address = "download.bareos.com/bareos/release/${release}/"
     } else {
       fail('For Bareos subscription repos both username and password are required.')
     }
   } else {
-    $url = "http://download.bareos.org/bareos/release/${release}/"
+    $address = "download.bareos.org/bareos/release/${release}/"
   }
 
   $os = $facts['os']['name']
@@ -50,8 +51,18 @@ class bareos::repository (
     $_gpg_key_fingerprint = '0143 857D 9CE8 C2D1 82FE 2631 F93C 028C 093B FBA2'
   }
 
+  $yum_username = $username ? {
+    undef   => 'absent',
+    default => $username,
+  }
+  $yum_password = $password ? {
+    undef   => 'absent',
+    default => $password,
+  }
+
   case $os {
     /(?i:redhat|centos|fedora|virtuozzolinux)/: {
+      $url = "${scheme}${address}"
       case $os {
         'RedHat', 'VirtuozzoLinux': {
           $location = "${url}RHEL_${osmajrelease}"
@@ -69,8 +80,8 @@ class bareos::repository (
       yumrepo { 'bareos':
         name     => 'bareos',
         descr    => 'Bareos Repository',
-        username => $username,
-        password => $password,
+        username => $yum_username,
+        password => $yum_password,
         baseurl  => $location,
         gpgcheck => '1',
         gpgkey   => "${location}/repodata/repomd.xml.key",
@@ -78,6 +89,11 @@ class bareos::repository (
       }
     }
     /(?i:debian|ubuntu)/: {
+      if $username and $password {
+        $url = "${scheme}${username}:${password}@${address}"
+      } else {
+        $url = "${scheme}${address}"
+      }
       if $os  == 'Ubuntu' {
         unless $osrelease in ['12.04', '14.04', '16.04', '18.04'] {
           fail('Only Ubunutu LTS Versions are supported')
@@ -86,6 +102,7 @@ class bareos::repository (
       } else {
         $location = "${url}Debian_${osmajrelease}.0"
       }
+
       include apt
       ::apt::source { 'bareos':
         location => $location,
