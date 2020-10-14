@@ -22,8 +22,8 @@ class bareos::repository (
   String              $release             = 'latest',
   Optional[String[1]] $gpg_key_fingerprint = undef,
   Boolean             $subscription        = false,
-  String              $username            = undef,
-  String              $password            = undef,
+  Optional[String]    $username            = undef,
+  Optional[String]    $password            = undef,
 ) {
   $scheme = 'http://'
   if $subscription {
@@ -95,7 +95,7 @@ class bareos::repository (
         $url = "${scheme}${address}"
       }
       if $os  == 'Ubuntu' {
-        unless $osrelease in ['12.04', '14.04', '16.04', '18.04'] {
+        unless $osrelease in ['12.04', '14.04', '16.04', '18.04', '20.04'] {
           fail('Only Ubunutu LTS Versions are supported')
         }
         $location = "${url}xUbuntu_${osrelease}"
@@ -108,10 +108,10 @@ class bareos::repository (
         location => $location,
         release  => '/',
         repos    => '',
-        key      => {
-          id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
-          source => "${location}/Release.key",
-        },
+      }
+      ::apt::key { 'bareos':
+        id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
+        source => "${location}/Release.key",
       }
       Apt::Source['bareos'] -> Package<|tag == 'bareos'|>
       Class['Apt::Update']  -> Package<|tag == 'bareos'|>
