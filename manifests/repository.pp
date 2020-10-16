@@ -27,7 +27,7 @@ class bareos::repository (
 ) {
   $scheme = 'http://'
   if $subscription {
-    if $subscription and $username and $password {
+    if $username and $password {
       # note the .com
       $address = "download.bareos.com/bareos/release/${release}/"
     } else {
@@ -93,7 +93,7 @@ class bareos::repository (
       }
     }
     /(?i:debian|ubuntu)/: {
-      if $username and $password {
+      if $subscription {
         $url = "${scheme}${username}:${password}@${address}"
       } else {
         $url = "${scheme}${address}"
@@ -110,13 +110,13 @@ class bareos::repository (
         # release key file is not avaiable without login and
         # apt-key cannot handle username and password in URI
         $key = {
-          id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
+          id => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
         }
       } else {
-        key      => {
+        $key = {
           id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
           source => "${location}/Release.key",
-        },
+        }
       }
 
       include apt
