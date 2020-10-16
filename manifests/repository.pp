@@ -93,9 +93,6 @@ class bareos::repository (
       }
     }
     /(?i:debian|ubuntu)/: {
-      $key = {
-        id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
-      }
       if $username and $password {
         $url = "${scheme}${username}:${password}@${address}"
       } else {
@@ -108,6 +105,18 @@ class bareos::repository (
         $location = "${url}xUbuntu_${osrelease}"
       } else {
         $location = "${url}Debian_${osmajrelease}.0"
+      }
+      if $subscription {
+        # release key file is not avaiable without login and
+        # apt-key cannot handle username and password in URI
+        $key = {
+          id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
+        }
+      } else {
+        key      => {
+          id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
+          source => "${location}/Release.key",
+        },
       }
 
       include apt
