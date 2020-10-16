@@ -27,7 +27,7 @@ class bareos::repository (
 ) {
   $scheme = 'http://'
   if $subscription {
-    if $username and $password {
+    if $subscription and $username and $password {
       # note the .com
       $address = "download.bareos.com/bareos/release/${release}/"
     } else {
@@ -45,7 +45,11 @@ class bareos::repository (
     $_gpg_key_fingerprint = $gpg_key_fingerprint
   } elsif $release == 'latest' or versioncmp($release, '18.2') >= 0 {
     # >= bareos-18.2
-    $_gpg_key_fingerprint = 'A0CF E15F 71F7 9857 4AB3 63DD 1182 83D9 A786 2CEE'
+    if $subscription {
+      $_gpg_key_fingerprint = '641A 1497 F1B1 1BEA 945F 840F E5D8 82B2 8657 AE28'
+    } else {
+      $_gpg_key_fingerprint = 'A0CF E15F 71F7 9857 4AB3 63DD 1182 83D9 A786 2CEE'
+    }
   } else {
     # >= bareos-15.2
     $_gpg_key_fingerprint = '0143 857D 9CE8 C2D1 82FE 2631 F93C 028C 093B FBA2'
@@ -89,6 +93,9 @@ class bareos::repository (
       }
     }
     /(?i:debian|ubuntu)/: {
+      $key = {
+        id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
+      }
       if $username and $password {
         $url = "${scheme}${username}:${password}@${address}"
       } else {
@@ -108,10 +115,7 @@ class bareos::repository (
         location => $location,
         release  => '/',
         repos    => '',
-      }
-      ::apt::key { 'bareos':
-        id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
-        source => "${location}/Release.key",
+        key      => $key,
       }
       Apt::Source['bareos'] -> Package<|tag == 'bareos'|>
       Class['Apt::Update']  -> Package<|tag == 'bareos'|>
