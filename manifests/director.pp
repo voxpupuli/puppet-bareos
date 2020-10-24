@@ -27,7 +27,7 @@ class bareos::director (
   Hash $profiles              = {},
   Hash $schedules             = {},
   Hash $storages              = {},
-) inherits ::bareos {
+) inherits bareos {
   include bareos::director::director
 
   if $manage_package {
