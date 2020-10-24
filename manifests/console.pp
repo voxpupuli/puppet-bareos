@@ -9,7 +9,7 @@ class bareos::console (
   $package_name   = $bareos::console_package_name,
   $package_ensure = $bareos::package_ensure,
   $config_dir     = "${bareos::config_dir}/bconsole.d"
-) inherits ::bareos {
+) inherits bareos {
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,

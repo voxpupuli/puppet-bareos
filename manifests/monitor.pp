@@ -9,7 +9,7 @@ class bareos::monitor (
   $package_name   = $bareos::monitor_package_name,
   $package_ensure = $bareos::package_ensure,
   $config_dir     = "${bareos::config_dir}/tray-monitor.d"
-) inherits ::bareos {
+) inherits bareos {
   if $manage_package {
     package { $package_name:
       ensure => $package_ensure,

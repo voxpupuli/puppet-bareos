@@ -13,7 +13,7 @@ class bareos::client (
   $service_ensure = $bareos::service_ensure,
   $service_enable = $bareos::service_enable,
   $config_dir     = "${bareos::config_dir}/bareos-fd.d"
-) inherits ::bareos {
+) inherits bareos {
   include bareos::client::client
 
   if $manage_package {

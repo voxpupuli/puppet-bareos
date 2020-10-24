@@ -18,7 +18,7 @@ class bareos::storage (
   Hash $directors    = {},
   Hash $messages     = {},
   Hash $ndmps        = {},
-) inherits ::bareos {
+) inherits bareos {
   include bareos::storage::storage
 
   if $manage_package {
