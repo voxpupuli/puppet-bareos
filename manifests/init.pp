@@ -1,8 +1,6 @@
 # This class manages the bareos repository
 # Parameters should be configured in the upper class `::bareos`.
 #
-# This class will be automatically included when a resource is defined.
-# It is not intended to be used directly by external resources like node definitions or other modules.
 
 class bareos (
   $config_dir                         = $bareos::params::config_dir,
