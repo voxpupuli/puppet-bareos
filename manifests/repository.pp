@@ -27,12 +27,11 @@ class bareos::repository (
 ) {
   $scheme = 'http://'
   if $subscription {
-    if $username and $password {
-      # note the .com
-      $address = "download.bareos.com/bareos/release/${release}/"
-    } else {
+    if empty($username) or empty($password) {
       fail('For Bareos subscription repos both username and password are required.')
     }
+    # note the .com
+    $address = "download.bareos.com/bareos/release/${release}/"
   } else {
     $address = "download.bareos.org/bareos/release/${release}/"
   }
