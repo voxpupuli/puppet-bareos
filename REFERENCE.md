@@ -6,7 +6,7 @@
 
 ### Classes
 
-* [`bareos`](#bareos): This puppet module configures and manage all aspects of an complex bareos installation
+* [`bareos`](#bareos)
 * [`bareos::client`](#bareosclient): This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node 
 * [`bareos::client::client`](#bareosclientclient): == Class: bareos::client::client The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as wel
 * [`bareos::console`](#bareosconsole): == Class: bareos::console This class manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be
@@ -71,115 +71,11 @@ It is not intended to be used directly by external resources like node definitio
 
 ### `bareos`
 
-This puppet module configures and manage all aspects of an complex bareos installation
+The bareos class.
 
 #### Parameters
 
 The following parameters are available in the `bareos` class.
-
-##### `repo_release`
-
-Data type: `String`
-
-The major bareos release version which should be used
-
-Default value: `'latest'`
-
-##### `repo_subscription`
-
-Data type: `Boolean`
-
-Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
-
-Default value: ``false``
-
-##### `repo_username`
-
-Data type: `String`
-
-The major bareos release version which should be used
-
-Default value: `absent`
-
-##### `repo_password`
-
-Data type: `String`
-
-The major bareos release version which should be used
-
-Default value: `absent`
-
-##### `manage_package`
-
-Data type: `Boolean`
-
-Whether puppet should handle the installation ob bareos packages
-
-Default value: ``true``
-
-##### `manage_service`
-
-Data type: `Boolean`
-
-Whether puppet should activate the bareos system services
-
-Default value: ``true``
-
-##### `manage_database`
-
-Data type: `Boolean`
-
-Whether puppet should call the bareos DB creation and configuration scripts
-
-Default value: ``true``
-
-##### `package_ensure`
-
-Data type: `String`
-
-Package version to be installed
-
-Default value: `present`
-
-##### `service_ensure`
-
-Data type: `String`
-
-Service state which should be ensured
-
-Default value: `running`
-
-##### `service_enable`
-
-Data type: `Boolean`
-
-Wheter puppet should enable the bareos services
-
-Default value: ``true``
-
-##### `manage_repo`
-
-Data type: `Boolean`
-
-Wheter puppet should manage the bareos package repository
-
-Default value: ``true``
-
-##### `manage_user`
-
-Data type: `Boolean`
-
-Wheter puppet should manage the bareos user
-
-Default value: ``true``
-
-##### `package_name`
-
-Data type: `String`
-
-Name of the package which should be installed
-
-Default value: `'bareos-common'`
 
 ##### `config_dir`
 
@@ -228,6 +124,110 @@ Data type: `Any`
 
 
 Default value: `$bareos::params::file_dir_mode`
+
+##### `repo_release`
+
+Data type: `String`
+
+
+
+Default value: `'latest'`
+
+##### `repo_subscription`
+
+Data type: `Boolean`
+
+
+
+Default value: ``false``
+
+##### `repo_username`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: ``undef``
+
+##### `repo_password`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: ``undef``
+
+##### `manage_package`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+##### `manage_service`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+##### `manage_database`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+##### `package_ensure`
+
+Data type: `String`
+
+
+
+Default value: `present`
+
+##### `service_ensure`
+
+Data type: `String`
+
+
+
+Default value: `running`
+
+##### `service_enable`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+##### `manage_repo`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+##### `manage_user`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+##### `package_name`
+
+Data type: `String`
+
+
+
+Default value: `'bareos-common'`
 
 ##### `console_package_name`
 
@@ -2339,19 +2339,19 @@ Default value: ``false``
 
 ##### `username`
 
-Data type: `String`
+Data type: `Optional[String]`
 
 The major bareos release version which should be used
 
-Default value: `absent`
+Default value: ``undef``
 
 ##### `password`
 
-Data type: `String`
+Data type: `Optional[String]`
 
 The major bareos release version which should be used
 
-Default value: `absent`
+Default value: ``undef``
 
 ### `bareos::storage`
 

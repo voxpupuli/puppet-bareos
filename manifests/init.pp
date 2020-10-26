@@ -1,34 +1,9 @@
-# @summary This puppet module configures and manage all aspects of an complex bareos installation
+# This class manages the bareos repository
+# Parameters should be configured in the upper class `::bareos`.
 #
-# @author Richard Hillmann <richie@project0.de>
-#
-# @param repo_release
-#   The major bareos release version which should be used
-# @param repo_subscription
-#   Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
-# @param repo_username
-#   The major bareos release version which should be used
-# @param repo_password
-#   The major bareos release version which should be used
-# @param manage_package
-#   Whether puppet should handle the installation ob bareos packages
-# @param manage_service
-#   Whether puppet should activate the bareos system services
-# @param manage_database
-#   Whether puppet should call the bareos DB creation and configuration scripts
-# @param package_ensure
-#   Package version to be installed
-# @param service_ensure
-#   Service state which should be ensured
-# @param service_enable
-#   Wheter puppet should enable the bareos services
-# @param manage_repo
-#   Wheter puppet should manage the bareos package repository
-# @param manage_user
-#   Wheter puppet should manage the bareos user
-# @param package_name
-#   Name of the package which should be installed
-#
+# This class will be automatically included when a resource is defined.
+# It is not intended to be used directly by external resources like node definitions or other modules.
+
 class bareos (
   $config_dir                         = $bareos::params::config_dir,
   $config_dir_webui                   = $bareos::params::config_dir_webui,
