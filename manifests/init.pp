@@ -1,7 +1,10 @@
-# This class manages the bareos repository
-# Parameters should be configured in the upper class `::bareos`.
+# Class: bareos
 #
-
+# Authors
+# -------
+#
+# Richard Hillmann <richie@project0.de>
+#
 class bareos (
   $config_dir                         = $bareos::params::config_dir,
   $config_dir_webui                   = $bareos::params::config_dir_webui,
