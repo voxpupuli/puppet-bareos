@@ -53,6 +53,7 @@ describe 'bareos::storage::device' do
           param('changer_device', 'Changer Device', 'strname').
           param('check_labels', 'Check Labels', 'bit').
           param('close_on_poll', 'Close On Poll', 'bit').
+          param('count', 'Count', 'pint32').
           param('collect_statistics', 'Collect Statistics', 'boolean').
           param('device_options', 'Device Options', 'string').
           param('device_type', 'Device Type', 'device_type').
