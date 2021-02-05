@@ -65,6 +65,12 @@
         "31",
         "32"
       ]
+    },
+    {
+      "operatingsystem": "Amazon",
+      "operatingsystemrelease": [
+        "2"
+      ]
     }
   ]
 }
