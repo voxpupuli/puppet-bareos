@@ -37,11 +37,18 @@ class bareos::director (
     }
   }
 
+  $reload_command = $::facts['service_provider'] ? {
+    'systemd' => "systemctl ${service_name} reload",
+    default   => "service reload ${service_name}",
+  }
+
   if $manage_service {
     service { $service_name:
-      ensure => $service_ensure,
-      enable => $service_enable,
-      tag    => ['bareos', 'bareos_director'],
+      ensure     => $service_ensure,
+      enable     => $service_enable,
+      hasrestart => true,
+      restart    => $reload_command,
+      tag        => ['bareos', 'bareos_director'],
     }
   }
 
