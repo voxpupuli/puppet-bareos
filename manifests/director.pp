@@ -46,7 +46,7 @@ class bareos::director (
     service { $service_name:
       ensure     => $service_ensure,
       enable     => $service_enable,
-      hasrestart => true,
+      hasrestart => false,
       restart    => $reload_command,
       tag        => ['bareos', 'bareos_director'],
     }
