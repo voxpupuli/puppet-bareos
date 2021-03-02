@@ -41,7 +41,10 @@ describe 'bareos::director' do
   
     it { is_expected.to compile.with_all_deps }
     it do
-      is_expected.to contain_service('bareos-dir').with('has_restart' => false, 'restart' => 'systemctl bareos-dir reload')
+      is_expected.to contain_service('bareos-dir').with(
+        'hasrestart' => false,
+        'restart'    => 'systemctl reload bareos-dir'
+      )
     end
   end
 end

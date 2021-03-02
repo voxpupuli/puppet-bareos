@@ -11,6 +11,7 @@ class bareos::director (
   $package_name               = $bareos::director_package_name,
   $package_ensure             = $bareos::package_ensure,
   $service_name               = $bareos::director_service_name,
+  $service_allow_restart      = $bareos::director_service_allow_restart,
   $service_ensure             = $bareos::service_ensure,
   $service_enable             = $bareos::service_enable,
   $config_dir                 = "${bareos::config_dir}/bareos-dir.d",
@@ -37,9 +38,11 @@ class bareos::director (
     }
   }
 
-  $reload_command = $::facts['service_provider'] ? {
-    'systemd' => "systemctl ${service_name} reload",
-    default   => "service reload ${service_name}",
+  unless $service_allow_restart {
+    $reload_command = $::facts['service_provider'] ? {
+      'systemd' => "systemctl reload ${service_name}",
+      default   => "service ${service_name} relaod",
+    }
   }
 
   if $manage_service {
