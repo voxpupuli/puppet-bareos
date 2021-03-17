@@ -103,7 +103,11 @@ class bareos::repository (
         }
         $location = "${url}xUbuntu_${osrelease}"
       } else {
-        $location = "${url}Debian_${osmajrelease}.0"
+        if $osmajrelease == '10' {
+          $location = "${url}Debian_${osmajrelease}"
+        } else {
+          $location = "${url}Debian_${osmajrelease}.0"
+        }
       }
       if $subscription {
         # release key file is not avaiable without login and
