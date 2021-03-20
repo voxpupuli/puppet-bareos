@@ -64,7 +64,7 @@ class bareos::repository (
   }
 
   case $os {
-    /(?i:redhat|centos|fedora|virtuozzolinux)/: {
+    /(?i:redhat|centos|fedora|virtuozzolinux|amazon)/: {
       $url = "${scheme}${address}"
       case $os {
         'RedHat', 'VirtuozzoLinux': {
@@ -75,6 +75,16 @@ class bareos::repository (
         }
         'Fedora': {
           $location = "${url}Fedora_${osmajrelease}"
+        }
+        'Amazon': {
+          case $osmajrelease {
+            '2': {
+              $location = "${url}RHEL_7"
+            }
+            default: {
+              fail('Operatingsystem is not supported by this module')
+            }
+          }
         }
         default: {
           fail('Operatingsystem is not supported by this module')
