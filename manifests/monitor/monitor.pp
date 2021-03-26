@@ -66,18 +66,17 @@ define bareos::monitor::monitor (
   $require_ssl = undef,
   $sd_connect_timeout = undef,
 ) {
-  include ::bareos::monitor
+  include bareos::monitor
 
   $_resource = 'Monitor'
   $_resource_dir = 'monitor'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$dir_connect_timeout, 'Dir Connect Timeout', 'time', false],
       [$fd_connect_timeout, 'Fd Connect Timeout', 'time', false],
@@ -88,7 +87,7 @@ define bareos::monitor::monitor (
     )
   }
 
-  file { "${::bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $bareos::file_mode,
     owner   => $bareos::file_owner,

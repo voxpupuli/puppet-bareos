@@ -1,65 +1,61 @@
-require 'puppetlabs_spec_helper/rake_tasks'
-require 'puppet-lint/tasks/puppet-lint'
-require 'metadata-json-lint/rake_task'
-
-if RUBY_VERSION >= '1.9'
-  require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
+# Attempt to load voxupuli-test (which pulls in puppetlabs_spec_helper),
+# otherwise attempt to load it directly.
+begin
+  require 'voxpupuli/test/rake'
+rescue LoadError
+  require 'puppetlabs_spec_helper/rake_tasks'
 end
 
-Rake::Task[:lint].clear
-PuppetLint::RakeTask.new :lint do |config|
-  # Pattern of files to check, defaults to `**/*.pp`
-  config.pattern = '**/*.pp'
-
-  # Pattern of files to ignore
-  config.ignore_paths = ['spec/**/*.pp', 'vendor/**/*.pp', 'pkg/**/*.pp']
-
-  # List of checks to disable
-  config.disable_checks = ['80chars', '140chars']
-
-  # Should puppet-lint prefix it's output with the file being checked,
-  # defaults to true
-  config.with_filename = false
-
-  # Should the task fail if there were any warnings, defaults to false
-  config.fail_on_warnings = true
-
-  # Format string for puppet-lint's output (see the puppet-lint help output
-  # for details
-  config.log_format = '%{path}:%{line}/%{column}:%{KIND}: %{message}'
-
-  # Print out the context for the problem, defaults to false
-  config.with_context = true
-
-  # Enable automatic fixing of problems, defaults to false
-  config.fix = false
-
-  # Show ignored problems in the output, defaults to false
-  config.show_ignored = false
-
-  # Compare module layout relative to the module root
-  config.relative = true
+# load optional tasks for releases
+# only available if gem group releases is installed
+begin
+  require 'voxpupuli/release/rake_tasks'
+rescue LoadError
 end
 
-desc 'Validate manifests, templates, and ruby files'
-task :validate do
-  Dir['manifests/**/*.pp'].each do |manifest|
-    sh "puppet parser validate --noop #{manifest}"
-    # check if none us ascii chars exists
-    sh "tr -d \\\\000-\\\\177 < #{manifest} | wc -c | grep -q 0"
-  end
-  Dir['spec/**/*.rb', 'lib/**/*.rb'].each do |ruby_file|
-    sh "ruby -c #{ruby_file}" unless ruby_file =~ %r{spec/fixtures}
-  end
-  Dir['templates/**/*.erb'].each do |template|
-    sh "erb -P -x -T '-' #{template} | ruby -c"
+desc "Run main 'test' task and report merged results to coveralls"
+task test_with_coveralls: [:test] do
+  if Dir.exist?(File.expand_path('../lib', __FILE__))
+    require 'coveralls/rake/task'
+    Coveralls::RakeTask.new
+    Rake::Task['coveralls:push'].invoke
+  else
+    puts 'Skipping reporting to coveralls.  Module has no lib dir'
   end
 end
 
-desc 'Run metadata_lint, lint, validate, and spec tests.'
-task :test do
-  [:metadata_lint, :lint, :validate, :spec].each do |test|
-    Rake::Task[test].invoke
-  end
+desc 'Generate REFERENCE.md'
+task :reference, [:debug, :backtrace] do |t, args|
+  patterns = ''
+  Rake::Task['strings:generate:reference'].invoke(patterns, args[:debug], args[:backtrace])
 end
+
+begin
+  require 'github_changelog_generator/task'
+  require 'puppet_blacksmith'
+  GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+    version = (Blacksmith::Modulefile.new).version
+    config.future_release = "v#{version}" if version =~ /^\d+\.\d+.\d+$/
+    config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not affect the functionality of the module."
+    config.exclude_labels = %w{duplicate question invalid wontfix wont-fix modulesync skip-changelog}
+    config.user = 'voxpupuli'
+    metadata_json = File.join(File.dirname(__FILE__), 'metadata.json')
+    metadata = JSON.load(File.read(metadata_json))
+    config.project = metadata['name']
+  end
+
+  # Workaround for https://github.com/github-changelog-generator/github-changelog-generator/issues/715
+  require 'rbconfig'
+  if RbConfig::CONFIG['host_os'] =~ /linux/
+    task :changelog do
+      puts 'Fixing line endings...'
+      changelog_file = File.join(__dir__, 'CHANGELOG.md')
+      changelog_txt = File.read(changelog_file)
+      new_contents = changelog_txt.gsub(%r{\r\n}, "\n")
+      File.open(changelog_file, "w") {|file| file.puts new_contents }
+    end
+  end
+
+rescue LoadError
+end
+# vim: syntax=ruby

@@ -38,22 +38,21 @@ define bareos::webui::director (
 ) {
   include bareos::webui
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
     # just for validation
-    $_validate = bareos_settings(
-      [$catalog, 'Catalog', 'res', false],
+    $_validate = bareos_settings( [$catalog, 'Catalog', 'res', false],
       [$dir_address, 'Dir Address', 'address', true],
       [$dir_port, 'Dir Port', 'port', true],
       [$enabled, 'Enabled', 'bit', true],
       [$name, 'Dir Name', 'res', true]
     )
-    concat::fragment{ "bareos webui director ${title}":
+    concat::fragment { "bareos webui director ${title}":
       target  => "${bareos::webui::config_dir}/directors.ini",
-      content =>  template('bareos/webui_directors.erb'),
+      content => template('bareos/webui_directors.erb'),
       notify  => Service[$bareos::webui::service_name],
       tag     => ['bareos', 'bareos_webui'],
     }

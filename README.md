@@ -1,6 +1,6 @@
 # Bareos Puppet Module
-[![Puppet Forge](http://img.shields.io/puppetforge/v/voxpupuli/bareos.svg)](https://forge.puppetlabs.com/voxpupuli/bareos)
-[![Puppet Forge score](https://img.shields.io/puppetforge/f/voxpupuli/bareos.svg)](https://forge.puppetlabs.com/voxpupuli/bareos)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/voxpupuli/bareos.svg)](https://forge.puppetlabs.com/puppet/bareos)
+[![Puppet Forge score](https://img.shields.io/puppetforge/f/voxpupuli/bareos.svg)](https://forge.puppetlabs.com/puppet/bareos)
 [![Build Status](https://travis-ci.org/voxpupuli/puppet-bareos.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-bareos)
 
 #### Table of Contents

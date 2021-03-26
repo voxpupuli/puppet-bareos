@@ -1,23 +1,20 @@
-require 'puppetlabs_spec_helper/module_spec_helper'
-require_relative './settings_helper.rb'
+# This file is managed via modulesync
+# https://github.com/voxpupuli/modulesync
+# https://github.com/voxpupuli/modulesync_config
 
-RSpec.configure do |c|
-  c.default_facts = {
-    operatingsystem: 'RedHat',
-    osfamily: 'RedHat',
-    operatingsystemmajrelease: '7',
-    operatingsystemrelease: '7.0',
-    puppetversion: Puppet.version,
-    :os => {
-      'name' => 'RedHat',
-      'release' => {
-        'full' => '7.0',
-        'major' => '7'
-      },
-    }
-  }
-  # Coverage generation
-  c.after(:suite) do
-    RSpec::Puppet::Coverage.report!
+# puppetlabs_spec_helper will set up coverage if the env variable is set.
+# We want to do this if lib exists and it hasn't been explicitly set.
+ENV['COVERAGE'] ||= 'yes' if Dir.exist?(File.expand_path('../../lib', __FILE__))
+
+require 'voxpupuli/test/spec_helper'
+
+if File.exist?(File.join(__dir__, 'default_module_facts.yml'))
+  facts = YAML.safe_load(File.read(File.join(__dir__, 'default_module_facts.yml')))
+  if facts
+    facts.each do |name, value|
+      add_custom_fact name.to_sym, value
+    end
   end
 end
+
+require_relative './settings_helper.rb'

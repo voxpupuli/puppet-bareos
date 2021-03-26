@@ -97,18 +97,17 @@ define bareos::director::profile (
   $storage_acl = undef,
   $where_acl = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Profile'
   $_resource_dir = 'profile'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$catalog_acl, 'Catalog ACL', 'acl', false],
       [$client_acl, 'Client ACL', 'acl', false],
@@ -123,7 +122,7 @@ define bareos::director::profile (
     )
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $bareos::file_mode,
     owner   => $bareos::file_owner,

@@ -260,12 +260,12 @@ define bareos::director::pool (
   $volume_retention = undef,
   $volume_use_duration = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Pool'
   $_resource_dir = 'pool'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -275,16 +275,15 @@ define bareos::director::pool (
     # check all configured pools
     $_pools = delete_undef_values([$next_pool, $recycle_pool, $scratch_pool])
     $_require_res_pools = empty($_pools) ? { false => Bareos::Director::Pool[$_pools], default => undef }
-    $_require_res_storage = $storage ? { undef => undef, default => Bareos::Director::Storage[$storage]}
+    $_require_res_storage = $storage ? { undef => undef, default => Bareos::Director::Storage[$storage] }
 
     $_require_resource = delete_undef_values([
-      $_require_res_catalog,
-      $_require_res_pools,
-      $_require_res_storage,
+        $_require_res_catalog,
+        $_require_res_pools,
+        $_require_res_storage,
     ])
 
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$action_on_purge, 'Action On Purge', 'action_on_purge', false],
       [$auto_prune, 'Auto Prune', 'boolean', false],
@@ -321,7 +320,7 @@ define bareos::director::pool (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $bareos::file_mode,
     owner   => $bareos::file_owner,
