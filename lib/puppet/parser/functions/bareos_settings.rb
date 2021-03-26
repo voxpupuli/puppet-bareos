@@ -27,8 +27,8 @@ module Puppet::Parser::Functions
 
         values.each do |value|
           # ignore undef if not required
-          next if required == false && (value == nil || value == :undef)
-          raise 'This directive is required, please set value' if (value == nil || value == :undef)
+          next if required == false && (value.nil? || value == :undef)
+          raise 'This directive is required, please set value' if value.nil? || value == :undef
 
           # defaults:
           # quote value
@@ -68,7 +68,7 @@ module Puppet::Parser::Functions
             raise 'Value need to be an string' unless value.is_a?(String)
             # validate net-address for domain name or ip
             regex_hostname = %r{^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$}i
-            raise 'Value needs to be an ip or host address' unless value =~ Resolv::IPv4::Regex or value =~ Resolv::IPv6::Regex or value =~ Regexp.compile(regex_hostname)
+            raise 'Value needs to be an ip or host address' unless value =~ Resolv::IPv4::Regex || value =~ Resolv::IPv6::Regex || value =~ Regexp.compile(regex_hostname)
           when 'addresses'
             hash_separator = ' = '
             raise 'Please specify as Hash' unless value.is_a?(Hash)

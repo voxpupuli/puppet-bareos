@@ -49,18 +49,17 @@ define bareos::director::fileset (
   $ignore_file_set_changes = undef,
   $include = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'FileSet'
   $_resource_dir = 'fileset'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$enable_vss, 'Enable VSS', 'boolean', false],
       [$exclude, 'Exclude', 'include_exclude_item', false],
@@ -69,13 +68,13 @@ define bareos::director::fileset (
     )
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     tag     => ['bareos', 'bareos_director'],
   }
 }

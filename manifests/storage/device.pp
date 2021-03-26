@@ -147,6 +147,13 @@
 #   Bareos Default: true
 #   Required: false
 #
+# [*count*]
+#   Count
+#
+#   Bareos Datatype: pint32
+#   Bareos Default: 1
+#   Required: false
+#
 # [*description*]
 #   Description: The Description directive provides easier human recognition, but is not used by Bareos directly.
 #
@@ -456,6 +463,7 @@ define bareos::storage::device (
   $check_labels = undef,
   $close_on_poll = undef,
   $collect_statistics = undef,
+  $count = undef,
   $description = undef,
   $device_options = undef,
   $device_type = undef,
@@ -498,18 +506,17 @@ define bareos::storage::device (
   $volume_capacity = undef,
   $volume_poll_interval = undef,
 ) {
-  include ::bareos::storage
+  include bareos::storage
 
   $_resource = 'Device'
   $_resource_dir = 'device'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$alert_command, 'Alert Command', 'strname', false],
       [$always_open, 'Always Open', 'bit', false],
@@ -531,6 +538,7 @@ define bareos::storage::device (
       [$check_labels, 'Check Labels', 'bit', false],
       [$close_on_poll, 'Close On Poll', 'bit', false],
       [$collect_statistics, 'Collect Statistics', 'boolean', false],
+      [$count, 'Count', 'pint32', false],
       [$device_options, 'Device Options', 'string', false],
       [$device_type, 'Device Type', 'device_type', false],
       [$diagnostic_device, 'Diagnostic Device', 'strname', false],
@@ -574,13 +582,13 @@ define bareos::storage::device (
     )
   }
 
-  file { "${::bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::storage::service_name],
+    notify  => Service[$bareos::storage::service_name],
     tag     => ['bareos', 'bareos_storage'],
   }
 }

@@ -49,12 +49,12 @@ define bareos::director::counter (
   $minimum = undef,
   $wrap_counter = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Counter'
   $_resource_dir = 'counter'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -62,11 +62,10 @@ define bareos::director::counter (
     $_require_res_catalog = $catalog ? { undef => undef, default => Bareos::Director::Catalog[$catalog] }
 
     $_require_resource = delete_undef_values([
-      $_require_res_catalog,
+        $_require_res_catalog,
     ])
 
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$catalog, 'Catalog', 'res', false],
       [$maximum, 'Maximum', 'pint32', false],
@@ -77,13 +76,13 @@ define bareos::director::counter (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_director'],
   }

@@ -10,12 +10,12 @@ class bareos::profile::director::client {
   }
 
   # configure client on bareos director
-  ::bareos::director::client {'bareos-director-fd':
+  ::bareos::director::client { 'bareos-director-fd':
     description => 'Client resource of the Director itself.',
     password    => $password,
     address     => 'localhost',
   }
-  ::bareos::director::job {'backup-bareos-fd':
+  ::bareos::director::job { 'backup-bareos-fd':
     job_defs => 'BackupBareosCatalog',
     client   => 'bareos-director-fd',
     messages => 'Standard',

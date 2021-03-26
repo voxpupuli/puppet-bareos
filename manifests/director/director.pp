@@ -397,12 +397,12 @@ class bareos::director::director (
   $ver_id = undef,
   $working_directory = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Director'
   $_resource_dir = 'director'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -410,11 +410,10 @@ class bareos::director::director (
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Director::Messages[$messages] }
 
     $_require_resource = delete_undef_values([
-      $_require_res_messages,
+        $_require_res_messages,
     ])
 
-    $_settings = bareos_settings(
-      [$name_director, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name_director, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$absolute_job_timeout, 'Absolute Job Timeout', 'pint32', false],
       [$audit_events, 'Audit Events', 'audit_command_list', false],
@@ -467,13 +466,13 @@ class bareos::director::director (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/bareos-dir.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/bareos-dir.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_director'],
   }

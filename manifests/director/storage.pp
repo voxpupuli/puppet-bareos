@@ -275,12 +275,12 @@ define bareos::director::storage (
   $tls_verify_peer = undef,
   $username = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Storage'
   $_resource_dir = 'storage'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -288,11 +288,10 @@ define bareos::director::storage (
     $_require_res_storage = $paired_storage ? { undef => undef, default => Bareos::Director::Storage[$paired_storage] }
 
     $_require_resource = delete_undef_values([
-      $_require_res_storage,
+        $_require_res_storage,
     ])
 
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
       [$allow_compression, 'Allow Compression', 'boolean', false],
@@ -331,13 +330,13 @@ define bareos::director::storage (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_director'],
   }

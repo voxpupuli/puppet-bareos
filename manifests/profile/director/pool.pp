@@ -1,7 +1,7 @@
 # == Class: bareos::profile::director::pool
 # Some default pools
 class bareos::profile::director::pool {
-  ::bareos::director::pool {'Differential':
+  ::bareos::director::pool { 'Differential':
     pool_type            => 'Backup',
     recycle              => true,
     auto_prune           => true,
@@ -11,7 +11,7 @@ class bareos::profile::director::pool {
     label_format         => 'Differential-',
   }
 
-  ::bareos::director::pool {'Full':
+  ::bareos::director::pool { 'Full':
     pool_type            => 'Backup',
     recycle              => true,
     auto_prune           => true,
@@ -21,7 +21,7 @@ class bareos::profile::director::pool {
     label_format         => 'Full-',
   }
 
-  ::bareos::director::pool {'Incremental':
+  ::bareos::director::pool { 'Incremental':
     pool_type            => 'Backup',
     recycle              => true,
     auto_prune           => true,
@@ -31,7 +31,7 @@ class bareos::profile::director::pool {
     label_format         => 'Incremental-',
   }
 
-  ::bareos::director::pool {'Scratch':
+  ::bareos::director::pool { 'Scratch':
     pool_type => 'Scratch',
   }
 }

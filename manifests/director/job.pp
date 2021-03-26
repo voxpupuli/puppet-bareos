@@ -680,12 +680,12 @@ define bareos::director::job (
   $write_bootstrap = undef,
   $write_verify_list = undef,
 ) {
-  include ::bareos::director
+  include bareos::director
 
   $_resource = 'Job'
   $_resource_dir = 'job'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -714,19 +714,18 @@ define bareos::director::job (
     $_require_res_storage = $storage ? { undef => undef, default => Bareos::Director::Storage[$storage] }
 
     $_require_resource = delete_undef_values([
-      $_require_res_catalog,
-      $_require_res_client,
-      $_require_res_file_set,
-      $_require_res_jobs,
-      $_require_res_job_defs,
-      $_require_res_message,
-      $_require_res_pools,
-      $_require_res_schedule,
-      $_require_res_storage,
+        $_require_res_catalog,
+        $_require_res_client,
+        $_require_res_file_set,
+        $_require_res_jobs,
+        $_require_res_job_defs,
+        $_require_res_message,
+        $_require_res_pools,
+        $_require_res_schedule,
+        $_require_res_storage,
     ])
 
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$accurate, 'Accurate', 'boolean', false],
       [$add_prefix, 'Add Prefix', 'string', false],
@@ -815,13 +814,13 @@ define bareos::director::job (
     $_require_resource = undef
   }
 
-  file { "${::bareos::director::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::director::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::director::service_name],
+    notify  => Service[$bareos::director::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_director'],
   }
