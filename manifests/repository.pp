@@ -146,6 +146,7 @@ class bareos::repository (
       Apt::Source['bareos'] -> Package <| provider == 'apt' |>
       Class['Apt::Update']  -> Package <| provider == 'apt' |>
     }
+    'windows':
     default: {
       fail('Operatingsystem is not supported by this module')
     }
