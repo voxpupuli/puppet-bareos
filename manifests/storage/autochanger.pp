@@ -43,12 +43,12 @@ define bareos::storage::autochanger (
   $description = undef,
   $device = undef,
 ) {
-  include ::bareos::storage
+  include bareos::storage
 
   $_resource = 'Autochanger'
   $_resource_dir = 'autochanger'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
@@ -56,8 +56,7 @@ define bareos::storage::autochanger (
     $_require_resource = [
       Bareos::Storage::Device[$device],
     ]
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$changer_command, 'Changer Command', 'strname', true],
       [$changer_device, 'Changer Device', 'strname', true],
@@ -67,13 +66,13 @@ define bareos::storage::autochanger (
     $_require_resource = undef
   }
 
-  file { "${::bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::storage::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::storage::service_name],
+    notify  => Service[$bareos::storage::service_name],
     require => $_require_resource,
     tag     => ['bareos', 'bareos_storage'],
   }

@@ -4,17 +4,17 @@
 #
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
-class bareos::director(
-  $manage_service             = $::bareos::manage_service,
-  $manage_package             = $::bareos::manage_package,
-  $manage_database            = $::bareos::manage_database,
-  $package_name               = $::bareos::director_package_name,
-  $package_ensure             = $::bareos::package_ensure,
-  $service_name               = $::bareos::director_service_name,
-  $service_ensure             = $::bareos::service_ensure,
-  $service_enable             = $::bareos::service_enable,
-  $config_dir                 = "${::bareos::config_dir}/bareos-dir.d",
-  Array[String] $managed_dirs = $::bareos::director_managed_dirs,
+class bareos::director (
+  $manage_service             = $bareos::manage_service,
+  $manage_package             = $bareos::manage_package,
+  $manage_database            = $bareos::manage_database,
+  $package_name               = $bareos::director_package_name,
+  $package_ensure             = $bareos::package_ensure,
+  $service_name               = $bareos::director_service_name,
+  $service_ensure             = $bareos::service_ensure,
+  $service_enable             = $bareos::service_enable,
+  $config_dir                 = "${bareos::config_dir}/bareos-dir.d",
+  Array[String] $managed_dirs = $bareos::director_managed_dirs,
   Hash $catalogs              = {},
   Hash $clients               = {},
   Hash $consoles              = {},
@@ -27,8 +27,8 @@ class bareos::director(
   Hash $profiles              = {},
   Hash $schedules             = {},
   Hash $storages              = {},
-) inherits ::bareos {
-  include ::bareos::director::director
+) inherits bareos {
+  include bareos::director::director
 
   if $manage_package {
     package { $package_name:
@@ -48,9 +48,9 @@ class bareos::director(
   file { $config_dir:
     ensure  => directory,
     force   => true,
-    mode    => $::bareos::file_dir_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_dir_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     require => Package[$package_name],
     notify  => Service[$service_name],
     tag     => ['bareos', 'bareos_director'],
@@ -63,9 +63,9 @@ class bareos::director(
       recurse => true,
       force   => true,
       require => Package[$package_name],
-      mode    => $::bareos::file_dir_mode,
-      owner   => $::bareos::file_owner,
-      group   => $::bareos::file_group,
+      mode    => $bareos::file_dir_mode,
+      owner   => $bareos::file_owner,
+      group   => $bareos::file_group,
       notify  => Service[$service_name],
       tag     => ['bareos', 'bareos_director'],
     }
@@ -74,7 +74,7 @@ class bareos::director(
   if $manage_database {
     File <| tag == 'bareos_director' |> -> exec { 'bareos director init catalog':
       command     => '/usr/lib/bareos/scripts/create_bareos_database && /usr/lib/bareos/scripts/make_bareos_tables && /usr/lib/bareos/scripts/grant_bareos_privileges',
-      notify      => Service[$::bareos::director::service_name],
+      notify      => Service[$bareos::director::service_name],
       refreshonly => true,
       tag         => ['bareos', 'bareos_director'],
     }

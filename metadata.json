@@ -1,38 +1,46 @@
 {
-  "name": "project0-bareos",
-  "version": "0.0.0",
-  "author": "Richard Hillmann <richie@project0.de>",
+  "name": "puppet-bareos",
+  "version": "1.0.1-rc0",
+  "author": "Vox Pupulii <voxpupuli@groups.io>",
   "summary": "Manage and configure a Bareos installation",
   "license": "Apache-2.0",
-  "source": "https://github.com/project0/puppet-bareos",
-  "project_page": "https://github.com/project0/puppet-bareos",
-  "issues_url": "https://github.com/project0/puppet-bareos/issues",
-  "tags": ["bareos", "backup"],
+  "source": "https://github.com/voxpupuli/puppet-bareos",
+  "project_page": "https://github.com/voxpupuli/puppet-bareos",
+  "issues_url": "https://github.com/voxpupuli/puppet-bareos/issues",
+  "tags": [
+    "bareos",
+    "backup"
+  ],
   "dependencies": [
-    {"name": "puppetlabs/apt", "version_requirement": ">= 2.0.0 < 7.0.0"},
-    {"name": "puppetlabs/concat", "version_requirement": ">= 4.1.0 < 7.0.0"},
-    {"name": "puppetlabs/stdlib","version_requirement":">= 4.25.0 < 7.0.0"}
+    {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">= 2.0.0 < 8.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 4.1.0 < 7.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.25.0 < 7.0.0"
+    }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">=3.6.0 < 6.0.0"
+      "version_requirement": ">= 5.5.8 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "7",
-        "8",
         "9"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "12.04",
-        "14.04",
         "16.04",
         "18.04"
       ]
@@ -40,7 +48,6 @@
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "5",
         "6",
         "7"
       ]
@@ -48,7 +55,6 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "5",
         "6",
         "7"
       ]
@@ -56,8 +62,14 @@
     {
       "operatingsystem": "Fedora",
       "operatingsystemrelease": [
-        "23",
-        "24"
+        "31",
+        "32"
+      ]
+    },
+    {
+      "operatingsystem": "Amazon",
+      "operatingsystemrelease": [
+        "2"
       ]
     }
   ]

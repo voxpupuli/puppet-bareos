@@ -160,18 +160,17 @@ define bareos::console::console (
   $tls_require = undef,
   $tls_verify_peer = undef,
 ) {
-  include ::bareos::console
+  include bareos::console
 
   $_resource = 'Console'
   $_resource_dir = 'console'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$director, 'Director', 'string', false],
       [$heartbeat_interval, 'Heartbeat Interval', 'time', false],
@@ -194,7 +193,7 @@ define bareos::console::console (
     )
   }
 
-  file { "${::bareos::console::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::console::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $bareos::file_mode,
     owner   => $bareos::file_owner,

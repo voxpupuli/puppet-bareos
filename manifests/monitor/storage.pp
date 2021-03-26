@@ -64,18 +64,17 @@ define bareos::monitor::storage (
   $sd_password = undef,
   $sd_port = undef,
 ) {
-  include ::bareos::monitor
+  include bareos::monitor
 
   $_resource = 'Storage'
   $_resource_dir = 'storage'
 
-  unless $ensure in [ 'present', 'absent' ] {
+  unless $ensure in ['present', 'absent'] {
     fail('Invalid value for ensure')
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings(
-      [$name, 'Name', 'name', true],
+    $_settings = bareos_settings( [$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
       [$enable_ssl, 'Enable Ssl', 'boolean', false],
@@ -86,7 +85,7 @@ define bareos::monitor::storage (
     )
   }
 
-  file { "${::bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
+  file { "${bareos::monitor::config_dir}/${_resource_dir}/${name}.conf":
     ensure  => $ensure,
     mode    => $bareos::file_mode,
     owner   => $bareos::file_owner,

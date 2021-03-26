@@ -1,7 +1,7 @@
 # == Class: bareos::profile::director::profile
 #
 class bareos::profile::director::profile {
-  bareos::director::profile {'operator':
+  bareos::director::profile { 'operator':
     description        => 'Profile allowing normal Bareos operations.',
     command_acl        => [
       '!.bvfs_clear_cache, !.exit, !.sql',
@@ -20,7 +20,7 @@ class bareos::profile::director::profile {
   }
 
   # this may be changed, so use sperate profile for webui
-  ::bareos::director::profile {'webui-admin':
+  ::bareos::director::profile { 'webui-admin':
     description        => 'bareos-webui webui-admin profile resource.',
     command_acl        => [
       '!.bvfs_clear_cache, !.exit, !.sql',
