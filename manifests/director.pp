@@ -39,7 +39,7 @@ class bareos::director (
   }
 
   unless $service_allow_restart {
-    $reload_command = $::facts['service_provider'] ? {
+    $reload_command = $facts['service_provider'] ? {
       'systemd' => "systemctl reload ${service_name}",
       default   => "service ${service_name} relaod",
     }
