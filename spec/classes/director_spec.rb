@@ -31,14 +31,13 @@ describe 'bareos::director' do
             with_db_name('test')
         end
       end
-
     end
   end
-  context "on ubuntu-18.04-x86_64" do
+  context 'on ubuntu-18.04-x86_64' do
     let(:facts) do
-      {'service_provider' => 'systemd',}.merge(on_supported_os['ubuntu-18.04-x86_64'])
+      { 'service_provider' => 'systemd', }.merge(on_supported_os['ubuntu-18.04-x86_64'])
     end
-  
+
     it { is_expected.to compile.with_all_deps }
     it do
       is_expected.to contain_service('bareos-dir').with(
