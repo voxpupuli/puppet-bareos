@@ -38,7 +38,7 @@ class bareos (
   $file_group                         = $bareos::params::file_group,
   $file_mode                          = $bareos::params::file_mode,
   $file_dir_mode                      = $bareos::params::file_dir_mode,
-  String  $repo_release               = 'latest',
+  String  $repo_release               = '20',
   Boolean $repo_subscription          = false,
   Optional[String[1]]  $repo_username = undef,
   Optional[String[1]]  $repo_password = undef,
