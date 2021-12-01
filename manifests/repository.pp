@@ -19,11 +19,11 @@
 #   The major bareos release version which should be used
 #
 class bareos::repository (
-  String              $release             = '20',
-  Optional[String[1]] $gpg_key_fingerprint = undef,
-  Boolean             $subscription        = false,
-  Optional[String]    $username            = undef,
-  Optional[String]    $password            = undef,
+  Enum['18.2', '19.2', '20']  $release             = '20',
+  Optional[String[1]]         $gpg_key_fingerprint = undef,
+  Boolean                     $subscription        = false,
+  Optional[String]            $username            = undef,
+  Optional[String]            $password            = undef,
 ) {
   $scheme = 'http://'
   if $subscription {
@@ -43,15 +43,15 @@ class bareos::repository (
   if $gpg_key_fingerprint {
     $_gpg_key_fingerprint = $gpg_key_fingerprint
   } elsif versioncmp($release, '20') >= 0 {
-    # >= bareos-20
+    # >= bareos 20
+    $_gpg_key_fingerprint = 'C68B 001F 74D2 F202 43D0 B7A2 0CCB A537 DBE0 83A6'
+  } else {
+    # >= bareos-18.2
     if $subscription {
       $_gpg_key_fingerprint = '641A 1497 F1B1 1BEA 945F 840F E5D8 82B2 8657 AE28'
     } else {
       $_gpg_key_fingerprint = 'C68B 001F 74D2 F202 43D0 B7A2 0CCB A537 DBE0 83A6'
     }
-  } else {
-    # >= bareos-15.2
-    $_gpg_key_fingerprint = '0143 857D 9CE8 C2D1 82FE 2631 F93C 028C 093B FBA2'
   }
 
   $yum_username = $username ? {
@@ -108,7 +108,7 @@ class bareos::repository (
         $url = "${scheme}${address}"
       }
       if $os  == 'Ubuntu' {
-        unless $osrelease in ['12.04', '14.04', '16.04', '18.04'] {
+        unless $osrelease in ['12.04', '14.04', '16.04', '18.04', '20.04'] {
           fail('Only Ubunutu LTS Versions are supported')
         }
         $location = "${url}xUbuntu_${osrelease}"
