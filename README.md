@@ -416,6 +416,7 @@ bareos::director::jobs:
     type: backup
     client: alice
     file_set: testing
+```
 
 ## Limitations
 
