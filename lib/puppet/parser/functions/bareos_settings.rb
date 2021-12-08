@@ -18,7 +18,7 @@ module Puppet::Parser::Functions
         raise 'Name of directive config key is invalid' unless directive =~ %r{^[a-zA-Z0-9 ]+$}
 
         # check array if allowed
-        values = if (%w[acl runscript].include?(dirty_type) || dirty_type =~ %r{[_-]list$}) && value_setting.is_a?(Array)
+        values = if (%w[acl runscript runscript_short].include?(dirty_type) || dirty_type =~ %r{[_-]list$}) && value_setting.is_a?(Array)
                    value_setting
                  else
                    [value_setting]
