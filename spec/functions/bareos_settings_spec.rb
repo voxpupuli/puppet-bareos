@@ -48,7 +48,7 @@ describe 'bareos_settings' do
   end
 
   context 'type is a string with quotes' do
-    %w[audit_command runscript_short autopassword md5password directory string strname device plugin_names].each do |type|
+    %w[audit_command autopassword md5password directory string strname device plugin_names].each do |type|
       it 'runs with compatible values' do
         ['Not a number', 'MyString', '23 free usage of Text.!', 'Special ".-,= Chars'].each do |val|
           is_expected.to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = \"#{val}\"")
@@ -388,6 +388,13 @@ describe 'bareos_settings' do
       is_expected.to run.with_params([val, 'Test', 'string_noquote_list', true]).and_return(result)
     end
 
+    it 'type is runscript_short' do
+      val = %w[first second]
+      result = "#{indent_default}Test = \"first\"
+#{indent_default}Test = \"second\""
+      is_expected.to run.with_params([val, 'Test', 'runscript_short', true]).and_return(result)
+    end
+
     it 'type is acl' do
       val = %w[first second]
       result = "#{indent_default}Test = first
@@ -395,7 +402,7 @@ describe 'bareos_settings' do
       is_expected.to run.with_params([val, 'Test', 'acl', true]).and_return(result)
     end
 
-    it 'type is runcsript' do
+    it 'type is runscript' do
       val = [
         { 'Test A' => 'value' },
         { 'Test B' => 'value' }
