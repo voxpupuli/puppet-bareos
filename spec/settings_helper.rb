@@ -14,11 +14,11 @@ class BareosResourceHelper
 
   # return params for let
   # attr name, directive name and bareos type
-  def param(attr, directive, type)
+  def param(attr, directive, type_argument)
     result = nil
     val = 'not set'
     sep = ' = '
-    type.gsub!(%r{([_-]list)$}, '')
+    type = type_argument.gsub(%r{([_-]list)$}, '')
 
     case type
     # short hack to have simple res names
