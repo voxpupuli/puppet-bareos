@@ -63,7 +63,7 @@ class BareosResourceHelper
       val = 'clear'
     when 'auth_protocol_type', 'protocol_type'
       val = 'native'
-    when 'pooltype' || 'job_type'
+    when 'pooltype', 'job_type'
       val = 'backup'
     when 'label'
       val = 'ANSI'
