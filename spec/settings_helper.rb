@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Provide some generic helper to test classes/defines for bareos
 require 'spec_helper'
 
@@ -12,11 +14,11 @@ class BareosResourceHelper
 
   # return params for let
   # attr name, directive name and bareos type
-  def param(attr, directive, type)
+  def param(attr, directive, type_argument)
     result = nil
     val = 'not set'
     sep = ' = '
-    type.gsub!(%r{([_-]list)$}, '')
+    type = type_argument.gsub(%r{([_-]list)$}, '')
 
     case type
     # short hack to have simple res names
@@ -61,14 +63,12 @@ class BareosResourceHelper
       val = 'clear'
     when 'auth_protocol_type', 'protocol_type'
       val = 'native'
-    when 'pooltype'
+    when 'pooltype', 'job_type'
       val = 'backup'
     when 'label'
       val = 'ANSI'
     when 'migration_type'
       val = 'job'
-    when 'job_type'
-      val = 'backup'
     when 'replace_option'
       val = 'always'
     when 'device_type'
@@ -112,7 +112,6 @@ class BareosResourceHelper
     @config.each do |_, v|
       tmp = "#{tmp}  #{v['dir']}#{v['sep']}#{v['res']}\n"
     end
-    tmp = "#{tmp}}\n"
-    tmp
+    "#{tmp}}\n"
   end
 end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bareos::monitor::client' do
   let(:title) { 'name' }
 
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -19,7 +21,7 @@ describe 'bareos::monitor::client' do
         let(:params) do
           {
             'password' => 'password',
-            'address'  => 'localhost'
+            'address' => 'localhost'
           }
         end
 

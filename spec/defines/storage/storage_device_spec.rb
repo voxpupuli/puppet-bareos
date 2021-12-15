@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bareos::storage::device' do
@@ -6,7 +8,7 @@ describe 'bareos::storage::device' do
   filename = '/etc/bareos/bareos-sd.d/device/name.conf'
 
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -18,8 +20,8 @@ describe 'bareos::storage::device' do
       context 'with required values' do
         let(:params) do
           {
-            'archive_device'  => '/dev/tape',
-            'media_type'      => 'DLT7000'
+            'archive_device' => '/dev/tape',
+            'media_type' => 'DLT7000'
           }
         end
 
@@ -100,8 +102,9 @@ describe 'bareos::storage::device' do
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_file(filename).with_content(res.content) }
+
         it do
-          is_expected.to contain_file(filename).
+          expect(subject).to contain_file(filename).
             that_notifies('Service[bareos-sd]')
         end
       end

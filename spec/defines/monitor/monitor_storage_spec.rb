@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bareos::monitor::storage' do
@@ -6,7 +8,7 @@ describe 'bareos::monitor::storage' do
   filename = '/etc/bareos/tray-monitor.d/storage/name.conf'
 
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -19,7 +21,7 @@ describe 'bareos::monitor::storage' do
         let(:params) do
           {
             'password' => 'password',
-            'address'  => 'localhost'
+            'address' => 'localhost'
           }
         end
 
