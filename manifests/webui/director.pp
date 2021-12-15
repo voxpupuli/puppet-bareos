@@ -43,13 +43,13 @@
 #   Bareos default: not set
 #   Required: false
 define bareos::webui::director (
-  $ensure = present,
-  $catalog = undef,
-  $dir_address = 'localhost',
-  $dir_port = 9101,
-  $enabled = 'yes',
-  $pam_console_name = undef,
-  $pam_console_password = undef,
+  Enum['present', 'absent'] $ensure = present,
+  Bareos::Resource $catalog = undef,
+  Stdlib::Host $dir_address = 'localhost',
+  Stdlib::Port $dir_port = 9101,
+  Enum['yes', 'no'] $enabled = 'yes',
+  Bareos::Resource $pam_console_name = undef,
+  String $pam_console_password = undef,
 ) {
   include bareos::webui
 
@@ -65,7 +65,7 @@ define bareos::webui::director (
       [$enabled, 'Enabled', 'bit', true],
       [$name, 'Dir Name', 'res', true],
       [$pam_console_name, 'Pam Console Name', 'res', false],
-      [$pam_console_password, 'Pam Console Password', 'res', false]
+      [$pam_console_password, 'Pam Console Password', 'autopassword', false]
     )
     concat::fragment { "bareos webui director ${title}":
       target  => "${bareos::webui::config_dir}/directors.ini",
