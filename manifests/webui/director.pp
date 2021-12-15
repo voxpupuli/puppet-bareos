@@ -44,12 +44,12 @@
 #   Required: false
 define bareos::webui::director (
   Enum['present', 'absent'] $ensure = present,
-  Bareos::Resource $catalog = undef,
+  Optional[Bareos::Resource] $catalog = undef,
   Stdlib::Host $dir_address = 'localhost',
   Stdlib::Port $dir_port = 9101,
   Enum['yes', 'no'] $enabled = 'yes',
-  Bareos::Resource $pam_console_name = undef,
-  String $pam_console_password = undef,
+  Optional[Bareos::Resource] $pam_console_name = undef,
+  Optional[String] $pam_console_password = undef,
 ) {
   include bareos::webui
 
