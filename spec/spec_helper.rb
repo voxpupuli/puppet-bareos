@@ -16,4 +16,4 @@ if File.exist?(File.join(__dir__, 'default_module_facts.yml'))
   end
 end
 
-require_relative './settings_helper.rb'
+require_relative './settings_helper'
