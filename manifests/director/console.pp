@@ -183,6 +183,13 @@
 #   Bareos Default: true
 #   Required: false
 #
+# [*use_pam_authentication*]
+#   Use Pam Authentication: If set to yes, PAM will be used to authenticate the user on this console. Otherwise, only the credentials of this console resource are used for authentication.
+#
+#   Bareos Datatype: boolean
+#   Bareos Default: false
+#   Required: false
+#
 # [*where_acl*]
 #   Where ACL
 #
@@ -217,6 +224,7 @@ define bareos::director::console (
   $tls_key = undef,
   $tls_require = undef,
   $tls_verify_peer = undef,
+  $use_pam_authentication = undef,
   $where_acl = undef,
 ) {
   include bareos::director
@@ -261,6 +269,7 @@ define bareos::director::console (
       [$tls_key, 'Tls Key', 'directory', false],
       [$tls_require, 'Tls Require', 'boolean', false],
       [$tls_verify_peer, 'Tls Verify Peer', 'boolean', false],
+      [$use_pam_authentication, 'Use Pam Authentication', 'boolean', false],
       [$where_acl, 'Where ACL', 'acl', false]
     )
   } else {
