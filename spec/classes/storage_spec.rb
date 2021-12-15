@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'bareos::storage' do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -31,12 +33,13 @@ describe 'bareos::storage' do
         end
 
         it { is_expected.to compile }
+
         it do
-          is_expected.to contain_bareos__storage__autochanger('test').
+          expect(subject).to contain_bareos__storage__autochanger('test').
             with_changer_command('foo').
             with_changer_device('/dev/foo').
             with_device('dev01')
-          is_expected.to contain_bareos__storage__device('dev01').
+          expect(subject).to contain_bareos__storage__device('dev01').
             with_archive_device('/mnt/test').
             with_media_type('file')
         end
@@ -54,8 +57,9 @@ describe 'bareos::storage' do
         end
 
         it { is_expected.to compile }
+
         it do
-          is_expected.to contain_bareos__storage__director('test').
+          expect(subject).to contain_bareos__storage__director('test').
             with_password('foobar')
         end
       end
@@ -72,8 +76,9 @@ describe 'bareos::storage' do
         end
 
         it { is_expected.to compile }
+
         it do
-          is_expected.to contain_bareos__storage__messages('test').
+          expect(subject).to contain_bareos__storage__messages('test').
             with_description('test')
         end
       end
@@ -91,8 +96,9 @@ describe 'bareos::storage' do
         end
 
         it { is_expected.to compile }
+
         it do
-          is_expected.to contain_bareos__storage__ndmp('test').
+          expect(subject).to contain_bareos__storage__ndmp('test').
             with_username('test').
             with_password('foobar')
         end
