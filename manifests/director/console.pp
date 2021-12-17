@@ -183,6 +183,13 @@
 #   Bareos Default: true
 #   Required: false
 #
+# [*use_pam_authentication*]
+#   Use Pam Authentication: If set to yes, PAM will be used to authenticate the user on this console. Otherwise, only the credentials of this console resource are used for authentication.
+#
+#   Bareos Datatype: boolean
+#   Bareos Default: false
+#   Required: false
+#
 # [*where_acl*]
 #   Where ACL
 #
@@ -191,33 +198,34 @@
 #   Required: false
 #
 define bareos::director::console (
-  $ensure = present,
-  $catalog_acl = undef,
-  $client_acl = undef,
-  $command_acl = undef,
-  $description = undef,
-  $file_set_acl = undef,
-  $job_acl = undef,
-  $password = undef,
-  $plugin_options_acl = undef,
-  $pool_acl = undef,
-  $profile = undef,
-  $run_acl = undef,
-  $schedule_acl = undef,
-  $storage_acl = undef,
-  $tls_allowed_cn = undef,
-  $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
-  $tls_ca_certificate_file = undef,
-  $tls_certificate = undef,
-  $tls_certificate_revocation_list = undef,
-  $tls_cipher_list = undef,
-  $tls_dh_file = undef,
-  $tls_enable = undef,
-  $tls_key = undef,
-  $tls_require = undef,
-  $tls_verify_peer = undef,
-  $where_acl = undef,
+  Enum['present', 'absent'] $ensure = present,
+  Optional[Bareos::List] $catalog_acl = undef,
+  Optional[Bareos::List] $client_acl = undef,
+  Optional[Bareos::List] $command_acl = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::List] $file_set_acl = undef,
+  Optional[Bareos::List] $job_acl = undef,
+  Optional[String] $password = undef,
+  Optional[Bareos::List] $plugin_options_acl = undef,
+  Optional[Bareos::List] $pool_acl = undef,
+  Optional[Bareos::List] $profile = undef,
+  Optional[Bareos::List] $run_acl = undef,
+  Optional[Bareos::List] $schedule_acl = undef,
+  Optional[Bareos::List] $storage_acl = undef,
+  Optional[Bareos::List] $tls_allowed_cn = undef,
+  Optional[Bareos::Boolean] $tls_authenticate = undef,
+  Optional[String] $tls_ca_certificate_dir = undef,
+  Optional[String] $tls_ca_certificate_file = undef,
+  Optional[String] $tls_certificate = undef,
+  Optional[String] $tls_certificate_revocation_list = undef,
+  Optional[String] $tls_cipher_list = undef,
+  Optional[String] $tls_dh_file = undef,
+  Optional[Bareos::Boolean] $tls_enable = undef,
+  Optional[String] $tls_key = undef,
+  Optional[Bareos::Boolean] $tls_require = undef,
+  Optional[Bareos::Boolean] $tls_verify_peer = undef,
+  Optional[Bareos::Boolean] $use_pam_authentication = undef,
+  Optional[Bareos::List] $where_acl = undef,
 ) {
   include bareos::director
 
@@ -261,6 +269,7 @@ define bareos::director::console (
       [$tls_key, 'Tls Key', 'directory', false],
       [$tls_require, 'Tls Require', 'boolean', false],
       [$tls_verify_peer, 'Tls Verify Peer', 'boolean', false],
+      [$use_pam_authentication, 'Use Pam Authentication', 'boolean', false],
       [$where_acl, 'Where ACL', 'acl', false]
     )
   } else {

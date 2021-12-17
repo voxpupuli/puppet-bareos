@@ -9,6 +9,10 @@ dirport	= <%= @dir_port %>
 ; Set catalog to explicit value if you have multiple catalogs
 catalog = "<%= @catalog %>"
 <%- end -%>
+<%-if @pam_console_name -%>
+pam_console_name = "<%= @pam_console_name %>"
+<%- end -%>
+pam_console_password = "<%= @pam_console_password %>"
 ; Note: TLS has not been tested and documented, yet.
 ;tls_verify_peer = false
 ;server_can_do_tls = false

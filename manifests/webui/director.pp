@@ -29,12 +29,27 @@
 # [*enabled*]
 #   Enable or disable section. Possible values are "yes" or "no", the default is "yes".
 #
+# [*pam_console_name*]
+#   Pam Console Name
+#
+#   Bareos datatype: res
+#   Bareos default: not set
+#   Required: false
+#
+# [*pam_console_password*]
+#   Pam Console Password
+#
+#   Bareos datatype: res
+#   Bareos default: not set
+#   Required: false
 define bareos::webui::director (
-  $ensure = present,
-  $catalog = undef,
-  $dir_address = 'localhost',
-  $dir_port = 9101,
-  $enabled = 'yes',
+  Enum['present', 'absent'] $ensure = present,
+  Optional[Bareos::Resource] $catalog = undef,
+  Stdlib::Host $dir_address = 'localhost',
+  Stdlib::Port $dir_port = 9101,
+  Enum['yes', 'no'] $enabled = 'yes',
+  Optional[Bareos::Resource] $pam_console_name = undef,
+  Optional[String] $pam_console_password = undef,
 ) {
   include bareos::webui
 
@@ -48,7 +63,9 @@ define bareos::webui::director (
       [$dir_address, 'Dir Address', 'address', true],
       [$dir_port, 'Dir Port', 'port', true],
       [$enabled, 'Enabled', 'bit', true],
-      [$name, 'Dir Name', 'res', true]
+      [$name, 'Dir Name', 'res', true],
+      [$pam_console_name, 'Pam Console Name', 'res', false],
+      [$pam_console_password, 'Pam Console Password', 'autopassword', false]
     )
     concat::fragment { "bareos webui director ${title}":
       target  => "${bareos::webui::config_dir}/directors.ini",
