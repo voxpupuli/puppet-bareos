@@ -10,6 +10,7 @@ module Puppet::Parser::Functions
     final_settings = []
     args.each do |setting|
       raise 'Invalid or incomplete setting' unless setting.length > 2 && setting.is_a?(Array)
+
       value_setting = setting[0] # value for this setting
       directive = setting[1] # Directive Keyword of this setting
       dirty_type = setting[2] # bareos variable type
@@ -20,10 +21,10 @@ module Puppet::Parser::Functions
 
       # check array if allowed
       values = if (%w[acl runscript runscript_short].include?(dirty_type) || dirty_type =~ %r{[_-]list$} || dirty_type =~ %r{[_-]nested$}) && value_setting.is_a?(Array)
-                  value_setting
-                else
-                  [value_setting]
-                end
+                 value_setting
+               else
+                 [value_setting]
+               end
       type = dirty_type.gsub(%r{[_-]list$}, '')
 
       values.each do |value|
@@ -49,7 +50,7 @@ module Puppet::Parser::Functions
           Integer(value)
         when 'name', 'res', 'resource'
           quote = true
-          regex = %r{^[a-z][a-z0-9\.\-_ \$]{0,126}$}i
+          regex = %r{^[a-z][a-z0-9.\-_ $]{0,126}$}i
         when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
           raise 'Value need to be an string' unless value.is_a?(String)
         # type md5password is missleading, it is an plain password and not md5 hashed
@@ -58,7 +59,7 @@ module Puppet::Parser::Functions
           quote = true
           raise 'Value need to be an string' unless value.is_a?(String)
         when 'speed'
-          regex = %r{^\d+\W*(k|kb|m|mb)\/s$}i
+          regex = %r{^\d+\W*(k|kb|m|mb)/s$}i
         when 'size64'
           regex = %r{^(\d+(\.\d+)?)\W*(k|kb|m|mb|g|gb)$}i
         when 'time'
@@ -67,6 +68,7 @@ module Puppet::Parser::Functions
           value_in_array = %w[yes no on off true false]
         when 'address'
           raise 'Value need to be an string' unless value.is_a?(String)
+
           # validate net-address for domain name or ip
           regex_hostname = %r{^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$}i
           raise 'Value needs to be an ip or host address' unless value =~ Resolv::IPv4::Regex || value =~ Resolv::IPv6::Regex || value =~ Regexp.compile(regex_hostname)
@@ -107,12 +109,14 @@ module Puppet::Parser::Functions
           raise "Invalid setting type '#{type}'"
         end
 
+        # rubocop:disable Style/SoleNestedConditional
         unless value_in_array.nil?
           raise "Value '#{value}' needs to be one of #{value_in_array.inspect}" unless value_in_array.include? value.to_s.downcase
         end
         unless regex.nil?
           raise "Value '#{value}' does not match regex #{regex}" unless value =~ Regexp.compile(regex)
         end
+        # rubocop:enable Style/SoleNestedConditional
 
         if value.is_a?(Hash)
           final_settings.push "#{indent}#{directive}#{hash_separator}{"
