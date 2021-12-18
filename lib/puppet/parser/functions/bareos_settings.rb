@@ -10,7 +10,6 @@ module Puppet::Parser::Functions
     final_settings = []
     args.each do |setting|
       raise 'Invalid or incomplete setting' unless setting.length > 2 && setting.is_a?(Array)
-
       value_setting = setting[0] # value for this setting
       directive = setting[1] # Directive Keyword of this setting
       dirty_type = setting[2] # bareos variable type
@@ -20,12 +19,12 @@ module Puppet::Parser::Functions
       raise 'Name of directive config key is invalid' unless directive =~ %r{^[a-zA-Z0-9 ]+$}
 
       # check array if allowed
-      values = if (%w[acl runscript runscript_short].include?(dirty_type) || dirty_type =~ %r{[_-]list$}) && value_setting.is_a?(Array)
-                 value_setting
-               else
-                 [value_setting]
-               end
-      type = dirty_type.gsub(%r{([_-]list)$}, '')
+      values = if (%w[acl runscript runscript_short].include?(dirty_type) || dirty_type =~ %r{[_-]list$} || dirty_type =~ %r{[_-]nested$}) && value_setting.is_a?(Array)
+                  value_setting
+                else
+                  [value_setting]
+                end
+      type = dirty_type.gsub(%r{[_-]list$}, '')
 
       values.each do |value|
         # ignore undef if not required
@@ -50,7 +49,7 @@ module Puppet::Parser::Functions
           Integer(value)
         when 'name', 'res', 'resource'
           quote = true
-          regex = %r{^[a-z][a-z0-9.\-_ $]{0,126}$}i
+          regex = %r{^[a-z][a-z0-9\.\-_ \$]{0,126}$}i
         when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
           raise 'Value need to be an string' unless value.is_a?(String)
         # type md5password is missleading, it is an plain password and not md5 hashed
@@ -59,7 +58,7 @@ module Puppet::Parser::Functions
           quote = true
           raise 'Value need to be an string' unless value.is_a?(String)
         when 'speed'
-          regex = %r{^\d+\W*(k|kb|m|mb)/s$}i
+          regex = %r{^\d+\W*(k|kb|m|mb)\/s$}i
         when 'size64'
           regex = %r{^(\d+(\.\d+)?)\W*(k|kb|m|mb|g|gb)$}i
         when 'time'
@@ -68,7 +67,6 @@ module Puppet::Parser::Functions
           value_in_array = %w[yes no on off true false]
         when 'address'
           raise 'Value need to be an string' unless value.is_a?(String)
-
           # validate net-address for domain name or ip
           regex_hostname = %r{^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$}i
           raise 'Value needs to be an ip or host address' unless value =~ Resolv::IPv4::Regex || value =~ Resolv::IPv6::Regex || value =~ Regexp.compile(regex_hostname)
@@ -77,6 +75,8 @@ module Puppet::Parser::Functions
           raise 'Please specify as Hash' unless value.is_a?(Hash)
         when 'include_exclude_item', 'runscript', 'hash'
           raise 'Please specify as Hash' unless value.is_a?(Hash)
+        when 'include_exclude_item_nested'
+          raise 'Nested elements need to be hashes or strings' unless value.is_a?(Hash) || value.is_a?(String)
         when 'backup_level'
           value_in_array = %w[full incremental differential virtualfull initcatalog catalog volumetocatalog disktocatalog]
         when 'io_direction'
@@ -107,14 +107,22 @@ module Puppet::Parser::Functions
           raise "Invalid setting type '#{type}'"
         end
 
-        raise "Value '#{value}' needs to be one of #{value_in_array.inspect}" if !value_in_array.nil? && !(value_in_array.include? value.to_s.downcase)
-        raise "Value '#{value}' does not match regex #{regex}" if !regex.nil? && value !~ Regexp.compile(regex)
+        unless value_in_array.nil?
+          raise "Value '#{value}' needs to be one of #{value_in_array.inspect}" unless value_in_array.include? value.to_s.downcase
+        end
+        unless regex.nil?
+          raise "Value '#{value}' does not match regex #{regex}" unless value =~ Regexp.compile(regex)
+        end
 
         if value.is_a?(Hash)
           final_settings.push "#{indent}#{directive}#{hash_separator}{"
           value.each do |k, v|
+            # Remove our little validation wrapper
+            type = type.gsub(%r{[_-]nested$}, '')
             type_n = 'string_noquote'
             type_n = "#{type_n}_list" if v.is_a?(Array)
+            # if we can have multiple hash elements of the same type, e.g. include/exclude/options with fileset
+            type_n = "#{type}_nested" if v.is_a?(Array) && %w[include_exclude_item].include?(type)
             # use same type again:
             type_n = type if v.is_a?(Hash)
             final_settings.push function_bareos_settings([[v, k, type_n, false, "#{indent}  "]])
@@ -131,7 +139,6 @@ module Puppet::Parser::Functions
     rescue StandardError => e
       raise Puppet::ParseError, "bareos_settings(): #{setting.inspect}: #{e}."
     end
-
     return final_settings.join "\n"
   end
 end
