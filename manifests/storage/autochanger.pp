@@ -37,20 +37,16 @@
 #   Required: true
 #
 define bareos::storage::autochanger (
-  $ensure = present,
-  $changer_command = undef,
-  $changer_device = undef,
-  $description = undef,
-  $device = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $changer_command = undef,
+  Optional[String] $changer_device = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::List::Resource] $device = undef,
 ) {
   include bareos::storage
 
   $_resource = 'Autochanger'
   $_resource_dir = 'autochanger'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_resource = [

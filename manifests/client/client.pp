@@ -286,7 +286,9 @@
 #   Required: false
 #
 # [*tls_dh_file*]
-#   Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
+#   Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this
+#   directive is specified, DH key exchange will be used for the ephemeral
+#   keying, allowing for forward secrecy of communications.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
@@ -307,14 +309,17 @@
 #   Required: false
 #
 # [*tls_require*]
-#   Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
+#   Tls Require: Without setting this to yes, Bareos can fall back to use
+#   unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
 # [*tls_verify_peer*]
-#   Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
+#   Tls Verify Peer: If disabled, all certificates signed by a known CA will be
+#   accepted. If enabled, the CN of a certificate must the Address or in the
+#   "TLS Allowed CN" list.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
@@ -335,62 +340,58 @@
 #   Required: false
 #
 class bareos::client::client (
-  $ensure = present,
-  $absolute_job_timeout = undef,
-  $allow_bandwidth_bursting = undef,
-  $allowed_job_command = undef,
-  $allowed_script_dir = undef,
-  $always_use_lmdb = undef,
-  $compatible = undef,
-  $description = undef,
-  $fd_address = undef,
-  $fd_addresses = undef,
-  $fd_port = undef,
-  $fd_source_address = undef,
-  $heartbeat_interval = undef,
-  $lmdb_threshold = undef,
-  $log_timestamp_format = undef,
-  $maximum_bandwidth_per_job = undef,
-  $maximum_concurrent_jobs = undef,
-  $maximum_connections = undef,
-  $maximum_network_buffer_size = undef,
-  $messages = undef,
-  $name_client = 'bareos-fd',
-  $pid_directory = undef,
-  $pki_cipher = undef,
-  $pki_encryption = undef,
-  $pki_key_pair = undef,
-  $pki_master_key = undef,
-  $pki_signatures = undef,
-  $pki_signer = undef,
-  $plugin_directory = undef,
-  $plugin_names = undef,
-  $scripts_directory = undef,
-  $sd_connect_timeout = undef,
-  $secure_erase_command = undef,
-  $tls_allowed_cn = undef,
-  $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
-  $tls_ca_certificate_file = undef,
-  $tls_certificate = undef,
-  $tls_certificate_revocation_list = undef,
-  $tls_cipher_list = undef,
-  $tls_dh_file = undef,
-  $tls_enable = undef,
-  $tls_key = undef,
-  $tls_require = undef,
-  $tls_verify_peer = undef,
-  $ver_id = undef,
-  $working_directory = undef,
+  Bareos::Resource $name_client = 'bareos-fd',
+  Bareos::Module::Ensure $ensure = present,
+  Optional[Integer[0]] $absolute_job_timeout = undef,
+  Optional[Boolean] $allow_bandwidth_bursting = undef,
+  Optional[Bareos::List::String] $allowed_job_command = undef,
+  Optional[Bareos::List::Directory] $allowed_script_dir = undef,
+  Optional[Boolean] $always_use_lmdb = undef,
+  Optional[Boolean] $compatible = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::Address] $fd_address = undef,
+  Optional[Bareos::Addresses] $fd_addresses = undef,
+  Optional[Stdlib::Port] $fd_port = undef,
+  Optional[Bareos::Address] $fd_source_address = undef,
+  Optional[Bareos::Time] $heartbeat_interval = undef,
+  Optional[Integer[0]] $lmdb_threshold = undef,
+  Optional[String] $log_timestamp_format = undef,
+  Optional[Bareos::Speed] $maximum_bandwidth_per_job = undef,
+  Optional[Integer[0]] $maximum_concurrent_jobs = undef,
+  Optional[Integer[0]] $maximum_connections = undef,
+  Optional[Integer[0]] $maximum_network_buffer_size = undef,
+  Optional[Bareos::Resource] $messages = undef,
+  Optional[String] $pid_directory = undef,
+  Optional[Bareos::EncryptionCipher] $pki_cipher = undef,
+  Optional[Bareos::Boolean] $pki_encryption = undef,
+  Optional[String] $pki_key_pair = undef,
+  Optional[Bareos::List::Directory] $pki_master_key = undef,
+  Optional[Bareos::Boolean] $pki_signatures = undef,
+  Optional[Bareos::List::Directory] $pki_signer = undef,
+  Optional[String] $plugin_directory = undef,
+  Optional[String] $plugin_names = undef,
+  Optional[String] $scripts_directory = undef,
+  Optional[Bareos::Time] $sd_connect_timeout = undef,
+  Optional[String] $secure_erase_command = undef,
+  Optional[Bareos::List::String] $tls_allowed_cn = undef,
+  Optional[Bareos::Boolean] $tls_authenticate = undef,
+  Optional[String] $tls_ca_certificate_dir = undef,
+  Optional[String] $tls_ca_certificate_file = undef,
+  Optional[String] $tls_certificate = undef,
+  Optional[String] $tls_certificate_revocation_list = undef,
+  Optional[String] $tls_cipher_list = undef,
+  Optional[String] $tls_dh_file = undef,
+  Optional[Bareos::Boolean] $tls_enable = undef,
+  Optional[String] $tls_key = undef,
+  Optional[Bareos::Boolean] $tls_require = undef,
+  Optional[Bareos::Boolean] $tls_verify_peer = undef,
+  Optional[String] $ver_id = undef,
+  Optional[String] $working_directory = undef,
 ) {
   include bareos::client
 
   $_resource = 'Client'
   $_resource_dir = 'client'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Client::Messages[$messages] }

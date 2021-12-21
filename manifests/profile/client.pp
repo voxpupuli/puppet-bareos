@@ -1,9 +1,9 @@
 # == Class: bareos::profile::client
 # setup an simple bareos filedaemon/client
 class bareos::profile::client (
-  $name_client = $facts['networking']['fqdn'],
-  $name_dir = 'bareos-dir',
-  $password = 'MyClientPasswordPleaseChange',
+  Bareos::Resource $name_client = $facts['networking']['fqdn'],
+  Bareos::Resource $name_dir = 'bareos-dir',
+  String $password = 'MyClientPasswordPleaseChange',
 ) {
   # default client
   class { 'bareos::client::client':

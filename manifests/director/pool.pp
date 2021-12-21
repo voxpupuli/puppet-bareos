@@ -227,47 +227,43 @@
 #   Required: false
 #
 define bareos::director::pool (
-  $ensure = present,
-  $action_on_purge = undef,
-  $auto_prune = undef,
-  $catalog = undef,
-  $catalog_files = undef,
-  $cleaning_prefix = undef,
-  $description = undef,
-  $file_retention = undef,
-  $job_retention = undef,
-  $label_format = undef,
-  $label_type = undef,
-  $maximum_block_size = undef,
-  $maximum_volume_bytes = undef,
-  $maximum_volume_files = undef,
-  $maximum_volume_jobs = undef,
-  $maximum_volumes = undef,
-  $migration_high_bytes = undef,
-  $migration_low_bytes = undef,
-  $migration_time = undef,
-  $minimum_block_size = undef,
-  $next_pool = undef,
-  $pool_type = undef,
-  $purge_oldest_volume = undef,
-  $recycle = undef,
-  $recycle_current_volume = undef,
-  $recycle_oldest_volume = undef,
-  $recycle_pool = undef,
-  $scratch_pool = undef,
-  $storage = undef,
-  $use_catalog = undef,
-  $volume_retention = undef,
-  $volume_use_duration = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[Enum['truncate']] $action_on_purge = undef,
+  Optional[Bareos::Boolean] $auto_prune = undef,
+  Optional[Bareos::Resource] $catalog = undef,
+  Optional[Bareos::Boolean] $catalog_files = undef,
+  Optional[String] $cleaning_prefix = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::Time] $file_retention = undef,
+  Optional[Bareos::Time] $job_retention = undef,
+  Optional[String] $label_format = undef,
+  Optional[Bareos::Label] $label_type = undef,
+  Optional[Integer[0]] $maximum_block_size = undef,
+  Optional[Bareos::Size] $maximum_volume_bytes = undef,
+  Optional[Integer[0]] $maximum_volume_files = undef,
+  Optional[Integer[0]] $maximum_volume_jobs = undef,
+  Optional[Integer[0]] $maximum_volumes = undef,
+  Optional[Bareos::Size] $migration_high_bytes = undef,
+  Optional[Bareos::Size] $migration_low_bytes = undef,
+  Optional[Bareos::Time] $migration_time = undef,
+  Optional[Integer[0]] $minimum_block_size = undef,
+  Optional[Bareos::Resource] $next_pool = undef,
+  Optional[Bareos::Pool] $pool_type = undef,
+  Optional[Bareos::Boolean] $purge_oldest_volume = undef,
+  Optional[Bareos::Boolean] $recycle = undef,
+  Optional[Bareos::Boolean] $recycle_current_volume = undef,
+  Optional[Bareos::Boolean] $recycle_oldest_volume = undef,
+  Optional[Bareos::Resource] $recycle_pool = undef,
+  Optional[Bareos::Resource] $scratch_pool = undef,
+  Optional[Bareos::List::Resource] $storage = undef,
+  Optional[Bareos::Boolean] $use_catalog = undef,
+  Optional[Bareos::Time] $volume_retention = undef,
+  Optional[Bareos::Time] $volume_use_duration = undef,
 ) {
   include bareos::director
 
   $_resource = 'Pool'
   $_resource_dir = 'pool'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     # set various resource dependencies

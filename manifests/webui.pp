@@ -3,22 +3,21 @@
 #
 # This class will be automatically included when a resource is defined.
 class bareos::webui (
-  $manage_service = $bareos::manage_service,
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::webui_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $service_name   = $bareos::webui_service_name,
-  $service_ensure = $bareos::service_ensure,
-  $service_enable = $bareos::service_enable,
-  $config_dir     = $bareos::config_dir_webui,
-
-  $manage_local_dir = true, # setup local bareos director
-  $session_timeout = 3600,
-  $pagination_values = '10,25,50,100',
-  $pagination_default_value = 25,
-  $save_previous_state = false,
-  $label_pooltype = '',
-  $directors = {},
+  String $config_dir = $bareos::config_dir_webui,
+  Hash $directors = {},
+  Optional[String] $label_pooltype = undef,
+  Boolean $manage_local_dir = true, # setup local bareos director
+  Boolean $manage_package = $bareos::manage_package,
+  Boolean $manage_service = $bareos::manage_service,
+  String $package_ensure = $bareos::package_ensure,
+  Variant[String, Array[String]] $package_name = $bareos::webui_package_name,
+  Integer $pagination_default_value = 25,
+  String $pagination_values = '10,25,50,100',
+  Boolean $save_previous_state = false,
+  Boolean $service_enable = $bareos::service_enable,
+  String $service_ensure = $bareos::service_ensure,
+  String $service_name = $bareos::webui_service_name,
+  Integer $session_timeout = 3600,
 ) inherits bareos {
   if $manage_package {
     package { $package_name:

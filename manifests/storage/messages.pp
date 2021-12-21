@@ -130,32 +130,29 @@
 #   Required: false
 #
 define bareos::storage::messages (
-  $ensure = present,
-  $append = undef,
-  $catalog = undef,
-  $console = undef,
-  $description = undef,
-  $director = undef,
-  $file = undef,
-  $mail = undef,
-  $mail_command = undef,
-  $mail_on_error = undef,
-  $mail_on_success = undef,
-  $operator = undef,
-  $operator_command = undef,
-  $stderr = undef,
-  $stdout = undef,
-  $syslog = undef,
-  $timestamp_format = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[Bareos::List::String] $append = undef,
+  Optional[Bareos::List::String] $catalog = undef,
+  Optional[Bareos::List::String] $console = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::List::String] $director = undef,
+  Optional[Bareos::List::String] $file = undef,
+  Optional[Bareos::List::String] $mail = undef,
+  Optional[String] $mail_command = undef,
+  Optional[Bareos::List::String] $mail_on_error = undef,
+  Optional[Bareos::List::String] $mail_on_success = undef,
+  Optional[Bareos::List::String] $operator = undef,
+  Optional[String] $operator_command = undef,
+  Optional[Bareos::List::String] $stderr = undef,
+  Optional[Bareos::List::String] $stdout = undef,
+  Optional[Bareos::List::String] $syslog = undef,
+  Optional[String] $timestamp_format = undef,
+
 ) {
   include bareos::storage
 
   $_resource = 'Messages'
   $_resource_dir = 'messages'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

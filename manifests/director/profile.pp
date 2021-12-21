@@ -84,27 +84,23 @@
 #   Required: false
 #
 define bareos::director::profile (
-  $ensure = present,
-  $catalog_acl = undef,
-  $client_acl = undef,
-  $command_acl = undef,
-  $description = undef,
-  $file_set_acl = undef,
-  $job_acl = undef,
-  $plugin_options_acl = undef,
-  $pool_acl = undef,
-  $schedule_acl = undef,
-  $storage_acl = undef,
-  $where_acl = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[Bareos::List::String] $catalog_acl = undef,
+  Optional[Bareos::List::String] $client_acl = undef,
+  Optional[Bareos::List::String] $command_acl = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::List::String] $file_set_acl = undef,
+  Optional[Bareos::List::String] $job_acl = undef,
+  Optional[Bareos::List::String] $plugin_options_acl = undef,
+  Optional[Bareos::List::String] $pool_acl = undef,
+  Optional[Bareos::List::String] $schedule_acl = undef,
+  Optional[Bareos::List::String] $storage_acl = undef,
+  Optional[Bareos::List::String] $where_acl = undef,
 ) {
   include bareos::director
 
   $_resource = 'Profile'
   $_resource_dir = 'profile'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

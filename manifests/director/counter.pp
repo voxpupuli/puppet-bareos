@@ -42,21 +42,17 @@
 #   Required: false
 #
 define bareos::director::counter (
-  $ensure = present,
-  $catalog = undef,
-  $description = undef,
-  $maximum = undef,
-  $minimum = undef,
-  $wrap_counter = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[Bareos::Resource] $catalog = undef,
+  Optional[String] $description = undef,
+  Optional[Integer[0]] $maximum = undef,
+  Optional[Integer] $minimum = undef,
+  Optional[Bareos::Resource] $wrap_counter = undef,
 ) {
   include bareos::director
 
   $_resource = 'Counter'
   $_resource_dir = 'counter'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_catalog = $catalog ? { undef => undef, default => Bareos::Director::Catalog[$catalog] }

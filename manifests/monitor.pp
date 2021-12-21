@@ -5,10 +5,10 @@
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::monitor (
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::monitor_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $config_dir     = "${bareos::config_dir}/tray-monitor.d"
+  Boolean $manage_package = $bareos::manage_package,
+  Variant[String, Array[String]] $package_name = $bareos::monitor_package_name,
+  String $package_ensure = $bareos::package_ensure,
+  String $config_dir = "${bareos::config_dir}/tray-monitor.d"
 ) inherits bareos {
   if $manage_package {
     package { $package_name:

@@ -127,33 +127,29 @@
 #   Required: false
 #
 define bareos::director::catalog (
-  $ensure = present,
-  $db_address = undef,
-  $db_driver = undef,
-  $db_name = undef,
-  $db_password = undef,
-  $db_port = undef,
-  $db_socket = undef,
-  $db_user = undef,
-  $description = undef,
-  $disable_batch_insert = undef,
-  $exit_on_fatal = undef,
-  $idle_timeout = undef,
-  $inc_connections = undef,
-  $max_connections = undef,
-  $min_connections = undef,
-  $multiple_connections = undef,
-  $reconnect = undef,
-  $validate_timeout = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $db_address = undef,
+  Optional[String] $db_driver = undef,
+  Optional[String] $db_name = undef,
+  Optional[String] $db_password = undef,
+  Optional[Stdlib::Port] $db_port = undef,
+  Optional[String] $db_socket = undef,
+  Optional[String] $db_user = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::Boolean] $disable_batch_insert = undef,
+  Optional[Bareos::Boolean] $exit_on_fatal = undef,
+  Optional[Integer[0]] $idle_timeout = undef,
+  Optional[Integer[0]] $inc_connections = undef,
+  Optional[Integer[0]] $max_connections = undef,
+  Optional[Integer[0]] $min_connections = undef,
+  Optional[Bareos::Boolean] $multiple_connections = undef,
+  Optional[Bareos::Boolean] $reconnect = undef,
+  Optional[Integer[0]] $validate_timeout = undef,
 ) {
   include bareos::director
 
   $_resource = 'Catalog'
   $_resource_dir = 'catalog'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

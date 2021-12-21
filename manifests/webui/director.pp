@@ -43,19 +43,15 @@
 #   Bareos default: not set
 #   Required: false
 define bareos::webui::director (
-  Enum['present', 'absent'] $ensure = present,
+  Bareos::Module::Ensure $ensure = present,
   Optional[Bareos::Resource] $catalog = undef,
-  Stdlib::Host $dir_address = 'localhost',
+  Bareos::Address $dir_address = 'localhost',
   Stdlib::Port $dir_port = 9101,
-  Enum['yes', 'no'] $enabled = 'yes',
+  Bareos::Boolean $enabled = 'yes',
   Optional[Bareos::Resource] $pam_console_name = undef,
   Optional[String] $pam_console_password = undef,
 ) {
   include bareos::webui
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     # just for validation

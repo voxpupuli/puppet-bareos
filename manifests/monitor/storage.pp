@@ -55,23 +55,19 @@
 #   Required: false
 #
 define bareos::monitor::storage (
-  $ensure = present,
-  $address = undef,
-  $description = undef,
-  $enable_ssl = undef,
-  $password = undef,
-  $sd_address = undef,
-  $sd_password = undef,
-  $sd_port = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $address = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::Boolean] $enable_ssl = undef,
+  Optional[String] $password = undef,
+  Optional[String] $sd_address = undef,
+  Optional[String] $sd_password = undef,
+  Optional[Stdlib::Port] $sd_port = undef,
 ) {
   include bareos::monitor
 
   $_resource = 'Storage'
   $_resource_dir = 'storage'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],
