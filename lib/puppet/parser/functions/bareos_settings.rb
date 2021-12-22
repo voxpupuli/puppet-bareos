@@ -20,12 +20,12 @@ module Puppet::Parser::Functions
       raise 'Name of directive config key is invalid' unless directive =~ %r{^[a-zA-Z0-9 ]+$}
 
       # check array if allowed
-      values = if (%w[acl runscript runscript_short].include?(dirty_type) || dirty_type =~ %r{[_-]list$}) && value_setting.is_a?(Array)
+      values = if (%w[acl runscript runscript_short].include?(dirty_type) || dirty_type =~ %r{[_-]list$} || dirty_type =~ %r{[_-]nested$}) && value_setting.is_a?(Array)
                  value_setting
                else
                  [value_setting]
                end
-      type = dirty_type.gsub(%r{([_-]list)$}, '')
+      type = dirty_type.gsub(%r{[_-]list$}, '')
 
       values.each do |value|
         # ignore undef if not required
@@ -77,6 +77,8 @@ module Puppet::Parser::Functions
           raise 'Please specify as Hash' unless value.is_a?(Hash)
         when 'include_exclude_item', 'runscript', 'hash'
           raise 'Please specify as Hash' unless value.is_a?(Hash)
+        when 'include_exclude_item_nested'
+          raise 'Nested elements need to be hashes or strings' unless value.is_a?(Hash) || value.is_a?(String)
         when 'backup_level'
           value_in_array = %w[full incremental differential virtualfull initcatalog catalog volumetocatalog disktocatalog]
         when 'io_direction'
@@ -107,14 +109,24 @@ module Puppet::Parser::Functions
           raise "Invalid setting type '#{type}'"
         end
 
-        raise "Value '#{value}' needs to be one of #{value_in_array.inspect}" if !value_in_array.nil? && !(value_in_array.include? value.to_s.downcase)
-        raise "Value '#{value}' does not match regex #{regex}" if !regex.nil? && value !~ Regexp.compile(regex)
+        # rubocop:disable Style/SoleNestedConditional
+        unless value_in_array.nil?
+          raise "Value '#{value}' needs to be one of #{value_in_array.inspect}" unless value_in_array.include? value.to_s.downcase
+        end
+        unless regex.nil?
+          raise "Value '#{value}' does not match regex #{regex}" unless value =~ Regexp.compile(regex)
+        end
+        # rubocop:enable Style/SoleNestedConditional
 
         if value.is_a?(Hash)
           final_settings.push "#{indent}#{directive}#{hash_separator}{"
           value.each do |k, v|
+            # Remove our little validation wrapper
+            type = type.gsub(%r{[_-]nested$}, '')
             type_n = 'string_noquote'
             type_n = "#{type_n}_list" if v.is_a?(Array)
+            # if we can have multiple hash elements of the same type, e.g. include/exclude/options with fileset
+            type_n = "#{type}_nested" if v.is_a?(Array) && %w[include_exclude_item].include?(type)
             # use same type again:
             type_n = type if v.is_a?(Hash)
             final_settings.push function_bareos_settings([[v, k, type_n, false, "#{indent}  "]])
@@ -131,7 +143,6 @@ module Puppet::Parser::Functions
     rescue StandardError => e
       raise Puppet::ParseError, "bareos_settings(): #{setting.inspect}: #{e}."
     end
-
     return final_settings.join "\n"
   end
 end
