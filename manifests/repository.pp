@@ -64,13 +64,13 @@ class bareos::repository (
   }
 
   case $os {
-    /(?i:redhat|centos|rocky|fedora|virtuozzolinux|amazon)/: {
+    /(?i:redhat|centos|rocky|almalinux|fedora|virtuozzolinux|amazon)/: {
       $url = "${scheme}${address}"
       case $os {
         'RedHat', 'VirtuozzoLinux': {
           $location = "${url}RHEL_${osmajrelease}"
         }
-        'Centos', 'Rocky': {
+        'Centos', 'Rocky', 'AlmaLinux': {
           if versioncmp($release, '21') >= 0 {
             $location = "${url}EL_${osmajrelease}"
           } else {
