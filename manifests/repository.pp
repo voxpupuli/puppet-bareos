@@ -19,11 +19,11 @@
 #   The major bareos release version which should be used
 #
 class bareos::repository (
-  Enum['18.2', '19.2', '20']  $release             = '20',
-  Optional[String[1]]         $gpg_key_fingerprint = undef,
-  Boolean                     $subscription        = false,
-  Optional[String]            $username            = undef,
-  Optional[String]            $password            = undef,
+  Enum['18.2', '19.2', '20', '21']  $release             = '20',
+  Optional[String[1]]               $gpg_key_fingerprint = undef,
+  Boolean                           $subscription        = false,
+  Optional[String]                  $username            = undef,
+  Optional[String]                  $password            = undef,
 ) {
   $scheme = 'http://'
   if $subscription {
@@ -64,14 +64,18 @@ class bareos::repository (
   }
 
   case $os {
-    /(?i:redhat|centos|fedora|virtuozzolinux|amazon)/: {
+    /(?i:redhat|centos|rocky|almalinux|fedora|virtuozzolinux|amazon)/: {
       $url = "${scheme}${address}"
       case $os {
         'RedHat', 'VirtuozzoLinux': {
           $location = "${url}RHEL_${osmajrelease}"
         }
-        'Centos': {
-          $location = "${url}CentOS_${osmajrelease}"
+        'Centos', 'Rocky', 'AlmaLinux': {
+          if versioncmp($release, '21') >= 0 {
+            $location = "${url}EL_${osmajrelease}"
+          } else {
+            $location = "${url}CentOS_${osmajrelease}"
+          }
         }
         'Fedora': {
           $location = "${url}Fedora_${osmajrelease}"
