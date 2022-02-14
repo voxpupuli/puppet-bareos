@@ -42,6 +42,9 @@ class bareos::repository (
 
   if $gpg_key_fingerprint {
     $_gpg_key_fingerprint = $gpg_key_fingerprint
+  } elsif versioncmp($release, '21') >= 0 {
+    # >= bareos 21
+    $_gpg_key_fingerprint = '91DA 1DC3 564A E20A 76C4  CA88 E019 57D6 C9FE D482'
   } elsif versioncmp($release, '20') >= 0 {
     # >= bareos 20
     $_gpg_key_fingerprint = 'C68B 001F 74D2 F202 43D0 B7A2 0CCB A537 DBE0 83A6'
