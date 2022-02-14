@@ -12,7 +12,9 @@ catalog = "<%= @catalog %>"
 <%-if @pam_console_name -%>
 pam_console_name = "<%= @pam_console_name %>"
 <%- end -%>
+<%-if @pam_console_password -%>
 pam_console_password = "<%= @pam_console_password %>"
+<%- end -%>
 ; Note: TLS has not been tested and documented, yet.
 ;tls_verify_peer = false
 ;server_can_do_tls = false
