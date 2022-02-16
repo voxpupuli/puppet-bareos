@@ -163,38 +163,34 @@
 #   Required: false
 #
 define bareos::client::director (
-  $ensure = present,
-  $address = undef,
-  $allowed_job_command = undef,
-  $allowed_script_dir = undef,
-  $connection_from_client_to_director = undef,
-  $connection_from_director_to_client = undef,
-  $description = undef,
-  $maximum_bandwidth_per_job = undef,
-  $monitor = undef,
-  $password = undef,
-  $port = undef,
-  $tls_allowed_cn = undef,
-  $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
-  $tls_ca_certificate_file = undef,
-  $tls_certificate = undef,
-  $tls_certificate_revocation_list = undef,
-  $tls_cipher_list = undef,
-  $tls_dh_file = undef,
-  $tls_enable = undef,
-  $tls_key = undef,
-  $tls_require = undef,
-  $tls_verify_peer = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $address = undef,
+  Optional[Bareos::List::String] $allowed_job_command = undef,
+  Optional[Bareos::List::Directory] $allowed_script_dir = undef,
+  Optional[Bareos::Boolean] $connection_from_client_to_director = undef,
+  Optional[Bareos::Boolean] $connection_from_director_to_client = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::Speed] $maximum_bandwidth_per_job = undef,
+  Optional[Bareos::Boolean] $monitor = undef,
+  Optional[String] $password = undef,
+  Optional[Stdlib::Port] $port = undef,
+  Optional[Bareos::List::String] $tls_allowed_cn = undef,
+  Optional[Bareos::Boolean] $tls_authenticate = undef,
+  Optional[String] $tls_ca_certificate_dir = undef,
+  Optional[String] $tls_ca_certificate_file = undef,
+  Optional[String] $tls_certificate = undef,
+  Optional[String] $tls_certificate_revocation_list = undef,
+  Optional[String] $tls_cipher_list = undef,
+  Optional[String] $tls_dh_file = undef,
+  Optional[Bareos::Boolean] $tls_enable = undef,
+  Optional[String] $tls_key = undef,
+  Optional[Bareos::Boolean] $tls_require = undef,
+  Optional[Bareos::Boolean] $tls_verify_peer = undef,
 ) {
   include bareos::client
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

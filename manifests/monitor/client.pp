@@ -41,21 +41,17 @@
 #   Required: true
 #
 define bareos::monitor::client (
-  $ensure = present,
-  $address = undef,
-  $description = undef,
-  $enable_ssl = undef,
-  $fd_port = undef,
-  $password = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $address = undef,
+  Optional[String] $description = undef,
+  Optional[Bareos::Boolean] $enable_ssl = undef,
+  Optional[Stdlib::Port] $fd_port = undef,
+  Optional[String] $password = undef,
 ) {
   include bareos::monitor
 
   $_resource = 'Client'
   $_resource_dir = 'client'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

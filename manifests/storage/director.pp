@@ -1,6 +1,6 @@
 # == Define: bareos::storage::director
 # The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
-# There may be multiple Director resources. 
+# There may be multiple Director resources.
 # The Director Name and Password must match the corresponding values in the Director's configuration file.
 #
 # == Parameters
@@ -128,33 +128,29 @@
 #   Required: false
 #
 define bareos::storage::director (
-  $ensure = present,
-  $description = undef,
-  $key_encryption_key = undef,
-  $maximum_bandwidth_per_job = undef,
-  $monitor = undef,
-  $password = undef,
-  $tls_allowed_cn = undef,
-  $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
-  $tls_ca_certificate_file = undef,
-  $tls_certificate = undef,
-  $tls_certificate_revocation_list = undef,
-  $tls_cipher_list = undef,
-  $tls_dh_file = undef,
-  $tls_enable = undef,
-  $tls_key = undef,
-  $tls_require = undef,
-  $tls_verify_peer = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $description = undef,
+  Optional[String] $key_encryption_key = undef,
+  Optional[Bareos::Speed] $maximum_bandwidth_per_job = undef,
+  Optional[Bareos::Boolean] $monitor = undef,
+  Optional[String] $password = undef,
+  Optional[Bareos::List::String] $tls_allowed_cn = undef,
+  Optional[Bareos::Boolean] $tls_authenticate = undef,
+  Optional[String] $tls_ca_certificate_dir = undef,
+  Optional[String] $tls_ca_certificate_file = undef,
+  Optional[String] $tls_certificate = undef,
+  Optional[String] $tls_certificate_revocation_list = undef,
+  Optional[String] $tls_cipher_list = undef,
+  Optional[String] $tls_dh_file = undef,
+  Optional[Bareos::Boolean] $tls_enable = undef,
+  Optional[String] $tls_key = undef,
+  Optional[Bareos::Boolean] $tls_require = undef,
+  Optional[Bareos::Boolean] $tls_verify_peer = undef,
 ) {
   include bareos::storage
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

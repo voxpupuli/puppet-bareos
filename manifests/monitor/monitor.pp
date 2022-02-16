@@ -57,23 +57,19 @@
 #   Required: false
 #
 define bareos::monitor::monitor (
-  $ensure = present,
-  $description = undef,
-  $dir_connect_timeout = undef,
-  $fd_connect_timeout = undef,
-  $password = undef,
-  $refresh_interval = undef,
-  $require_ssl = undef,
-  $sd_connect_timeout = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $description = undef,
+  Optional[Bareos::Time] $dir_connect_timeout = undef,
+  Optional[Bareos::Time] $fd_connect_timeout = undef,
+  Optional[String] $password = undef,
+  Optional[Bareos::Time] $refresh_interval = undef,
+  Optional[Bareos::Boolean] $require_ssl = undef,
+  Optional[Bareos::Time] $sd_connect_timeout = undef,
 ) {
   include bareos::monitor
 
   $_resource = 'Monitor'
   $_resource_dir = 'monitor'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

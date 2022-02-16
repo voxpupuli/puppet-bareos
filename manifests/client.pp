@@ -5,14 +5,14 @@
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::client (
-  $manage_service = $bareos::manage_service,
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::client_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $service_name   = $bareos::client_service_name,
-  $service_ensure = $bareos::service_ensure,
-  $service_enable = $bareos::service_enable,
-  $config_dir     = "${bareos::config_dir}/bareos-fd.d"
+  Boolean $manage_service = $bareos::manage_service,
+  Boolean $manage_package = $bareos::manage_package,
+  Variant[String, Array[String]] $package_name = $bareos::client_package_name,
+  String $package_ensure = $bareos::package_ensure,
+  String $service_name = $bareos::client_service_name,
+  String $service_ensure = $bareos::service_ensure,
+  Boolean $service_enable = $bareos::service_enable,
+  String $config_dir = "${bareos::config_dir}/bareos-fd.d"
 ) inherits bareos {
   include bareos::client::client
 

@@ -43,21 +43,17 @@
 #   Required: true
 #
 define bareos::storage::ndmp (
-  $ensure = present,
-  $auth_type = undef,
-  $description = undef,
-  $log_level = undef,
-  $password = undef,
-  $username = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[Bareos::Auth::Type] $auth_type = undef,
+  Optional[String] $description = undef,
+  Optional[Integer[0]] $log_level = undef,
+  Optional[String] $password = undef,
+  Optional[String] $username = undef,
 ) {
   include bareos::storage
 
   $_resource = 'Ndmp'
   $_resource_dir = 'ndmp'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

@@ -198,21 +198,21 @@
 #   Required: false
 #
 define bareos::director::console (
-  Enum['present', 'absent'] $ensure = present,
-  Optional[Bareos::List] $catalog_acl = undef,
-  Optional[Bareos::List] $client_acl = undef,
-  Optional[Bareos::List] $command_acl = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[Bareos::List::String] $catalog_acl = undef,
+  Optional[Bareos::List::String] $client_acl = undef,
+  Optional[Bareos::List::String] $command_acl = undef,
   Optional[String] $description = undef,
-  Optional[Bareos::List] $file_set_acl = undef,
-  Optional[Bareos::List] $job_acl = undef,
+  Optional[Bareos::List::String] $file_set_acl = undef,
+  Optional[Bareos::List::String] $job_acl = undef,
   Optional[String] $password = undef,
-  Optional[Bareos::List] $plugin_options_acl = undef,
-  Optional[Bareos::List] $pool_acl = undef,
-  Optional[Bareos::List] $profile = undef,
-  Optional[Bareos::List] $run_acl = undef,
-  Optional[Bareos::List] $schedule_acl = undef,
-  Optional[Bareos::List] $storage_acl = undef,
-  Optional[Bareos::List] $tls_allowed_cn = undef,
+  Optional[Bareos::List::String] $plugin_options_acl = undef,
+  Optional[Bareos::List::String] $pool_acl = undef,
+  Optional[Bareos::List::String] $profile = undef,
+  Optional[Bareos::List::String] $run_acl = undef,
+  Optional[Bareos::List::String] $schedule_acl = undef,
+  Optional[Bareos::List::String] $storage_acl = undef,
+  Optional[Bareos::List::String] $tls_allowed_cn = undef,
   Optional[Bareos::Boolean] $tls_authenticate = undef,
   Optional[String] $tls_ca_certificate_dir = undef,
   Optional[String] $tls_ca_certificate_file = undef,
@@ -225,16 +225,12 @@ define bareos::director::console (
   Optional[Bareos::Boolean] $tls_require = undef,
   Optional[Bareos::Boolean] $tls_verify_peer = undef,
   Optional[Bareos::Boolean] $use_pam_authentication = undef,
-  Optional[Bareos::List] $where_acl = undef,
+  Optional[Bareos::List::String] $where_acl = undef,
 ) {
   include bareos::director
 
   $_resource = 'Console'
   $_resource_dir = 'console'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_profiles = $profile ? { undef => undef, default => Bareos::Director::Profile[$profile] }

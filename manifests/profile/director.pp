@@ -1,14 +1,14 @@
 # == Class: bareos::profile::director
 # Ready to use director with default configs
 class bareos::profile::director (
-  $password = 'MyDirectorPasswordPleaseChange',
-  $name_dir = 'bareos-dir',
-  $catalog_conf = {
+  String $password = 'MyDirectorPasswordPleaseChange',
+  Bareos::Resource $name_dir = 'bareos-dir',
+  Bareos::Module::CatalogConfig $catalog_conf = {
     'db_driver' => 'sqlite3',
     'db_name'   => 'bareos_mycatalog',
   },
-  $storage_address = 'localhost',
-  $storage_password = 'BareosStoragePleaseChangeMe',
+  String $storage_address = 'localhost',
+  String $storage_password = 'BareosStoragePleaseChangeMe',
 ) {
   # ensure bconsole is installed and can connect to director
   ::bareos::console::director { $name_dir:

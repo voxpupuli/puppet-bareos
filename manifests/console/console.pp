@@ -139,35 +139,31 @@
 #   Required: false
 #
 define bareos::console::console (
-  $ensure = present,
-  $description = undef,
-  $director = undef,
-  $heartbeat_interval = undef,
-  $history_file = undef,
-  $history_length = undef,
-  $password = undef,
-  $rc_file = undef,
-  $tls_allowed_cn = undef,
-  $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
-  $tls_ca_certificate_file = undef,
-  $tls_certificate = undef,
-  $tls_certificate_revocation_list = undef,
-  $tls_cipher_list = undef,
-  $tls_dh_file = undef,
-  $tls_enable = undef,
-  $tls_key = undef,
-  $tls_require = undef,
-  $tls_verify_peer = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $description = undef,
+  Optional[Bareos::Resource] $director = undef,
+  Optional[Bareos::Time] $heartbeat_interval = undef,
+  Optional[String] $history_file = undef,
+  Optional[Integer[0]] $history_length = undef,
+  Optional[String] $password = undef,
+  Optional[String] $rc_file = undef,
+  Optional[Bareos::List::String] $tls_allowed_cn = undef,
+  Optional[Bareos::Boolean] $tls_authenticate = undef,
+  Optional[String] $tls_ca_certificate_dir = undef,
+  Optional[String] $tls_ca_certificate_file = undef,
+  Optional[String] $tls_certificate = undef,
+  Optional[String] $tls_certificate_revocation_list = undef,
+  Optional[String] $tls_cipher_list = undef,
+  Optional[String] $tls_dh_file = undef,
+  Optional[Bareos::Boolean] $tls_enable = undef,
+  Optional[String] $tls_key = undef,
+  Optional[Bareos::Boolean] $tls_require = undef,
+  Optional[Bareos::Boolean] $tls_verify_peer = undef,
 ) {
   include bareos::console
 
   $_resource = 'Console'
   $_resource_dir = 'console'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

@@ -35,88 +35,17 @@ module Puppet::Parser::Functions
         # defaults:
         # quote value
         quote = false
-        # check regex
-        regex = nil
-        # check in array
-        value_in_array = nil
         # required for addresses/hashes
         hash_separator = ' '
 
         # validation by type
         case type
         # maybe check more than it is an int
-        when 'int32', 'pint16', 'pint32', 'port', 'max_blocksize'
-          # type casting raise error
-          Integer(value)
-        when 'name', 'res', 'resource'
+        when 'name', 'res', 'resource', 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'device', 'plugin_names'
           quote = true
-          regex = %r{^[a-z][a-z0-9.\-_ $]{0,126}$}i
-        when 'acl', 'messages', 'type', 'string_noquote', 'schedule_run_command'
-          raise 'Value need to be an string' unless value.is_a?(String)
-        # type md5password is missleading, it is an plain password and not md5 hashed
-        when 'audit_command', 'runscript_short', 'autopassword', 'md5password', 'directory', 'string', 'strname', 'device', 'plugin_names'
-          # array
-          quote = true
-          raise 'Value need to be an string' unless value.is_a?(String)
-        when 'speed'
-          regex = %r{^\d+\W*(k|kb|m|mb)/s$}i
-        when 'size64'
-          regex = %r{^(\d+(\.\d+)?)\W*(k|kb|m|mb|g|gb)$}i
-        when 'time'
-          regex = %r{^(\d+|(\d+\W+(seconds|sec|s|minutes|min|hours|h|days|d|weeks|w|months|m|quarters|q|years|y)\W*)+)$}i
-        when 'boolean', 'bit'
-          value_in_array = %w[yes no on off true false]
-        when 'address'
-          raise 'Value need to be an string' unless value.is_a?(String)
-
-          # validate net-address for domain name or ip
-          regex_hostname = %r{^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$}i
-          raise 'Value needs to be an ip or host address' unless value =~ Resolv::IPv4::Regex || value =~ Resolv::IPv6::Regex || value =~ Regexp.compile(regex_hostname)
         when 'addresses'
           hash_separator = ' = '
-          raise 'Please specify as Hash' unless value.is_a?(Hash)
-        when 'include_exclude_item', 'runscript', 'hash'
-          raise 'Please specify as Hash' unless value.is_a?(Hash)
-        when 'include_exclude_item_nested'
-          raise 'Nested elements need to be hashes or strings' unless value.is_a?(Hash) || value.is_a?(String)
-        when 'backup_level'
-          value_in_array = %w[full incremental differential virtualfull initcatalog catalog volumetocatalog disktocatalog]
-        when 'io_direction'
-          value_in_array = %w[in out both]
-        when 'action_on_purge'
-          value_in_array = %w[truncate]
-        when 'encryption_cipher'
-          value_in_array = %w[aes128 aes192 aes256 camellia128 camellia192 camellia256 aes128hmacsha1 aes256hmacsha1 blowfish]
-        when 'auth_type'
-          value_in_array = %w[clear md5]
-        when 'auth_protocol_type', 'protocol_type'
-          value_in_array = %w[native ndmp]
-        when 'pooltype'
-          value_in_array = %w[backup archive cloned migration copy save scratch]
-        when 'label'
-          value_in_array = %w[ansi ibm bareos]
-        when 'migration_type'
-          value_in_array = %w[smallestvolume oldestvolume client volume job sqlquery pooloccupancy pooltime pooluncopiedjobs]
-        when 'job_type'
-          value_in_array = %w[backup restore verify admin migrate copy consolidate]
-        when 'replace_option'
-          value_in_array = %w[always ifnewer ifolder never]
-        when 'device_type'
-          value_in_array = %w[tape file fifo gfapi rados]
-        when 'compression_algorithm'
-          value_in_array = %w[gzip lzo lzfast lz4 lz4hc]
-        else
-          raise "Invalid setting type '#{type}'"
         end
-
-        # rubocop:disable Style/SoleNestedConditional
-        unless value_in_array.nil?
-          raise "Value '#{value}' needs to be one of #{value_in_array.inspect}" unless value_in_array.include? value.to_s.downcase
-        end
-        unless regex.nil?
-          raise "Value '#{value}' does not match regex #{regex}" unless value =~ Regexp.compile(regex)
-        end
-        # rubocop:enable Style/SoleNestedConditional
 
         if value.is_a?(Hash)
           final_settings.push "#{indent}#{directive}#{hash_separator}{"

@@ -43,8 +43,27 @@ class BareosResourceHelper
       val = false
     when 'address'
       val = 'host.name.com'
-    when 'addresses', 'include_exclude_item', 'runscript', 'hash'
-      sep = ' ' unless type == 'addresses'
+    when 'addresses'
+      val = {
+        'ipv4' => {
+          'addr' => '192.0.2.1'
+        }
+      }
+      result = '{
+    ipv4 = {
+      addr = 192.0.2.1
+    }
+  }'
+    when 'include_exclude_item'
+      sep = ' '
+      val = {
+        'File' => '/foo'
+      }
+      result = '{
+    File = /foo
+  }'
+    when 'runscript', 'hash'
+      sep = ' '
       val = {
         'x' => 'y'
       }

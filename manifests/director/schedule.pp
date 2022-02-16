@@ -31,19 +31,15 @@
 #   Required: false
 #
 define bareos::director::schedule (
-  $ensure = present,
-  $description = undef,
-  $enabled = undef,
-  $run = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $description = undef,
+  Optional[Bareos::Boolean] $enabled = undef,
+  Optional[Bareos::List::String] $run = undef,
 ) {
   include bareos::director
 
   $_resource = 'Schedule'
   $_resource_dir = 'schedule'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

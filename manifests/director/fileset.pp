@@ -42,21 +42,17 @@
 #   Required: false
 #
 define bareos::director::fileset (
-  $ensure = present,
-  $description = undef,
-  $enable_vss = undef,
-  $exclude = undef,
-  $ignore_file_set_changes = undef,
-  $include = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $description = undef,
+  Optional[Bareos::Boolean] $enable_vss = undef,
+  Optional[Bareos::ExcludeItem] $exclude = undef,
+  Optional[Bareos::Boolean] $ignore_file_set_changes = undef,
+  Optional[Bareos::IncludeItem] $include = undef,
 ) {
   include bareos::director
 
   $_resource = 'FileSet'
   $_resource_dir = 'fileset'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],

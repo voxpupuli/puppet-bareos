@@ -34,20 +34,16 @@
 #   Required: false
 #
 define bareos::monitor::director (
-  $ensure = present,
-  $address = undef,
-  $description = undef,
-  $dir_port = undef,
-  $enable_ssl = undef,
+  Bareos::Module::Ensure $ensure = present,
+  Optional[String] $address = undef,
+  Optional[String] $description = undef,
+  Optional[Stdlib::Port] $dir_port = undef,
+  Optional[Bareos::Boolean] $enable_ssl = undef,
 ) {
   include bareos::monitor
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings( [$name, 'Name', 'name', true],
