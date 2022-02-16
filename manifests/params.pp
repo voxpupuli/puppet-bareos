@@ -18,7 +18,7 @@ class bareos::params {
   # director
   $director_package_name = [
     'bareos-director',
-    'bareos-director-python-plugin',
+    'bareos-director-python3-plugin',
     'bareos-database-common',
     'bareos-database-mysql',
     'bareos-database-postgresql',
@@ -42,11 +42,11 @@ class bareos::params {
   ]
 
   # filedaemon/client
-  $client_package_name = ['bareos-filedaemon', 'bareos-filedaemon-python-plugin']
+  $client_package_name = ['bareos-filedaemon', 'bareos-filedaemon-python3-plugin']
   $client_service_name = 'bareos-fd'
 
   # storage
-  $storage_package_name = ['bareos-storage', 'bareos-storage-python-plugin', 'bareos-tools']
+  $storage_package_name = ['bareos-storage', 'bareos-storage-python3-plugin', 'bareos-tools']
   $storage_service_name = 'bareos-sd'
 
   # webui
