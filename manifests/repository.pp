@@ -153,8 +153,8 @@ class bareos::repository (
         repos    => '',
         key      => $key,
       }
-      Apt::Source['bareos'] -> Package<|tag == 'bareos'|>
-      Class['Apt::Update']  -> Package<|tag == 'bareos'|>
+      Apt::Source['bareos'] -> Package <| provider == 'apt' |>
+      Class['Apt::Update']  -> Package <| provider == 'apt' |>
     }
     default: {
       fail('Operatingsystem is not supported by this module')
