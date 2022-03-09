@@ -1,156 +1,64 @@
-# == Class: bareos::repository
-#
 # @summary
 #   This class manages the bareos repository
-#   Parameters should be configured in the upper class `::bareos`.
+#   Parameters should be configured in the upper class `bareos`.
 #
 #   This class will be automatically included when a resource is defined.
 #   It is not intended to be used directly by external resources like node definitions or other modules.
 #
-# @param release
-#   The major bareos release version which should be used
-# @param gpg_key_fingerprint
-#   The GPG fingerprint of the repos key
-# @param subscription
-#   Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
-# @param username
-#   The major bareos release version which should be used
-# @param password
-#   The major bareos release version which should be used
+# @api private
 #
 class bareos::repository (
-  Enum['18.2', '19.2', '20', '21']  $release             = '20',
-  Optional[String[1]]               $gpg_key_fingerprint = undef,
-  Boolean                           $subscription        = false,
-  Optional[String]                  $username            = undef,
-  Optional[String]                  $password            = undef,
 ) {
-  $scheme = 'http://'
-  if $subscription {
-    if empty($username) or empty($password) {
-      fail('For Bareos subscription repos both username and password are required.')
+  assert_private()
+
+  $schema = $bareos::repository_ssl ? {
+    true    => 'https',
+    default => 'http',
+  }
+
+  if $bareos::repository_subscription {
+    if ! $bareos::repository_username or ! $bareos::repository_password {
+      fail('You require a username (bareos::repository_username) and password (bareos::repository_password) for Bareos subscription repos.')
     }
-    # note the .com
-    $address = "download.bareos.com/bareos/release/${release}/"
+
+    $host = $bareos::repository_host ? {
+      undef   => 'download.bareos.com',
+      default => $bareos::repository_host
+    }
   } else {
-    $address = "download.bareos.org/bareos/release/${release}/"
-  }
-
-  $os = $facts['os']['name']
-  $osrelease = $facts['os']['release']['full']
-  $osmajrelease = $facts['os']['release']['major']
-
-  if $gpg_key_fingerprint {
-    $_gpg_key_fingerprint = $gpg_key_fingerprint
-  } elsif versioncmp($release, '21') >= 0 {
-    # >= bareos 21
-    $_gpg_key_fingerprint = '91DA 1DC3 564A E20A 76C4  CA88 E019 57D6 C9FE D482'
-  } elsif versioncmp($release, '20') >= 0 {
-    # >= bareos 20
-    $_gpg_key_fingerprint = 'C68B 001F 74D2 F202 43D0 B7A2 0CCB A537 DBE0 83A6'
-  } else {
-    # >= bareos-18.2
-    if $subscription {
-      $_gpg_key_fingerprint = '641A 1497 F1B1 1BEA 945F 840F E5D8 82B2 8657 AE28'
-    } else {
-      $_gpg_key_fingerprint = 'A0CF E15F 71F7 9857 4AB3 63DD 1182 83D9 A786 2CEE'
+    $host = $bareos::repository_host ? {
+      undef   => 'download.bareos.org',
+      default => $bareos::repository_host
     }
   }
 
-  $yum_username = $username ? {
-    undef   => 'absent',
-    default => $username,
-  }
-  $yum_password = $password ? {
-    undef   => 'absent',
-    default => $password,
-  }
+  $address = "${schema}://${host}/bareos/release/${bareos::repository_release}"
 
-  case $os {
-    /(?i:redhat|centos|rocky|almalinux|fedora|virtuozzolinux|amazon)/: {
-      $url = "${scheme}${address}"
-      case $os {
-        'RedHat', 'VirtuozzoLinux': {
-          $location = "${url}RHEL_${osmajrelease}"
-        }
-        'Centos', 'Rocky', 'AlmaLinux': {
-          if versioncmp($release, '21') >= 0 {
-            $location = "${url}EL_${osmajrelease}"
-          } else {
-            $location = "${url}CentOS_${osmajrelease}"
-          }
-        }
-        'Fedora': {
-          $location = "${url}Fedora_${osmajrelease}"
-        }
-        'Amazon': {
-          case $osmajrelease {
-            '2': {
-              $location = "${url}RHEL_7"
-            }
-            default: {
-              fail('Operatingsystem is not supported by this module')
-            }
-          }
-        }
-        default: {
-          fail('Operatingsystem is not supported by this module')
-        }
-      }
-      yumrepo { 'bareos':
-        name     => 'bareos',
-        descr    => 'Bareos Repository',
-        username => $yum_username,
-        password => $yum_password,
-        baseurl  => $location,
-        gpgcheck => '1',
-        gpgkey   => "${location}/repodata/repomd.xml.key",
-        priority => '1',
+  case $bareos::repository_release {
+    '18.2', '19.2': {
+      if $bareos::repository_subscription {
+        $key_id = '641A1497F1B11BEA945F840FE5D882B28657AE28'
+      } else {
+        $key_id = 'A0CFE15F71F798574AB363DD118283D9A7862CEE'
       }
     }
-    /(?i:debian|ubuntu)/: {
-      if $subscription {
-        $url = "${scheme}${username}:${password}@${address}"
-      } else {
-        $url = "${scheme}${address}"
-      }
-      if $os  == 'Ubuntu' {
-        unless $osrelease in ['12.04', '14.04', '16.04', '18.04', '20.04'] {
-          fail('Only Ubunutu LTS Versions are supported')
-        }
-        $location = "${url}xUbuntu_${osrelease}"
-      } else {
-        if $osmajrelease == '10' {
-          $location = "${url}Debian_${osmajrelease}"
-        } else {
-          $location = "${url}Debian_${osmajrelease}.0"
-        }
-      }
-      if $subscription {
-        # release key file is not avaiable without login and
-        # apt-key cannot handle username and password in URI
-        $key = {
-          id => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
-        }
-      } else {
-        $key = {
-          id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
-          source => "${location}/Release.key",
-        }
-      }
+    '20': {
+      $key_id = 'C68B001F74D2F20243D0B7A20CCBA537DBE083A6'
+    }
+    '21': {
+      $key_id = '91DA1DC3564AE20A76C4CA88E01957D6C9FED482'
+    }
+  }
 
-      include apt
-      ::apt::source { 'bareos':
-        location => $location,
-        release  => '/',
-        repos    => '',
-        key      => $key,
-      }
-      Apt::Source['bareos'] -> Package<|tag == 'bareos'|>
-      Class['Apt::Update']  -> Package<|tag == 'bareos'|>
+  case $facts['os']['family'] {
+    'Debian': {
+      contain bareos::repository::apt
+    }
+    'RedHat': {
+      contain bareos::repository::yum
     }
     default: {
-      fail('Operatingsystem is not supported by this module')
+      fail("Your OS family ${facts['os']['family']} is not supported by ${class_name}. Consider to use bareos::manage_repo: false")
     }
   }
 }

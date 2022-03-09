@@ -1,8 +1,7 @@
 fixtures:
-  repositories:
-    concat: https://github.com/puppetlabs/puppetlabs-concat.git
-    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
-    apt: https://github.com/puppetlabs/puppetlabs-apt.git
-    yumrepo_core:
-      repo: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
-      puppet_version: ">= 6.0.0"
+  forge_modules:
+    apt: 'puppetlabs-apt'
+    stdlib: 'puppetlabs-stdlib'
+    yumrepo_core: 'puppetlabs-yumrepo_core'
+  symlinks:
+    bareos: "#{source_dir}"

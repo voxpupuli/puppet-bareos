@@ -1,34 +1,44 @@
-# frozen_string_literal: true
-
 require 'spec_helper'
-describe 'bareos' do
+require 'shared_examples'
+
+tests = {
+  'with defaults parameters' => {},
+  'with other repository release' => {
+    'repository_release' => '21',
+  },
+  'with not managing client' => {
+    'enable_client' => false,
+  },
+}
+
+
+describe 'bareos', type: :class do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
-      let :facts do
+      let(:facts) do
         facts
       end
 
-      context 'with default values for all parameters' do
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos') }
-      end
+      defaults = get_defaults(facts)
 
-      context 'with repo_subscription: true, repo_username: "test", repo_password: "test"' do
-        let(:params) do
-          {
-            repo_subscription: true,
-            repo_username: 'test',
-            repo_password: 'test'
+      tests.each do |test, values|
+        context test do
+          params = defaults.merge(values)
+
+          let(:params) do
+            params
+          end
+
+          it {
+            is_expected.to compile.with_all_deps
+            is_expected.to contain_class('bareos::params')
           }
-        end
 
-        it { is_expected.to compile }
-
-        it do
-          expect(subject).to contain_class('bareos::repository').
-            with_subscription(true).
-            with_username('test').
-            with_password('test')
+          include_examples 'repository', params, facts
+          include_examples 'config', params, facts
+          include_examples 'client', params, facts
+          include_examples 'console', params, facts
+          include_examples 'monitor', params, facts
         end
       end
     end

@@ -32,80 +32,88 @@
 #   Whether puppet is allowed to restart the director service. If not it will reload
 #
 class bareos (
-  $config_dir                         = $bareos::params::config_dir,
-  $config_dir_webui                   = $bareos::params::config_dir_webui,
-  $file_owner                         = $bareos::params::file_owner,
-  $file_group                         = $bareos::params::file_group,
-  $file_mode                          = $bareos::params::file_mode,
-  $file_dir_mode                      = $bareos::params::file_dir_mode,
-  String  $repo_release               = '20',
-  Boolean $repo_subscription          = false,
-  Optional[String[1]]  $repo_username = undef,
-  Optional[String[1]]  $repo_password = undef,
-  Boolean $manage_package             = true,
-  Boolean $manage_service             = true,
-  Boolean $manage_database            = true,
-  String  $package_ensure             = present,
-  String  $service_ensure             = running,
-  Boolean $service_enable             = true,
-  Boolean $manage_repo                = true,
-  Boolean $manage_user                = true,
-  String  $package_name               = 'bareos-common',
+  ##
+  ## basic settings
+  ##
+                           $config_directory        = '/etc/bareos',
+                           $config_directory_mode   = '0755',
+                           $config_file_mode        = '0660',
+                           $config_group            = 'bareos',
+                           $config_owner            = 'bareos',
+                           $manage_user             = true,
 
-  $console_package_name           = $bareos::params::console_package_name,
-  $monitor_package_name           = $bareos::params::monitor_package_name,
-  $director_package_name          = $bareos::params::director_package_name,
-  $director_service_name          = $bareos::params::director_service_name,
-  $director_service_allow_restart = false,
-  $director_managed_dirs          = $bareos::params::director_managed_dirs,
-  $client_package_name            = $bareos::params::client_package_name,
-  $client_service_name            = $bareos::params::client_service_name,
-  $storage_package_name           = $bareos::params::storage_package_name,
-  $storage_service_name           = $bareos::params::storage_service_name,
+
+  ##
+  ## repository settings
+  ##
+  Boolean                  $manage_repository       = true,
+  Optional[Stdlib::Host]   $repository_host         = undef,
+  Optional[Hash]           $repository_key          = {},
+  Optional[String[1]]      $repository_password     = undef,
+  Bareos::Version          $repository_release      = '20',
+  Boolean                  $repository_ssl          = true,
+  Boolean                  $repository_subscription = false,
+  Optional[String[1]]      $repository_username     = undef,
+
+  ##
+  ## client settings
+  ##
+  Boolean                  $enable_client           = true,
+  Boolean                  $manage_client_package   = true,
+  Boolean                  $manage_client_service   = true,
+  Hash                     $client_config           = {},
+  String[1]                $client_config_directory = $bareos::params::client_config_directory,
+  Array[String[1]]         $client_packages         = $bareos::params::client_packages,
+  String[1]                $client_package_ensure   = $bareos::params::client_package_ensure,
+  Boolean                  $client_service_enable   = $bareos::params::client_service_enable,
+  String[1]                $client_service_ensure   = $bareos::params::client_service_ensure,
+  String[1]                $client_service          = $bareos::params::client_service,
+
+  ##
+  ## console
+  ##
+  Boolean                  $manage_console_package   = true,
+  Array[String[1]]         $console_packages         = $bareos::params::console_packages,
+  String[1]                $console_package_ensure   = $bareos::params::console_package_ensure,
+
+  ##
+  ## monitor
+  ##
+  Boolean                  $manage_monitor_package   = true,
+  Array[String[1]]         $monitor_packages         = $bareos::params::monitor_packages,
+  String[1]                $monitor_package_ensure   = $bareos::params::monitor_package_ensure,
+
+  ##
+  ## webui
+  ##
+  Boolean                  $manage_webui_package           = $bareos::params::manage_webui_package,
+  Array[String[1]]         $webui_packages                 = $bareos::params::webui_packages,
+  String[1]                $webui_package_ensure           = $bareos::params::webui_package_ensure,
+
+  Boolean                  $manage_webui_service           = $bareos::params::manage_webui_service,
+  String[1]                $webui_service                  = $bareos::params::webui_service,
+  Boolean                  $webui_service_enable           = $bareos::params::webui_service_enable,
+  String[1]                $webui_service_ensure           = $bareos::params::webui_service_ensure,
+
+  String[1]                $webui_config_directory         = $bareos::params::webui_config_directory,
+
+
+  Boolean                  $webui_manage_local_director    = $bareos::params::webui_manage_local_director,
+  Integer                  $webui_session_timeout          = $bareos::params::webui_session_timeout,
+  String[1]                $webui_pagination_values        = $bareos::params::webui_pagination_values,
+  Integer                  $webui_pagination_default_value = $bareos::params::webui_pagination_default_value,
+  Boolean                  $webui_save_previous_state      = $bareos::params::webui_save_previous_state,
+  String                   $webui_label_pooltype           = $bareos::params::webui_label_pooltype,
+  Hash                     $webui_directors                = $bareos::params::webui_directors,
 ) inherits bareos::params {
-  if $manage_repo {
-    class { 'bareos::repository':
-      release      => $repo_release,
-      subscription => $repo_subscription,
-      username     => $repo_username,
-      password     => $repo_password,
-    }
+  if $manage_repository {
+    contain bareos::repository
+
+    Class['bareos::repository'] -> Class['bareos::client']
   }
 
-  if $manage_package {
-    package { $package_name:
-      ensure => $package_ensure,
-      tag    => ['bareos', 'bareos_core'],
-    }
-  }
-
-  if $manage_user {
-    group { $file_group:
-      ensure     => present,
-      forcelocal => true,
-      system     => true,
-      tag        => ['bareos', 'bareos_core'],
-    }
-    -> user { $file_owner:
-      ensure     => present,
-      forcelocal => true,
-      comment    => 'Bareos system user',
-      home       => '/var/lib/bareos',
-      shell      => '/bin/false',
-      groups     => ['disk', 'tape', $file_group],
-      system     => true,
-      tag        => ['bareos', 'bareos_core'],
-    }
-  }
-
-  file { $config_dir:
-    ensure       => directory,
-    purge        => true,
-    recurse      => true,
-    recurselimit => 1,
-    mode         => $bareos::file_dir_mode,
-    owner        => $bareos::file_owner,
-    group        => $bareos::file_group,
-    tag          => ['bareos', 'bareos_core'],
-  }
+  contain bareos::client
+  contain bareos::config
+  contain bareos::console
+  contain bareos::monitor
 }

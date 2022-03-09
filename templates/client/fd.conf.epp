@@ -1,0 +1,52 @@
+<%- | Hash $config | -%>
+
+# This file is managed by puppet
+Client {
+<% if $config.has_key('absolute_job_timeout') { %>  Absolute Job Timeout = <%= $config['absolute_job_timeout'] %><% } %>
+<% if $config.has_key('allow_bandwidth_bursting') { %>  Allow Bandwidth Bursting = <%= $config['allow_bandwidth_bursting'] %><% } %>
+<% if $config.has_key('allowed_job_command') { %>  Allowed Job Command = <%= $config['allowed_job_command'] %><% } %>
+<% if $config.has_key('allowed_script_dir') { %>  Allowed Script Dir = <%= $config['allowed_script_dir'] %><% } %>
+<% if $config.has_key('always_use_lmdb') { %>  Always Use LMDB = <%= $config['always_use_lmdb'] %><% } %>
+<% if $config.has_key('compatible') { %>  Compatible = <%= $config['compatible'] %><% } %>
+<% if $config.has_key('description') { %>  Description = <%= $config['description'] %><% } %>
+<% if $config.has_key('fd_address') { %>  FD Address = <%= $config['fd_address'] %><% } %>
+<% if $config.has_key('fd_addresses') { %>  FD Addresses = <%= $config['fd_addresses'] %><% } %>
+<% if $config.has_key('fd_port') { %>  FD Port = <%= $config['fd_port'] %><% } %>
+<% if $config.has_key('fd_source_address') { %>  FD Source Address = <%= $config['fd_source_address'] %><% } %>
+<% if $config.has_key('heartbeat_interval') { %>  Heartbeat Interval = <%= $config['heartbeat_interval'] %><% } %>
+<% if $config.has_key('lmdb_threshold') { %>  LMDB Threshold = <%= $config['lmdb_threshold'] %><% } %>
+<% if $config.has_key('log_timestamp_format') { %>  Log Timestamp Format = <%= $config['log_timestamp_format'] %><% } %>
+<% if $config.has_key('maximum_bandwidth_per_job') { %>  Maximum Bandwidth Per Job = <%= $config['maximum_bandwidth_per_job'] %><% } %>
+<% if $config.has_key('maximum_concurrent_jobs') { %>  Maximum Concurrent Jobs = <%= $config['maximum_concurrent_jobs'] %><% } %>
+<% if $config.has_key('maximum_connections') { %>  Maximum Connections = <%= $config['maximum_connections'] %><% } %>
+<% if $config.has_key('maximum_network_buffer_size') { %>  Maximum Network Buffer Size = <%= $config['maximum_network_buffer_size'] %><% } %>
+<% if $config.has_key('messages') { %>  Messages = <%= $config['messages'] %><% } %>
+<% if $config.has_key('client_name') { %>  Name = <%= $config['client_name'] %><% } %>
+<% if $config.has_key('pid_directory') { %>  Pid Directory = <%= $config['pid_directory'] %><% } %>
+<% if $config.has_key('pki_cipher') { %>  Pki Cipher = <%= $config['pki_cipher'] %><% } %>
+<% if $config.has_key('pki_encryption') { %>  Pki Encryption = <%= $config['pki_encryption'] %><% } %>
+<% if $config.has_key('pki_key_pair') { %>  Pki Key Pair = <%= $config['pki_key_pair'] %><% } %>
+<% if $config.has_key('pki_master_key') { %>  Pki Master Key = <%= $config['pki_master_key'] %><% } %>
+<% if $config.has_key('pki_signatures') { %>  Pki Signatures = <%= $config['pki_signatures'] %><% } %>
+<% if $config.has_key('pki_signer') { %>  Pki Signer = <%= $config['pki_signer'] %><% } %>
+<% if $config.has_key('plugin_directory') { %>  Plugin Directory = <%= $config[''] %><% } %>
+<% if $config.has_key('plugin_names') { %>  Plugin Names = <%= $config[''] %><% } %>
+<% if $config.has_key('scripts_directory') { %>  Scripts Directory = <%= $config[''] %><% } %>
+<% if $config.has_key('sd_connect_timeout') { %>  SD Connect Timeout = <%= $config[''] %><% } %>
+<% if $config.has_key('secure_erase_command') { %>  Secure Erase Command = <%= $config[''] %><% } %>
+<% if $config.has_key('tls_allowed_cn') { %>  TLS Allowed CN = <%= $config['tls_allowed_cn'] %><% } %>
+<% if $config.has_key('tls_authenticate') { %>  TLS Authenticate = <%= $config['tls_authenticate'] %><% } %>
+<% if $config.has_key('tls_ca_certificate_dir') { %>  TLS CA Certificate Dir = <%= $config['tls_ca_certificate_dir'] %><% } %>
+<% if $config.has_key('tls_ca_certificate_file') { %>  TLS CA Certificate File = <%= $config['tls_ca_certificate_file'] %><% } %>
+<% if $config.has_key('tls_certificate') { %>  TLS Certificate = <%= $config['tls_certificate'] %><% } %>
+<% if $config.has_key('tls_certificate_revocation_list') { %>  TLS Certificate Revocation List = <%= $config['tls_certificate_revocation_list'] %><% } %>
+<% if $config.has_key('tls_cipher_list') { %>  TLS Cipher List = <%= $config['tls_cipher_list'] %><% } %>
+<% if $config.has_key('tls_dh_file') { %>  TLS DH File = <%= $config['tls_dh_file'] %><% } %>
+<% if $config.has_key('tls_enable') { %>  TLS Enable = <%= $config['tls_enable'] %><% } %>
+<% if $config.has_key('tls_key') { %>  TLS Key = <%= $config['tls_key'] %><% } %>
+<% if $config.has_key('tls_protocal') { %>  TLS Protocol = <%= $config['tls_protocal'] %><% } %>
+<% if $config.has_key('tls_require') { %>  TLS Require = <%= $config['tls_require'] %><% } %>
+<% if $config.has_key('tls_verify_peer') { %>  TLS Verify Peer = <%= $config['tls_verify_peer'] %><% } %>
+<% if $config.has_key('ver_id') { %>  Ver Id = <%= $config['ver_id'] %><% } %>
+<% if $config.has_key('working_directory') { %>  Working Directory = <%= $config['working_directory'] %><% } %>
+}
