@@ -18,7 +18,7 @@
 # @param password
 #   The major bareos release version which should be used
 # @param https
-#   Wether or not https should be used in repo URL
+#   Whether https should be used in repo URL
 #
 class bareos::repository (
   Enum['18.2', '19.2', '20', '21']  $release             = '20',
