@@ -120,7 +120,7 @@ class bareos::repository (
         }
         $location = "${url}xUbuntu_${osrelease}"
       } else {
-        if $osmajrelease == '10' {
+        if $osmajrelease >= '10' {
           $location = "${url}Debian_${osmajrelease}"
         } else {
           $location = "${url}Debian_${osmajrelease}.0"
