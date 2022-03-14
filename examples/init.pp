@@ -10,7 +10,6 @@
 # https://docs.puppet.com/guides/tests_smoke.html
 #
 class { 'bareos':
-  manage_repo => false,
 }
 class { 'bareos::director::director':
   password => 'pw',
