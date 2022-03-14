@@ -121,6 +121,10 @@ class bareos::repository (
         $location = "${url}xUbuntu_${osrelease}"
       } else {
         if versioncmp($osmajrelease, '10') >= 0 {
+          if (versioncmp($release, '18.2') <= 0)
+          or ((versioncmp($release, '20') <= 0) and (versioncmp($osmajrelease, '11') >= 0)) {
+            fail("Bareos ${release} is not distributed for Debian ${osmajrelease}")
+          }
           $location = "${url}Debian_${osmajrelease}"
         } else {
           $location = "${url}Debian_${osmajrelease}.0"
