@@ -9,8 +9,15 @@ describe 'bareos::repository' do
       end
 
       context 'with default values for all parameters' do
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::repository') }
+        if (facts[:osfamily] == 'Debian') && (facts[:operatingsystemmajrelease] == '11')
+          it 'fails' do
+            expect { is_expected.to contain_class('bareos::repository') }.
+              to raise_error(Puppet::PreformattedError, %r{is not distributed for})
+          end
+        else
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to contain_class('bareos::repository') }
+        end
       end
 
       case facts[:osfamily]
