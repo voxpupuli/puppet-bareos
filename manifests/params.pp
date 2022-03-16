@@ -7,22 +7,7 @@ class bareos::params {
   $file_group = 'bareos'
   $config_dir = '/etc/bareos'
   $config_dir_webui = '/etc/bareos-webui'
-
-  case $facts['os']['name'] {
-    'Debian': {
-      case $facts['os']['release']['major'] {
-        '11': {
-          $repo_release = '21'
-        }
-        default: {
-          $repo_release = '20'
-        }
-      }
-    }
-    default: {
-      $repo_release = '20'
-    }
-  }
+  $repo_release = '20'
 
   # service/package specific
   # bconsole

@@ -37,14 +37,14 @@ describe 'bareos::repository' do
         when 'Debian'
           case facts[:operatingsystemmajrelease]
           when '11'
-            context 'with release: "20"' do
+            context 'with release: "19.2"' do
               let(:params) do
                 {
-                  release: '20'
+                  release: '19.2'
                 }
               end
 
-              it { is_expected.to compile.and_raise_error(%r{Bareos 20 is not distributed for Debian 11}) }
+              it { is_expected.to compile.and_raise_error(%r{Bareos 19.2 is not distributed for Debian 11}) }
             end
           end
         when 'Ubuntu'
