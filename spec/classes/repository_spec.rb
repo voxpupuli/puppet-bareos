@@ -10,10 +10,7 @@ describe 'bareos::repository' do
 
       context 'with default values for all parameters' do
         if (facts[:osfamily] == 'Debian') && (facts[:operatingsystemmajrelease] == '11')
-          it 'fails' do
-            expect { is_expected.to contain_class('bareos::repository') }.
-              to raise_error(Puppet::PreformattedError, %r{is not distributed for})
-          end
+          it { is_expected.to compile.and_raise_error(%r{is not distributed for}) }
         else
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_class('bareos::repository') }
