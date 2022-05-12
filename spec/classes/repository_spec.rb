@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'bareos::repository' do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -23,8 +25,9 @@ describe 'bareos::repository' do
           end
 
           it { is_expected.to compile }
+
           it do
-            is_expected.to contain_yumrepo('bareos').
+            expect(subject).to contain_yumrepo('bareos').
               with_username('test').
               with_password('test')
           end
@@ -42,8 +45,9 @@ describe 'bareos::repository' do
             end
 
             it { is_expected.to compile }
+
             it do
-              is_expected.to contain_apt__source('bareos').
+              expect(subject).to contain_apt__source('bareos').
                 with_location('http://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
             end
           end

@@ -21,13 +21,15 @@
 # @param service_ensure
 #   Service state which should be ensured
 # @param service_enable
-#   Wheter puppet should enable the bareos services
+#   Whether puppet should enable the bareos services
 # @param manage_repo
-#   Wheter puppet should manage the bareos package repository
+#   Whether puppet should manage the bareos package repository
 # @param manage_user
-#   Wheter puppet should manage the bareos user
+#   Whether puppet should manage the bareos user
 # @param package_name
 #   Name of the package which should be installed
+# @param director_service_allow_restart
+#   Whether puppet is allowed to restart the director service. If not it will reload
 #
 class bareos (
   $config_dir                         = $bareos::params::config_dir,
@@ -51,15 +53,16 @@ class bareos (
   Boolean $manage_user                = true,
   String  $package_name               = 'bareos-common',
 
-  $console_package_name  = $bareos::params::console_package_name,
-  $monitor_package_name  = $bareos::params::monitor_package_name,
-  $director_package_name = $bareos::params::director_package_name,
-  $director_service_name = $bareos::params::director_service_name,
-  $director_managed_dirs = $bareos::params::director_managed_dirs,
-  $client_package_name   = $bareos::params::client_package_name,
-  $client_service_name   = $bareos::params::client_service_name,
-  $storage_package_name  = $bareos::params::storage_package_name,
-  $storage_service_name  = $bareos::params::storage_service_name,
+  $console_package_name           = $bareos::params::console_package_name,
+  $monitor_package_name           = $bareos::params::monitor_package_name,
+  $director_package_name          = $bareos::params::director_package_name,
+  $director_service_name          = $bareos::params::director_service_name,
+  $director_service_allow_restart = false,
+  $director_managed_dirs          = $bareos::params::director_managed_dirs,
+  $client_package_name            = $bareos::params::client_package_name,
+  $client_service_name            = $bareos::params::client_service_name,
+  $storage_package_name           = $bareos::params::storage_package_name,
+  $storage_service_name           = $bareos::params::storage_service_name,
 ) inherits bareos::params {
   if $manage_repo {
     class { 'bareos::repository':

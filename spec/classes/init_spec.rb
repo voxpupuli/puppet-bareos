@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'bareos' do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -21,8 +23,9 @@ describe 'bareos' do
         end
 
         it { is_expected.to compile }
+
         it do
-          is_expected.to contain_class('bareos::repository').
+          expect(subject).to contain_class('bareos::repository').
             with_subscription(true).
             with_username('test').
             with_password('test')

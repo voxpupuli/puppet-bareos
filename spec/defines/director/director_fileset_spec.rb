@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bareos::director::fileset' do
   let(:title) { 'name' }
 
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -32,8 +34,9 @@ describe 'bareos::director::fileset' do
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_file(filename).with_content(res.content) }
+
         it do
-          is_expected.to contain_file(filename).
+          expect(subject).to contain_file(filename).
             that_notifies('Service[bareos-dir]')
         end
       end

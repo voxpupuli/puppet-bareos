@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bareos::monitor::monitor' do
@@ -6,7 +8,7 @@ describe 'bareos::monitor::monitor' do
   filename = '/etc/bareos/tray-monitor.d/monitor/name.conf'
 
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
