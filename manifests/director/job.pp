@@ -339,6 +339,13 @@
 #   Bareos Default: Not set
 #   Required: true
 #
+# [*mtime_only*]
+#   Mtime Only
+#
+#   Bareos Datatype: boolean
+#   Bareos Default: false
+#   Required: false
+#
 # [*next_pool*]
 #   Next Pool
 #
@@ -643,6 +650,7 @@ define bareos::director::job (
   $maximum_bandwidth = undef,
   $maximum_concurrent_jobs = undef,
   $messages = undef,
+  $mtime_only = undef,
   $next_pool = undef,
   $pool = undef,
   $prefer_mounted_volumes = undef,
@@ -773,6 +781,7 @@ define bareos::director::job (
       [$maximum_bandwidth, 'Maximum Bandwidth', 'speed', false],
       [$maximum_concurrent_jobs, 'Maximum Concurrent Jobs', 'pint32', false],
       [$messages, 'Messages', 'res', $_require_res],
+      [$mtime_only, 'Mtime Only', 'boolean', false],
       [$next_pool, 'Next Pool', 'res', false],
       [$pool, 'Pool', 'res', $_require_res],
       [$prefer_mounted_volumes, 'Prefer Mounted Volumes', 'boolean', false],

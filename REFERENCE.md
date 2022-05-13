@@ -6317,6 +6317,13 @@ Normally, you will Jobs of different names corresponding to each client
   Bareos Default: Not set
   Required: true
 
+[*mtime_only*]
+  Mtime Only
+
+  Bareos Datatype: boolean
+  Bareos Default: false
+  Required: false
+
 [*next_pool*]
   Next Pool
 
@@ -6960,6 +6967,14 @@ Data type: `Any`
 
 Default value: ``undef``
 
+##### `mtime_only`
+
+Data type: `Any`
+
+
+
+Default value: ``undef``
+
 ##### `next_pool`
 
 Data type: `Any`
@@ -7589,6 +7604,13 @@ Almost the same like `Job`.
   Bareos Datatype: res
   Bareos Default: Not set
   Required: true
+
+[*mtime_only*]
+  Mtime Only
+
+  Bareos Datatype: boolean
+  Bareos Default: false
+  Required: false
 
 [*next_pool*]
   Next Pool
@@ -8226,6 +8248,14 @@ Data type: `Any`
 Default value: ``undef``
 
 ##### `messages`
+
+Data type: `Any`
+
+
+
+Default value: ``undef``
+
+##### `mtime_only`
 
 Data type: `Any`
 
