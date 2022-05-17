@@ -92,7 +92,6 @@ describe 'bareos::director::job' do
           param('maximum_bandwidth', 'Maximum Bandwidth', 'speed').
           param('maximum_concurrent_jobs', 'Maximum Concurrent Jobs', 'pint32').
           param('messages', 'Messages', 'res').
-          param('mtime_only', 'Mtime Only', 'boolean').
           param('next_pool', 'Next Pool', 'res').
           param('pool', 'Pool', 'res').
           param('prefer_mounted_volumes', 'Prefer Mounted Volumes', 'boolean').
