@@ -1,38 +1,38 @@
-# == Class: bareos::console
-# This class manages the bareos console (bconsole cli tool) package and configuration directory.
-# Parameters should be configured in the upper class `::bareos`.
+# @summary bareos::console
 #
-# This class will be automatically included when a resource is defined.
-# It is not intended to be used directly by external resources like node definitions or other modules.
+# @api private
+#
 class bareos::console (
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::console_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $config_dir     = "${bareos::config_dir}/bconsole.d"
-) inherits bareos {
-  if $manage_package {
-    package { $package_name:
-      ensure => $package_ensure,
-      tag    => ['bareos', 'bareos_console'],
+) {
+  assert_private()
+
+  if $bareos::manage_console_package {
+    $bareos::console_packages.each |$console_package| {
+      package { $console_package:
+        ensure => $bareos::console_package_ensure,
+        tag    => [ 'bareos', 'bareos_console', ],
+      }
     }
   }
 
-  # directories
-  $config_console_dirs = [
-    $config_dir,
-    "${config_dir}/console",
-    "${config_dir}/director",
+  $config_console_directories = [
+    "${bareos::config_directory}/bconsole.d",
+    "${bareos::config_directory}/bconsole.d/console",
+    "${bareos::config_directory}/bconsole.d/director",
   ]
 
-  file { $config_console_dirs:
-    ensure  => directory,
-    purge   => true,
-    recurse => true,
-    force   => true,
-    mode    => $bareos::file_dir_mode,
-    owner   => $bareos::file_owner,
-    group   => $bareos::file_group,
-    require => Package[$package_name],
-    tag     => ['bareos', 'bareos_console'],
+  $config_console_directories.each | $config_console_directory | {
+    file { $config_console_directory:
+      ensure  => directory,
+      purge   => true,
+      recurse => true,
+      force   => true,
+      mode    => $bareos::config_directory_mode,
+      owner   => $bareos::config_owner,
+      group   => $bareos::config_group,
+      tag     => [ 'bareos', 'bareos_console', ],
+    }
   }
+
+  Package<| tag == 'bareos_console' |> -> File<| tag == 'bareos_console' |>
 }

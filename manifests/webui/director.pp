@@ -43,35 +43,40 @@
 #   Bareos default: not set
 #   Required: false
 define bareos::webui::director (
-  Enum['present', 'absent'] $ensure = present,
-  Optional[Bareos::Resource] $catalog = undef,
-  Stdlib::Host $dir_address = 'localhost',
-  Stdlib::Port $dir_port = 9101,
-  Enum['yes', 'no'] $enabled = 'yes',
-  Optional[Bareos::Resource] $pam_console_name = undef,
-  Optional[String] $pam_console_password = undef,
+  Enum['present', 'absent']  $ensure               = present,
+  Optional[Bareos::Resource] $catalog              = undef,
+  Stdlib::Host               $director_address     = 'localhost',
+  Stdlib::Port               $director_port        = 9101,
+  Enum['yes', 'no']          $enabled              = 'yes',
+  Optional[Bareos::Resource] $pam_console_name     = undef,
+  Optional[String]           $pam_console_password = undef,
 ) {
-  include bareos::webui
+  assert_private()
 
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
+  if ! defined("Concat[${bareos::webui_config_directory}/directors.ini]") {
+    concat { "${bareos::webui_config_directory}/directors.ini":
+      ensure => present,
+      mode   => '0644',
+      owner  => 'root',
+      group  => 'root',
+      tag    => [ 'bareos', 'bareos_webui', ],
+    }
   }
 
-  if $ensure == 'present' {
-    # just for validation
-    $_validate = bareos_settings( [$catalog, 'Catalog', 'res', false],
-      [$dir_address, 'Dir Address', 'address', true],
-      [$dir_port, 'Dir Port', 'port', true],
-      [$enabled, 'Enabled', 'bit', true],
-      [$name, 'Dir Name', 'res', true],
-      [$pam_console_name, 'Pam Console Name', 'res', false],
-      [$pam_console_password, 'Pam Console Password', 'autopassword', false]
-    )
-    concat::fragment { "bareos webui director ${title}":
-      target  => "${bareos::webui::config_dir}/directors.ini",
-      content => template('bareos/webui_directors.erb'),
-      notify  => Service[$bareos::webui::service_name],
-      tag     => ['bareos', 'bareos_webui'],
-    }
+  concat::fragment { "bareos webui director ${title}":
+    ensure  => $ensure,
+    target  => "${bareos::webui_config_directory}/directors.ini",
+    content => epp('bareos/webui/webui_directors.erb',
+      {
+        'catalog'              => $catalog,
+        'director_address'     => $director_address,
+        'director_port'        => $director_port,
+        'enabled'              => $enabled,
+        'pam_console_name'     => $pam_console_name,
+        'pam_console_password' => $pam_console_password,
+      }
+    ),
+    notify  => Service[$bareos::webui_service],
+    tag     => [ 'bareos', 'bareos_webui', ],
   }
 }

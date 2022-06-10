@@ -1,0 +1,29 @@
+<%- | Hash $config | -%>
+
+# This file is managed by puppet
+Director {
+<% if $config.has_key('address') { %>  Address = <%= $config['address'] %><% } %>
+<% if $config.has_key('allowed_job_command') { %>  Allowed Job Command = <%= $config['allowed_job_command'] %><% } %>
+<% if $config.has_key('allowed_script_dir') { %>  Allowed Script Dir = <%= $config['allowed_script_dir'] %><% } %>
+<% if $config.has_key('connection_from_client_to_director') { %>  Connection From Client To Director = <%= $config['connection_from_client_to_director'] %><% } %>
+<% if $config.has_key('connection_from_director_to_client') { %>  Connection From Director To Client = <%= $config['connection_from_director_to_client'] %><% } %>
+<% if $config.has_key('description') { %>  Description = <%= $config['description'] %><% } %>
+<% if $config.has_key('maximum_bandwidth_per_job') { %>  Maximum Bandwidth Per Job = <%= $config['maximum_bandwidth_per_job'] %><% } %>
+<% if $config.has_key('monitor') { %>  Monitor = <%= $config['monitor'] %><% } %>
+<% if $config.has_key('name') { %>  Name = <%= $config['name'] %><% } %>
+<% if $config.has_key('password') { %>  Password = <%= $config['password'] %><% } %>
+<% if $config.has_key('port') { %>  Port = <%= $config['port'] %><% } %>
+<% if $config.has_key('tls_allowed_cn') { %>  TLS Allowed CN = <%= $config['tls_allowed_cn'] %><% } %>
+<% if $config.has_key('tls_authenticate') { %>  TLS Authenticate = <%= $config['tls_authenticate'] %><% } %>
+<% if $config.has_key('tls_ca_certificate_dir') { %>  TLS CA Certificate Dir = <%= $config['tls_ca_certificate_dir'] %><% } %>
+<% if $config.has_key('tls_ca_certificate_file') { %>  TLS CA Certificate File = <%= $config['tls_ca_certificate_file'] %><% } %>
+<% if $config.has_key('tls_certificate_revocation_list') { %>  TLS Certificate = <%= $config['tls_certificate_revocation_list'] %><% } %>
+<% if $config.has_key('tls_certificate') { %>  TLS Certificate Revocation List = <%= $config['tls_certificate'] %><% } %>
+<% if $config.has_key('tls_cipher_list') { %>  TLS Cipher List = <%= $config['tls_cipher_list'] %><% } %>
+<% if $config.has_key('tls_dh_file') { %>  TLS DH File = <%= $config['tls_dh_file'] %><% } %>
+<% if $config.has_key('tls_enable') { %>  TLS Enable = <%= $config['tls_enable'] %><% } %>
+<% if $config.has_key('tls_key') { %>  TLS Key = <%= $config['tls_key'] %><% } %>
+<% if $config.has_key('tls_protocal') { %>  TLS Protocol = <%= $config['tls_protocal'] %><% } %>
+<% if $config.has_key('tls_require') { %>  TLS Require = <%= $config['tls_require'] %><% } %>
+<% if $config.has_key('tls_verify_peer') { %>  TLS Verify Peer = <%= $config['tls_verify_peer'] %><% } %>
+}

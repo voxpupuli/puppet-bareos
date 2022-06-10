@@ -1,40 +1,40 @@
-# == Class: bareos::monitor
-# This class manages the bareos (tray-) monitor package and configuration directory.
-# Parameters should be configured in the upper class `::bareos`.
+# @summary
+#   This class manages the bareos (tray-) monitor package and configuration directory.
+#   Parameters should be configured in the upper class `::bareos`.
 #
-# This class will be automatically included when a resource is defined.
-# It is not intended to be used directly by external resources like node definitions or other modules.
+# @api private
+#
 class bareos::monitor (
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::monitor_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $config_dir     = "${bareos::config_dir}/tray-monitor.d"
-) inherits bareos {
-  if $manage_package {
-    package { $package_name:
-      ensure => $package_ensure,
-      tag    => ['bareos', 'bareos_monitor'],
+) {
+  assert_private()
+
+  if $bareos::manage_monitor_package {
+    $bareos::monitor_packages.each |$monitor_package| {
+      package { $monitor_package:
+        ensure => $bareos::monitor_package_ensure,
+        tag    => [ 'bareos', 'bareos_monitor', ],
+      }
     }
   }
 
-  # directories
-  $config_monitor_dirs = [
-    $config_dir,
-    "${config_dir}/client",
-    "${config_dir}/director",
-    "${config_dir}/monitor",
-    "${config_dir}/storage",
+  $config_monitor_directories = [
+    "${bareos::config_directory}/tray-monitor.d",
+    "${bareos::config_directory}/tray-monitor.d/client",
+    "${bareos::config_directory}/tray-monitor.d/director",
+    "${bareos::config_directory}/tray-monitor.d/monitor",
+    "${bareos::config_directory}/tray-monitor.d/storage",
   ]
 
-  file { $config_monitor_dirs:
-    ensure  => directory,
-    purge   => true,
-    recurse => true,
-    force   => true,
-    mode    => $bareos::file_dir_mode,
-    owner   => $bareos::file_owner,
-    group   => $bareos::file_group,
-    require => Package[$package_name],
-    tag     => ['bareos', 'bareos_monitor'],
+  $config_monitor_directories.each |$config_monitor_directory| {
+    file { $config_monitor_directory:
+      ensure  => directory,
+      purge   => true,
+      recurse => true,
+      force   => true,
+      mode    => $bareos::config_directory_mode,
+      owner   => $bareos::config_owner,
+      group   => $bareos::config_group,
+      tag     => [ 'bareos', 'bareos_monitor', ],
+    }
   }
 }
