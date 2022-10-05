@@ -74,13 +74,6 @@
       ]
     },
     {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "31",
-        "32"
-      ]
-    },
-    {
       "operatingsystem": "Amazon",
       "operatingsystemrelease": [
         "2"
