@@ -368,7 +368,7 @@ describe 'bareos_settings' do
   context 'type is device_type' do
     %w[device_type].each do |type|
       it 'runs with compatible values' do
-        %w[TAPE file fifo gfapi rados].each do |val|
+        %w[TAPE file fifo gfapi rados droplet].each do |val|
           expect(subject).to run.with_params([val, 'Test', type, true]).and_return("#{indent_default}Test = #{val}")
         end
       end
