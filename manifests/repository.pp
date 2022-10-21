@@ -74,7 +74,7 @@ class bareos::repository (
           $location = "${url}RHEL_${osmajrelease}"
         }
         'Centos', 'Rocky', 'AlmaLinux': {
-          if versioncmp($release, '21') >= 0 {
+          if versioncmp($release, '21') >= 0 and versioncmp($osmajrelease, '8') >= 0 {
             $location = "${url}EL_${osmajrelease}"
           } else {
             $location = "${url}CentOS_${osmajrelease}"
