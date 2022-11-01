@@ -1,6 +1,6 @@
 # == Define: bareos::storage::director
 # The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
-# There may be multiple Director resources. 
+# There may be multiple Director resources.
 # The Director Name and Password must match the corresponding values in the Director's configuration file.
 #
 # == Parameters
