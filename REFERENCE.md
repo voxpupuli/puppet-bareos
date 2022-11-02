@@ -67,25 +67,61 @@ It is not intended to be used directly by external resources like node definitio
 
 * [`bareos_settings`](#bareos_settings): Helper function to parse settings for bareos and return prepared lines for config file
 
+### Data types
+
+* [`Bareos::Boolean`](#bareosboolean): Bareos boolean datatype
+* [`Bareos::List`](#bareoslist): Bareos List data type
+* [`Bareos::Resource`](#bareosresource): Bareos Resource data type
+
 ## Classes
 
-### `bareos`
+### <a name="bareos"></a>`bareos`
 
 This puppet module configures and manage all aspects of an complex bareos installation
 
 #### Parameters
 
-The following parameters are available in the `bareos` class.
+The following parameters are available in the `bareos` class:
 
-##### `repo_release`
+* [`repo_release`](#repo_release)
+* [`repo_subscription`](#repo_subscription)
+* [`repo_username`](#repo_username)
+* [`repo_password`](#repo_password)
+* [`manage_package`](#manage_package)
+* [`manage_service`](#manage_service)
+* [`manage_database`](#manage_database)
+* [`package_ensure`](#package_ensure)
+* [`service_ensure`](#service_ensure)
+* [`service_enable`](#service_enable)
+* [`manage_repo`](#manage_repo)
+* [`manage_user`](#manage_user)
+* [`package_name`](#package_name)
+* [`director_service_allow_restart`](#director_service_allow_restart)
+* [`config_dir`](#config_dir)
+* [`config_dir_webui`](#config_dir_webui)
+* [`file_owner`](#file_owner)
+* [`file_group`](#file_group)
+* [`file_mode`](#file_mode)
+* [`file_dir_mode`](#file_dir_mode)
+* [`console_package_name`](#console_package_name)
+* [`monitor_package_name`](#monitor_package_name)
+* [`director_package_name`](#director_package_name)
+* [`director_service_name`](#director_service_name)
+* [`director_managed_dirs`](#director_managed_dirs)
+* [`client_package_name`](#client_package_name)
+* [`client_service_name`](#client_service_name)
+* [`storage_package_name`](#storage_package_name)
+* [`storage_service_name`](#storage_service_name)
+
+##### <a name="repo_release"></a>`repo_release`
 
 Data type: `String`
 
 The major bareos release version which should be used
 
-Default value: `'latest'`
+Default value: `'21'`
 
-##### `repo_subscription`
+##### <a name="repo_subscription"></a>`repo_subscription`
 
 Data type: `Boolean`
 
@@ -93,7 +129,7 @@ Activate the (paid) subscription repo. Otherwise the opensource repos will be se
 
 Default value: ``false``
 
-##### `repo_username`
+##### <a name="repo_username"></a>`repo_username`
 
 Data type: `Optional[String[1]]`
 
@@ -101,7 +137,7 @@ The major bareos release version which should be used
 
 Default value: ``undef``
 
-##### `repo_password`
+##### <a name="repo_password"></a>`repo_password`
 
 Data type: `Optional[String[1]]`
 
@@ -109,7 +145,7 @@ The major bareos release version which should be used
 
 Default value: ``undef``
 
-##### `manage_package`
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
@@ -117,7 +153,7 @@ Whether puppet should handle the installation ob bareos packages
 
 Default value: ``true``
 
-##### `manage_service`
+##### <a name="manage_service"></a>`manage_service`
 
 Data type: `Boolean`
 
@@ -125,7 +161,7 @@ Whether puppet should activate the bareos system services
 
 Default value: ``true``
 
-##### `manage_database`
+##### <a name="manage_database"></a>`manage_database`
 
 Data type: `Boolean`
 
@@ -133,7 +169,7 @@ Whether puppet should call the bareos DB creation and configuration scripts
 
 Default value: ``true``
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -141,7 +177,7 @@ Package version to be installed
 
 Default value: `present`
 
-##### `service_ensure`
+##### <a name="service_ensure"></a>`service_ensure`
 
 Data type: `String`
 
@@ -149,31 +185,31 @@ Service state which should be ensured
 
 Default value: `running`
 
-##### `service_enable`
+##### <a name="service_enable"></a>`service_enable`
 
 Data type: `Boolean`
 
-Wheter puppet should enable the bareos services
+Whether puppet should enable the bareos services
 
 Default value: ``true``
 
-##### `manage_repo`
+##### <a name="manage_repo"></a>`manage_repo`
 
 Data type: `Boolean`
 
-Wheter puppet should manage the bareos package repository
+Whether puppet should manage the bareos package repository
 
 Default value: ``true``
 
-##### `manage_user`
+##### <a name="manage_user"></a>`manage_user`
 
 Data type: `Boolean`
 
-Wheter puppet should manage the bareos user
+Whether puppet should manage the bareos user
 
 Default value: ``true``
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `String`
 
@@ -181,7 +217,15 @@ Name of the package which should be installed
 
 Default value: `'bareos-common'`
 
-##### `config_dir`
+##### <a name="director_service_allow_restart"></a>`director_service_allow_restart`
+
+Data type: `Any`
+
+Whether puppet is allowed to restart the director service. If not it will reload
+
+Default value: ``false``
+
+##### <a name="config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -189,7 +233,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::config_dir`
 
-##### `config_dir_webui`
+##### <a name="config_dir_webui"></a>`config_dir_webui`
 
 Data type: `Any`
 
@@ -197,7 +241,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::config_dir_webui`
 
-##### `file_owner`
+##### <a name="file_owner"></a>`file_owner`
 
 Data type: `Any`
 
@@ -205,7 +249,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_owner`
 
-##### `file_group`
+##### <a name="file_group"></a>`file_group`
 
 Data type: `Any`
 
@@ -213,7 +257,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_group`
 
-##### `file_mode`
+##### <a name="file_mode"></a>`file_mode`
 
 Data type: `Any`
 
@@ -221,7 +265,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_mode`
 
-##### `file_dir_mode`
+##### <a name="file_dir_mode"></a>`file_dir_mode`
 
 Data type: `Any`
 
@@ -229,7 +273,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_dir_mode`
 
-##### `console_package_name`
+##### <a name="console_package_name"></a>`console_package_name`
 
 Data type: `Any`
 
@@ -237,7 +281,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::console_package_name`
 
-##### `monitor_package_name`
+##### <a name="monitor_package_name"></a>`monitor_package_name`
 
 Data type: `Any`
 
@@ -245,7 +289,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::monitor_package_name`
 
-##### `director_package_name`
+##### <a name="director_package_name"></a>`director_package_name`
 
 Data type: `Any`
 
@@ -253,7 +297,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::director_package_name`
 
-##### `director_service_name`
+##### <a name="director_service_name"></a>`director_service_name`
 
 Data type: `Any`
 
@@ -261,7 +305,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::director_service_name`
 
-##### `director_managed_dirs`
+##### <a name="director_managed_dirs"></a>`director_managed_dirs`
 
 Data type: `Any`
 
@@ -269,7 +313,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::director_managed_dirs`
 
-##### `client_package_name`
+##### <a name="client_package_name"></a>`client_package_name`
 
 Data type: `Any`
 
@@ -277,7 +321,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::client_package_name`
 
-##### `client_service_name`
+##### <a name="client_service_name"></a>`client_service_name`
 
 Data type: `Any`
 
@@ -285,7 +329,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::client_service_name`
 
-##### `storage_package_name`
+##### <a name="storage_package_name"></a>`storage_package_name`
 
 Data type: `Any`
 
@@ -293,7 +337,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::storage_package_name`
 
-##### `storage_service_name`
+##### <a name="storage_service_name"></a>`storage_service_name`
 
 Data type: `Any`
 
@@ -301,16 +345,25 @@ Data type: `Any`
 
 Default value: `$bareos::params::storage_service_name`
 
-### `bareos::client`
+### <a name="bareosclient"></a>`bareos::client`
 
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
-The following parameters are available in the `bareos::client` class.
+The following parameters are available in the `bareos::client` class:
 
-##### `manage_service`
+* [`manage_service`](#manage_service)
+* [`manage_package`](#manage_package)
+* [`package_name`](#package_name)
+* [`package_ensure`](#package_ensure)
+* [`service_name`](#service_name)
+* [`service_ensure`](#service_ensure)
+* [`service_enable`](#service_enable)
+* [`config_dir`](#config_dir)
+
+##### <a name="manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -318,7 +371,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -326,7 +379,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -334,7 +387,7 @@ Data type: `Any`
 
 Default value: `$bareos::client_package_name`
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -342,7 +395,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -350,7 +403,7 @@ Data type: `Any`
 
 Default value: `$bareos::client_service_name`
 
-##### `service_ensure`
+##### <a name="service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -358,7 +411,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -366,7 +419,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -374,7 +427,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bareos-fd.d"`
 
-### `bareos::client::client`
+### <a name="bareosclientclient"></a>`bareos::client::client`
 
 == Class: bareos::client::client
 The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director)
@@ -714,9 +767,57 @@ as well as the port on which the Client listens for Director connections.
 
 #### Parameters
 
-The following parameters are available in the `bareos::client::client` class.
+The following parameters are available in the `bareos::client::client` class:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`absolute_job_timeout`](#absolute_job_timeout)
+* [`allow_bandwidth_bursting`](#allow_bandwidth_bursting)
+* [`allowed_job_command`](#allowed_job_command)
+* [`allowed_script_dir`](#allowed_script_dir)
+* [`always_use_lmdb`](#always_use_lmdb)
+* [`compatible`](#compatible)
+* [`description`](#description)
+* [`fd_address`](#fd_address)
+* [`fd_addresses`](#fd_addresses)
+* [`fd_port`](#fd_port)
+* [`fd_source_address`](#fd_source_address)
+* [`heartbeat_interval`](#heartbeat_interval)
+* [`lmdb_threshold`](#lmdb_threshold)
+* [`log_timestamp_format`](#log_timestamp_format)
+* [`maximum_bandwidth_per_job`](#maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`maximum_connections`](#maximum_connections)
+* [`maximum_network_buffer_size`](#maximum_network_buffer_size)
+* [`messages`](#messages)
+* [`name_client`](#name_client)
+* [`pid_directory`](#pid_directory)
+* [`pki_cipher`](#pki_cipher)
+* [`pki_encryption`](#pki_encryption)
+* [`pki_key_pair`](#pki_key_pair)
+* [`pki_master_key`](#pki_master_key)
+* [`pki_signatures`](#pki_signatures)
+* [`pki_signer`](#pki_signer)
+* [`plugin_directory`](#plugin_directory)
+* [`plugin_names`](#plugin_names)
+* [`scripts_directory`](#scripts_directory)
+* [`sd_connect_timeout`](#sd_connect_timeout)
+* [`secure_erase_command`](#secure_erase_command)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+* [`ver_id`](#ver_id)
+* [`working_directory`](#working_directory)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -724,7 +825,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `absolute_job_timeout`
+##### <a name="absolute_job_timeout"></a>`absolute_job_timeout`
 
 Data type: `Any`
 
@@ -732,7 +833,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_bandwidth_bursting`
+##### <a name="allow_bandwidth_bursting"></a>`allow_bandwidth_bursting`
 
 Data type: `Any`
 
@@ -740,7 +841,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allowed_job_command`
+##### <a name="allowed_job_command"></a>`allowed_job_command`
 
 Data type: `Any`
 
@@ -748,7 +849,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allowed_script_dir`
+##### <a name="allowed_script_dir"></a>`allowed_script_dir`
 
 Data type: `Any`
 
@@ -756,7 +857,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_use_lmdb`
+##### <a name="always_use_lmdb"></a>`always_use_lmdb`
 
 Data type: `Any`
 
@@ -764,7 +865,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `compatible`
+##### <a name="compatible"></a>`compatible`
 
 Data type: `Any`
 
@@ -772,7 +873,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -780,7 +881,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_address`
+##### <a name="fd_address"></a>`fd_address`
 
 Data type: `Any`
 
@@ -788,7 +889,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_addresses`
+##### <a name="fd_addresses"></a>`fd_addresses`
 
 Data type: `Any`
 
@@ -796,7 +897,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_port`
+##### <a name="fd_port"></a>`fd_port`
 
 Data type: `Any`
 
@@ -804,7 +905,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_source_address`
+##### <a name="fd_source_address"></a>`fd_source_address`
 
 Data type: `Any`
 
@@ -812,7 +913,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `heartbeat_interval`
+##### <a name="heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
@@ -820,7 +921,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `lmdb_threshold`
+##### <a name="lmdb_threshold"></a>`lmdb_threshold`
 
 Data type: `Any`
 
@@ -828,7 +929,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `log_timestamp_format`
+##### <a name="log_timestamp_format"></a>`log_timestamp_format`
 
 Data type: `Any`
 
@@ -836,7 +937,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth_per_job`
+##### <a name="maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
@@ -844,7 +945,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -852,7 +953,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_connections`
+##### <a name="maximum_connections"></a>`maximum_connections`
 
 Data type: `Any`
 
@@ -860,7 +961,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_network_buffer_size`
+##### <a name="maximum_network_buffer_size"></a>`maximum_network_buffer_size`
 
 Data type: `Any`
 
@@ -868,7 +969,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Any`
 
@@ -876,7 +977,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `name_client`
+##### <a name="name_client"></a>`name_client`
 
 Data type: `Any`
 
@@ -884,7 +985,7 @@ Data type: `Any`
 
 Default value: `'bareos-fd'`
 
-##### `pid_directory`
+##### <a name="pid_directory"></a>`pid_directory`
 
 Data type: `Any`
 
@@ -892,7 +993,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pki_cipher`
+##### <a name="pki_cipher"></a>`pki_cipher`
 
 Data type: `Any`
 
@@ -900,7 +1001,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pki_encryption`
+##### <a name="pki_encryption"></a>`pki_encryption`
 
 Data type: `Any`
 
@@ -908,7 +1009,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pki_key_pair`
+##### <a name="pki_key_pair"></a>`pki_key_pair`
 
 Data type: `Any`
 
@@ -916,7 +1017,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pki_master_key`
+##### <a name="pki_master_key"></a>`pki_master_key`
 
 Data type: `Any`
 
@@ -924,7 +1025,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pki_signatures`
+##### <a name="pki_signatures"></a>`pki_signatures`
 
 Data type: `Any`
 
@@ -932,7 +1033,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pki_signer`
+##### <a name="pki_signer"></a>`pki_signer`
 
 Data type: `Any`
 
@@ -940,7 +1041,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `plugin_directory`
+##### <a name="plugin_directory"></a>`plugin_directory`
 
 Data type: `Any`
 
@@ -948,7 +1049,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `plugin_names`
+##### <a name="plugin_names"></a>`plugin_names`
 
 Data type: `Any`
 
@@ -956,7 +1057,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `scripts_directory`
+##### <a name="scripts_directory"></a>`scripts_directory`
 
 Data type: `Any`
 
@@ -964,7 +1065,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_connect_timeout`
+##### <a name="sd_connect_timeout"></a>`sd_connect_timeout`
 
 Data type: `Any`
 
@@ -972,7 +1073,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `secure_erase_command`
+##### <a name="secure_erase_command"></a>`secure_erase_command`
 
 Data type: `Any`
 
@@ -980,7 +1081,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -988,7 +1089,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -996,7 +1097,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -1004,7 +1105,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -1012,7 +1113,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -1020,7 +1121,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -1028,7 +1129,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -1036,7 +1137,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -1044,7 +1145,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -1052,7 +1153,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -1060,7 +1161,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -1068,7 +1169,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -1076,7 +1177,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ver_id`
+##### <a name="ver_id"></a>`ver_id`
 
 Data type: `Any`
 
@@ -1084,7 +1185,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `working_directory`
+##### <a name="working_directory"></a>`working_directory`
 
 Data type: `Any`
 
@@ -1092,7 +1193,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::console`
+### <a name="bareosconsole"></a>`bareos::console`
 
 == Class: bareos::console
 This class manages the bareos console (bconsole cli tool) package and configuration directory.
@@ -1103,9 +1204,14 @@ It is not intended to be used directly by external resources like node definitio
 
 #### Parameters
 
-The following parameters are available in the `bareos::console` class.
+The following parameters are available in the `bareos::console` class:
 
-##### `manage_package`
+* [`manage_package`](#manage_package)
+* [`package_name`](#package_name)
+* [`package_ensure`](#package_ensure)
+* [`config_dir`](#config_dir)
+
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -1113,7 +1219,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -1121,7 +1227,7 @@ Data type: `Any`
 
 Default value: `$bareos::console_package_name`
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -1129,7 +1235,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `config_dir`
+##### <a name="config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -1137,7 +1243,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bconsole.d"`
 
-### `bareos::director`
+### <a name="bareosdirector"></a>`bareos::director`
 
 == Class: bareos::director
 This class manages the bareos director service, packages and configuration directory.
@@ -1148,9 +1254,33 @@ It is not intended to be used directly by external resources like node definitio
 
 #### Parameters
 
-The following parameters are available in the `bareos::director` class.
+The following parameters are available in the `bareos::director` class:
 
-##### `manage_service`
+* [`manage_service`](#manage_service)
+* [`manage_package`](#manage_package)
+* [`manage_database`](#manage_database)
+* [`package_name`](#package_name)
+* [`package_ensure`](#package_ensure)
+* [`service_name`](#service_name)
+* [`service_allow_restart`](#service_allow_restart)
+* [`service_ensure`](#service_ensure)
+* [`service_enable`](#service_enable)
+* [`config_dir`](#config_dir)
+* [`managed_dirs`](#managed_dirs)
+* [`catalogs`](#catalogs)
+* [`clients`](#clients)
+* [`consoles`](#consoles)
+* [`counters`](#counters)
+* [`filesets`](#filesets)
+* [`jobs`](#jobs)
+* [`jobdefs`](#jobdefs)
+* [`messages`](#messages)
+* [`pools`](#pools)
+* [`profiles`](#profiles)
+* [`schedules`](#schedules)
+* [`storages`](#storages)
+
+##### <a name="manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -1158,7 +1288,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -1166,7 +1296,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `manage_database`
+##### <a name="manage_database"></a>`manage_database`
 
 Data type: `Any`
 
@@ -1174,7 +1304,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_database`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -1182,7 +1312,7 @@ Data type: `Any`
 
 Default value: `$bareos::director_package_name`
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -1190,7 +1320,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -1198,7 +1328,15 @@ Data type: `Any`
 
 Default value: `$bareos::director_service_name`
 
-##### `service_ensure`
+##### <a name="service_allow_restart"></a>`service_allow_restart`
+
+Data type: `Any`
+
+
+
+Default value: `$bareos::director_service_allow_restart`
+
+##### <a name="service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -1206,7 +1344,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -1214,7 +1352,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -1222,7 +1360,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bareos-dir.d"`
 
-##### `managed_dirs`
+##### <a name="managed_dirs"></a>`managed_dirs`
 
 Data type: `Array[String]`
 
@@ -1230,7 +1368,7 @@ Data type: `Array[String]`
 
 Default value: `$bareos::director_managed_dirs`
 
-##### `catalogs`
+##### <a name="catalogs"></a>`catalogs`
 
 Data type: `Hash`
 
@@ -1238,7 +1376,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `clients`
+##### <a name="clients"></a>`clients`
 
 Data type: `Hash`
 
@@ -1246,7 +1384,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `consoles`
+##### <a name="consoles"></a>`consoles`
 
 Data type: `Hash`
 
@@ -1254,7 +1392,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `counters`
+##### <a name="counters"></a>`counters`
 
 Data type: `Hash`
 
@@ -1262,7 +1400,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `filesets`
+##### <a name="filesets"></a>`filesets`
 
 Data type: `Hash`
 
@@ -1270,7 +1408,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `jobs`
+##### <a name="jobs"></a>`jobs`
 
 Data type: `Hash`
 
@@ -1278,7 +1416,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `jobdefs`
+##### <a name="jobdefs"></a>`jobdefs`
 
 Data type: `Hash`
 
@@ -1286,7 +1424,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Hash`
 
@@ -1294,7 +1432,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `pools`
+##### <a name="pools"></a>`pools`
 
 Data type: `Hash`
 
@@ -1302,7 +1440,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `profiles`
+##### <a name="profiles"></a>`profiles`
 
 Data type: `Hash`
 
@@ -1310,7 +1448,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `schedules`
+##### <a name="schedules"></a>`schedules`
 
 Data type: `Hash`
 
@@ -1318,7 +1456,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `storages`
+##### <a name="storages"></a>`storages`
 
 Data type: `Hash`
 
@@ -1326,7 +1464,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-### `bareos::director::director`
+### <a name="bareosdirectordirector"></a>`bareos::director::director`
 
 == Class: bareos::director::director
 To define the Director's name and its access password used for authenticating the Console program.
@@ -1678,9 +1816,59 @@ Only a single Director resource definition may appear in the Director's configur
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::director` class.
+The following parameters are available in the `bareos::director::director` class:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`absolute_job_timeout`](#absolute_job_timeout)
+* [`audit_events`](#audit_events)
+* [`auditing`](#auditing)
+* [`backend_directory`](#backend_directory)
+* [`description`](#description)
+* [`dir_address`](#dir_address)
+* [`dir_addresses`](#dir_addresses)
+* [`dir_port`](#dir_port)
+* [`dir_source_address`](#dir_source_address)
+* [`fd_connect_timeout`](#fd_connect_timeout)
+* [`heartbeat_interval`](#heartbeat_interval)
+* [`key_encryption_key`](#key_encryption_key)
+* [`log_timestamp_format`](#log_timestamp_format)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`maximum_connections`](#maximum_connections)
+* [`maximum_console_connections`](#maximum_console_connections)
+* [`messages`](#messages)
+* [`name_director`](#name_director)
+* [`ndmp_log_level`](#ndmp_log_level)
+* [`ndmp_snooping`](#ndmp_snooping)
+* [`omit_defaults`](#omit_defaults)
+* [`optimize_for_size`](#optimize_for_size)
+* [`optimize_for_speed`](#optimize_for_speed)
+* [`password`](#password)
+* [`pid_directory`](#pid_directory)
+* [`plugin_directory`](#plugin_directory)
+* [`plugin_names`](#plugin_names)
+* [`query_file`](#query_file)
+* [`scripts_directory`](#scripts_directory)
+* [`sd_connect_timeout`](#sd_connect_timeout)
+* [`secure_erase_command`](#secure_erase_command)
+* [`statistics_collect_interval`](#statistics_collect_interval)
+* [`statistics_retention`](#statistics_retention)
+* [`subscriptions`](#subscriptions)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+* [`ver_id`](#ver_id)
+* [`working_directory`](#working_directory)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -1688,7 +1876,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `absolute_job_timeout`
+##### <a name="absolute_job_timeout"></a>`absolute_job_timeout`
 
 Data type: `Any`
 
@@ -1696,7 +1884,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `audit_events`
+##### <a name="audit_events"></a>`audit_events`
 
 Data type: `Any`
 
@@ -1704,7 +1892,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auditing`
+##### <a name="auditing"></a>`auditing`
 
 Data type: `Any`
 
@@ -1712,7 +1900,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `backend_directory`
+##### <a name="backend_directory"></a>`backend_directory`
 
 Data type: `Any`
 
@@ -1720,7 +1908,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -1728,7 +1916,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_address`
+##### <a name="dir_address"></a>`dir_address`
 
 Data type: `Any`
 
@@ -1736,7 +1924,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_addresses`
+##### <a name="dir_addresses"></a>`dir_addresses`
 
 Data type: `Any`
 
@@ -1744,7 +1932,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_port`
+##### <a name="dir_port"></a>`dir_port`
 
 Data type: `Any`
 
@@ -1752,7 +1940,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_source_address`
+##### <a name="dir_source_address"></a>`dir_source_address`
 
 Data type: `Any`
 
@@ -1760,7 +1948,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_connect_timeout`
+##### <a name="fd_connect_timeout"></a>`fd_connect_timeout`
 
 Data type: `Any`
 
@@ -1768,7 +1956,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `heartbeat_interval`
+##### <a name="heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
@@ -1776,7 +1964,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `key_encryption_key`
+##### <a name="key_encryption_key"></a>`key_encryption_key`
 
 Data type: `Any`
 
@@ -1784,7 +1972,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `log_timestamp_format`
+##### <a name="log_timestamp_format"></a>`log_timestamp_format`
 
 Data type: `Any`
 
@@ -1792,7 +1980,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -1800,7 +1988,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_connections`
+##### <a name="maximum_connections"></a>`maximum_connections`
 
 Data type: `Any`
 
@@ -1808,7 +1996,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_console_connections`
+##### <a name="maximum_console_connections"></a>`maximum_console_connections`
 
 Data type: `Any`
 
@@ -1816,7 +2004,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Any`
 
@@ -1824,7 +2012,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `name_director`
+##### <a name="name_director"></a>`name_director`
 
 Data type: `Any`
 
@@ -1832,7 +2020,7 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `ndmp_log_level`
+##### <a name="ndmp_log_level"></a>`ndmp_log_level`
 
 Data type: `Any`
 
@@ -1840,7 +2028,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_snooping`
+##### <a name="ndmp_snooping"></a>`ndmp_snooping`
 
 Data type: `Any`
 
@@ -1848,7 +2036,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `omit_defaults`
+##### <a name="omit_defaults"></a>`omit_defaults`
 
 Data type: `Any`
 
@@ -1856,7 +2044,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `optimize_for_size`
+##### <a name="optimize_for_size"></a>`optimize_for_size`
 
 Data type: `Any`
 
@@ -1864,7 +2052,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `optimize_for_speed`
+##### <a name="optimize_for_speed"></a>`optimize_for_speed`
 
 Data type: `Any`
 
@@ -1872,7 +2060,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -1880,7 +2068,7 @@ Data type: `Any`
 
 Default value: `'PleaseChangeMe'`
 
-##### `pid_directory`
+##### <a name="pid_directory"></a>`pid_directory`
 
 Data type: `Any`
 
@@ -1888,7 +2076,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `plugin_directory`
+##### <a name="plugin_directory"></a>`plugin_directory`
 
 Data type: `Any`
 
@@ -1896,7 +2084,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `plugin_names`
+##### <a name="plugin_names"></a>`plugin_names`
 
 Data type: `Any`
 
@@ -1904,7 +2092,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `query_file`
+##### <a name="query_file"></a>`query_file`
 
 Data type: `Any`
 
@@ -1912,7 +2100,7 @@ Data type: `Any`
 
 Default value: `'/usr/lib/bareos/scripts/query.sql'`
 
-##### `scripts_directory`
+##### <a name="scripts_directory"></a>`scripts_directory`
 
 Data type: `Any`
 
@@ -1920,7 +2108,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_connect_timeout`
+##### <a name="sd_connect_timeout"></a>`sd_connect_timeout`
 
 Data type: `Any`
 
@@ -1928,7 +2116,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `secure_erase_command`
+##### <a name="secure_erase_command"></a>`secure_erase_command`
 
 Data type: `Any`
 
@@ -1936,7 +2124,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `statistics_collect_interval`
+##### <a name="statistics_collect_interval"></a>`statistics_collect_interval`
 
 Data type: `Any`
 
@@ -1944,7 +2132,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `statistics_retention`
+##### <a name="statistics_retention"></a>`statistics_retention`
 
 Data type: `Any`
 
@@ -1952,7 +2140,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `subscriptions`
+##### <a name="subscriptions"></a>`subscriptions`
 
 Data type: `Any`
 
@@ -1960,7 +2148,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -1968,7 +2156,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -1976,7 +2164,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -1984,7 +2172,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -1992,7 +2180,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -2000,7 +2188,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -2008,7 +2196,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -2016,7 +2204,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -2024,7 +2212,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -2032,7 +2220,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -2040,7 +2228,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -2048,7 +2236,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -2056,7 +2244,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ver_id`
+##### <a name="ver_id"></a>`ver_id`
 
 Data type: `Any`
 
@@ -2064,7 +2252,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `working_directory`
+##### <a name="working_directory"></a>`working_directory`
 
 Data type: `Any`
 
@@ -2072,7 +2260,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::monitor`
+### <a name="bareosmonitor"></a>`bareos::monitor`
 
 == Class: bareos::monitor
 This class manages the bareos (tray-) monitor package and configuration directory.
@@ -2083,9 +2271,14 @@ It is not intended to be used directly by external resources like node definitio
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor` class.
+The following parameters are available in the `bareos::monitor` class:
 
-##### `manage_package`
+* [`manage_package`](#manage_package)
+* [`package_name`](#package_name)
+* [`package_ensure`](#package_ensure)
+* [`config_dir`](#config_dir)
+
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -2093,7 +2286,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -2101,7 +2294,7 @@ Data type: `Any`
 
 Default value: `$bareos::monitor_package_name`
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -2109,7 +2302,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `config_dir`
+##### <a name="config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -2117,20 +2310,24 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/tray-monitor.d"`
 
-### `bareos::params`
+### <a name="bareosparams"></a>`bareos::params`
 
 == Class: bareos::params
 
-### `bareos::profile::client`
+### <a name="bareosprofileclient"></a>`bareos::profile::client`
 
 == Class: bareos::profile::client
 setup an simple bareos filedaemon/client
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::client` class.
+The following parameters are available in the `bareos::profile::client` class:
 
-##### `name_client`
+* [`name_client`](#name_client)
+* [`name_dir`](#name_dir)
+* [`password`](#password)
+
+##### <a name="name_client"></a>`name_client`
 
 Data type: `Any`
 
@@ -2138,7 +2335,7 @@ Data type: `Any`
 
 Default value: `$facts['networking']['fqdn']`
 
-##### `name_dir`
+##### <a name="name_dir"></a>`name_dir`
 
 Data type: `Any`
 
@@ -2146,7 +2343,7 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -2154,16 +2351,22 @@ Data type: `Any`
 
 Default value: `'MyClientPasswordPleaseChange'`
 
-### `bareos::profile::director`
+### <a name="bareosprofiledirector"></a>`bareos::profile::director`
 
 == Class: bareos::profile::director
 Ready to use director with default configs
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::director` class.
+The following parameters are available in the `bareos::profile::director` class:
 
-##### `password`
+* [`password`](#password)
+* [`name_dir`](#name_dir)
+* [`catalog_conf`](#catalog_conf)
+* [`storage_address`](#storage_address)
+* [`storage_password`](#storage_password)
+
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -2171,7 +2374,7 @@ Data type: `Any`
 
 Default value: `'MyDirectorPasswordPleaseChange'`
 
-##### `name_dir`
+##### <a name="name_dir"></a>`name_dir`
 
 Data type: `Any`
 
@@ -2179,7 +2382,7 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `catalog_conf`
+##### <a name="catalog_conf"></a>`catalog_conf`
 
 Data type: `Any`
 
@@ -2190,7 +2393,7 @@ Default value: `{
     'db_name'   => 'bareos_mycatalog',
   }`
 
-##### `storage_address`
+##### <a name="storage_address"></a>`storage_address`
 
 Data type: `Any`
 
@@ -2198,7 +2401,7 @@ Data type: `Any`
 
 Default value: `'localhost'`
 
-##### `storage_password`
+##### <a name="storage_password"></a>`storage_password`
 
 Data type: `Any`
 
@@ -2206,50 +2409,53 @@ Data type: `Any`
 
 Default value: `'BareosStoragePleaseChangeMe'`
 
-### `bareos::profile::director::client`
+### <a name="bareosprofiledirectorclient"></a>`bareos::profile::director::client`
 
 == Class: bareos::profile::director::client
 Default client, backup bareos director itself
 
-### `bareos::profile::director::fileset`
+### <a name="bareosprofiledirectorfileset"></a>`bareos::profile::director::fileset`
 
 == Class: bareos::profile::director::fileset
 Default filesets
 
-### `bareos::profile::director::jobdefs`
+### <a name="bareosprofiledirectorjobdefs"></a>`bareos::profile::director::jobdefs`
 
 == Class: bareos::profile::director::jobdefs
 Default jobdefs
 
-### `bareos::profile::director::messages`
+### <a name="bareosprofiledirectormessages"></a>`bareos::profile::director::messages`
 
 == Class: bareos::profile::director::messages
 Default messages
 
-### `bareos::profile::director::pool`
+### <a name="bareosprofiledirectorpool"></a>`bareos::profile::director::pool`
 
 == Class: bareos::profile::director::pool
 Some default pools
 
-### `bareos::profile::director::profile`
+### <a name="bareosprofiledirectorprofile"></a>`bareos::profile::director::profile`
 
 == Class: bareos::profile::director::profile
 
-### `bareos::profile::director::schedule`
+### <a name="bareosprofiledirectorschedule"></a>`bareos::profile::director::schedule`
 
 == Class: bareos::profile::director::schedule
 Default schedules
 
-### `bareos::profile::director::storage`
+### <a name="bareosprofiledirectorstorage"></a>`bareos::profile::director::storage`
 
 == Class: bareos::profile::director::storage
 Default storage daemon
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::director::storage` class.
+The following parameters are available in the `bareos::profile::director::storage` class:
 
-##### `address`
+* [`address`](#address)
+* [`password`](#password)
+
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -2257,7 +2463,7 @@ Data type: `Any`
 
 Default value: `'localhost'`
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -2265,15 +2471,20 @@ Data type: `Any`
 
 Default value: `'BareosStoragePleaseChangeMe'`
 
-### `bareos::profile::storage`
+### <a name="bareosprofilestorage"></a>`bareos::profile::storage`
 
 == Class: bareos::profile::storage
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::storage` class.
+The following parameters are available in the `bareos::profile::storage` class:
 
-##### `name_storage`
+* [`name_storage`](#name_storage)
+* [`name_dir`](#name_dir)
+* [`password`](#password)
+* [`archive_device`](#archive_device)
+
+##### <a name="name_storage"></a>`name_storage`
 
 Data type: `Any`
 
@@ -2281,7 +2492,7 @@ Data type: `Any`
 
 Default value: `'bareos-sd'`
 
-##### `name_dir`
+##### <a name="name_dir"></a>`name_dir`
 
 Data type: `Any`
 
@@ -2289,7 +2500,7 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -2297,7 +2508,7 @@ Data type: `Any`
 
 Default value: `'BareosStoragePleaseChangeMe'`
 
-##### `archive_device`
+##### <a name="archive_device"></a>`archive_device`
 
 Data type: `Any`
 
@@ -2305,23 +2516,29 @@ Data type: `Any`
 
 Default value: `'/var/lib/bareos/storage'`
 
-### `bareos::repository`
+### <a name="bareosrepository"></a>`bareos::repository`
 
 == Class: bareos::repository
 
 #### Parameters
 
-The following parameters are available in the `bareos::repository` class.
+The following parameters are available in the `bareos::repository` class:
 
-##### `release`
+* [`release`](#release)
+* [`gpg_key_fingerprint`](#gpg_key_fingerprint)
+* [`subscription`](#subscription)
+* [`username`](#username)
+* [`password`](#password)
 
-Data type: `String`
+##### <a name="release"></a>`release`
+
+Data type: `Enum['18.2', '19.2', '20', '21']`
 
 The major bareos release version which should be used
 
-Default value: `'latest'`
+Default value: `'21'`
 
-##### `gpg_key_fingerprint`
+##### <a name="gpg_key_fingerprint"></a>`gpg_key_fingerprint`
 
 Data type: `Optional[String[1]]`
 
@@ -2329,7 +2546,7 @@ The GPG fingerprint of the repos key
 
 Default value: ``undef``
 
-##### `subscription`
+##### <a name="subscription"></a>`subscription`
 
 Data type: `Boolean`
 
@@ -2337,7 +2554,7 @@ Activate the (paid) subscription repo. Otherwise the opensource repos will be se
 
 Default value: ``false``
 
-##### `username`
+##### <a name="username"></a>`username`
 
 Data type: `Optional[String]`
 
@@ -2345,7 +2562,7 @@ The major bareos release version which should be used
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Optional[String]`
 
@@ -2353,16 +2570,30 @@ The major bareos release version which should be used
 
 Default value: ``undef``
 
-### `bareos::storage`
+### <a name="bareosstorage"></a>`bareos::storage`
 
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage` class.
+The following parameters are available in the `bareos::storage` class:
 
-##### `manage_service`
+* [`manage_service`](#manage_service)
+* [`manage_package`](#manage_package)
+* [`package_name`](#package_name)
+* [`package_ensure`](#package_ensure)
+* [`service_name`](#service_name)
+* [`service_ensure`](#service_ensure)
+* [`service_enable`](#service_enable)
+* [`config_dir`](#config_dir)
+* [`autochangers`](#autochangers)
+* [`devices`](#devices)
+* [`directors`](#directors)
+* [`messages`](#messages)
+* [`ndmps`](#ndmps)
+
+##### <a name="manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -2370,7 +2601,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -2378,7 +2609,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -2386,7 +2617,7 @@ Data type: `Any`
 
 Default value: `$bareos::storage_package_name`
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -2394,7 +2625,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -2402,7 +2633,7 @@ Data type: `Any`
 
 Default value: `$bareos::storage_service_name`
 
-##### `service_ensure`
+##### <a name="service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -2410,7 +2641,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -2418,7 +2649,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -2426,7 +2657,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bareos-sd.d"`
 
-##### `autochangers`
+##### <a name="autochangers"></a>`autochangers`
 
 Data type: `Hash`
 
@@ -2434,7 +2665,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `devices`
+##### <a name="devices"></a>`devices`
 
 Data type: `Hash`
 
@@ -2442,7 +2673,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `directors`
+##### <a name="directors"></a>`directors`
 
 Data type: `Hash`
 
@@ -2450,7 +2681,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Hash`
 
@@ -2458,7 +2689,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `ndmps`
+##### <a name="ndmps"></a>`ndmps`
 
 Data type: `Hash`
 
@@ -2466,7 +2697,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-### `bareos::storage::storage`
+### <a name="bareosstoragestorage"></a>`bareos::storage::storage`
 
 == Class: bareos::storage::storage
 In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
@@ -2844,9 +3075,63 @@ In general, the properties specified under the Storage resource dene global prop
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::storage` class.
+The following parameters are available in the `bareos::storage::storage` class:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`absolute_job_timeout`](#absolute_job_timeout)
+* [`allow_bandwidth_bursting`](#allow_bandwidth_bursting)
+* [`auto_x_flate_on_replication`](#auto_x_flate_on_replication)
+* [`backend_directory`](#backend_directory)
+* [`client_connect_wait`](#client_connect_wait)
+* [`collect_device_statistics`](#collect_device_statistics)
+* [`collect_job_statistics`](#collect_job_statistics)
+* [`compatible`](#compatible)
+* [`description`](#description)
+* [`device_reserve_by_media_type`](#device_reserve_by_media_type)
+* [`fd_connect_timeout`](#fd_connect_timeout)
+* [`file_device_concurrent_read`](#file_device_concurrent_read)
+* [`heartbeat_interval`](#heartbeat_interval)
+* [`log_timestamp_format`](#log_timestamp_format)
+* [`maximum_bandwidth_per_job`](#maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`maximum_connections`](#maximum_connections)
+* [`maximum_network_buffer_size`](#maximum_network_buffer_size)
+* [`messages`](#messages)
+* [`name_storage`](#name_storage)
+* [`ndmp_address`](#ndmp_address)
+* [`ndmp_addresses`](#ndmp_addresses)
+* [`ndmp_enable`](#ndmp_enable)
+* [`ndmp_log_level`](#ndmp_log_level)
+* [`ndmp_port`](#ndmp_port)
+* [`ndmp_snooping`](#ndmp_snooping)
+* [`pid_directory`](#pid_directory)
+* [`plugin_directory`](#plugin_directory)
+* [`plugin_names`](#plugin_names)
+* [`scripts_directory`](#scripts_directory)
+* [`sd_address`](#sd_address)
+* [`sd_addresses`](#sd_addresses)
+* [`sd_connect_timeout`](#sd_connect_timeout)
+* [`sd_port`](#sd_port)
+* [`sd_source_address`](#sd_source_address)
+* [`secure_erase_command`](#secure_erase_command)
+* [`statistics_collect_interval`](#statistics_collect_interval)
+* [`sub_sys_directory`](#sub_sys_directory)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+* [`ver_id`](#ver_id)
+* [`working_directory`](#working_directory)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -2854,7 +3139,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `absolute_job_timeout`
+##### <a name="absolute_job_timeout"></a>`absolute_job_timeout`
 
 Data type: `Any`
 
@@ -2862,7 +3147,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_bandwidth_bursting`
+##### <a name="allow_bandwidth_bursting"></a>`allow_bandwidth_bursting`
 
 Data type: `Any`
 
@@ -2870,7 +3155,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_x_flate_on_replication`
+##### <a name="auto_x_flate_on_replication"></a>`auto_x_flate_on_replication`
 
 Data type: `Any`
 
@@ -2878,7 +3163,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `backend_directory`
+##### <a name="backend_directory"></a>`backend_directory`
 
 Data type: `Any`
 
@@ -2886,7 +3171,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client_connect_wait`
+##### <a name="client_connect_wait"></a>`client_connect_wait`
 
 Data type: `Any`
 
@@ -2894,7 +3179,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `collect_device_statistics`
+##### <a name="collect_device_statistics"></a>`collect_device_statistics`
 
 Data type: `Any`
 
@@ -2902,7 +3187,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `collect_job_statistics`
+##### <a name="collect_job_statistics"></a>`collect_job_statistics`
 
 Data type: `Any`
 
@@ -2910,7 +3195,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `compatible`
+##### <a name="compatible"></a>`compatible`
 
 Data type: `Any`
 
@@ -2918,7 +3203,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -2926,7 +3211,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `device_reserve_by_media_type`
+##### <a name="device_reserve_by_media_type"></a>`device_reserve_by_media_type`
 
 Data type: `Any`
 
@@ -2934,7 +3219,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_connect_timeout`
+##### <a name="fd_connect_timeout"></a>`fd_connect_timeout`
 
 Data type: `Any`
 
@@ -2942,7 +3227,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_device_concurrent_read`
+##### <a name="file_device_concurrent_read"></a>`file_device_concurrent_read`
 
 Data type: `Any`
 
@@ -2950,7 +3235,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `heartbeat_interval`
+##### <a name="heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
@@ -2958,7 +3243,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `log_timestamp_format`
+##### <a name="log_timestamp_format"></a>`log_timestamp_format`
 
 Data type: `Any`
 
@@ -2966,7 +3251,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth_per_job`
+##### <a name="maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
@@ -2974,7 +3259,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -2982,7 +3267,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_connections`
+##### <a name="maximum_connections"></a>`maximum_connections`
 
 Data type: `Any`
 
@@ -2990,7 +3275,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_network_buffer_size`
+##### <a name="maximum_network_buffer_size"></a>`maximum_network_buffer_size`
 
 Data type: `Any`
 
@@ -2998,7 +3283,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Any`
 
@@ -3006,7 +3291,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `name_storage`
+##### <a name="name_storage"></a>`name_storage`
 
 Data type: `Any`
 
@@ -3014,7 +3299,7 @@ Data type: `Any`
 
 Default value: `'bareos-sd'`
 
-##### `ndmp_address`
+##### <a name="ndmp_address"></a>`ndmp_address`
 
 Data type: `Any`
 
@@ -3022,7 +3307,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_addresses`
+##### <a name="ndmp_addresses"></a>`ndmp_addresses`
 
 Data type: `Any`
 
@@ -3030,7 +3315,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_enable`
+##### <a name="ndmp_enable"></a>`ndmp_enable`
 
 Data type: `Any`
 
@@ -3038,7 +3323,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_log_level`
+##### <a name="ndmp_log_level"></a>`ndmp_log_level`
 
 Data type: `Any`
 
@@ -3046,7 +3331,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_port`
+##### <a name="ndmp_port"></a>`ndmp_port`
 
 Data type: `Any`
 
@@ -3054,7 +3339,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_snooping`
+##### <a name="ndmp_snooping"></a>`ndmp_snooping`
 
 Data type: `Any`
 
@@ -3062,7 +3347,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pid_directory`
+##### <a name="pid_directory"></a>`pid_directory`
 
 Data type: `Any`
 
@@ -3070,7 +3355,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `plugin_directory`
+##### <a name="plugin_directory"></a>`plugin_directory`
 
 Data type: `Any`
 
@@ -3078,7 +3363,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `plugin_names`
+##### <a name="plugin_names"></a>`plugin_names`
 
 Data type: `Any`
 
@@ -3086,7 +3371,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `scripts_directory`
+##### <a name="scripts_directory"></a>`scripts_directory`
 
 Data type: `Any`
 
@@ -3094,7 +3379,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_address`
+##### <a name="sd_address"></a>`sd_address`
 
 Data type: `Any`
 
@@ -3102,7 +3387,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_addresses`
+##### <a name="sd_addresses"></a>`sd_addresses`
 
 Data type: `Any`
 
@@ -3110,7 +3395,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_connect_timeout`
+##### <a name="sd_connect_timeout"></a>`sd_connect_timeout`
 
 Data type: `Any`
 
@@ -3118,7 +3403,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_port`
+##### <a name="sd_port"></a>`sd_port`
 
 Data type: `Any`
 
@@ -3126,7 +3411,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_source_address`
+##### <a name="sd_source_address"></a>`sd_source_address`
 
 Data type: `Any`
 
@@ -3134,7 +3419,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `secure_erase_command`
+##### <a name="secure_erase_command"></a>`secure_erase_command`
 
 Data type: `Any`
 
@@ -3142,7 +3427,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `statistics_collect_interval`
+##### <a name="statistics_collect_interval"></a>`statistics_collect_interval`
 
 Data type: `Any`
 
@@ -3150,7 +3435,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sub_sys_directory`
+##### <a name="sub_sys_directory"></a>`sub_sys_directory`
 
 Data type: `Any`
 
@@ -3158,7 +3443,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -3166,7 +3451,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -3174,7 +3459,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -3182,7 +3467,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -3190,7 +3475,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -3198,7 +3483,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -3206,7 +3491,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -3214,7 +3499,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -3222,7 +3507,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -3230,7 +3515,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -3238,7 +3523,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -3246,7 +3531,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -3254,7 +3539,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ver_id`
+##### <a name="ver_id"></a>`ver_id`
 
 Data type: `Any`
 
@@ -3262,7 +3547,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `working_directory`
+##### <a name="working_directory"></a>`working_directory`
 
 Data type: `Any`
 
@@ -3270,7 +3555,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::webui`
+### <a name="bareoswebui"></a>`bareos::webui`
 
 == Class: bareos::webui
 This class manages the bareos webui service, package and configuration.
@@ -3279,9 +3564,25 @@ This class will be automatically included when a resource is defined.
 
 #### Parameters
 
-The following parameters are available in the `bareos::webui` class.
+The following parameters are available in the `bareos::webui` class:
 
-##### `manage_service`
+* [`manage_service`](#manage_service)
+* [`manage_package`](#manage_package)
+* [`package_name`](#package_name)
+* [`package_ensure`](#package_ensure)
+* [`service_name`](#service_name)
+* [`service_ensure`](#service_ensure)
+* [`service_enable`](#service_enable)
+* [`config_dir`](#config_dir)
+* [`manage_local_dir`](#manage_local_dir)
+* [`session_timeout`](#session_timeout)
+* [`pagination_values`](#pagination_values)
+* [`pagination_default_value`](#pagination_default_value)
+* [`save_previous_state`](#save_previous_state)
+* [`label_pooltype`](#label_pooltype)
+* [`directors`](#directors)
+
+##### <a name="manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -3289,7 +3590,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -3297,7 +3598,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -3305,7 +3606,7 @@ Data type: `Any`
 
 Default value: `$bareos::webui_package_name`
 
-##### `package_ensure`
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -3313,7 +3614,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -3321,7 +3622,7 @@ Data type: `Any`
 
 Default value: `$bareos::webui_service_name`
 
-##### `service_ensure`
+##### <a name="service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -3329,7 +3630,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -3337,7 +3638,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -3345,7 +3646,7 @@ Data type: `Any`
 
 Default value: `$bareos::config_dir_webui`
 
-##### `manage_local_dir`
+##### <a name="manage_local_dir"></a>`manage_local_dir`
 
 Data type: `Any`
 
@@ -3353,7 +3654,7 @@ Data type: `Any`
 
 Default value: ``true``
 
-##### `session_timeout`
+##### <a name="session_timeout"></a>`session_timeout`
 
 Data type: `Any`
 
@@ -3361,7 +3662,7 @@ Data type: `Any`
 
 Default value: `3600`
 
-##### `pagination_values`
+##### <a name="pagination_values"></a>`pagination_values`
 
 Data type: `Any`
 
@@ -3369,7 +3670,7 @@ Data type: `Any`
 
 Default value: `'10,25,50,100'`
 
-##### `pagination_default_value`
+##### <a name="pagination_default_value"></a>`pagination_default_value`
 
 Data type: `Any`
 
@@ -3377,7 +3678,7 @@ Data type: `Any`
 
 Default value: `25`
 
-##### `save_previous_state`
+##### <a name="save_previous_state"></a>`save_previous_state`
 
 Data type: `Any`
 
@@ -3385,7 +3686,7 @@ Data type: `Any`
 
 Default value: ``false``
 
-##### `label_pooltype`
+##### <a name="label_pooltype"></a>`label_pooltype`
 
 Data type: `Any`
 
@@ -3393,7 +3694,7 @@ Data type: `Any`
 
 Default value: `''`
 
-##### `directors`
+##### <a name="directors"></a>`directors`
 
 Data type: `Any`
 
@@ -3403,7 +3704,7 @@ Default value: `{}`
 
 ## Defined types
 
-### `bareos::client::director`
+### <a name="bareosclientdirector"></a>`bareos::client::director`
 
 == Define: bareos::client::director
 The Director resource defines the name and password of the Directors that are permitted to contact this Client.
@@ -3571,9 +3872,33 @@ The Director resource defines the name and password of the Directors that are pe
 
 #### Parameters
 
-The following parameters are available in the `bareos::client::director` defined type.
+The following parameters are available in the `bareos::client::director` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`address`](#address)
+* [`allowed_job_command`](#allowed_job_command)
+* [`allowed_script_dir`](#allowed_script_dir)
+* [`connection_from_client_to_director`](#connection_from_client_to_director)
+* [`connection_from_director_to_client`](#connection_from_director_to_client)
+* [`description`](#description)
+* [`maximum_bandwidth_per_job`](#maximum_bandwidth_per_job)
+* [`monitor`](#monitor)
+* [`password`](#password)
+* [`port`](#port)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -3581,7 +3906,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -3589,7 +3914,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allowed_job_command`
+##### <a name="allowed_job_command"></a>`allowed_job_command`
 
 Data type: `Any`
 
@@ -3597,7 +3922,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allowed_script_dir`
+##### <a name="allowed_script_dir"></a>`allowed_script_dir`
 
 Data type: `Any`
 
@@ -3605,7 +3930,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `connection_from_client_to_director`
+##### <a name="connection_from_client_to_director"></a>`connection_from_client_to_director`
 
 Data type: `Any`
 
@@ -3613,7 +3938,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `connection_from_director_to_client`
+##### <a name="connection_from_director_to_client"></a>`connection_from_director_to_client`
 
 Data type: `Any`
 
@@ -3621,7 +3946,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -3629,7 +3954,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth_per_job`
+##### <a name="maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
@@ -3637,7 +3962,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `monitor`
+##### <a name="monitor"></a>`monitor`
 
 Data type: `Any`
 
@@ -3645,7 +3970,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -3653,7 +3978,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Any`
 
@@ -3661,7 +3986,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -3669,7 +3994,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -3677,7 +4002,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -3685,7 +4010,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -3693,7 +4018,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -3701,7 +4026,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -3709,7 +4034,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -3717,7 +4042,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -3725,7 +4050,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -3733,7 +4058,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -3741,7 +4066,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -3749,7 +4074,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -3757,7 +4082,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::client::messages`
+### <a name="bareosclientmessages"></a>`bareos::client::messages`
 
 == Define: bareos::client::messages
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
@@ -3892,9 +4217,27 @@ The Messages resource defines how messages are to be handled and destinations to
 
 #### Parameters
 
-The following parameters are available in the `bareos::client::messages` defined type.
+The following parameters are available in the `bareos::client::messages` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`append`](#append)
+* [`catalog`](#catalog)
+* [`console`](#console)
+* [`description`](#description)
+* [`director`](#director)
+* [`file`](#file)
+* [`mail`](#mail)
+* [`mail_command`](#mail_command)
+* [`mail_on_error`](#mail_on_error)
+* [`mail_on_success`](#mail_on_success)
+* [`operator`](#operator)
+* [`operator_command`](#operator_command)
+* [`stderr`](#stderr)
+* [`stdout`](#stdout)
+* [`syslog`](#syslog)
+* [`timestamp_format`](#timestamp_format)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -3902,7 +4245,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `append`
+##### <a name="append"></a>`append`
 
 Data type: `Any`
 
@@ -3910,7 +4253,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -3918,7 +4261,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `console`
+##### <a name="console"></a>`console`
 
 Data type: `Any`
 
@@ -3926,7 +4269,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -3934,7 +4277,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `director`
+##### <a name="director"></a>`director`
 
 Data type: `Any`
 
@@ -3942,7 +4285,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file`
+##### <a name="file"></a>`file`
 
 Data type: `Any`
 
@@ -3950,7 +4293,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail`
+##### <a name="mail"></a>`mail`
 
 Data type: `Any`
 
@@ -3958,7 +4301,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_command`
+##### <a name="mail_command"></a>`mail_command`
 
 Data type: `Any`
 
@@ -3966,7 +4309,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_on_error`
+##### <a name="mail_on_error"></a>`mail_on_error`
 
 Data type: `Any`
 
@@ -3974,7 +4317,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_on_success`
+##### <a name="mail_on_success"></a>`mail_on_success`
 
 Data type: `Any`
 
@@ -3982,7 +4325,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `operator`
+##### <a name="operator"></a>`operator`
 
 Data type: `Any`
 
@@ -3990,7 +4333,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `operator_command`
+##### <a name="operator_command"></a>`operator_command`
 
 Data type: `Any`
 
@@ -3998,7 +4341,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `stderr`
+##### <a name="stderr"></a>`stderr`
 
 Data type: `Any`
 
@@ -4006,7 +4349,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `stdout`
+##### <a name="stdout"></a>`stdout`
 
 Data type: `Any`
 
@@ -4014,7 +4357,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `syslog`
+##### <a name="syslog"></a>`syslog`
 
 Data type: `Any`
 
@@ -4022,7 +4365,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `timestamp_format`
+##### <a name="timestamp_format"></a>`timestamp_format`
 
 Data type: `Any`
 
@@ -4030,7 +4373,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::console::console`
+### <a name="bareosconsoleconsole"></a>`bareos::console::console`
 
 == Define: bareos::console::console
 
@@ -4174,9 +4517,30 @@ Default value: ``undef``
 
 #### Parameters
 
-The following parameters are available in the `bareos::console::console` defined type.
+The following parameters are available in the `bareos::console::console` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`description`](#description)
+* [`director`](#director)
+* [`heartbeat_interval`](#heartbeat_interval)
+* [`history_file`](#history_file)
+* [`history_length`](#history_length)
+* [`password`](#password)
+* [`rc_file`](#rc_file)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -4184,7 +4548,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -4192,7 +4556,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `director`
+##### <a name="director"></a>`director`
 
 Data type: `Any`
 
@@ -4200,7 +4564,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `heartbeat_interval`
+##### <a name="heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
@@ -4208,7 +4572,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `history_file`
+##### <a name="history_file"></a>`history_file`
 
 Data type: `Any`
 
@@ -4216,7 +4580,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `history_length`
+##### <a name="history_length"></a>`history_length`
 
 Data type: `Any`
 
@@ -4224,7 +4588,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -4232,7 +4596,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `rc_file`
+##### <a name="rc_file"></a>`rc_file`
 
 Data type: `Any`
 
@@ -4240,7 +4604,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -4248,7 +4612,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -4256,7 +4620,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -4264,7 +4628,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -4272,7 +4636,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -4280,7 +4644,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -4288,7 +4652,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -4296,7 +4660,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -4304,7 +4668,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -4312,7 +4676,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -4320,7 +4684,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -4328,7 +4692,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -4336,7 +4700,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::console::director`
+### <a name="bareosconsoledirector"></a>`bareos::console::director`
 
 == Define: bareos:console::director
 The Director resource defines the attributes of the Director running on the network.
@@ -4469,9 +4833,28 @@ If you have more than one, you will be prompted to choose one when you start the
 
 #### Parameters
 
-The following parameters are available in the `bareos::console::director` defined type.
+The following parameters are available in the `bareos::console::director` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`address`](#address)
+* [`description`](#description)
+* [`dir_port`](#dir_port)
+* [`heartbeat_interval`](#heartbeat_interval)
+* [`password`](#password)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -4479,7 +4862,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -4487,7 +4870,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -4495,7 +4878,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_port`
+##### <a name="dir_port"></a>`dir_port`
 
 Data type: `Any`
 
@@ -4503,7 +4886,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `heartbeat_interval`
+##### <a name="heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
@@ -4511,7 +4894,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -4519,7 +4902,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -4527,7 +4910,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -4535,7 +4918,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -4543,7 +4926,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -4551,7 +4934,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -4559,7 +4942,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -4567,7 +4950,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -4575,7 +4958,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -4583,7 +4966,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -4591,7 +4974,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -4599,7 +4982,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -4607,7 +4990,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -4615,7 +4998,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::catalog`
+### <a name="bareosdirectorcatalog"></a>`bareos::director::catalog`
 
 [*validate_timeout*]
   Validate Timeout
@@ -4626,9 +5009,28 @@ Default value: ``undef``
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::catalog` defined type.
+The following parameters are available in the `bareos::director::catalog` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`db_address`](#db_address)
+* [`db_driver`](#db_driver)
+* [`db_name`](#db_name)
+* [`db_password`](#db_password)
+* [`db_port`](#db_port)
+* [`db_socket`](#db_socket)
+* [`db_user`](#db_user)
+* [`description`](#description)
+* [`disable_batch_insert`](#disable_batch_insert)
+* [`exit_on_fatal`](#exit_on_fatal)
+* [`idle_timeout`](#idle_timeout)
+* [`inc_connections`](#inc_connections)
+* [`max_connections`](#max_connections)
+* [`min_connections`](#min_connections)
+* [`multiple_connections`](#multiple_connections)
+* [`reconnect`](#reconnect)
+* [`validate_timeout`](#validate_timeout)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -4636,7 +5038,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `db_address`
+##### <a name="db_address"></a>`db_address`
 
 Data type: `Any`
 
@@ -4644,7 +5046,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `db_driver`
+##### <a name="db_driver"></a>`db_driver`
 
 Data type: `Any`
 
@@ -4652,7 +5054,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `db_name`
+##### <a name="db_name"></a>`db_name`
 
 Data type: `Any`
 
@@ -4660,7 +5062,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `db_password`
+##### <a name="db_password"></a>`db_password`
 
 Data type: `Any`
 
@@ -4668,7 +5070,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `db_port`
+##### <a name="db_port"></a>`db_port`
 
 Data type: `Any`
 
@@ -4676,7 +5078,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `db_socket`
+##### <a name="db_socket"></a>`db_socket`
 
 Data type: `Any`
 
@@ -4684,7 +5086,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `db_user`
+##### <a name="db_user"></a>`db_user`
 
 Data type: `Any`
 
@@ -4692,7 +5094,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -4700,7 +5102,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `disable_batch_insert`
+##### <a name="disable_batch_insert"></a>`disable_batch_insert`
 
 Data type: `Any`
 
@@ -4708,7 +5110,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `exit_on_fatal`
+##### <a name="exit_on_fatal"></a>`exit_on_fatal`
 
 Data type: `Any`
 
@@ -4716,7 +5118,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `idle_timeout`
+##### <a name="idle_timeout"></a>`idle_timeout`
 
 Data type: `Any`
 
@@ -4724,7 +5126,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `inc_connections`
+##### <a name="inc_connections"></a>`inc_connections`
 
 Data type: `Any`
 
@@ -4732,7 +5134,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_connections`
+##### <a name="max_connections"></a>`max_connections`
 
 Data type: `Any`
 
@@ -4740,7 +5142,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `min_connections`
+##### <a name="min_connections"></a>`min_connections`
 
 Data type: `Any`
 
@@ -4748,7 +5150,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `multiple_connections`
+##### <a name="multiple_connections"></a>`multiple_connections`
 
 Data type: `Any`
 
@@ -4756,7 +5158,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `reconnect`
+##### <a name="reconnect"></a>`reconnect`
 
 Data type: `Any`
 
@@ -4764,7 +5166,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `validate_timeout`
+##### <a name="validate_timeout"></a>`validate_timeout`
 
 Data type: `Any`
 
@@ -4772,7 +5174,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::client`
+### <a name="bareosdirectorclient"></a>`bareos::director::client`
 
 == Define: bareos::director::client
 To define what Client is to be backed up.
@@ -5052,9 +5454,49 @@ Each Job will reference only a single client.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::client` defined type.
+The following parameters are available in the `bareos::director::client` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`address`](#address)
+* [`auth_type`](#auth_type)
+* [`auto_prune`](#auto_prune)
+* [`catalog`](#catalog)
+* [`connection_from_client_to_director`](#connection_from_client_to_director)
+* [`connection_from_director_to_client`](#connection_from_director_to_client)
+* [`description`](#description)
+* [`enabled`](#enabled)
+* [`file_retention`](#file_retention)
+* [`hard_quota`](#hard_quota)
+* [`heartbeat_interval`](#heartbeat_interval)
+* [`job_retention`](#job_retention)
+* [`maximum_bandwidth_per_job`](#maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`ndmp_block_size`](#ndmp_block_size)
+* [`ndmp_log_level`](#ndmp_log_level)
+* [`ndmp_use_lmdb`](#ndmp_use_lmdb)
+* [`passive`](#passive)
+* [`password`](#password)
+* [`port`](#port)
+* [`protocol`](#protocol)
+* [`quota_include_failed_jobs`](#quota_include_failed_jobs)
+* [`soft_quota`](#soft_quota)
+* [`soft_quota_grace_period`](#soft_quota_grace_period)
+* [`strict_quotas`](#strict_quotas)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+* [`username`](#username)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -5062,7 +5504,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -5070,7 +5512,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auth_type`
+##### <a name="auth_type"></a>`auth_type`
 
 Data type: `Any`
 
@@ -5078,7 +5520,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_prune`
+##### <a name="auto_prune"></a>`auto_prune`
 
 Data type: `Any`
 
@@ -5086,7 +5528,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -5094,7 +5536,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `connection_from_client_to_director`
+##### <a name="connection_from_client_to_director"></a>`connection_from_client_to_director`
 
 Data type: `Any`
 
@@ -5102,7 +5544,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `connection_from_director_to_client`
+##### <a name="connection_from_director_to_client"></a>`connection_from_director_to_client`
 
 Data type: `Any`
 
@@ -5110,7 +5552,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -5118,7 +5560,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enabled`
+##### <a name="enabled"></a>`enabled`
 
 Data type: `Any`
 
@@ -5126,7 +5568,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_retention`
+##### <a name="file_retention"></a>`file_retention`
 
 Data type: `Any`
 
@@ -5134,7 +5576,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `hard_quota`
+##### <a name="hard_quota"></a>`hard_quota`
 
 Data type: `Any`
 
@@ -5142,7 +5584,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `heartbeat_interval`
+##### <a name="heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
@@ -5150,7 +5592,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `job_retention`
+##### <a name="job_retention"></a>`job_retention`
 
 Data type: `Any`
 
@@ -5158,7 +5600,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth_per_job`
+##### <a name="maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
@@ -5166,7 +5608,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -5174,7 +5616,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_block_size`
+##### <a name="ndmp_block_size"></a>`ndmp_block_size`
 
 Data type: `Any`
 
@@ -5182,7 +5624,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_log_level`
+##### <a name="ndmp_log_level"></a>`ndmp_log_level`
 
 Data type: `Any`
 
@@ -5190,7 +5632,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ndmp_use_lmdb`
+##### <a name="ndmp_use_lmdb"></a>`ndmp_use_lmdb`
 
 Data type: `Any`
 
@@ -5198,7 +5640,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `passive`
+##### <a name="passive"></a>`passive`
 
 Data type: `Any`
 
@@ -5206,7 +5648,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -5214,7 +5656,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Any`
 
@@ -5222,7 +5664,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `protocol`
+##### <a name="protocol"></a>`protocol`
 
 Data type: `Any`
 
@@ -5230,7 +5672,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `quota_include_failed_jobs`
+##### <a name="quota_include_failed_jobs"></a>`quota_include_failed_jobs`
 
 Data type: `Any`
 
@@ -5238,7 +5680,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `soft_quota`
+##### <a name="soft_quota"></a>`soft_quota`
 
 Data type: `Any`
 
@@ -5246,7 +5688,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `soft_quota_grace_period`
+##### <a name="soft_quota_grace_period"></a>`soft_quota_grace_period`
 
 Data type: `Any`
 
@@ -5254,7 +5696,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `strict_quotas`
+##### <a name="strict_quotas"></a>`strict_quotas`
 
 Data type: `Any`
 
@@ -5262,7 +5704,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -5270,7 +5712,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -5278,7 +5720,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -5286,7 +5728,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -5294,7 +5736,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -5302,7 +5744,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -5310,7 +5752,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -5318,7 +5760,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -5326,7 +5768,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -5334,7 +5776,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -5342,7 +5784,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -5350,7 +5792,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -5358,7 +5800,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `username`
+##### <a name="username"></a>`username`
 
 Data type: `Any`
 
@@ -5366,7 +5808,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::console`
+### <a name="bareosdirectorconsole"></a>`bareos::director::console`
 
 == Define: bareos::director::console
 Configure an **Named Console** aka **Restricted Console**.
@@ -5553,6 +5995,13 @@ Both the names and the passwords in these two entries must match much as is the 
   Bareos Default: true
   Required: false
 
+[*use_pam_authentication*]
+  Use Pam Authentication: If set to yes, PAM will be used to authenticate the user on this console. Otherwise, only the credentials of this console resource are used for authentication.
+
+  Bareos Datatype: boolean
+  Bareos Default: false
+  Required: false
+
 [*where_acl*]
   Where ACL
 
@@ -5562,225 +6011,262 @@ Both the names and the passwords in these two entries must match much as is the 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::console` defined type.
+The following parameters are available in the `bareos::director::console` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`catalog_acl`](#catalog_acl)
+* [`client_acl`](#client_acl)
+* [`command_acl`](#command_acl)
+* [`description`](#description)
+* [`file_set_acl`](#file_set_acl)
+* [`job_acl`](#job_acl)
+* [`password`](#password)
+* [`plugin_options_acl`](#plugin_options_acl)
+* [`pool_acl`](#pool_acl)
+* [`profile`](#profile)
+* [`run_acl`](#run_acl)
+* [`schedule_acl`](#schedule_acl)
+* [`storage_acl`](#storage_acl)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+* [`use_pam_authentication`](#use_pam_authentication)
+* [`where_acl`](#where_acl)
 
-Data type: `Any`
+##### <a name="ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
 
 
 
 Default value: `present`
 
-##### `catalog_acl`
+##### <a name="catalog_acl"></a>`catalog_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `client_acl`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `command_acl`
+##### <a name="client_acl"></a>`client_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `description`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `file_set_acl`
+##### <a name="command_acl"></a>`command_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `job_acl`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="description"></a>`description`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `plugin_options_acl`
-
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
 Default value: ``undef``
 
-##### `pool_acl`
+##### <a name="file_set_acl"></a>`file_set_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `profile`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `run_acl`
+##### <a name="job_acl"></a>`job_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `schedule_acl`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `storage_acl`
+##### <a name="password"></a>`password`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_allowed_cn`
-
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="plugin_options_acl"></a>`plugin_options_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_dir`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="pool_acl"></a>`pool_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="profile"></a>`profile`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_cipher_list`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="run_acl"></a>`run_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_enable`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="schedule_acl"></a>`schedule_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_require`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="storage_acl"></a>`storage_acl`
 
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `where_acl`
-
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
 Default value: ``undef``
 
-### `bareos::director::counter`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
+
+Data type: `Optional[Bareos::List]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_authenticate"></a>`tls_authenticate`
+
+Data type: `Optional[Bareos::Boolean]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_certificate"></a>`tls_certificate`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_enable"></a>`tls_enable`
+
+Data type: `Optional[Bareos::Boolean]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_key"></a>`tls_key`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_require"></a>`tls_require`
+
+Data type: `Optional[Bareos::Boolean]`
+
+
+
+Default value: ``undef``
+
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Optional[Bareos::Boolean]`
+
+
+
+Default value: ``undef``
+
+##### <a name="use_pam_authentication"></a>`use_pam_authentication`
+
+Data type: `Optional[Bareos::Boolean]`
+
+
+
+Default value: ``undef``
+
+##### <a name="where_acl"></a>`where_acl`
+
+Data type: `Optional[Bareos::List]`
+
+
+
+Default value: ``undef``
+
+### <a name="bareosdirectorcounter"></a>`bareos::director::counter`
 
 == Define: bareos::director::counter
 The Counter Resource defines a counter variable that can be accessed by variable expansion used
@@ -5827,9 +6313,16 @@ for creating Volume labels with the Label Format Dir Pool directive.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::counter` defined type.
+The following parameters are available in the `bareos::director::counter` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`catalog`](#catalog)
+* [`description`](#description)
+* [`maximum`](#maximum)
+* [`minimum`](#minimum)
+* [`wrap_counter`](#wrap_counter)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -5837,7 +6330,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -5845,7 +6338,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -5853,7 +6346,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum`
+##### <a name="maximum"></a>`maximum`
 
 Data type: `Any`
 
@@ -5861,7 +6354,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `minimum`
+##### <a name="minimum"></a>`minimum`
 
 Data type: `Any`
 
@@ -5869,7 +6362,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `wrap_counter`
+##### <a name="wrap_counter"></a>`wrap_counter`
 
 Data type: `Any`
 
@@ -5877,7 +6370,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::fileset`
+### <a name="bareosdirectorfileset"></a>`bareos::director::fileset`
 
 == Define: bareos::director::fileset
 To define the set of files to be backed up for each Client.
@@ -5924,9 +6417,16 @@ You may have any number of FileSets but each Job will reference only one.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::fileset` defined type.
+The following parameters are available in the `bareos::director::fileset` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`description`](#description)
+* [`enable_vss`](#enable_vss)
+* [`exclude`](#exclude)
+* [`ignore_file_set_changes`](#ignore_file_set_changes)
+* [`include`](#include)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -5934,7 +6434,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -5942,7 +6442,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enable_vss`
+##### <a name="enable_vss"></a>`enable_vss`
 
 Data type: `Any`
 
@@ -5950,7 +6450,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `exclude`
+##### <a name="exclude"></a>`exclude`
 
 Data type: `Any`
 
@@ -5958,7 +6458,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `ignore_file_set_changes`
+##### <a name="ignore_file_set_changes"></a>`ignore_file_set_changes`
 
 Data type: `Any`
 
@@ -5966,7 +6466,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `include`
+##### <a name="include"></a>`include`
 
 Data type: `Any`
 
@@ -5974,7 +6474,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::job`
+### <a name="bareosdirectorjob"></a>`bareos::director::job`
 
 == Define: bareos::director::job
 To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
@@ -6574,9 +7074,94 @@ Normally, you will Jobs of different names corresponding to each client
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::job` defined type.
+The following parameters are available in the `bareos::director::job` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`accurate`](#accurate)
+* [`add_prefix`](#add_prefix)
+* [`add_suffix`](#add_suffix)
+* [`allow_duplicate_jobs`](#allow_duplicate_jobs)
+* [`allow_higher_duplicates`](#allow_higher_duplicates)
+* [`allow_mixed_priority`](#allow_mixed_priority)
+* [`always_incremental`](#always_incremental)
+* [`always_incremental_job_retention`](#always_incremental_job_retention)
+* [`always_incremental_keep_number`](#always_incremental_keep_number)
+* [`always_incremental_max_full_age`](#always_incremental_max_full_age)
+* [`backup_format`](#backup_format)
+* [`base`](#base)
+* [`bootstrap`](#bootstrap)
+* [`cancel_lower_level_duplicates`](#cancel_lower_level_duplicates)
+* [`cancel_queued_duplicates`](#cancel_queued_duplicates)
+* [`cancel_running_duplicates`](#cancel_running_duplicates)
+* [`catalog`](#catalog)
+* [`client`](#client)
+* [`client_run_after_job`](#client_run_after_job)
+* [`client_run_before_job`](#client_run_before_job)
+* [`description`](#description)
+* [`differential_backup_pool`](#differential_backup_pool)
+* [`differential_max_runtime`](#differential_max_runtime)
+* [`dir_plugin_options`](#dir_plugin_options)
+* [`enabled`](#enabled)
+* [`fd_plugin_options`](#fd_plugin_options)
+* [`file_history_size`](#file_history_size)
+* [`file_set`](#file_set)
+* [`full_backup_pool`](#full_backup_pool)
+* [`full_max_runtime`](#full_max_runtime)
+* [`incremental_backup_pool`](#incremental_backup_pool)
+* [`incremental_max_runtime`](#incremental_max_runtime)
+* [`job_defs`](#job_defs)
+* [`job_to_verify`](#job_to_verify)
+* [`level`](#level)
+* [`max_concurrent_copies`](#max_concurrent_copies)
+* [`max_diff_interval`](#max_diff_interval)
+* [`max_full_consolidations`](#max_full_consolidations)
+* [`max_full_interval`](#max_full_interval)
+* [`max_run_sched_time`](#max_run_sched_time)
+* [`max_run_time`](#max_run_time)
+* [`max_start_delay`](#max_start_delay)
+* [`max_virtual_full_interval`](#max_virtual_full_interval)
+* [`max_wait_time`](#max_wait_time)
+* [`maximum_bandwidth`](#maximum_bandwidth)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`messages`](#messages)
+* [`next_pool`](#next_pool)
+* [`pool`](#pool)
+* [`prefer_mounted_volumes`](#prefer_mounted_volumes)
+* [`prefix_links`](#prefix_links)
+* [`priority`](#priority)
+* [`protocol`](#protocol)
+* [`prune_files`](#prune_files)
+* [`prune_jobs`](#prune_jobs)
+* [`prune_volumes`](#prune_volumes)
+* [`purge_migration_job`](#purge_migration_job)
+* [`regex_where`](#regex_where)
+* [`replace`](#replace)
+* [`rerun_failed_levels`](#rerun_failed_levels)
+* [`reschedule_interval`](#reschedule_interval)
+* [`reschedule_on_error`](#reschedule_on_error)
+* [`reschedule_times`](#reschedule_times)
+* [`run`](#run)
+* [`run_after_failed_job`](#run_after_failed_job)
+* [`run_after_job`](#run_after_job)
+* [`run_before_job`](#run_before_job)
+* [`run_script`](#run_script)
+* [`save_file_history`](#save_file_history)
+* [`schedule_res`](#schedule_res)
+* [`sd_plugin_options`](#sd_plugin_options)
+* [`selection_pattern`](#selection_pattern)
+* [`selection_type`](#selection_type)
+* [`spool_attributes`](#spool_attributes)
+* [`spool_data`](#spool_data)
+* [`spool_size`](#spool_size)
+* [`storage`](#storage)
+* [`strip_prefix`](#strip_prefix)
+* [`type`](#type)
+* [`virtual_full_backup_pool`](#virtual_full_backup_pool)
+* [`where`](#where)
+* [`write_bootstrap`](#write_bootstrap)
+* [`write_verify_list`](#write_verify_list)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -6584,7 +7169,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `accurate`
+##### <a name="accurate"></a>`accurate`
 
 Data type: `Any`
 
@@ -6592,7 +7177,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `add_prefix`
+##### <a name="add_prefix"></a>`add_prefix`
 
 Data type: `Any`
 
@@ -6600,7 +7185,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `add_suffix`
+##### <a name="add_suffix"></a>`add_suffix`
 
 Data type: `Any`
 
@@ -6608,7 +7193,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_duplicate_jobs`
+##### <a name="allow_duplicate_jobs"></a>`allow_duplicate_jobs`
 
 Data type: `Any`
 
@@ -6616,7 +7201,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_higher_duplicates`
+##### <a name="allow_higher_duplicates"></a>`allow_higher_duplicates`
 
 Data type: `Any`
 
@@ -6624,7 +7209,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_mixed_priority`
+##### <a name="allow_mixed_priority"></a>`allow_mixed_priority`
 
 Data type: `Any`
 
@@ -6632,7 +7217,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental`
+##### <a name="always_incremental"></a>`always_incremental`
 
 Data type: `Any`
 
@@ -6640,7 +7225,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental_job_retention`
+##### <a name="always_incremental_job_retention"></a>`always_incremental_job_retention`
 
 Data type: `Any`
 
@@ -6648,7 +7233,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental_keep_number`
+##### <a name="always_incremental_keep_number"></a>`always_incremental_keep_number`
 
 Data type: `Any`
 
@@ -6656,7 +7241,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental_max_full_age`
+##### <a name="always_incremental_max_full_age"></a>`always_incremental_max_full_age`
 
 Data type: `Any`
 
@@ -6664,7 +7249,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `backup_format`
+##### <a name="backup_format"></a>`backup_format`
 
 Data type: `Any`
 
@@ -6672,7 +7257,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `base`
+##### <a name="base"></a>`base`
 
 Data type: `Any`
 
@@ -6680,7 +7265,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `bootstrap`
+##### <a name="bootstrap"></a>`bootstrap`
 
 Data type: `Any`
 
@@ -6688,7 +7273,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cancel_lower_level_duplicates`
+##### <a name="cancel_lower_level_duplicates"></a>`cancel_lower_level_duplicates`
 
 Data type: `Any`
 
@@ -6696,7 +7281,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cancel_queued_duplicates`
+##### <a name="cancel_queued_duplicates"></a>`cancel_queued_duplicates`
 
 Data type: `Any`
 
@@ -6704,7 +7289,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cancel_running_duplicates`
+##### <a name="cancel_running_duplicates"></a>`cancel_running_duplicates`
 
 Data type: `Any`
 
@@ -6712,7 +7297,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -6720,7 +7305,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client`
+##### <a name="client"></a>`client`
 
 Data type: `Any`
 
@@ -6728,7 +7313,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client_run_after_job`
+##### <a name="client_run_after_job"></a>`client_run_after_job`
 
 Data type: `Any`
 
@@ -6736,7 +7321,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client_run_before_job`
+##### <a name="client_run_before_job"></a>`client_run_before_job`
 
 Data type: `Any`
 
@@ -6744,7 +7329,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -6752,7 +7337,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `differential_backup_pool`
+##### <a name="differential_backup_pool"></a>`differential_backup_pool`
 
 Data type: `Any`
 
@@ -6760,7 +7345,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `differential_max_runtime`
+##### <a name="differential_max_runtime"></a>`differential_max_runtime`
 
 Data type: `Any`
 
@@ -6768,7 +7353,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_plugin_options`
+##### <a name="dir_plugin_options"></a>`dir_plugin_options`
 
 Data type: `Any`
 
@@ -6776,7 +7361,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enabled`
+##### <a name="enabled"></a>`enabled`
 
 Data type: `Any`
 
@@ -6784,7 +7369,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_plugin_options`
+##### <a name="fd_plugin_options"></a>`fd_plugin_options`
 
 Data type: `Any`
 
@@ -6792,7 +7377,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_history_size`
+##### <a name="file_history_size"></a>`file_history_size`
 
 Data type: `Any`
 
@@ -6800,7 +7385,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_set`
+##### <a name="file_set"></a>`file_set`
 
 Data type: `Any`
 
@@ -6808,7 +7393,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `full_backup_pool`
+##### <a name="full_backup_pool"></a>`full_backup_pool`
 
 Data type: `Any`
 
@@ -6816,7 +7401,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `full_max_runtime`
+##### <a name="full_max_runtime"></a>`full_max_runtime`
 
 Data type: `Any`
 
@@ -6824,7 +7409,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `incremental_backup_pool`
+##### <a name="incremental_backup_pool"></a>`incremental_backup_pool`
 
 Data type: `Any`
 
@@ -6832,7 +7417,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `incremental_max_runtime`
+##### <a name="incremental_max_runtime"></a>`incremental_max_runtime`
 
 Data type: `Any`
 
@@ -6840,7 +7425,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `job_defs`
+##### <a name="job_defs"></a>`job_defs`
 
 Data type: `Any`
 
@@ -6848,7 +7433,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `job_to_verify`
+##### <a name="job_to_verify"></a>`job_to_verify`
 
 Data type: `Any`
 
@@ -6856,7 +7441,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `level`
+##### <a name="level"></a>`level`
 
 Data type: `Any`
 
@@ -6864,7 +7449,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_concurrent_copies`
+##### <a name="max_concurrent_copies"></a>`max_concurrent_copies`
 
 Data type: `Any`
 
@@ -6872,7 +7457,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_diff_interval`
+##### <a name="max_diff_interval"></a>`max_diff_interval`
 
 Data type: `Any`
 
@@ -6880,7 +7465,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_full_consolidations`
+##### <a name="max_full_consolidations"></a>`max_full_consolidations`
 
 Data type: `Any`
 
@@ -6888,7 +7473,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_full_interval`
+##### <a name="max_full_interval"></a>`max_full_interval`
 
 Data type: `Any`
 
@@ -6896,7 +7481,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_run_sched_time`
+##### <a name="max_run_sched_time"></a>`max_run_sched_time`
 
 Data type: `Any`
 
@@ -6904,7 +7489,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_run_time`
+##### <a name="max_run_time"></a>`max_run_time`
 
 Data type: `Any`
 
@@ -6912,7 +7497,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_start_delay`
+##### <a name="max_start_delay"></a>`max_start_delay`
 
 Data type: `Any`
 
@@ -6920,7 +7505,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_virtual_full_interval`
+##### <a name="max_virtual_full_interval"></a>`max_virtual_full_interval`
 
 Data type: `Any`
 
@@ -6928,7 +7513,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_wait_time`
+##### <a name="max_wait_time"></a>`max_wait_time`
 
 Data type: `Any`
 
@@ -6936,7 +7521,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth`
+##### <a name="maximum_bandwidth"></a>`maximum_bandwidth`
 
 Data type: `Any`
 
@@ -6944,7 +7529,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -6952,7 +7537,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Any`
 
@@ -6960,7 +7545,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `next_pool`
+##### <a name="next_pool"></a>`next_pool`
 
 Data type: `Any`
 
@@ -6968,7 +7553,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pool`
+##### <a name="pool"></a>`pool`
 
 Data type: `Any`
 
@@ -6976,7 +7561,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prefer_mounted_volumes`
+##### <a name="prefer_mounted_volumes"></a>`prefer_mounted_volumes`
 
 Data type: `Any`
 
@@ -6984,7 +7569,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prefix_links`
+##### <a name="prefix_links"></a>`prefix_links`
 
 Data type: `Any`
 
@@ -6992,7 +7577,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `priority`
+##### <a name="priority"></a>`priority`
 
 Data type: `Any`
 
@@ -7000,7 +7585,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `protocol`
+##### <a name="protocol"></a>`protocol`
 
 Data type: `Any`
 
@@ -7008,7 +7593,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prune_files`
+##### <a name="prune_files"></a>`prune_files`
 
 Data type: `Any`
 
@@ -7016,7 +7601,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prune_jobs`
+##### <a name="prune_jobs"></a>`prune_jobs`
 
 Data type: `Any`
 
@@ -7024,7 +7609,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prune_volumes`
+##### <a name="prune_volumes"></a>`prune_volumes`
 
 Data type: `Any`
 
@@ -7032,7 +7617,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `purge_migration_job`
+##### <a name="purge_migration_job"></a>`purge_migration_job`
 
 Data type: `Any`
 
@@ -7040,7 +7625,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `regex_where`
+##### <a name="regex_where"></a>`regex_where`
 
 Data type: `Any`
 
@@ -7048,7 +7633,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `replace`
+##### <a name="replace"></a>`replace`
 
 Data type: `Any`
 
@@ -7056,7 +7641,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `rerun_failed_levels`
+##### <a name="rerun_failed_levels"></a>`rerun_failed_levels`
 
 Data type: `Any`
 
@@ -7064,7 +7649,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `reschedule_interval`
+##### <a name="reschedule_interval"></a>`reschedule_interval`
 
 Data type: `Any`
 
@@ -7072,7 +7657,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `reschedule_on_error`
+##### <a name="reschedule_on_error"></a>`reschedule_on_error`
 
 Data type: `Any`
 
@@ -7080,7 +7665,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `reschedule_times`
+##### <a name="reschedule_times"></a>`reschedule_times`
 
 Data type: `Any`
 
@@ -7088,7 +7673,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run`
+##### <a name="run"></a>`run`
 
 Data type: `Any`
 
@@ -7096,7 +7681,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_after_failed_job`
+##### <a name="run_after_failed_job"></a>`run_after_failed_job`
 
 Data type: `Any`
 
@@ -7104,7 +7689,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_after_job`
+##### <a name="run_after_job"></a>`run_after_job`
 
 Data type: `Any`
 
@@ -7112,7 +7697,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_before_job`
+##### <a name="run_before_job"></a>`run_before_job`
 
 Data type: `Any`
 
@@ -7120,7 +7705,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_script`
+##### <a name="run_script"></a>`run_script`
 
 Data type: `Any`
 
@@ -7128,7 +7713,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `save_file_history`
+##### <a name="save_file_history"></a>`save_file_history`
 
 Data type: `Any`
 
@@ -7136,7 +7721,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `schedule_res`
+##### <a name="schedule_res"></a>`schedule_res`
 
 Data type: `Any`
 
@@ -7144,7 +7729,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_plugin_options`
+##### <a name="sd_plugin_options"></a>`sd_plugin_options`
 
 Data type: `Any`
 
@@ -7152,7 +7737,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `selection_pattern`
+##### <a name="selection_pattern"></a>`selection_pattern`
 
 Data type: `Any`
 
@@ -7160,7 +7745,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `selection_type`
+##### <a name="selection_type"></a>`selection_type`
 
 Data type: `Any`
 
@@ -7168,7 +7753,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `spool_attributes`
+##### <a name="spool_attributes"></a>`spool_attributes`
 
 Data type: `Any`
 
@@ -7176,7 +7761,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `spool_data`
+##### <a name="spool_data"></a>`spool_data`
 
 Data type: `Any`
 
@@ -7184,7 +7769,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `spool_size`
+##### <a name="spool_size"></a>`spool_size`
 
 Data type: `Any`
 
@@ -7192,7 +7777,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `storage`
+##### <a name="storage"></a>`storage`
 
 Data type: `Any`
 
@@ -7200,7 +7785,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `strip_prefix`
+##### <a name="strip_prefix"></a>`strip_prefix`
 
 Data type: `Any`
 
@@ -7208,7 +7793,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `type`
+##### <a name="type"></a>`type`
 
 Data type: `Any`
 
@@ -7216,7 +7801,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `virtual_full_backup_pool`
+##### <a name="virtual_full_backup_pool"></a>`virtual_full_backup_pool`
 
 Data type: `Any`
 
@@ -7224,7 +7809,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `where`
+##### <a name="where"></a>`where`
 
 Data type: `Any`
 
@@ -7232,7 +7817,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `write_bootstrap`
+##### <a name="write_bootstrap"></a>`write_bootstrap`
 
 Data type: `Any`
 
@@ -7240,7 +7825,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `write_verify_list`
+##### <a name="write_verify_list"></a>`write_verify_list`
 
 Data type: `Any`
 
@@ -7248,7 +7833,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::jobdefs`
+### <a name="bareosdirectorjobdefs"></a>`bareos::director::jobdefs`
 
 == Define: bareos::director::jobdefs
 JobDefs are optional resources for providing defaults for Job resources.
@@ -7847,9 +8432,94 @@ Almost the same like `Job`.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::jobdefs` defined type.
+The following parameters are available in the `bareos::director::jobdefs` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`accurate`](#accurate)
+* [`add_prefix`](#add_prefix)
+* [`add_suffix`](#add_suffix)
+* [`allow_duplicate_jobs`](#allow_duplicate_jobs)
+* [`allow_higher_duplicates`](#allow_higher_duplicates)
+* [`allow_mixed_priority`](#allow_mixed_priority)
+* [`always_incremental`](#always_incremental)
+* [`always_incremental_job_retention`](#always_incremental_job_retention)
+* [`always_incremental_keep_number`](#always_incremental_keep_number)
+* [`always_incremental_max_full_age`](#always_incremental_max_full_age)
+* [`backup_format`](#backup_format)
+* [`base`](#base)
+* [`bootstrap`](#bootstrap)
+* [`cancel_lower_level_duplicates`](#cancel_lower_level_duplicates)
+* [`cancel_queued_duplicates`](#cancel_queued_duplicates)
+* [`cancel_running_duplicates`](#cancel_running_duplicates)
+* [`catalog`](#catalog)
+* [`client`](#client)
+* [`client_run_after_job`](#client_run_after_job)
+* [`client_run_before_job`](#client_run_before_job)
+* [`description`](#description)
+* [`differential_backup_pool`](#differential_backup_pool)
+* [`differential_max_runtime`](#differential_max_runtime)
+* [`dir_plugin_options`](#dir_plugin_options)
+* [`enabled`](#enabled)
+* [`fd_plugin_options`](#fd_plugin_options)
+* [`file_history_size`](#file_history_size)
+* [`file_set`](#file_set)
+* [`full_backup_pool`](#full_backup_pool)
+* [`full_max_runtime`](#full_max_runtime)
+* [`incremental_backup_pool`](#incremental_backup_pool)
+* [`incremental_max_runtime`](#incremental_max_runtime)
+* [`job_defs`](#job_defs)
+* [`job_to_verify`](#job_to_verify)
+* [`level`](#level)
+* [`max_concurrent_copies`](#max_concurrent_copies)
+* [`max_diff_interval`](#max_diff_interval)
+* [`max_full_consolidations`](#max_full_consolidations)
+* [`max_full_interval`](#max_full_interval)
+* [`max_run_sched_time`](#max_run_sched_time)
+* [`max_run_time`](#max_run_time)
+* [`max_start_delay`](#max_start_delay)
+* [`max_virtual_full_interval`](#max_virtual_full_interval)
+* [`max_wait_time`](#max_wait_time)
+* [`maximum_bandwidth`](#maximum_bandwidth)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`messages`](#messages)
+* [`next_pool`](#next_pool)
+* [`pool`](#pool)
+* [`prefer_mounted_volumes`](#prefer_mounted_volumes)
+* [`prefix_links`](#prefix_links)
+* [`priority`](#priority)
+* [`protocol`](#protocol)
+* [`prune_files`](#prune_files)
+* [`prune_jobs`](#prune_jobs)
+* [`prune_volumes`](#prune_volumes)
+* [`purge_migration_job`](#purge_migration_job)
+* [`regex_where`](#regex_where)
+* [`replace`](#replace)
+* [`rerun_failed_levels`](#rerun_failed_levels)
+* [`reschedule_interval`](#reschedule_interval)
+* [`reschedule_on_error`](#reschedule_on_error)
+* [`reschedule_times`](#reschedule_times)
+* [`run`](#run)
+* [`run_after_failed_job`](#run_after_failed_job)
+* [`run_after_job`](#run_after_job)
+* [`run_before_job`](#run_before_job)
+* [`run_script`](#run_script)
+* [`save_file_history`](#save_file_history)
+* [`schedule_res`](#schedule_res)
+* [`sd_plugin_options`](#sd_plugin_options)
+* [`selection_pattern`](#selection_pattern)
+* [`selection_type`](#selection_type)
+* [`spool_attributes`](#spool_attributes)
+* [`spool_data`](#spool_data)
+* [`spool_size`](#spool_size)
+* [`storage`](#storage)
+* [`strip_prefix`](#strip_prefix)
+* [`type`](#type)
+* [`virtual_full_backup_pool`](#virtual_full_backup_pool)
+* [`where`](#where)
+* [`write_bootstrap`](#write_bootstrap)
+* [`write_verify_list`](#write_verify_list)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -7857,7 +8527,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `accurate`
+##### <a name="accurate"></a>`accurate`
 
 Data type: `Any`
 
@@ -7865,7 +8535,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `add_prefix`
+##### <a name="add_prefix"></a>`add_prefix`
 
 Data type: `Any`
 
@@ -7873,7 +8543,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `add_suffix`
+##### <a name="add_suffix"></a>`add_suffix`
 
 Data type: `Any`
 
@@ -7881,7 +8551,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_duplicate_jobs`
+##### <a name="allow_duplicate_jobs"></a>`allow_duplicate_jobs`
 
 Data type: `Any`
 
@@ -7889,7 +8559,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_higher_duplicates`
+##### <a name="allow_higher_duplicates"></a>`allow_higher_duplicates`
 
 Data type: `Any`
 
@@ -7897,7 +8567,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_mixed_priority`
+##### <a name="allow_mixed_priority"></a>`allow_mixed_priority`
 
 Data type: `Any`
 
@@ -7905,7 +8575,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental`
+##### <a name="always_incremental"></a>`always_incremental`
 
 Data type: `Any`
 
@@ -7913,7 +8583,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental_job_retention`
+##### <a name="always_incremental_job_retention"></a>`always_incremental_job_retention`
 
 Data type: `Any`
 
@@ -7921,7 +8591,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental_keep_number`
+##### <a name="always_incremental_keep_number"></a>`always_incremental_keep_number`
 
 Data type: `Any`
 
@@ -7929,7 +8599,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_incremental_max_full_age`
+##### <a name="always_incremental_max_full_age"></a>`always_incremental_max_full_age`
 
 Data type: `Any`
 
@@ -7937,7 +8607,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `backup_format`
+##### <a name="backup_format"></a>`backup_format`
 
 Data type: `Any`
 
@@ -7945,7 +8615,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `base`
+##### <a name="base"></a>`base`
 
 Data type: `Any`
 
@@ -7953,7 +8623,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `bootstrap`
+##### <a name="bootstrap"></a>`bootstrap`
 
 Data type: `Any`
 
@@ -7961,7 +8631,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cancel_lower_level_duplicates`
+##### <a name="cancel_lower_level_duplicates"></a>`cancel_lower_level_duplicates`
 
 Data type: `Any`
 
@@ -7969,7 +8639,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cancel_queued_duplicates`
+##### <a name="cancel_queued_duplicates"></a>`cancel_queued_duplicates`
 
 Data type: `Any`
 
@@ -7977,7 +8647,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cancel_running_duplicates`
+##### <a name="cancel_running_duplicates"></a>`cancel_running_duplicates`
 
 Data type: `Any`
 
@@ -7985,7 +8655,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -7993,7 +8663,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client`
+##### <a name="client"></a>`client`
 
 Data type: `Any`
 
@@ -8001,7 +8671,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client_run_after_job`
+##### <a name="client_run_after_job"></a>`client_run_after_job`
 
 Data type: `Any`
 
@@ -8009,7 +8679,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client_run_before_job`
+##### <a name="client_run_before_job"></a>`client_run_before_job`
 
 Data type: `Any`
 
@@ -8017,7 +8687,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -8025,7 +8695,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `differential_backup_pool`
+##### <a name="differential_backup_pool"></a>`differential_backup_pool`
 
 Data type: `Any`
 
@@ -8033,7 +8703,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `differential_max_runtime`
+##### <a name="differential_max_runtime"></a>`differential_max_runtime`
 
 Data type: `Any`
 
@@ -8041,7 +8711,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_plugin_options`
+##### <a name="dir_plugin_options"></a>`dir_plugin_options`
 
 Data type: `Any`
 
@@ -8049,7 +8719,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enabled`
+##### <a name="enabled"></a>`enabled`
 
 Data type: `Any`
 
@@ -8057,7 +8727,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_plugin_options`
+##### <a name="fd_plugin_options"></a>`fd_plugin_options`
 
 Data type: `Any`
 
@@ -8065,7 +8735,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_history_size`
+##### <a name="file_history_size"></a>`file_history_size`
 
 Data type: `Any`
 
@@ -8073,7 +8743,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_set`
+##### <a name="file_set"></a>`file_set`
 
 Data type: `Any`
 
@@ -8081,7 +8751,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `full_backup_pool`
+##### <a name="full_backup_pool"></a>`full_backup_pool`
 
 Data type: `Any`
 
@@ -8089,7 +8759,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `full_max_runtime`
+##### <a name="full_max_runtime"></a>`full_max_runtime`
 
 Data type: `Any`
 
@@ -8097,7 +8767,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `incremental_backup_pool`
+##### <a name="incremental_backup_pool"></a>`incremental_backup_pool`
 
 Data type: `Any`
 
@@ -8105,7 +8775,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `incremental_max_runtime`
+##### <a name="incremental_max_runtime"></a>`incremental_max_runtime`
 
 Data type: `Any`
 
@@ -8113,7 +8783,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `job_defs`
+##### <a name="job_defs"></a>`job_defs`
 
 Data type: `Any`
 
@@ -8121,7 +8791,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `job_to_verify`
+##### <a name="job_to_verify"></a>`job_to_verify`
 
 Data type: `Any`
 
@@ -8129,7 +8799,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `level`
+##### <a name="level"></a>`level`
 
 Data type: `Any`
 
@@ -8137,7 +8807,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_concurrent_copies`
+##### <a name="max_concurrent_copies"></a>`max_concurrent_copies`
 
 Data type: `Any`
 
@@ -8145,7 +8815,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_diff_interval`
+##### <a name="max_diff_interval"></a>`max_diff_interval`
 
 Data type: `Any`
 
@@ -8153,7 +8823,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_full_consolidations`
+##### <a name="max_full_consolidations"></a>`max_full_consolidations`
 
 Data type: `Any`
 
@@ -8161,7 +8831,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_full_interval`
+##### <a name="max_full_interval"></a>`max_full_interval`
 
 Data type: `Any`
 
@@ -8169,7 +8839,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_run_sched_time`
+##### <a name="max_run_sched_time"></a>`max_run_sched_time`
 
 Data type: `Any`
 
@@ -8177,7 +8847,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_run_time`
+##### <a name="max_run_time"></a>`max_run_time`
 
 Data type: `Any`
 
@@ -8185,7 +8855,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_start_delay`
+##### <a name="max_start_delay"></a>`max_start_delay`
 
 Data type: `Any`
 
@@ -8193,7 +8863,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_virtual_full_interval`
+##### <a name="max_virtual_full_interval"></a>`max_virtual_full_interval`
 
 Data type: `Any`
 
@@ -8201,7 +8871,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `max_wait_time`
+##### <a name="max_wait_time"></a>`max_wait_time`
 
 Data type: `Any`
 
@@ -8209,7 +8879,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth`
+##### <a name="maximum_bandwidth"></a>`maximum_bandwidth`
 
 Data type: `Any`
 
@@ -8217,7 +8887,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -8225,7 +8895,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Any`
 
@@ -8233,7 +8903,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `next_pool`
+##### <a name="next_pool"></a>`next_pool`
 
 Data type: `Any`
 
@@ -8241,7 +8911,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pool`
+##### <a name="pool"></a>`pool`
 
 Data type: `Any`
 
@@ -8249,7 +8919,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prefer_mounted_volumes`
+##### <a name="prefer_mounted_volumes"></a>`prefer_mounted_volumes`
 
 Data type: `Any`
 
@@ -8257,7 +8927,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prefix_links`
+##### <a name="prefix_links"></a>`prefix_links`
 
 Data type: `Any`
 
@@ -8265,7 +8935,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `priority`
+##### <a name="priority"></a>`priority`
 
 Data type: `Any`
 
@@ -8273,7 +8943,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `protocol`
+##### <a name="protocol"></a>`protocol`
 
 Data type: `Any`
 
@@ -8281,7 +8951,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prune_files`
+##### <a name="prune_files"></a>`prune_files`
 
 Data type: `Any`
 
@@ -8289,7 +8959,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prune_jobs`
+##### <a name="prune_jobs"></a>`prune_jobs`
 
 Data type: `Any`
 
@@ -8297,7 +8967,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `prune_volumes`
+##### <a name="prune_volumes"></a>`prune_volumes`
 
 Data type: `Any`
 
@@ -8305,7 +8975,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `purge_migration_job`
+##### <a name="purge_migration_job"></a>`purge_migration_job`
 
 Data type: `Any`
 
@@ -8313,7 +8983,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `regex_where`
+##### <a name="regex_where"></a>`regex_where`
 
 Data type: `Any`
 
@@ -8321,7 +8991,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `replace`
+##### <a name="replace"></a>`replace`
 
 Data type: `Any`
 
@@ -8329,7 +8999,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `rerun_failed_levels`
+##### <a name="rerun_failed_levels"></a>`rerun_failed_levels`
 
 Data type: `Any`
 
@@ -8337,7 +9007,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `reschedule_interval`
+##### <a name="reschedule_interval"></a>`reschedule_interval`
 
 Data type: `Any`
 
@@ -8345,7 +9015,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `reschedule_on_error`
+##### <a name="reschedule_on_error"></a>`reschedule_on_error`
 
 Data type: `Any`
 
@@ -8353,7 +9023,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `reschedule_times`
+##### <a name="reschedule_times"></a>`reschedule_times`
 
 Data type: `Any`
 
@@ -8361,7 +9031,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run`
+##### <a name="run"></a>`run`
 
 Data type: `Any`
 
@@ -8369,7 +9039,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_after_failed_job`
+##### <a name="run_after_failed_job"></a>`run_after_failed_job`
 
 Data type: `Any`
 
@@ -8377,7 +9047,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_after_job`
+##### <a name="run_after_job"></a>`run_after_job`
 
 Data type: `Any`
 
@@ -8385,7 +9055,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_before_job`
+##### <a name="run_before_job"></a>`run_before_job`
 
 Data type: `Any`
 
@@ -8393,7 +9063,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run_script`
+##### <a name="run_script"></a>`run_script`
 
 Data type: `Any`
 
@@ -8401,7 +9071,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `save_file_history`
+##### <a name="save_file_history"></a>`save_file_history`
 
 Data type: `Any`
 
@@ -8409,7 +9079,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `schedule_res`
+##### <a name="schedule_res"></a>`schedule_res`
 
 Data type: `Any`
 
@@ -8417,7 +9087,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_plugin_options`
+##### <a name="sd_plugin_options"></a>`sd_plugin_options`
 
 Data type: `Any`
 
@@ -8425,7 +9095,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `selection_pattern`
+##### <a name="selection_pattern"></a>`selection_pattern`
 
 Data type: `Any`
 
@@ -8433,7 +9103,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `selection_type`
+##### <a name="selection_type"></a>`selection_type`
 
 Data type: `Any`
 
@@ -8441,7 +9111,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `spool_attributes`
+##### <a name="spool_attributes"></a>`spool_attributes`
 
 Data type: `Any`
 
@@ -8449,7 +9119,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `spool_data`
+##### <a name="spool_data"></a>`spool_data`
 
 Data type: `Any`
 
@@ -8457,7 +9127,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `spool_size`
+##### <a name="spool_size"></a>`spool_size`
 
 Data type: `Any`
 
@@ -8465,7 +9135,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `storage`
+##### <a name="storage"></a>`storage`
 
 Data type: `Any`
 
@@ -8473,7 +9143,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `strip_prefix`
+##### <a name="strip_prefix"></a>`strip_prefix`
 
 Data type: `Any`
 
@@ -8481,7 +9151,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `type`
+##### <a name="type"></a>`type`
 
 Data type: `Any`
 
@@ -8489,7 +9159,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `virtual_full_backup_pool`
+##### <a name="virtual_full_backup_pool"></a>`virtual_full_backup_pool`
 
 Data type: `Any`
 
@@ -8497,7 +9167,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `where`
+##### <a name="where"></a>`where`
 
 Data type: `Any`
 
@@ -8505,7 +9175,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `write_bootstrap`
+##### <a name="write_bootstrap"></a>`write_bootstrap`
 
 Data type: `Any`
 
@@ -8513,7 +9183,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `write_verify_list`
+##### <a name="write_verify_list"></a>`write_verify_list`
 
 Data type: `Any`
 
@@ -8521,7 +9191,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::messages`
+### <a name="bareosdirectormessages"></a>`bareos::director::messages`
 
 == Define: bareos::director::messages
 To define where error and information messages are to be sent or logged.
@@ -8657,9 +9327,27 @@ You may define multiple different message resources and hence direct particular 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::messages` defined type.
+The following parameters are available in the `bareos::director::messages` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`append`](#append)
+* [`catalog`](#catalog)
+* [`console`](#console)
+* [`description`](#description)
+* [`director`](#director)
+* [`file`](#file)
+* [`mail`](#mail)
+* [`mail_command`](#mail_command)
+* [`mail_on_error`](#mail_on_error)
+* [`mail_on_success`](#mail_on_success)
+* [`operator`](#operator)
+* [`operator_command`](#operator_command)
+* [`stderr`](#stderr)
+* [`stdout`](#stdout)
+* [`syslog`](#syslog)
+* [`timestamp_format`](#timestamp_format)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -8667,7 +9355,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `append`
+##### <a name="append"></a>`append`
 
 Data type: `Any`
 
@@ -8675,7 +9363,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -8683,7 +9371,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `console`
+##### <a name="console"></a>`console`
 
 Data type: `Any`
 
@@ -8691,7 +9379,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -8699,7 +9387,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `director`
+##### <a name="director"></a>`director`
 
 Data type: `Any`
 
@@ -8707,7 +9395,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file`
+##### <a name="file"></a>`file`
 
 Data type: `Any`
 
@@ -8715,7 +9403,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail`
+##### <a name="mail"></a>`mail`
 
 Data type: `Any`
 
@@ -8723,7 +9411,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_command`
+##### <a name="mail_command"></a>`mail_command`
 
 Data type: `Any`
 
@@ -8731,7 +9419,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_on_error`
+##### <a name="mail_on_error"></a>`mail_on_error`
 
 Data type: `Any`
 
@@ -8739,7 +9427,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_on_success`
+##### <a name="mail_on_success"></a>`mail_on_success`
 
 Data type: `Any`
 
@@ -8747,7 +9435,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `operator`
+##### <a name="operator"></a>`operator`
 
 Data type: `Any`
 
@@ -8755,7 +9443,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `operator_command`
+##### <a name="operator_command"></a>`operator_command`
 
 Data type: `Any`
 
@@ -8763,7 +9451,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `stderr`
+##### <a name="stderr"></a>`stderr`
 
 Data type: `Any`
 
@@ -8771,7 +9459,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `stdout`
+##### <a name="stdout"></a>`stdout`
 
 Data type: `Any`
 
@@ -8779,7 +9467,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `syslog`
+##### <a name="syslog"></a>`syslog`
 
 Data type: `Any`
 
@@ -8787,7 +9475,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `timestamp_format`
+##### <a name="timestamp_format"></a>`timestamp_format`
 
 Data type: `Any`
 
@@ -8795,7 +9483,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::pool`
+### <a name="bareosdirectorpool"></a>`bareos::director::pool`
 
 == Define: bareos::director::pool
 To define the pool of Volumes that can be used for a particular Job.
@@ -9027,9 +9715,42 @@ Pools allow you to restrict a Job (or a Client) to use only a particular set of 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::pool` defined type.
+The following parameters are available in the `bareos::director::pool` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`action_on_purge`](#action_on_purge)
+* [`auto_prune`](#auto_prune)
+* [`catalog`](#catalog)
+* [`catalog_files`](#catalog_files)
+* [`cleaning_prefix`](#cleaning_prefix)
+* [`description`](#description)
+* [`file_retention`](#file_retention)
+* [`job_retention`](#job_retention)
+* [`label_format`](#label_format)
+* [`label_type`](#label_type)
+* [`maximum_block_size`](#maximum_block_size)
+* [`maximum_volume_bytes`](#maximum_volume_bytes)
+* [`maximum_volume_files`](#maximum_volume_files)
+* [`maximum_volume_jobs`](#maximum_volume_jobs)
+* [`maximum_volumes`](#maximum_volumes)
+* [`migration_high_bytes`](#migration_high_bytes)
+* [`migration_low_bytes`](#migration_low_bytes)
+* [`migration_time`](#migration_time)
+* [`minimum_block_size`](#minimum_block_size)
+* [`next_pool`](#next_pool)
+* [`pool_type`](#pool_type)
+* [`purge_oldest_volume`](#purge_oldest_volume)
+* [`recycle`](#recycle)
+* [`recycle_current_volume`](#recycle_current_volume)
+* [`recycle_oldest_volume`](#recycle_oldest_volume)
+* [`recycle_pool`](#recycle_pool)
+* [`scratch_pool`](#scratch_pool)
+* [`storage`](#storage)
+* [`use_catalog`](#use_catalog)
+* [`volume_retention`](#volume_retention)
+* [`volume_use_duration`](#volume_use_duration)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9037,7 +9758,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `action_on_purge`
+##### <a name="action_on_purge"></a>`action_on_purge`
 
 Data type: `Any`
 
@@ -9045,7 +9766,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_prune`
+##### <a name="auto_prune"></a>`auto_prune`
 
 Data type: `Any`
 
@@ -9053,7 +9774,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -9061,7 +9782,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog_files`
+##### <a name="catalog_files"></a>`catalog_files`
 
 Data type: `Any`
 
@@ -9069,7 +9790,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cleaning_prefix`
+##### <a name="cleaning_prefix"></a>`cleaning_prefix`
 
 Data type: `Any`
 
@@ -9077,7 +9798,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -9085,7 +9806,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_retention`
+##### <a name="file_retention"></a>`file_retention`
 
 Data type: `Any`
 
@@ -9093,7 +9814,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `job_retention`
+##### <a name="job_retention"></a>`job_retention`
 
 Data type: `Any`
 
@@ -9101,7 +9822,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `label_format`
+##### <a name="label_format"></a>`label_format`
 
 Data type: `Any`
 
@@ -9109,7 +9830,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `label_type`
+##### <a name="label_type"></a>`label_type`
 
 Data type: `Any`
 
@@ -9117,7 +9838,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_block_size`
+##### <a name="maximum_block_size"></a>`maximum_block_size`
 
 Data type: `Any`
 
@@ -9125,7 +9846,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_volume_bytes`
+##### <a name="maximum_volume_bytes"></a>`maximum_volume_bytes`
 
 Data type: `Any`
 
@@ -9133,7 +9854,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_volume_files`
+##### <a name="maximum_volume_files"></a>`maximum_volume_files`
 
 Data type: `Any`
 
@@ -9141,7 +9862,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_volume_jobs`
+##### <a name="maximum_volume_jobs"></a>`maximum_volume_jobs`
 
 Data type: `Any`
 
@@ -9149,7 +9870,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_volumes`
+##### <a name="maximum_volumes"></a>`maximum_volumes`
 
 Data type: `Any`
 
@@ -9157,7 +9878,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `migration_high_bytes`
+##### <a name="migration_high_bytes"></a>`migration_high_bytes`
 
 Data type: `Any`
 
@@ -9165,7 +9886,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `migration_low_bytes`
+##### <a name="migration_low_bytes"></a>`migration_low_bytes`
 
 Data type: `Any`
 
@@ -9173,7 +9894,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `migration_time`
+##### <a name="migration_time"></a>`migration_time`
 
 Data type: `Any`
 
@@ -9181,7 +9902,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `minimum_block_size`
+##### <a name="minimum_block_size"></a>`minimum_block_size`
 
 Data type: `Any`
 
@@ -9189,7 +9910,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `next_pool`
+##### <a name="next_pool"></a>`next_pool`
 
 Data type: `Any`
 
@@ -9197,7 +9918,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pool_type`
+##### <a name="pool_type"></a>`pool_type`
 
 Data type: `Any`
 
@@ -9205,7 +9926,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `purge_oldest_volume`
+##### <a name="purge_oldest_volume"></a>`purge_oldest_volume`
 
 Data type: `Any`
 
@@ -9213,7 +9934,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `recycle`
+##### <a name="recycle"></a>`recycle`
 
 Data type: `Any`
 
@@ -9221,7 +9942,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `recycle_current_volume`
+##### <a name="recycle_current_volume"></a>`recycle_current_volume`
 
 Data type: `Any`
 
@@ -9229,7 +9950,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `recycle_oldest_volume`
+##### <a name="recycle_oldest_volume"></a>`recycle_oldest_volume`
 
 Data type: `Any`
 
@@ -9237,7 +9958,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `recycle_pool`
+##### <a name="recycle_pool"></a>`recycle_pool`
 
 Data type: `Any`
 
@@ -9245,7 +9966,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `scratch_pool`
+##### <a name="scratch_pool"></a>`scratch_pool`
 
 Data type: `Any`
 
@@ -9253,7 +9974,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `storage`
+##### <a name="storage"></a>`storage`
 
 Data type: `Any`
 
@@ -9261,7 +9982,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `use_catalog`
+##### <a name="use_catalog"></a>`use_catalog`
 
 Data type: `Any`
 
@@ -9269,7 +9990,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `volume_retention`
+##### <a name="volume_retention"></a>`volume_retention`
 
 Data type: `Any`
 
@@ -9277,7 +9998,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `volume_use_duration`
+##### <a name="volume_use_duration"></a>`volume_use_duration`
 
 Data type: `Any`
 
@@ -9285,7 +10006,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::profile`
+### <a name="bareosdirectorprofile"></a>`bareos::director::profile`
 
 == Define: bareos::director::profile
 The Profile Resource defines a set of ACLs.
@@ -9374,9 +10095,22 @@ Console Resources can be tight to one or more profiles, making it easier to use 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::profile` defined type.
+The following parameters are available in the `bareos::director::profile` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`catalog_acl`](#catalog_acl)
+* [`client_acl`](#client_acl)
+* [`command_acl`](#command_acl)
+* [`description`](#description)
+* [`file_set_acl`](#file_set_acl)
+* [`job_acl`](#job_acl)
+* [`plugin_options_acl`](#plugin_options_acl)
+* [`pool_acl`](#pool_acl)
+* [`schedule_acl`](#schedule_acl)
+* [`storage_acl`](#storage_acl)
+* [`where_acl`](#where_acl)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9384,7 +10118,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `catalog_acl`
+##### <a name="catalog_acl"></a>`catalog_acl`
 
 Data type: `Any`
 
@@ -9392,7 +10126,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `client_acl`
+##### <a name="client_acl"></a>`client_acl`
 
 Data type: `Any`
 
@@ -9400,7 +10134,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `command_acl`
+##### <a name="command_acl"></a>`command_acl`
 
 Data type: `Any`
 
@@ -9408,7 +10142,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -9416,7 +10150,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file_set_acl`
+##### <a name="file_set_acl"></a>`file_set_acl`
 
 Data type: `Any`
 
@@ -9424,7 +10158,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `job_acl`
+##### <a name="job_acl"></a>`job_acl`
 
 Data type: `Any`
 
@@ -9432,7 +10166,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `plugin_options_acl`
+##### <a name="plugin_options_acl"></a>`plugin_options_acl`
 
 Data type: `Any`
 
@@ -9440,7 +10174,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `pool_acl`
+##### <a name="pool_acl"></a>`pool_acl`
 
 Data type: `Any`
 
@@ -9448,7 +10182,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `schedule_acl`
+##### <a name="schedule_acl"></a>`schedule_acl`
 
 Data type: `Any`
 
@@ -9456,7 +10190,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `storage_acl`
+##### <a name="storage_acl"></a>`storage_acl`
 
 Data type: `Any`
 
@@ -9464,7 +10198,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `where_acl`
+##### <a name="where_acl"></a>`where_acl`
 
 Data type: `Any`
 
@@ -9472,7 +10206,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::schedule`
+### <a name="bareosdirectorschedule"></a>`bareos::director::schedule`
 
 == Define: bareos::director::schedule
 The Schedule resource provides a means of automatically scheduling a Job
@@ -9508,9 +10242,14 @@ In general, you specify an action to be taken and when.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::schedule` defined type.
+The following parameters are available in the `bareos::director::schedule` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`description`](#description)
+* [`enabled`](#enabled)
+* [`run`](#run)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9518,7 +10257,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -9526,7 +10265,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enabled`
+##### <a name="enabled"></a>`enabled`
 
 Data type: `Any`
 
@@ -9534,7 +10273,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `run`
+##### <a name="run"></a>`run`
 
 Data type: `Any`
 
@@ -9542,7 +10281,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::director::storage`
+### <a name="bareosdirectorstorage"></a>`bareos::director::storage`
 
 == Define: bareos::director::storage
 To define on what physical device the Volumes should be mounted.
@@ -9787,9 +10526,44 @@ You may have one or more Storage definitions.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::storage` defined type.
+The following parameters are available in the `bareos::director::storage` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`address`](#address)
+* [`allow_compression`](#allow_compression)
+* [`auth_type`](#auth_type)
+* [`auto_changer`](#auto_changer)
+* [`cache_status_interval`](#cache_status_interval)
+* [`changer_device`](#changer_device)
+* [`collect_statistics`](#collect_statistics)
+* [`description`](#description)
+* [`device`](#device)
+* [`enabled`](#enabled)
+* [`heartbeat_interval`](#heartbeat_interval)
+* [`maximum_bandwidth_per_job`](#maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`maximum_concurrent_read_jobs`](#maximum_concurrent_read_jobs)
+* [`media_type`](#media_type)
+* [`paired_storage`](#paired_storage)
+* [`password`](#password)
+* [`port`](#port)
+* [`protocol`](#protocol)
+* [`tape_device`](#tape_device)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+* [`username`](#username)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9797,7 +10571,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -9805,7 +10579,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `allow_compression`
+##### <a name="allow_compression"></a>`allow_compression`
 
 Data type: `Any`
 
@@ -9813,7 +10587,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auth_type`
+##### <a name="auth_type"></a>`auth_type`
 
 Data type: `Any`
 
@@ -9821,7 +10595,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_changer`
+##### <a name="auto_changer"></a>`auto_changer`
 
 Data type: `Any`
 
@@ -9829,7 +10603,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `cache_status_interval`
+##### <a name="cache_status_interval"></a>`cache_status_interval`
 
 Data type: `Any`
 
@@ -9837,7 +10611,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `changer_device`
+##### <a name="changer_device"></a>`changer_device`
 
 Data type: `Any`
 
@@ -9845,7 +10619,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `collect_statistics`
+##### <a name="collect_statistics"></a>`collect_statistics`
 
 Data type: `Any`
 
@@ -9853,7 +10627,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -9861,7 +10635,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `device`
+##### <a name="device"></a>`device`
 
 Data type: `Any`
 
@@ -9869,7 +10643,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enabled`
+##### <a name="enabled"></a>`enabled`
 
 Data type: `Any`
 
@@ -9877,7 +10651,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `heartbeat_interval`
+##### <a name="heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
@@ -9885,7 +10659,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth_per_job`
+##### <a name="maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
@@ -9893,7 +10667,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -9901,7 +10675,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_read_jobs`
+##### <a name="maximum_concurrent_read_jobs"></a>`maximum_concurrent_read_jobs`
 
 Data type: `Any`
 
@@ -9909,7 +10683,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `media_type`
+##### <a name="media_type"></a>`media_type`
 
 Data type: `Any`
 
@@ -9917,7 +10691,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `paired_storage`
+##### <a name="paired_storage"></a>`paired_storage`
 
 Data type: `Any`
 
@@ -9925,7 +10699,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -9933,7 +10707,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Any`
 
@@ -9941,7 +10715,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `protocol`
+##### <a name="protocol"></a>`protocol`
 
 Data type: `Any`
 
@@ -9949,7 +10723,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tape_device`
+##### <a name="tape_device"></a>`tape_device`
 
 Data type: `Any`
 
@@ -9957,7 +10731,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -9965,7 +10739,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -9973,7 +10747,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -9981,7 +10755,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -9989,7 +10763,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -9997,7 +10771,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -10005,7 +10779,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -10013,7 +10787,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -10021,7 +10795,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -10029,7 +10803,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -10037,7 +10811,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -10045,7 +10819,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -10053,7 +10827,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `username`
+##### <a name="username"></a>`username`
 
 Data type: `Any`
 
@@ -10061,7 +10835,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::monitor::client`
+### <a name="bareosmonitorclient"></a>`bareos::monitor::client`
 
 == Define: bareos::monitor::client
 The Client resource defines the attributes of the Clients that are monitored by this Monitor.
@@ -10107,9 +10881,16 @@ The Client resource defines the attributes of the Clients that are monitored by 
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::client` defined type.
+The following parameters are available in the `bareos::monitor::client` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`address`](#address)
+* [`description`](#description)
+* [`enable_ssl`](#enable_ssl)
+* [`fd_port`](#fd_port)
+* [`password`](#password)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10117,7 +10898,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -10125,7 +10906,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -10133,7 +10914,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enable_ssl`
+##### <a name="enable_ssl"></a>`enable_ssl`
 
 Data type: `Any`
 
@@ -10141,7 +10922,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_port`
+##### <a name="fd_port"></a>`fd_port`
 
 Data type: `Any`
 
@@ -10149,7 +10930,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -10157,7 +10938,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::monitor::director`
+### <a name="bareosmonitordirector"></a>`bareos::monitor::director`
 
 == Define: bareos::monitor::director
 The Director resource defines the attributes of the Directors that are monitored by this Monitor.
@@ -10196,9 +10977,15 @@ The Director resource defines the attributes of the Directors that are monitored
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::director` defined type.
+The following parameters are available in the `bareos::monitor::director` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`address`](#address)
+* [`description`](#description)
+* [`dir_port`](#dir_port)
+* [`enable_ssl`](#enable_ssl)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10206,7 +10993,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -10214,7 +11001,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -10222,7 +11009,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_port`
+##### <a name="dir_port"></a>`dir_port`
 
 Data type: `Any`
 
@@ -10230,7 +11017,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enable_ssl`
+##### <a name="enable_ssl"></a>`enable_ssl`
 
 Data type: `Any`
 
@@ -10238,7 +11025,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::monitor::monitor`
+### <a name="bareosmonitormonitor"></a>`bareos::monitor::monitor`
 
 == Define: bareos::monitor::monitor
 The Monitor resource defines the attributes of the Monitor running on the network.
@@ -10300,9 +11087,18 @@ in Clients and Storages configuration files, and as a Console resource in Direct
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::monitor` defined type.
+The following parameters are available in the `bareos::monitor::monitor` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`description`](#description)
+* [`dir_connect_timeout`](#dir_connect_timeout)
+* [`fd_connect_timeout`](#fd_connect_timeout)
+* [`password`](#password)
+* [`refresh_interval`](#refresh_interval)
+* [`require_ssl`](#require_ssl)
+* [`sd_connect_timeout`](#sd_connect_timeout)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10310,7 +11106,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -10318,7 +11114,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `dir_connect_timeout`
+##### <a name="dir_connect_timeout"></a>`dir_connect_timeout`
 
 Data type: `Any`
 
@@ -10326,7 +11122,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fd_connect_timeout`
+##### <a name="fd_connect_timeout"></a>`fd_connect_timeout`
 
 Data type: `Any`
 
@@ -10334,7 +11130,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -10342,7 +11138,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `refresh_interval`
+##### <a name="refresh_interval"></a>`refresh_interval`
 
 Data type: `Any`
 
@@ -10350,7 +11146,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `require_ssl`
+##### <a name="require_ssl"></a>`require_ssl`
 
 Data type: `Any`
 
@@ -10358,7 +11154,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_connect_timeout`
+##### <a name="sd_connect_timeout"></a>`sd_connect_timeout`
 
 Data type: `Any`
 
@@ -10366,7 +11162,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::monitor::storage`
+### <a name="bareosmonitorstorage"></a>`bareos::monitor::storage`
 
 == Define: bareos::monitor::storage
 The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
@@ -10426,9 +11222,18 @@ The Storage resource defines the attributes of the Storages that are monitored b
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::storage` defined type.
+The following parameters are available in the `bareos::monitor::storage` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`address`](#address)
+* [`description`](#description)
+* [`enable_ssl`](#enable_ssl)
+* [`password`](#password)
+* [`sd_address`](#sd_address)
+* [`sd_password`](#sd_password)
+* [`sd_port`](#sd_port)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10436,7 +11241,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `Any`
 
@@ -10444,7 +11249,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -10452,7 +11257,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `enable_ssl`
+##### <a name="enable_ssl"></a>`enable_ssl`
 
 Data type: `Any`
 
@@ -10460,7 +11265,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -10468,7 +11273,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_address`
+##### <a name="sd_address"></a>`sd_address`
 
 Data type: `Any`
 
@@ -10476,7 +11281,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_password`
+##### <a name="sd_password"></a>`sd_password`
 
 Data type: `Any`
 
@@ -10484,7 +11289,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `sd_port`
+##### <a name="sd_port"></a>`sd_port`
 
 Data type: `Any`
 
@@ -10492,7 +11297,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::storage::autochanger`
+### <a name="bareosstorageautochanger"></a>`bareos::storage::autochanger`
 
 == Define: bareos::storage::autochanger
 The Autochanger resource supports single or multiple drive autochangers
@@ -10534,9 +11339,15 @@ by grouping one or more Device resources into one unit called an autochanger in 
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::autochanger` defined type.
+The following parameters are available in the `bareos::storage::autochanger` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`changer_command`](#changer_command)
+* [`changer_device`](#changer_device)
+* [`description`](#description)
+* [`device`](#device)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10544,7 +11355,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `changer_command`
+##### <a name="changer_command"></a>`changer_command`
 
 Data type: `Any`
 
@@ -10552,7 +11363,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `changer_device`
+##### <a name="changer_device"></a>`changer_device`
 
 Data type: `Any`
 
@@ -10560,7 +11371,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -10568,7 +11379,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `device`
+##### <a name="device"></a>`device`
 
 Data type: `Any`
 
@@ -10576,7 +11387,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::storage::device`
+### <a name="bareosstoragedevice"></a>`bareos::storage::device`
 
 == Define: bareos::storage::device
 The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon.
@@ -10725,6 +11536,13 @@ In general, the properties specified within the Device resource are specific to 
 
   Bareos Datatype: boolean
   Bareos Default: true
+  Required: false
+
+[*count*]
+  Count
+
+  Bareos Datatype: pint32
+  Bareos Default: 1
   Required: false
 
 [*description*]
@@ -11016,9 +11834,73 @@ In general, the properties specified within the Device resource are specific to 
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::device` defined type.
+The following parameters are available in the `bareos::storage::device` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`alert_command`](#alert_command)
+* [`always_open`](#always_open)
+* [`archive_device`](#archive_device)
+* [`auto_deflate`](#auto_deflate)
+* [`auto_deflate_algorithm`](#auto_deflate_algorithm)
+* [`auto_deflate_level`](#auto_deflate_level)
+* [`auto_inflate`](#auto_inflate)
+* [`auto_select`](#auto_select)
+* [`autochanger`](#autochanger)
+* [`automatic_mount`](#automatic_mount)
+* [`backward_space_file`](#backward_space_file)
+* [`backward_space_record`](#backward_space_record)
+* [`block_checksum`](#block_checksum)
+* [`block_positioning`](#block_positioning)
+* [`bsf_at_eom`](#bsf_at_eom)
+* [`changer_command`](#changer_command)
+* [`changer_device`](#changer_device)
+* [`check_labels`](#check_labels)
+* [`close_on_poll`](#close_on_poll)
+* [`collect_statistics`](#collect_statistics)
+* [`count`](#count)
+* [`description`](#description)
+* [`device_options`](#device_options)
+* [`device_type`](#device_type)
+* [`diagnostic_device`](#diagnostic_device)
+* [`drive_crypto_enabled`](#drive_crypto_enabled)
+* [`drive_index`](#drive_index)
+* [`drive_tape_alert_enabled`](#drive_tape_alert_enabled)
+* [`fast_forward_space_file`](#fast_forward_space_file)
+* [`forward_space_file`](#forward_space_file)
+* [`forward_space_record`](#forward_space_record)
+* [`hardware_end_of_file`](#hardware_end_of_file)
+* [`hardware_end_of_medium`](#hardware_end_of_medium)
+* [`label_block_size`](#label_block_size)
+* [`label_media`](#label_media)
+* [`label_type`](#label_type)
+* [`maximum_block_size`](#maximum_block_size)
+* [`maximum_changer_wait`](#maximum_changer_wait)
+* [`maximum_concurrent_jobs`](#maximum_concurrent_jobs)
+* [`maximum_file_size`](#maximum_file_size)
+* [`maximum_job_spool_size`](#maximum_job_spool_size)
+* [`maximum_network_buffer_size`](#maximum_network_buffer_size)
+* [`maximum_open_volumes`](#maximum_open_volumes)
+* [`maximum_open_wait`](#maximum_open_wait)
+* [`maximum_rewind_wait`](#maximum_rewind_wait)
+* [`maximum_spool_size`](#maximum_spool_size)
+* [`media_type`](#media_type)
+* [`minimum_block_size`](#minimum_block_size)
+* [`mount_command`](#mount_command)
+* [`mount_point`](#mount_point)
+* [`no_rewind_on_close`](#no_rewind_on_close)
+* [`offline_on_unmount`](#offline_on_unmount)
+* [`query_crypto_status`](#query_crypto_status)
+* [`random_access`](#random_access)
+* [`removable_media`](#removable_media)
+* [`requires_mount`](#requires_mount)
+* [`spool_directory`](#spool_directory)
+* [`two_eof`](#two_eof)
+* [`unmount_command`](#unmount_command)
+* [`use_mtiocget`](#use_mtiocget)
+* [`volume_capacity`](#volume_capacity)
+* [`volume_poll_interval`](#volume_poll_interval)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -11026,7 +11908,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `alert_command`
+##### <a name="alert_command"></a>`alert_command`
 
 Data type: `Any`
 
@@ -11034,7 +11916,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `always_open`
+##### <a name="always_open"></a>`always_open`
 
 Data type: `Any`
 
@@ -11042,7 +11924,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `archive_device`
+##### <a name="archive_device"></a>`archive_device`
 
 Data type: `Any`
 
@@ -11050,7 +11932,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_deflate`
+##### <a name="auto_deflate"></a>`auto_deflate`
 
 Data type: `Any`
 
@@ -11058,7 +11940,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_deflate_algorithm`
+##### <a name="auto_deflate_algorithm"></a>`auto_deflate_algorithm`
 
 Data type: `Any`
 
@@ -11066,7 +11948,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_deflate_level`
+##### <a name="auto_deflate_level"></a>`auto_deflate_level`
 
 Data type: `Any`
 
@@ -11074,7 +11956,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_inflate`
+##### <a name="auto_inflate"></a>`auto_inflate`
 
 Data type: `Any`
 
@@ -11082,7 +11964,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `auto_select`
+##### <a name="auto_select"></a>`auto_select`
 
 Data type: `Any`
 
@@ -11090,7 +11972,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `autochanger`
+##### <a name="autochanger"></a>`autochanger`
 
 Data type: `Any`
 
@@ -11098,7 +11980,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `automatic_mount`
+##### <a name="automatic_mount"></a>`automatic_mount`
 
 Data type: `Any`
 
@@ -11106,7 +11988,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `backward_space_file`
+##### <a name="backward_space_file"></a>`backward_space_file`
 
 Data type: `Any`
 
@@ -11114,7 +11996,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `backward_space_record`
+##### <a name="backward_space_record"></a>`backward_space_record`
 
 Data type: `Any`
 
@@ -11122,7 +12004,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `block_checksum`
+##### <a name="block_checksum"></a>`block_checksum`
 
 Data type: `Any`
 
@@ -11130,7 +12012,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `block_positioning`
+##### <a name="block_positioning"></a>`block_positioning`
 
 Data type: `Any`
 
@@ -11138,7 +12020,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `bsf_at_eom`
+##### <a name="bsf_at_eom"></a>`bsf_at_eom`
 
 Data type: `Any`
 
@@ -11146,7 +12028,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `changer_command`
+##### <a name="changer_command"></a>`changer_command`
 
 Data type: `Any`
 
@@ -11154,7 +12036,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `changer_device`
+##### <a name="changer_device"></a>`changer_device`
 
 Data type: `Any`
 
@@ -11162,7 +12044,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `check_labels`
+##### <a name="check_labels"></a>`check_labels`
 
 Data type: `Any`
 
@@ -11170,7 +12052,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `close_on_poll`
+##### <a name="close_on_poll"></a>`close_on_poll`
 
 Data type: `Any`
 
@@ -11178,7 +12060,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `collect_statistics`
+##### <a name="collect_statistics"></a>`collect_statistics`
 
 Data type: `Any`
 
@@ -11186,7 +12068,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="count"></a>`count`
 
 Data type: `Any`
 
@@ -11194,7 +12076,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `device_options`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -11202,7 +12084,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `device_type`
+##### <a name="device_options"></a>`device_options`
 
 Data type: `Any`
 
@@ -11210,7 +12092,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `diagnostic_device`
+##### <a name="device_type"></a>`device_type`
 
 Data type: `Any`
 
@@ -11218,7 +12100,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `drive_crypto_enabled`
+##### <a name="diagnostic_device"></a>`diagnostic_device`
 
 Data type: `Any`
 
@@ -11226,7 +12108,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `drive_index`
+##### <a name="drive_crypto_enabled"></a>`drive_crypto_enabled`
 
 Data type: `Any`
 
@@ -11234,7 +12116,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `drive_tape_alert_enabled`
+##### <a name="drive_index"></a>`drive_index`
 
 Data type: `Any`
 
@@ -11242,7 +12124,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `fast_forward_space_file`
+##### <a name="drive_tape_alert_enabled"></a>`drive_tape_alert_enabled`
 
 Data type: `Any`
 
@@ -11250,7 +12132,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `forward_space_file`
+##### <a name="fast_forward_space_file"></a>`fast_forward_space_file`
 
 Data type: `Any`
 
@@ -11258,7 +12140,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `forward_space_record`
+##### <a name="forward_space_file"></a>`forward_space_file`
 
 Data type: `Any`
 
@@ -11266,7 +12148,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `hardware_end_of_file`
+##### <a name="forward_space_record"></a>`forward_space_record`
 
 Data type: `Any`
 
@@ -11274,7 +12156,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `hardware_end_of_medium`
+##### <a name="hardware_end_of_file"></a>`hardware_end_of_file`
 
 Data type: `Any`
 
@@ -11282,7 +12164,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `label_block_size`
+##### <a name="hardware_end_of_medium"></a>`hardware_end_of_medium`
 
 Data type: `Any`
 
@@ -11290,7 +12172,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `label_media`
+##### <a name="label_block_size"></a>`label_block_size`
 
 Data type: `Any`
 
@@ -11298,7 +12180,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `label_type`
+##### <a name="label_media"></a>`label_media`
 
 Data type: `Any`
 
@@ -11306,7 +12188,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_block_size`
+##### <a name="label_type"></a>`label_type`
 
 Data type: `Any`
 
@@ -11314,7 +12196,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_changer_wait`
+##### <a name="maximum_block_size"></a>`maximum_block_size`
 
 Data type: `Any`
 
@@ -11322,7 +12204,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_concurrent_jobs`
+##### <a name="maximum_changer_wait"></a>`maximum_changer_wait`
 
 Data type: `Any`
 
@@ -11330,7 +12212,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_file_size`
+##### <a name="maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
@@ -11338,7 +12220,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_job_spool_size`
+##### <a name="maximum_file_size"></a>`maximum_file_size`
 
 Data type: `Any`
 
@@ -11346,7 +12228,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_network_buffer_size`
+##### <a name="maximum_job_spool_size"></a>`maximum_job_spool_size`
 
 Data type: `Any`
 
@@ -11354,7 +12236,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_open_volumes`
+##### <a name="maximum_network_buffer_size"></a>`maximum_network_buffer_size`
 
 Data type: `Any`
 
@@ -11362,7 +12244,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_open_wait`
+##### <a name="maximum_open_volumes"></a>`maximum_open_volumes`
 
 Data type: `Any`
 
@@ -11370,7 +12252,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_rewind_wait`
+##### <a name="maximum_open_wait"></a>`maximum_open_wait`
 
 Data type: `Any`
 
@@ -11378,7 +12260,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_spool_size`
+##### <a name="maximum_rewind_wait"></a>`maximum_rewind_wait`
 
 Data type: `Any`
 
@@ -11386,7 +12268,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `media_type`
+##### <a name="maximum_spool_size"></a>`maximum_spool_size`
 
 Data type: `Any`
 
@@ -11394,7 +12276,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `minimum_block_size`
+##### <a name="media_type"></a>`media_type`
 
 Data type: `Any`
 
@@ -11402,7 +12284,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mount_command`
+##### <a name="minimum_block_size"></a>`minimum_block_size`
 
 Data type: `Any`
 
@@ -11410,7 +12292,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mount_point`
+##### <a name="mount_command"></a>`mount_command`
 
 Data type: `Any`
 
@@ -11418,7 +12300,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `no_rewind_on_close`
+##### <a name="mount_point"></a>`mount_point`
 
 Data type: `Any`
 
@@ -11426,7 +12308,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `offline_on_unmount`
+##### <a name="no_rewind_on_close"></a>`no_rewind_on_close`
 
 Data type: `Any`
 
@@ -11434,7 +12316,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `query_crypto_status`
+##### <a name="offline_on_unmount"></a>`offline_on_unmount`
 
 Data type: `Any`
 
@@ -11442,7 +12324,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `random_access`
+##### <a name="query_crypto_status"></a>`query_crypto_status`
 
 Data type: `Any`
 
@@ -11450,7 +12332,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `removable_media`
+##### <a name="random_access"></a>`random_access`
 
 Data type: `Any`
 
@@ -11458,7 +12340,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `requires_mount`
+##### <a name="removable_media"></a>`removable_media`
 
 Data type: `Any`
 
@@ -11466,7 +12348,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `spool_directory`
+##### <a name="requires_mount"></a>`requires_mount`
 
 Data type: `Any`
 
@@ -11474,7 +12356,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `two_eof`
+##### <a name="spool_directory"></a>`spool_directory`
 
 Data type: `Any`
 
@@ -11482,7 +12364,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `unmount_command`
+##### <a name="two_eof"></a>`two_eof`
 
 Data type: `Any`
 
@@ -11490,7 +12372,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `use_mtiocget`
+##### <a name="unmount_command"></a>`unmount_command`
 
 Data type: `Any`
 
@@ -11498,7 +12380,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `volume_capacity`
+##### <a name="use_mtiocget"></a>`use_mtiocget`
 
 Data type: `Any`
 
@@ -11506,7 +12388,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `volume_poll_interval`
+##### <a name="volume_capacity"></a>`volume_capacity`
 
 Data type: `Any`
 
@@ -11514,7 +12396,15 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::storage::director`
+##### <a name="volume_poll_interval"></a>`volume_poll_interval`
+
+Data type: `Any`
+
+
+
+Default value: ``undef``
+
+### <a name="bareosstoragedirector"></a>`bareos::storage::director`
 
 == Define: bareos::storage::director
 The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
@@ -11647,9 +12537,28 @@ The Director Name and Password must match the corresponding values in the Direct
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::director` defined type.
+The following parameters are available in the `bareos::storage::director` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`description`](#description)
+* [`key_encryption_key`](#key_encryption_key)
+* [`maximum_bandwidth_per_job`](#maximum_bandwidth_per_job)
+* [`monitor`](#monitor)
+* [`password`](#password)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_authenticate`](#tls_authenticate)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_certificate_revocation_list`](#tls_certificate_revocation_list)
+* [`tls_cipher_list`](#tls_cipher_list)
+* [`tls_dh_file`](#tls_dh_file)
+* [`tls_enable`](#tls_enable)
+* [`tls_key`](#tls_key)
+* [`tls_require`](#tls_require)
+* [`tls_verify_peer`](#tls_verify_peer)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -11657,7 +12566,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -11665,7 +12574,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `key_encryption_key`
+##### <a name="key_encryption_key"></a>`key_encryption_key`
 
 Data type: `Any`
 
@@ -11673,7 +12582,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `maximum_bandwidth_per_job`
+##### <a name="maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
@@ -11681,7 +12590,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `monitor`
+##### <a name="monitor"></a>`monitor`
 
 Data type: `Any`
 
@@ -11689,7 +12598,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -11697,7 +12606,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
@@ -11705,7 +12614,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_authenticate`
+##### <a name="tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
@@ -11713,7 +12622,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
@@ -11721,7 +12630,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
@@ -11729,7 +12638,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
@@ -11737,7 +12646,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_certificate_revocation_list`
+##### <a name="tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
 Data type: `Any`
 
@@ -11745,7 +12654,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_cipher_list`
+##### <a name="tls_cipher_list"></a>`tls_cipher_list`
 
 Data type: `Any`
 
@@ -11753,7 +12662,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Any`
 
@@ -11761,7 +12670,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Any`
 
@@ -11769,7 +12678,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Any`
 
@@ -11777,7 +12686,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Any`
 
@@ -11785,7 +12694,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Any`
 
@@ -11793,7 +12702,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::storage::messages`
+### <a name="bareosstoragemessages"></a>`bareos::storage::messages`
 
 == Define: bareos::storage::messages
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
@@ -11928,9 +12837,27 @@ The Messages resource defines how messages are to be handled and destinations to
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::messages` defined type.
+The following parameters are available in the `bareos::storage::messages` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`append`](#append)
+* [`catalog`](#catalog)
+* [`console`](#console)
+* [`description`](#description)
+* [`director`](#director)
+* [`file`](#file)
+* [`mail`](#mail)
+* [`mail_command`](#mail_command)
+* [`mail_on_error`](#mail_on_error)
+* [`mail_on_success`](#mail_on_success)
+* [`operator`](#operator)
+* [`operator_command`](#operator_command)
+* [`stderr`](#stderr)
+* [`stdout`](#stdout)
+* [`syslog`](#syslog)
+* [`timestamp_format`](#timestamp_format)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -11938,7 +12865,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `append`
+##### <a name="append"></a>`append`
 
 Data type: `Any`
 
@@ -11946,7 +12873,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Any`
 
@@ -11954,7 +12881,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `console`
+##### <a name="console"></a>`console`
 
 Data type: `Any`
 
@@ -11962,7 +12889,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -11970,7 +12897,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `director`
+##### <a name="director"></a>`director`
 
 Data type: `Any`
 
@@ -11978,7 +12905,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `file`
+##### <a name="file"></a>`file`
 
 Data type: `Any`
 
@@ -11986,7 +12913,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail`
+##### <a name="mail"></a>`mail`
 
 Data type: `Any`
 
@@ -11994,7 +12921,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_command`
+##### <a name="mail_command"></a>`mail_command`
 
 Data type: `Any`
 
@@ -12002,7 +12929,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_on_error`
+##### <a name="mail_on_error"></a>`mail_on_error`
 
 Data type: `Any`
 
@@ -12010,7 +12937,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `mail_on_success`
+##### <a name="mail_on_success"></a>`mail_on_success`
 
 Data type: `Any`
 
@@ -12018,7 +12945,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `operator`
+##### <a name="operator"></a>`operator`
 
 Data type: `Any`
 
@@ -12026,7 +12953,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `operator_command`
+##### <a name="operator_command"></a>`operator_command`
 
 Data type: `Any`
 
@@ -12034,7 +12961,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `stderr`
+##### <a name="stderr"></a>`stderr`
 
 Data type: `Any`
 
@@ -12042,7 +12969,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `stdout`
+##### <a name="stdout"></a>`stdout`
 
 Data type: `Any`
 
@@ -12050,7 +12977,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `syslog`
+##### <a name="syslog"></a>`syslog`
 
 Data type: `Any`
 
@@ -12058,7 +12985,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `timestamp_format`
+##### <a name="timestamp_format"></a>`timestamp_format`
 
 Data type: `Any`
 
@@ -12066,7 +12993,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::storage::ndmp`
+### <a name="bareosstoragendmp"></a>`bareos::storage::ndmp`
 
 == Define: bareos::storage::ndmp
 The NDMP Resource specifies the authentication details of each NDMP client.
@@ -12114,9 +13041,16 @@ In general, the properties specified within the NDMP resource are specific to on
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::ndmp` defined type.
+The following parameters are available in the `bareos::storage::ndmp` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`auth_type`](#auth_type)
+* [`description`](#description)
+* [`log_level`](#log_level)
+* [`password`](#password)
+* [`username`](#username)
+
+##### <a name="ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -12124,7 +13058,7 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `auth_type`
+##### <a name="auth_type"></a>`auth_type`
 
 Data type: `Any`
 
@@ -12132,7 +13066,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `description`
+##### <a name="description"></a>`description`
 
 Data type: `Any`
 
@@ -12140,7 +13074,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `log_level`
+##### <a name="log_level"></a>`log_level`
 
 Data type: `Any`
 
@@ -12148,7 +13082,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `Any`
 
@@ -12156,7 +13090,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-##### `username`
+##### <a name="username"></a>`username`
 
 Data type: `Any`
 
@@ -12164,7 +13098,7 @@ Data type: `Any`
 
 Default value: ``undef``
 
-### `bareos::webui::director`
+### <a name="bareoswebuidirector"></a>`bareos::webui::director`
 
 == Class: bareos::webui::director
 Configures an director to use with the webui.
@@ -12197,53 +13131,91 @@ Configures an director to use with the webui.
 [*enabled*]
   Enable or disable section. Possible values are "yes" or "no", the default is "yes".
 
+[*pam_console_name*]
+  Pam Console Name
+
+  Bareos datatype: res
+  Bareos default: not set
+  Required: false
+
+[*pam_console_password*]
+  Pam Console Password
+
+  Bareos datatype: res
+  Bareos default: not set
+  Required: false
+
 #### Parameters
 
-The following parameters are available in the `bareos::webui::director` defined type.
+The following parameters are available in the `bareos::webui::director` defined type:
 
-##### `ensure`
+* [`ensure`](#ensure)
+* [`catalog`](#catalog)
+* [`dir_address`](#dir_address)
+* [`dir_port`](#dir_port)
+* [`enabled`](#enabled)
+* [`pam_console_name`](#pam_console_name)
+* [`pam_console_password`](#pam_console_password)
 
-Data type: `Any`
+##### <a name="ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
 
 
 
 Default value: `present`
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
-Data type: `Any`
+Data type: `Optional[Bareos::Resource]`
 
 
 
 Default value: ``undef``
 
-##### `dir_address`
+##### <a name="dir_address"></a>`dir_address`
 
-Data type: `Any`
+Data type: `Stdlib::Host`
 
 
 
 Default value: `'localhost'`
 
-##### `dir_port`
+##### <a name="dir_port"></a>`dir_port`
 
-Data type: `Any`
+Data type: `Stdlib::Port`
 
 
 
 Default value: `9101`
 
-##### `enabled`
+##### <a name="enabled"></a>`enabled`
 
-Data type: `Any`
+Data type: `Enum['yes', 'no']`
 
 
 
 Default value: `'yes'`
 
+##### <a name="pam_console_name"></a>`pam_console_name`
+
+Data type: `Optional[Bareos::Resource]`
+
+
+
+Default value: ``undef``
+
+##### <a name="pam_console_password"></a>`pam_console_password`
+
+Data type: `Optional[String]`
+
+
+
+Default value: ``undef``
+
 ## Functions
 
-### `bareos_settings`
+### <a name="bareos_settings"></a>`bareos_settings`
 
 Type: Ruby 3.x API
 
@@ -12254,4 +13226,36 @@ Helper function to parse settings for bareos and return prepared lines for confi
 Helper function to parse settings for bareos and return prepared lines for config file
 
 Returns: `Any`
+
+## Data types
+
+### <a name="bareosboolean"></a>`Bareos::Boolean`
+
+Bareos boolean datatype
+
+Alias of
+
+```puppet
+Variant[Boolean, Enum['yes', 'no']]
+```
+
+### <a name="bareoslist"></a>`Bareos::List`
+
+Bareos List data type
+
+Alias of
+
+```puppet
+Variant[String, Array[String]]
+```
+
+### <a name="bareosresource"></a>`Bareos::Resource`
+
+Bareos Resource data type
+
+Alias of
+
+```puppet
+Pattern[/(?i:^[a-z][a-z0-9\.\-_ \$]{0,126}$)/]
+```
 
