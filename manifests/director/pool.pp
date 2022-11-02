@@ -283,7 +283,7 @@ define bareos::director::pool (
         $_require_res_storage,
     ])
 
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$action_on_purge, 'Action On Purge', 'action_on_purge', false],
       [$auto_prune, 'Auto Prune', 'boolean', false],

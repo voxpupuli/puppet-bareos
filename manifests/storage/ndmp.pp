@@ -60,7 +60,7 @@ define bareos::storage::ndmp (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$auth_type, 'Auth Type', 'auth_type', false],
       [$log_level, 'Log Level', 'pint32', false],

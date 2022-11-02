@@ -65,7 +65,7 @@ define bareos::director::counter (
         $_require_res_catalog,
     ])
 
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$catalog, 'Catalog', 'res', false],
       [$maximum, 'Maximum', 'pint32', false],
