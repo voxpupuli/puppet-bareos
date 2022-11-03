@@ -18,8 +18,13 @@
 #   Db Driver
 #
 #   Bareos Datatype: string
-#   Bareos Default: Not set
-#   Required: true
+#   Bareos Default: postgresql
+#   Required: false
+#
+#   This parameter is deprecated. The only valid value under bareos >= 21 is
+#   `postgresql`.
+#
+#   See https://docs.bareos.org/Configuration/Director.html#config-Dir_Catalog_DbDriver
 #
 # [*db_name*]
 #   Db Name

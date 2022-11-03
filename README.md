@@ -47,7 +47,7 @@ A good starting point is too look into the profile classes `bareos::profile::dir
 
 Please note, this is only the minimal subset of an bareos configuration. You may use only some of the default configurations such like the schedules, messages, filesets or profiles.
 
-It is highly recommend **not** to use sqlite3 as bareos catalog backend. Please ensure you provide an mysql or postgresql database. See also define `bareos::director::catalog` for the possible database configuration.
+*Note that Bareos >= 21 only supports `postgresql` as a DB backend.*
 
 ```puppet
 # Install and configure an Director Server
@@ -55,10 +55,9 @@ $storage_password = 'Password of the storage instance',
 class { '::bareos::profile::director':
   password     => 'Password of the director instance itself',
   catalog_conf => {
-    'db_driver'   => 'mysql',
     'db_name'     => 'bareos_catalog',
-    'db_address'  => 'fqdn',
-    'db_port'     => 3306,
+    'db_address'  => '127.0.0.1',
+    'db_port'     => 5432,
     'db_user'     => 'user',
     'db_password' => 'password'
   },
@@ -403,7 +402,6 @@ bareos::director::director::name_director: 'example'
 bareos::director::director::password: 'foobar'
 bareos::director::catalogs:
   'testing':
-    db_driver: 'postgresql'
     db_name: 'test'
 bareos::director::clients:
   'alice':

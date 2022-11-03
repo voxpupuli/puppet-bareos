@@ -14,12 +14,12 @@ describe 'bareos::director' do
         it { is_expected.to contain_class('bareos') }
       end
 
-      context 'with catalogs => { test: { db_driver: "sqlite", db_name: "test" }}}' do
+      context 'with catalogs => { test: { db_driver: "postgresql", db_name: "test" }}}' do
         let(:params) do
           {
             catalogs: {
               test: {
-                db_driver: 'sqlite',
+                db_driver: 'postgresql',
                 db_name: 'test'
               }
             }
@@ -30,7 +30,7 @@ describe 'bareos::director' do
 
         it do
           expect(subject).to contain_bareos__director__catalog('test').
-            with_db_driver('sqlite').
+            with_db_driver('postgresql').
             with_db_name('test')
         end
       end

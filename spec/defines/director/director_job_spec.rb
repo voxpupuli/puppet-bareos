@@ -135,7 +135,7 @@ describe 'bareos::director::job' do
           '
           bareos::director::pool { "name": }
           bareos::director::catalog { "name":
-            db_driver => "sqlite3",
+            db_driver => "postgresql",
             db_name   => "test",
           }
           bareos::director::storage { "name":
