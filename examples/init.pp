@@ -9,11 +9,28 @@
 # Learn more about module testing here:
 # https://docs.puppet.com/guides/tests_smoke.html
 #
-class { 'bareos':
-}
+
+include postgresql::server
+
+class { 'bareos': }
+
 class { 'bareos::director::director':
   password => 'pw',
 }
+
+postgresql::server::db { 'bareos_catalog':
+  user     => 'dbuser',
+  password => postgresql::postgresql_password('bareos', 'dbpass'),
+}
+-> bareos::director::catalog { 'bareos_catalog':
+  db_driver   => 'postgresql',
+  db_name     => 'bareos_catalog',
+  db_address  => '127.0.0.1',
+  db_port     => 5432,
+  db_user     => 'dbuser',
+  db_password => 'dbpass',
+}
+
 class { 'bareos::client::client':
 }
 class { 'bareos::storage::storage':

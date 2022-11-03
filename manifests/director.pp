@@ -83,6 +83,7 @@ class bareos::director (
 
   if $manage_database {
     File <| tag == 'bareos_director' |> -> exec { 'bareos director init catalog':
+      user        => 'postgres',
       command     => '/usr/lib/bareos/scripts/create_bareos_database && /usr/lib/bareos/scripts/make_bareos_tables && /usr/lib/bareos/scripts/grant_bareos_privileges',
       notify      => Service[$bareos::director::service_name],
       refreshonly => true,
