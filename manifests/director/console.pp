@@ -243,7 +243,7 @@ define bareos::director::console (
         $_require_res_profiles,
     ])
 
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$catalog_acl, 'Catalog ACL', 'acl', false],
       [$client_acl, 'Client ACL', 'acl', false],

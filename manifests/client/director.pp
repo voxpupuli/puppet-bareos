@@ -197,7 +197,7 @@ define bareos::client::director (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', false],
       [$allowed_job_command, 'Allowed Job Command', 'string_list', false],

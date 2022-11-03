@@ -59,7 +59,7 @@ define bareos::director::fileset (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$enable_vss, 'Enable VSS', 'boolean', false],
       [$exclude, 'Exclude', 'include_exclude_item', false],

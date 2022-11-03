@@ -291,7 +291,7 @@ define bareos::director::storage (
         $_require_res_storage,
     ])
 
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
       [$allow_compression, 'Allow Compression', 'boolean', false],
