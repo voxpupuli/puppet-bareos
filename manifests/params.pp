@@ -20,9 +20,7 @@ class bareos::params {
     'bareos-director',
     'bareos-director-python-plugin',
     'bareos-database-common',
-    'bareos-database-mysql',
     'bareos-database-postgresql',
-    'bareos-database-sqlite3',
     'bareos-database-tools',
   ]
   $director_service_name = 'bareos-dir'
