@@ -134,7 +134,7 @@
 define bareos::director::catalog (
   $ensure = present,
   $db_address = undef,
-  $db_driver = undef,
+  Enum['postgresql'] $db_driver = 'postgresql',
   $db_name = undef,
   $db_password = undef,
   $db_port = undef,
