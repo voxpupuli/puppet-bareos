@@ -106,6 +106,7 @@ class bareos (
     mode         => $bareos::file_dir_mode,
     owner        => $bareos::file_owner,
     group        => $bareos::file_group,
+    require      => Package[$package_name],
     tag          => ['bareos', 'bareos_core'],
   }
 }
