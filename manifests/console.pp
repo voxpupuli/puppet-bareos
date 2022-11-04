@@ -35,4 +35,10 @@ class bareos::console (
     require => Package[$package_name],
     tag     => ['bareos', 'bareos_console'],
   }
+
+  file { "${bareos::config_dir}/bconsole.conf":
+    ensure  => absent,
+    force   => true,
+    require => Package[$package_name],
+  }
 }

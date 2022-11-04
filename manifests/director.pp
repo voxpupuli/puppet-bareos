@@ -15,6 +15,7 @@ class bareos::director (
   $service_ensure             = $bareos::service_ensure,
   $service_enable             = $bareos::service_enable,
   $config_dir                 = "${bareos::config_dir}/bareos-dir.d",
+  $export_dir                 = "${bareos::config_dir}/bareos-dir-export",
   Array[String] $managed_dirs = $bareos::director_managed_dirs,
   Hash $catalogs              = {},
   Hash $clients               = {},
@@ -55,7 +56,7 @@ class bareos::director (
     }
   }
 
-  file { $config_dir:
+  file { [$config_dir, $export_dir]:
     ensure  => directory,
     purge   => true,
     recurse => true,
