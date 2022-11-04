@@ -102,6 +102,7 @@ class bareos (
     ensure       => directory,
     purge        => true,
     recurse      => true,
+    force        => true,
     recurselimit => 1,
     mode         => $bareos::file_dir_mode,
     owner        => $bareos::file_owner,
