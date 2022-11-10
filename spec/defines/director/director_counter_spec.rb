@@ -38,7 +38,7 @@ describe 'bareos::director::counter' do
         let(:pre_condition) do
           '
           bareos::director::catalog { "name":
-            db_driver => "sqlite3",
+            db_driver => "postgresql",
             db_name   => "test",
           }
           '

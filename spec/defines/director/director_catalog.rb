@@ -23,7 +23,7 @@ describe 'bareos::director::catalog' do
       context 'with required values' do
         let(:params) do
           {
-            'db_driver' => 'mysql',
+            'db_driver' => 'postgresql',
             'db_name' => 'catalogdb'
           }
         end
