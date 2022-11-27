@@ -89,7 +89,7 @@ class bareos::repository (
               (versioncmp($release, '21') >= 0) and
               (versioncmp($osmajrelease, '8') >= 0)
             ) or ($release == 'current')
-            ) {
+          ) {
             $location = "${url}EL_${osmajrelease}"
           } else {
             $location = "${url}CentOS_${osmajrelease}"
