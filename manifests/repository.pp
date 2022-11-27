@@ -86,9 +86,10 @@ class bareos::repository (
         'Centos', 'Rocky', 'AlmaLinux': {
           if (
             (
-              (versioncmp($release, '21') >= 0) and
-              (versioncmp($osmajrelease, '8') >= 0)
-            ) or ($release == 'current')
+              (versioncmp($release, '21') >= 0) or
+              ($release == 'current')
+            ) and
+            (versioncmp($osmajrelease, '8') >= 0)
           ) {
             $location = "${url}EL_${osmajrelease}"
           } else {
