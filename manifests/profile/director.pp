@@ -4,7 +4,7 @@ class bareos::profile::director (
   $password = 'MyDirectorPasswordPleaseChange',
   $name_dir = 'bareos-dir',
   $catalog_conf = {
-    'db_driver' => 'sqlite3',
+    'db_driver' => 'postgresql',
     'db_name'   => 'bareos_mycatalog',
   },
   $storage_address = 'localhost',

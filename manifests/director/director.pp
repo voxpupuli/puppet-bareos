@@ -413,7 +413,7 @@ class bareos::director::director (
         $_require_res_messages,
     ])
 
-    $_settings = bareos_settings( [$name_director, 'Name', 'name', true],
+    $_settings = bareos_settings([$name_director, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$absolute_job_timeout, 'Absolute Job Timeout', 'pint32', false],
       [$audit_events, 'Audit Events', 'audit_command_list', false],

@@ -50,7 +50,7 @@ define bareos::monitor::director (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
       [$dir_port, 'Dir Port', 'pint32', false],

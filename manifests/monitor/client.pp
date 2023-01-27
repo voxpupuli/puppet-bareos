@@ -58,7 +58,7 @@ define bareos::monitor::client (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
       [$enable_ssl, 'Enable Ssl', 'boolean', false],

@@ -18,8 +18,13 @@
 #   Db Driver
 #
 #   Bareos Datatype: string
-#   Bareos Default: Not set
-#   Required: true
+#   Bareos Default: postgresql
+#   Required: false
+#
+#   This parameter is deprecated. The only valid value under bareos >= 21 is
+#   `postgresql`.
+#
+#   See https://docs.bareos.org/Configuration/Director.html#config-Dir_Catalog_DbDriver
 #
 # [*db_name*]
 #   Db Name
@@ -156,7 +161,7 @@ define bareos::director::catalog (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$db_address, 'Db Address', 'string', false],
       [$db_driver, 'Db Driver', 'string', true],

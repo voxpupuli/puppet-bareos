@@ -59,7 +59,7 @@ define bareos::webui::director (
 
   if $ensure == 'present' {
     # just for validation
-    $_validate = bareos_settings( [$catalog, 'Catalog', 'res', false],
+    $_validate = bareos_settings([$catalog, 'Catalog', 'res', false],
       [$dir_address, 'Dir Address', 'address', true],
       [$dir_port, 'Dir Port', 'port', true],
       [$enabled, 'Enabled', 'bit', true],

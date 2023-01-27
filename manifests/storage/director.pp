@@ -157,7 +157,7 @@ define bareos::storage::director (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$key_encryption_key, 'Key Encryption Key', 'autopassword', false],
       [$maximum_bandwidth_per_job, 'Maximum Bandwidth Per Job', 'speed', false],

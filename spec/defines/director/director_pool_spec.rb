@@ -62,7 +62,7 @@ describe 'bareos::director::pool' do
           '
           bareos::director::pool { ["next_pool", "recycle_pool", "scratch_pool"]: }
           bareos::director::catalog { "name":
-            db_driver => "sqlite3",
+            db_driver => "postgresql",
             db_name   => "test",
           }
           bareos::director::storage { "name":

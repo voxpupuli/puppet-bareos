@@ -725,7 +725,7 @@ define bareos::director::job (
         $_require_res_storage,
     ])
 
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$accurate, 'Accurate', 'boolean', false],
       [$add_prefix, 'Add Prefix', 'string', false],

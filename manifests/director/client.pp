@@ -331,7 +331,7 @@ define bareos::director::client (
         $_require_res_catalog,
     ])
 
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$address, 'Address', 'string', true],
       [$auth_type, 'Auth Type', 'auth_type', false],

@@ -516,7 +516,7 @@ define bareos::storage::device (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$alert_command, 'Alert Command', 'strname', false],
       [$always_open, 'Always Open', 'bit', false],

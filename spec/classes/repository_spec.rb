@@ -29,10 +29,41 @@ describe 'bareos::repository' do
           it do
             expect(subject).to contain_yumrepo('bareos').
               with_username('test').
-              with_password('test')
+              with_password('test').
+              with_baseurl(%r{^https:})
+          end
+        end
+
+        context 'with https: false' do
+          let(:params) do
+            {
+              https: false,
+            }
+          end
+
+          it { is_expected.to compile }
+
+          it do
+            expect(subject).to contain_yumrepo('bareos').
+              with_baseurl(%r{^http:})
           end
         end
       when 'Debian'
+        context 'with https: false' do
+          let(:params) do
+            {
+              https: false,
+            }
+          end
+
+          it { is_expected.to compile }
+
+          it do
+            expect(subject).to contain_apt__source('bareos').
+              with_location(%r{^http:})
+          end
+        end
+
         case facts[:operatingsystemmajrelease]
         when '20'
           context 'with subscription: true, username: "test", password: "test"' do
@@ -48,7 +79,7 @@ describe 'bareos::repository' do
 
             it do
               expect(subject).to contain_apt__source('bareos').
-                with_location('http://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
+                with_location('https://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
             end
           end
         end
