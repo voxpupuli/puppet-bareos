@@ -7,133 +7,169 @@
 ### Classes
 
 * [`bareos`](#bareos): This puppet module configures and manage all aspects of an complex bareos installation
-* [`bareos::client`](#bareosclient): This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node 
-* [`bareos::client::client`](#bareosclientclient): == Class: bareos::client::client The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as wel
-* [`bareos::console`](#bareosconsole): == Class: bareos::console This class manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be
-* [`bareos::director`](#bareosdirector): == Class: bareos::director This class manages the bareos director service, packages and configuration directory. Parameters should be configu
-* [`bareos::director::director`](#bareosdirectordirector): == Class: bareos::director::director To define the Director's name and its access password used for authenticating the Console program. Only 
-* [`bareos::monitor`](#bareosmonitor): == Class: bareos::monitor This class manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured 
-* [`bareos::params`](#bareosparams): == Class: bareos::params
-* [`bareos::profile::client`](#bareosprofileclient): == Class: bareos::profile::client setup an simple bareos filedaemon/client
-* [`bareos::profile::director`](#bareosprofiledirector): == Class: bareos::profile::director Ready to use director with default configs
-* [`bareos::profile::director::client`](#bareosprofiledirectorclient): == Class: bareos::profile::director::client Default client, backup bareos director itself
-* [`bareos::profile::director::fileset`](#bareosprofiledirectorfileset): == Class: bareos::profile::director::fileset Default filesets
-* [`bareos::profile::director::jobdefs`](#bareosprofiledirectorjobdefs): == Class: bareos::profile::director::jobdefs Default jobdefs
-* [`bareos::profile::director::messages`](#bareosprofiledirectormessages): == Class: bareos::profile::director::messages Default messages
-* [`bareos::profile::director::pool`](#bareosprofiledirectorpool): == Class: bareos::profile::director::pool Some default pools
-* [`bareos::profile::director::profile`](#bareosprofiledirectorprofile): == Class: bareos::profile::director::profile
-* [`bareos::profile::director::schedule`](#bareosprofiledirectorschedule): == Class: bareos::profile::director::schedule Default schedules
-* [`bareos::profile::director::storage`](#bareosprofiledirectorstorage): == Class: bareos::profile::director::storage Default storage daemon
-* [`bareos::profile::storage`](#bareosprofilestorage): == Class: bareos::profile::storage
-* [`bareos::repository`](#bareosrepository): This class manages the bareos repository
+* [`bareos::client`](#bareos--client): This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node 
+* [`bareos::client::client`](#bareos--client--client): == Class: bareos::client::client The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as wel
+* [`bareos::console`](#bareos--console): == Class: bareos::console This class manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be
+* [`bareos::director`](#bareos--director): == Class: bareos::director This class manages the bareos director service, packages and configuration directory. Parameters should be configu
+* [`bareos::director::director`](#bareos--director--director): == Class: bareos::director::director To define the Director's name and its access password used for authenticating the Console program. Only 
+* [`bareos::monitor`](#bareos--monitor): == Class: bareos::monitor This class manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured 
+* [`bareos::params`](#bareos--params): == Class: bareos::params
+* [`bareos::profile::client`](#bareos--profile--client): == Class: bareos::profile::client setup an simple bareos filedaemon/client
+* [`bareos::profile::director`](#bareos--profile--director): == Class: bareos::profile::director Ready to use director with default configs
+* [`bareos::profile::director::client`](#bareos--profile--director--client): == Class: bareos::profile::director::client Default client, backup bareos director itself
+* [`bareos::profile::director::fileset`](#bareos--profile--director--fileset): == Class: bareos::profile::director::fileset Default filesets
+* [`bareos::profile::director::jobdefs`](#bareos--profile--director--jobdefs): == Class: bareos::profile::director::jobdefs Default jobdefs
+* [`bareos::profile::director::messages`](#bareos--profile--director--messages): == Class: bareos::profile::director::messages Default messages
+* [`bareos::profile::director::pool`](#bareos--profile--director--pool): == Class: bareos::profile::director::pool Some default pools
+* [`bareos::profile::director::profile`](#bareos--profile--director--profile): == Class: bareos::profile::director::profile
+* [`bareos::profile::director::schedule`](#bareos--profile--director--schedule): == Class: bareos::profile::director::schedule Default schedules
+* [`bareos::profile::director::storage`](#bareos--profile--director--storage): == Class: bareos::profile::director::storage Default storage daemon
+* [`bareos::profile::storage`](#bareos--profile--storage): == Class: bareos::profile::storage
+* [`bareos::repository`](#bareos--repository): This class manages the bareos repository
 Parameters should be configured in the upper class `::bareos`.
 
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
-* [`bareos::storage`](#bareosstorage): This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node 
-* [`bareos::storage::storage`](#bareosstoragestorage): == Class: bareos::storage::storage In general, the properties specified under the Storage resource dene global properties of the Storage daem
-* [`bareos::webui`](#bareoswebui): == Class: bareos::webui This class manages the bareos webui service, package and configuration.  This class will be automatically included wh
+* [`bareos::storage`](#bareos--storage): This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node 
+* [`bareos::storage::storage`](#bareos--storage--storage): == Class: bareos::storage::storage In general, the properties specified under the Storage resource dene global properties of the Storage daem
+* [`bareos::webui`](#bareos--webui): == Class: bareos::webui This class manages the bareos webui service, package and configuration.  This class will be automatically included wh
 
 ### Defined types
 
-* [`bareos::client::director`](#bareosclientdirector): == Define: bareos::client::director The Director resource defines the name and password of the Directors that are permitted to contact this C
-* [`bareos::client::messages`](#bareosclientmessages): == Define: bareos::client::messages The Messages resource defines how messages are to be handled and destinations to which they should be sen
-* [`bareos::console::console`](#bareosconsoleconsole): == Define: bareos::console::console  == Parameters [*ensure*]   present or absent the config file.  [*description*]   Description    Bareos D
-* [`bareos::console::director`](#bareosconsoledirector): == Define: bareos:console::director The Director resource defines the attributes of the Director running on the network. You may have multipl
-* [`bareos::director::catalog`](#bareosdirectorcatalog): [*validate_timeout*]   Validate Timeout    Bareos Datatype: pint32   Bareos Default: 120   Required: false
-* [`bareos::director::client`](#bareosdirectorclient): == Define: bareos::director::client To define what Client is to be backed up. You will generally have multiple Client definitions. Each Job w
-* [`bareos::director::console`](#bareosdirectorconsole): == Define: bareos::director::console Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two
-* [`bareos::director::counter`](#bareosdirectorcounter): == Define: bareos::director::counter The Counter Resource defines a counter variable that can be accessed by variable expansion used for crea
-* [`bareos::director::fileset`](#bareosdirectorfileset): == Define: bareos::director::fileset To define the set of files to be backed up for each Client. You may have any number of FileSets but each
-* [`bareos::director::job`](#bareosdirectorjob): == Define: bareos::director::job To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used 
-* [`bareos::director::jobdefs`](#bareosdirectorjobdefs): == Define: bareos::director::jobdefs JobDefs are optional resources for providing defaults for Job resources. Almost the same like `Job`.  ==
-* [`bareos::director::messages`](#bareosdirectormessages): == Define: bareos::director::messages To define where error and information messages are to be sent or logged. You may define multiple differ
-* [`bareos::director::pool`](#bareosdirectorpool): == Define: bareos::director::pool To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool.
-* [`bareos::director::profile`](#bareosdirectorprofile): == Define: bareos::director::profile The Profile Resource defines a set of ACLs. Console Resources can be tight to one or more profiles, maki
-* [`bareos::director::schedule`](#bareosdirectorschedule): == Define: bareos::director::schedule The Schedule resource provides a means of automatically scheduling a Job as well as the ability to over
-* [`bareos::director::storage`](#bareosdirectorstorage): == Define: bareos::director::storage To define on what physical device the Volumes should be mounted. You may have one or more Storage defini
-* [`bareos::monitor::client`](#bareosmonitorclient): == Define: bareos::monitor::client The Client resource defines the attributes of the Clients that are monitored by this Monitor.  == Paramete
-* [`bareos::monitor::director`](#bareosmonitordirector): == Define: bareos::monitor::director The Director resource defines the attributes of the Directors that are monitored by this Monitor.  == Pa
-* [`bareos::monitor::monitor`](#bareosmonitormonitor): == Define: bareos::monitor::monitor The Monitor resource defines the attributes of the Monitor running on the network. The parameters you def
-* [`bareos::monitor::storage`](#bareosmonitorstorage): == Define: bareos::monitor::storage The Storage resource defines the attributes of the Storages that are monitored by this Monitor.  == Param
-* [`bareos::storage::autochanger`](#bareosstorageautochanger): == Define: bareos::storage::autochanger The Autochanger resource supports single or multiple drive autochangers by grouping one or more Devic
-* [`bareos::storage::device`](#bareosstoragedevice): == Define: bareos::storage::device The Device Resource specifies the details of each device (normally a tape drive) that can be used by the S
-* [`bareos::storage::director`](#bareosstoragedirector): == Define: bareos::storage::director The Director resource specifies the Name of the Director which is permitted to use the services of the S
-* [`bareos::storage::messages`](#bareosstoragemessages): == Define: bareos::storage::messages The Messages resource defines how messages are to be handled and destinations to which they should be se
-* [`bareos::storage::ndmp`](#bareosstoragendmp): == Define: bareos::storage::ndmp The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resou
-* [`bareos::webui::director`](#bareoswebuidirector): == Class: bareos::webui::director Configures an director to use with the webui.  == Parameters [*ensure*]   present or absent the config file
+* [`bareos::client::director`](#bareos--client--director): == Define: bareos::client::director The Director resource defines the name and password of the Directors that are permitted to contact this C
+* [`bareos::client::messages`](#bareos--client--messages): == Define: bareos::client::messages The Messages resource defines how messages are to be handled and destinations to which they should be sen
+* [`bareos::console::console`](#bareos--console--console): == Define: bareos::console::console  == Parameters [*ensure*]   present or absent the config file.  [*description*]   Description    Bareos D
+* [`bareos::console::director`](#bareos--console--director): == Define: bareos:console::director The Director resource defines the attributes of the Director running on the network. You may have multipl
+* [`bareos::director::catalog`](#bareos--director--catalog): [*validate_timeout*]   Validate Timeout    Bareos Datatype: pint32   Bareos Default: 120   Required: false
+* [`bareos::director::client`](#bareos--director--client): == Define: bareos::director::client To define what Client is to be backed up. You will generally have multiple Client definitions. Each Job w
+* [`bareos::director::console`](#bareos--director--console): == Define: bareos::director::console Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two
+* [`bareos::director::counter`](#bareos--director--counter): == Define: bareos::director::counter The Counter Resource defines a counter variable that can be accessed by variable expansion used for crea
+* [`bareos::director::fileset`](#bareos--director--fileset): == Define: bareos::director::fileset To define the set of files to be backed up for each Client. You may have any number of FileSets but each
+* [`bareos::director::job`](#bareos--director--job): == Define: bareos::director::job To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used 
+* [`bareos::director::jobdefs`](#bareos--director--jobdefs): == Define: bareos::director::jobdefs JobDefs are optional resources for providing defaults for Job resources. Almost the same like `Job`.  ==
+* [`bareos::director::messages`](#bareos--director--messages): == Define: bareos::director::messages To define where error and information messages are to be sent or logged. You may define multiple differ
+* [`bareos::director::pool`](#bareos--director--pool): == Define: bareos::director::pool To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool.
+* [`bareos::director::profile`](#bareos--director--profile): == Define: bareos::director::profile The Profile Resource defines a set of ACLs. Console Resources can be tight to one or more profiles, maki
+* [`bareos::director::schedule`](#bareos--director--schedule): == Define: bareos::director::schedule The Schedule resource provides a means of automatically scheduling a Job as well as the ability to over
+* [`bareos::director::storage`](#bareos--director--storage): == Define: bareos::director::storage To define on what physical device the Volumes should be mounted. You may have one or more Storage defini
+* [`bareos::monitor::client`](#bareos--monitor--client): == Define: bareos::monitor::client The Client resource defines the attributes of the Clients that are monitored by this Monitor.  == Paramete
+* [`bareos::monitor::director`](#bareos--monitor--director): == Define: bareos::monitor::director The Director resource defines the attributes of the Directors that are monitored by this Monitor.  == Pa
+* [`bareos::monitor::monitor`](#bareos--monitor--monitor): == Define: bareos::monitor::monitor The Monitor resource defines the attributes of the Monitor running on the network. The parameters you def
+* [`bareos::monitor::storage`](#bareos--monitor--storage): == Define: bareos::monitor::storage The Storage resource defines the attributes of the Storages that are monitored by this Monitor.  == Param
+* [`bareos::storage::autochanger`](#bareos--storage--autochanger): == Define: bareos::storage::autochanger The Autochanger resource supports single or multiple drive autochangers by grouping one or more Devic
+* [`bareos::storage::device`](#bareos--storage--device): == Define: bareos::storage::device The Device Resource specifies the details of each device (normally a tape drive) that can be used by the S
+* [`bareos::storage::director`](#bareos--storage--director): == Define: bareos::storage::director The Director resource specifies the Name of the Director which is permitted to use the services of the S
+* [`bareos::storage::messages`](#bareos--storage--messages): == Define: bareos::storage::messages The Messages resource defines how messages are to be handled and destinations to which they should be se
+* [`bareos::storage::ndmp`](#bareos--storage--ndmp): == Define: bareos::storage::ndmp The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resou
+* [`bareos::webui::director`](#bareos--webui--director): == Class: bareos::webui::director Configures an director to use with the webui.  == Parameters [*ensure*]   present or absent the config file
 
 ### Functions
 
 * [`bareos_settings`](#bareos_settings): Helper function to parse settings for bareos and return prepared lines for config file
 
+### Data types
+
+* [`Bareos::Boolean`](#Bareos--Boolean): Bareos boolean datatype
+* [`Bareos::List`](#Bareos--List): Bareos List data type
+* [`Bareos::Resource`](#Bareos--Resource): Bareos Resource data type
+
 ## Classes
 
-### `bareos`
+### <a name="bareos"></a>`bareos`
 
 This puppet module configures and manage all aspects of an complex bareos installation
 
 #### Parameters
 
-The following parameters are available in the `bareos` class.
+The following parameters are available in the `bareos` class:
 
-##### `repo_release`
+* [`repo_release`](#-bareos--repo_release)
+* [`repo_subscription`](#-bareos--repo_subscription)
+* [`repo_username`](#-bareos--repo_username)
+* [`repo_password`](#-bareos--repo_password)
+* [`manage_package`](#-bareos--manage_package)
+* [`manage_service`](#-bareos--manage_service)
+* [`manage_database`](#-bareos--manage_database)
+* [`package_ensure`](#-bareos--package_ensure)
+* [`service_ensure`](#-bareos--service_ensure)
+* [`service_enable`](#-bareos--service_enable)
+* [`manage_repo`](#-bareos--manage_repo)
+* [`manage_user`](#-bareos--manage_user)
+* [`package_name`](#-bareos--package_name)
+* [`director_service_allow_restart`](#-bareos--director_service_allow_restart)
+* [`config_dir`](#-bareos--config_dir)
+* [`config_dir_webui`](#-bareos--config_dir_webui)
+* [`file_owner`](#-bareos--file_owner)
+* [`file_group`](#-bareos--file_group)
+* [`file_mode`](#-bareos--file_mode)
+* [`file_dir_mode`](#-bareos--file_dir_mode)
+* [`console_package_name`](#-bareos--console_package_name)
+* [`monitor_package_name`](#-bareos--monitor_package_name)
+* [`director_package_name`](#-bareos--director_package_name)
+* [`director_service_name`](#-bareos--director_service_name)
+* [`director_managed_dirs`](#-bareos--director_managed_dirs)
+* [`client_package_name`](#-bareos--client_package_name)
+* [`client_service_name`](#-bareos--client_service_name)
+* [`storage_package_name`](#-bareos--storage_package_name)
+* [`storage_service_name`](#-bareos--storage_service_name)
+
+##### <a name="-bareos--repo_release"></a>`repo_release`
 
 Data type: `String`
 
 The major bareos release version which should be used
 
-Default value: `'latest'`
+Default value: `'21'`
 
-##### `repo_subscription`
+##### <a name="-bareos--repo_subscription"></a>`repo_subscription`
 
 Data type: `Boolean`
 
 Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
 
-Default value: ``false``
+Default value: `false`
 
-##### `repo_username`
-
-Data type: `Optional[String[1]]`
-
-The major bareos release version which should be used
-
-Default value: ``undef``
-
-##### `repo_password`
+##### <a name="-bareos--repo_username"></a>`repo_username`
 
 Data type: `Optional[String[1]]`
 
 The major bareos release version which should be used
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `manage_package`
+##### <a name="-bareos--repo_password"></a>`repo_password`
+
+Data type: `Optional[String[1]]`
+
+The major bareos release version which should be used
+
+Default value: `undef`
+
+##### <a name="-bareos--manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
 Whether puppet should handle the installation ob bareos packages
 
-Default value: ``true``
+Default value: `true`
 
-##### `manage_service`
+##### <a name="-bareos--manage_service"></a>`manage_service`
 
 Data type: `Boolean`
 
 Whether puppet should activate the bareos system services
 
-Default value: ``true``
+Default value: `true`
 
-##### `manage_database`
+##### <a name="-bareos--manage_database"></a>`manage_database`
 
 Data type: `Boolean`
 
 Whether puppet should call the bareos DB creation and configuration scripts
 
-Default value: ``true``
+Default value: `true`
 
-##### `package_ensure`
+##### <a name="-bareos--package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -141,7 +177,7 @@ Package version to be installed
 
 Default value: `present`
 
-##### `service_ensure`
+##### <a name="-bareos--service_ensure"></a>`service_ensure`
 
 Data type: `String`
 
@@ -149,31 +185,31 @@ Service state which should be ensured
 
 Default value: `running`
 
-##### `service_enable`
+##### <a name="-bareos--service_enable"></a>`service_enable`
 
 Data type: `Boolean`
 
-Wheter puppet should enable the bareos services
+Whether puppet should enable the bareos services
 
-Default value: ``true``
+Default value: `true`
 
-##### `manage_repo`
-
-Data type: `Boolean`
-
-Wheter puppet should manage the bareos package repository
-
-Default value: ``true``
-
-##### `manage_user`
+##### <a name="-bareos--manage_repo"></a>`manage_repo`
 
 Data type: `Boolean`
 
-Wheter puppet should manage the bareos user
+Whether puppet should manage the bareos package repository
 
-Default value: ``true``
+Default value: `true`
 
-##### `package_name`
+##### <a name="-bareos--manage_user"></a>`manage_user`
+
+Data type: `Boolean`
+
+Whether puppet should manage the bareos user
+
+Default value: `true`
+
+##### <a name="-bareos--package_name"></a>`package_name`
 
 Data type: `String`
 
@@ -181,7 +217,15 @@ Name of the package which should be installed
 
 Default value: `'bareos-common'`
 
-##### `config_dir`
+##### <a name="-bareos--director_service_allow_restart"></a>`director_service_allow_restart`
+
+Data type: `Any`
+
+Whether puppet is allowed to restart the director service. If not it will reload
+
+Default value: `false`
+
+##### <a name="-bareos--config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -189,7 +233,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::config_dir`
 
-##### `config_dir_webui`
+##### <a name="-bareos--config_dir_webui"></a>`config_dir_webui`
 
 Data type: `Any`
 
@@ -197,7 +241,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::config_dir_webui`
 
-##### `file_owner`
+##### <a name="-bareos--file_owner"></a>`file_owner`
 
 Data type: `Any`
 
@@ -205,7 +249,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_owner`
 
-##### `file_group`
+##### <a name="-bareos--file_group"></a>`file_group`
 
 Data type: `Any`
 
@@ -213,7 +257,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_group`
 
-##### `file_mode`
+##### <a name="-bareos--file_mode"></a>`file_mode`
 
 Data type: `Any`
 
@@ -221,7 +265,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_mode`
 
-##### `file_dir_mode`
+##### <a name="-bareos--file_dir_mode"></a>`file_dir_mode`
 
 Data type: `Any`
 
@@ -229,7 +273,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::file_dir_mode`
 
-##### `console_package_name`
+##### <a name="-bareos--console_package_name"></a>`console_package_name`
 
 Data type: `Any`
 
@@ -237,7 +281,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::console_package_name`
 
-##### `monitor_package_name`
+##### <a name="-bareos--monitor_package_name"></a>`monitor_package_name`
 
 Data type: `Any`
 
@@ -245,7 +289,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::monitor_package_name`
 
-##### `director_package_name`
+##### <a name="-bareos--director_package_name"></a>`director_package_name`
 
 Data type: `Any`
 
@@ -253,7 +297,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::director_package_name`
 
-##### `director_service_name`
+##### <a name="-bareos--director_service_name"></a>`director_service_name`
 
 Data type: `Any`
 
@@ -261,7 +305,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::director_service_name`
 
-##### `director_managed_dirs`
+##### <a name="-bareos--director_managed_dirs"></a>`director_managed_dirs`
 
 Data type: `Any`
 
@@ -269,7 +313,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::director_managed_dirs`
 
-##### `client_package_name`
+##### <a name="-bareos--client_package_name"></a>`client_package_name`
 
 Data type: `Any`
 
@@ -277,7 +321,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::client_package_name`
 
-##### `client_service_name`
+##### <a name="-bareos--client_service_name"></a>`client_service_name`
 
 Data type: `Any`
 
@@ -285,7 +329,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::client_service_name`
 
-##### `storage_package_name`
+##### <a name="-bareos--storage_package_name"></a>`storage_package_name`
 
 Data type: `Any`
 
@@ -293,7 +337,7 @@ Data type: `Any`
 
 Default value: `$bareos::params::storage_package_name`
 
-##### `storage_service_name`
+##### <a name="-bareos--storage_service_name"></a>`storage_service_name`
 
 Data type: `Any`
 
@@ -301,16 +345,25 @@ Data type: `Any`
 
 Default value: `$bareos::params::storage_service_name`
 
-### `bareos::client`
+### <a name="bareos--client"></a>`bareos::client`
 
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
-The following parameters are available in the `bareos::client` class.
+The following parameters are available in the `bareos::client` class:
 
-##### `manage_service`
+* [`manage_service`](#-bareos--client--manage_service)
+* [`manage_package`](#-bareos--client--manage_package)
+* [`package_name`](#-bareos--client--package_name)
+* [`package_ensure`](#-bareos--client--package_ensure)
+* [`service_name`](#-bareos--client--service_name)
+* [`service_ensure`](#-bareos--client--service_ensure)
+* [`service_enable`](#-bareos--client--service_enable)
+* [`config_dir`](#-bareos--client--config_dir)
+
+##### <a name="-bareos--client--manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -318,7 +371,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="-bareos--client--manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -326,7 +379,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="-bareos--client--package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -334,7 +387,7 @@ Data type: `Any`
 
 Default value: `$bareos::client_package_name`
 
-##### `package_ensure`
+##### <a name="-bareos--client--package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -342,7 +395,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="-bareos--client--service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -350,7 +403,7 @@ Data type: `Any`
 
 Default value: `$bareos::client_service_name`
 
-##### `service_ensure`
+##### <a name="-bareos--client--service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -358,7 +411,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="-bareos--client--service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -366,7 +419,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="-bareos--client--config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -374,7 +427,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bareos-fd.d"`
 
-### `bareos::client::client`
+### <a name="bareos--client--client"></a>`bareos::client::client`
 
 == Class: bareos::client::client
 The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director)
@@ -714,9 +767,57 @@ as well as the port on which the Client listens for Director connections.
 
 #### Parameters
 
-The following parameters are available in the `bareos::client::client` class.
+The following parameters are available in the `bareos::client::client` class:
 
-##### `ensure`
+* [`ensure`](#-bareos--client--client--ensure)
+* [`absolute_job_timeout`](#-bareos--client--client--absolute_job_timeout)
+* [`allow_bandwidth_bursting`](#-bareos--client--client--allow_bandwidth_bursting)
+* [`allowed_job_command`](#-bareos--client--client--allowed_job_command)
+* [`allowed_script_dir`](#-bareos--client--client--allowed_script_dir)
+* [`always_use_lmdb`](#-bareos--client--client--always_use_lmdb)
+* [`compatible`](#-bareos--client--client--compatible)
+* [`description`](#-bareos--client--client--description)
+* [`fd_address`](#-bareos--client--client--fd_address)
+* [`fd_addresses`](#-bareos--client--client--fd_addresses)
+* [`fd_port`](#-bareos--client--client--fd_port)
+* [`fd_source_address`](#-bareos--client--client--fd_source_address)
+* [`heartbeat_interval`](#-bareos--client--client--heartbeat_interval)
+* [`lmdb_threshold`](#-bareos--client--client--lmdb_threshold)
+* [`log_timestamp_format`](#-bareos--client--client--log_timestamp_format)
+* [`maximum_bandwidth_per_job`](#-bareos--client--client--maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#-bareos--client--client--maximum_concurrent_jobs)
+* [`maximum_connections`](#-bareos--client--client--maximum_connections)
+* [`maximum_network_buffer_size`](#-bareos--client--client--maximum_network_buffer_size)
+* [`messages`](#-bareos--client--client--messages)
+* [`name_client`](#-bareos--client--client--name_client)
+* [`pid_directory`](#-bareos--client--client--pid_directory)
+* [`pki_cipher`](#-bareos--client--client--pki_cipher)
+* [`pki_encryption`](#-bareos--client--client--pki_encryption)
+* [`pki_key_pair`](#-bareos--client--client--pki_key_pair)
+* [`pki_master_key`](#-bareos--client--client--pki_master_key)
+* [`pki_signatures`](#-bareos--client--client--pki_signatures)
+* [`pki_signer`](#-bareos--client--client--pki_signer)
+* [`plugin_directory`](#-bareos--client--client--plugin_directory)
+* [`plugin_names`](#-bareos--client--client--plugin_names)
+* [`scripts_directory`](#-bareos--client--client--scripts_directory)
+* [`sd_connect_timeout`](#-bareos--client--client--sd_connect_timeout)
+* [`secure_erase_command`](#-bareos--client--client--secure_erase_command)
+* [`tls_allowed_cn`](#-bareos--client--client--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--client--client--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--client--client--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--client--client--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--client--client--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--client--client--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--client--client--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--client--client--tls_dh_file)
+* [`tls_enable`](#-bareos--client--client--tls_enable)
+* [`tls_key`](#-bareos--client--client--tls_key)
+* [`tls_require`](#-bareos--client--client--tls_require)
+* [`tls_verify_peer`](#-bareos--client--client--tls_verify_peer)
+* [`ver_id`](#-bareos--client--client--ver_id)
+* [`working_directory`](#-bareos--client--client--working_directory)
+
+##### <a name="-bareos--client--client--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -724,159 +825,159 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `absolute_job_timeout`
+##### <a name="-bareos--client--client--absolute_job_timeout"></a>`absolute_job_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_bandwidth_bursting`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `allowed_job_command`
+##### <a name="-bareos--client--client--allow_bandwidth_bursting"></a>`allow_bandwidth_bursting`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allowed_script_dir`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `always_use_lmdb`
+##### <a name="-bareos--client--client--allowed_job_command"></a>`allowed_job_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `compatible`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `description`
+##### <a name="-bareos--client--client--allowed_script_dir"></a>`allowed_script_dir`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fd_address`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `fd_addresses`
+##### <a name="-bareos--client--client--always_use_lmdb"></a>`always_use_lmdb`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fd_port`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `fd_source_address`
+##### <a name="-bareos--client--client--compatible"></a>`compatible`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `heartbeat_interval`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `lmdb_threshold`
+##### <a name="-bareos--client--client--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `log_timestamp_format`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_bandwidth_per_job`
+##### <a name="-bareos--client--client--fd_address"></a>`fd_address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_connections`
+##### <a name="-bareos--client--client--fd_addresses"></a>`fd_addresses`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_network_buffer_size`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `messages`
+##### <a name="-bareos--client--client--fd_port"></a>`fd_port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `name_client`
+##### <a name="-bareos--client--client--fd_source_address"></a>`fd_source_address`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--heartbeat_interval"></a>`heartbeat_interval`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--lmdb_threshold"></a>`lmdb_threshold`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--log_timestamp_format"></a>`log_timestamp_format`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--maximum_connections"></a>`maximum_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--maximum_network_buffer_size"></a>`maximum_network_buffer_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--messages"></a>`messages`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--name_client"></a>`name_client`
 
 Data type: `Any`
 
@@ -884,215 +985,215 @@ Data type: `Any`
 
 Default value: `'bareos-fd'`
 
-##### `pid_directory`
+##### <a name="-bareos--client--client--pid_directory"></a>`pid_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pki_cipher`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `pki_encryption`
+##### <a name="-bareos--client--client--pki_cipher"></a>`pki_cipher`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pki_key_pair`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `pki_master_key`
+##### <a name="-bareos--client--client--pki_encryption"></a>`pki_encryption`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pki_signatures`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `pki_signer`
+##### <a name="-bareos--client--client--pki_key_pair"></a>`pki_key_pair`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `plugin_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `plugin_names`
+##### <a name="-bareos--client--client--pki_master_key"></a>`pki_master_key`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `scripts_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `sd_connect_timeout`
+##### <a name="-bareos--client--client--pki_signatures"></a>`pki_signatures`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `secure_erase_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_allowed_cn`
+##### <a name="-bareos--client--client--pki_signer"></a>`pki_signer`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_authenticate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_dir`
+##### <a name="-bareos--client--client--plugin_directory"></a>`plugin_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate`
+##### <a name="-bareos--client--client--plugin_names"></a>`plugin_names`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate_revocation_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_cipher_list`
+##### <a name="-bareos--client--client--scripts_directory"></a>`scripts_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_dh_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_enable`
+##### <a name="-bareos--client--client--sd_connect_timeout"></a>`sd_connect_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_key`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_require`
+##### <a name="-bareos--client--client--secure_erase_command"></a>`secure_erase_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_verify_peer`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `ver_id`
+##### <a name="-bareos--client--client--tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `working_directory`
+##### <a name="-bareos--client--client--tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::console`
+##### <a name="-bareos--client--client--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--ver_id"></a>`ver_id`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--client--working_directory"></a>`working_directory`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--console"></a>`bareos::console`
 
 == Class: bareos::console
 This class manages the bareos console (bconsole cli tool) package and configuration directory.
@@ -1103,9 +1204,14 @@ It is not intended to be used directly by external resources like node definitio
 
 #### Parameters
 
-The following parameters are available in the `bareos::console` class.
+The following parameters are available in the `bareos::console` class:
 
-##### `manage_package`
+* [`manage_package`](#-bareos--console--manage_package)
+* [`package_name`](#-bareos--console--package_name)
+* [`package_ensure`](#-bareos--console--package_ensure)
+* [`config_dir`](#-bareos--console--config_dir)
+
+##### <a name="-bareos--console--manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -1113,7 +1219,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="-bareos--console--package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -1121,7 +1227,7 @@ Data type: `Any`
 
 Default value: `$bareos::console_package_name`
 
-##### `package_ensure`
+##### <a name="-bareos--console--package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -1129,7 +1235,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `config_dir`
+##### <a name="-bareos--console--config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -1137,7 +1243,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bconsole.d"`
 
-### `bareos::director`
+### <a name="bareos--director"></a>`bareos::director`
 
 == Class: bareos::director
 This class manages the bareos director service, packages and configuration directory.
@@ -1148,9 +1254,33 @@ It is not intended to be used directly by external resources like node definitio
 
 #### Parameters
 
-The following parameters are available in the `bareos::director` class.
+The following parameters are available in the `bareos::director` class:
 
-##### `manage_service`
+* [`manage_service`](#-bareos--director--manage_service)
+* [`manage_package`](#-bareos--director--manage_package)
+* [`manage_database`](#-bareos--director--manage_database)
+* [`package_name`](#-bareos--director--package_name)
+* [`package_ensure`](#-bareos--director--package_ensure)
+* [`service_name`](#-bareos--director--service_name)
+* [`service_allow_restart`](#-bareos--director--service_allow_restart)
+* [`service_ensure`](#-bareos--director--service_ensure)
+* [`service_enable`](#-bareos--director--service_enable)
+* [`config_dir`](#-bareos--director--config_dir)
+* [`managed_dirs`](#-bareos--director--managed_dirs)
+* [`catalogs`](#-bareos--director--catalogs)
+* [`clients`](#-bareos--director--clients)
+* [`consoles`](#-bareos--director--consoles)
+* [`counters`](#-bareos--director--counters)
+* [`filesets`](#-bareos--director--filesets)
+* [`jobs`](#-bareos--director--jobs)
+* [`jobdefs`](#-bareos--director--jobdefs)
+* [`messages`](#-bareos--director--messages)
+* [`pools`](#-bareos--director--pools)
+* [`profiles`](#-bareos--director--profiles)
+* [`schedules`](#-bareos--director--schedules)
+* [`storages`](#-bareos--director--storages)
+
+##### <a name="-bareos--director--manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -1158,7 +1288,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="-bareos--director--manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -1166,7 +1296,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `manage_database`
+##### <a name="-bareos--director--manage_database"></a>`manage_database`
 
 Data type: `Any`
 
@@ -1174,7 +1304,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_database`
 
-##### `package_name`
+##### <a name="-bareos--director--package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -1182,7 +1312,7 @@ Data type: `Any`
 
 Default value: `$bareos::director_package_name`
 
-##### `package_ensure`
+##### <a name="-bareos--director--package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -1190,7 +1320,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="-bareos--director--service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -1198,7 +1328,15 @@ Data type: `Any`
 
 Default value: `$bareos::director_service_name`
 
-##### `service_ensure`
+##### <a name="-bareos--director--service_allow_restart"></a>`service_allow_restart`
+
+Data type: `Any`
+
+
+
+Default value: `$bareos::director_service_allow_restart`
+
+##### <a name="-bareos--director--service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -1206,7 +1344,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="-bareos--director--service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -1214,7 +1352,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="-bareos--director--config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -1222,7 +1360,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bareos-dir.d"`
 
-##### `managed_dirs`
+##### <a name="-bareos--director--managed_dirs"></a>`managed_dirs`
 
 Data type: `Array[String]`
 
@@ -1230,7 +1368,7 @@ Data type: `Array[String]`
 
 Default value: `$bareos::director_managed_dirs`
 
-##### `catalogs`
+##### <a name="-bareos--director--catalogs"></a>`catalogs`
 
 Data type: `Hash`
 
@@ -1238,7 +1376,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `clients`
+##### <a name="-bareos--director--clients"></a>`clients`
 
 Data type: `Hash`
 
@@ -1246,7 +1384,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `consoles`
+##### <a name="-bareos--director--consoles"></a>`consoles`
 
 Data type: `Hash`
 
@@ -1254,7 +1392,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `counters`
+##### <a name="-bareos--director--counters"></a>`counters`
 
 Data type: `Hash`
 
@@ -1262,7 +1400,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `filesets`
+##### <a name="-bareos--director--filesets"></a>`filesets`
 
 Data type: `Hash`
 
@@ -1270,7 +1408,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `jobs`
+##### <a name="-bareos--director--jobs"></a>`jobs`
 
 Data type: `Hash`
 
@@ -1278,7 +1416,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `jobdefs`
+##### <a name="-bareos--director--jobdefs"></a>`jobdefs`
 
 Data type: `Hash`
 
@@ -1286,7 +1424,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `messages`
+##### <a name="-bareos--director--messages"></a>`messages`
 
 Data type: `Hash`
 
@@ -1294,7 +1432,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `pools`
+##### <a name="-bareos--director--pools"></a>`pools`
 
 Data type: `Hash`
 
@@ -1302,7 +1440,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `profiles`
+##### <a name="-bareos--director--profiles"></a>`profiles`
 
 Data type: `Hash`
 
@@ -1310,7 +1448,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `schedules`
+##### <a name="-bareos--director--schedules"></a>`schedules`
 
 Data type: `Hash`
 
@@ -1318,7 +1456,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `storages`
+##### <a name="-bareos--director--storages"></a>`storages`
 
 Data type: `Hash`
 
@@ -1326,7 +1464,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-### `bareos::director::director`
+### <a name="bareos--director--director"></a>`bareos::director::director`
 
 == Class: bareos::director::director
 To define the Director's name and its access password used for authenticating the Console program.
@@ -1678,9 +1816,59 @@ Only a single Director resource definition may appear in the Director's configur
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::director` class.
+The following parameters are available in the `bareos::director::director` class:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--director--ensure)
+* [`absolute_job_timeout`](#-bareos--director--director--absolute_job_timeout)
+* [`audit_events`](#-bareos--director--director--audit_events)
+* [`auditing`](#-bareos--director--director--auditing)
+* [`backend_directory`](#-bareos--director--director--backend_directory)
+* [`description`](#-bareos--director--director--description)
+* [`dir_address`](#-bareos--director--director--dir_address)
+* [`dir_addresses`](#-bareos--director--director--dir_addresses)
+* [`dir_port`](#-bareos--director--director--dir_port)
+* [`dir_source_address`](#-bareos--director--director--dir_source_address)
+* [`fd_connect_timeout`](#-bareos--director--director--fd_connect_timeout)
+* [`heartbeat_interval`](#-bareos--director--director--heartbeat_interval)
+* [`key_encryption_key`](#-bareos--director--director--key_encryption_key)
+* [`log_timestamp_format`](#-bareos--director--director--log_timestamp_format)
+* [`maximum_concurrent_jobs`](#-bareos--director--director--maximum_concurrent_jobs)
+* [`maximum_connections`](#-bareos--director--director--maximum_connections)
+* [`maximum_console_connections`](#-bareos--director--director--maximum_console_connections)
+* [`messages`](#-bareos--director--director--messages)
+* [`name_director`](#-bareos--director--director--name_director)
+* [`ndmp_log_level`](#-bareos--director--director--ndmp_log_level)
+* [`ndmp_snooping`](#-bareos--director--director--ndmp_snooping)
+* [`omit_defaults`](#-bareos--director--director--omit_defaults)
+* [`optimize_for_size`](#-bareos--director--director--optimize_for_size)
+* [`optimize_for_speed`](#-bareos--director--director--optimize_for_speed)
+* [`password`](#-bareos--director--director--password)
+* [`pid_directory`](#-bareos--director--director--pid_directory)
+* [`plugin_directory`](#-bareos--director--director--plugin_directory)
+* [`plugin_names`](#-bareos--director--director--plugin_names)
+* [`query_file`](#-bareos--director--director--query_file)
+* [`scripts_directory`](#-bareos--director--director--scripts_directory)
+* [`sd_connect_timeout`](#-bareos--director--director--sd_connect_timeout)
+* [`secure_erase_command`](#-bareos--director--director--secure_erase_command)
+* [`statistics_collect_interval`](#-bareos--director--director--statistics_collect_interval)
+* [`statistics_retention`](#-bareos--director--director--statistics_retention)
+* [`subscriptions`](#-bareos--director--director--subscriptions)
+* [`tls_allowed_cn`](#-bareos--director--director--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--director--director--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--director--director--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--director--director--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--director--director--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--director--director--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--director--director--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--director--director--tls_dh_file)
+* [`tls_enable`](#-bareos--director--director--tls_enable)
+* [`tls_key`](#-bareos--director--director--tls_key)
+* [`tls_require`](#-bareos--director--director--tls_require)
+* [`tls_verify_peer`](#-bareos--director--director--tls_verify_peer)
+* [`ver_id`](#-bareos--director--director--ver_id)
+* [`working_directory`](#-bareos--director--director--working_directory)
+
+##### <a name="-bareos--director--director--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -1688,143 +1876,143 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `absolute_job_timeout`
+##### <a name="-bareos--director--director--absolute_job_timeout"></a>`absolute_job_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `audit_events`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `auditing`
+##### <a name="-bareos--director--director--audit_events"></a>`audit_events`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `backend_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `description`
+##### <a name="-bareos--director--director--auditing"></a>`auditing`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `dir_address`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `dir_addresses`
+##### <a name="-bareos--director--director--backend_directory"></a>`backend_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `dir_port`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `dir_source_address`
+##### <a name="-bareos--director--director--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fd_connect_timeout`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `heartbeat_interval`
+##### <a name="-bareos--director--director--dir_address"></a>`dir_address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `key_encryption_key`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `log_timestamp_format`
+##### <a name="-bareos--director--director--dir_addresses"></a>`dir_addresses`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_connections`
+##### <a name="-bareos--director--director--dir_port"></a>`dir_port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_console_connections`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `messages`
+##### <a name="-bareos--director--director--dir_source_address"></a>`dir_source_address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `name_director`
+##### <a name="-bareos--director--director--fd_connect_timeout"></a>`fd_connect_timeout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--heartbeat_interval"></a>`heartbeat_interval`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--key_encryption_key"></a>`key_encryption_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--log_timestamp_format"></a>`log_timestamp_format`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--maximum_connections"></a>`maximum_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--maximum_console_connections"></a>`maximum_console_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--messages"></a>`messages`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--name_director"></a>`name_director`
 
 Data type: `Any`
 
@@ -1832,47 +2020,47 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `ndmp_log_level`
+##### <a name="-bareos--director--director--ndmp_log_level"></a>`ndmp_log_level`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ndmp_snooping`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `omit_defaults`
+##### <a name="-bareos--director--director--ndmp_snooping"></a>`ndmp_snooping`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `optimize_for_size`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `optimize_for_speed`
+##### <a name="-bareos--director--director--omit_defaults"></a>`omit_defaults`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `password`
+##### <a name="-bareos--director--director--optimize_for_size"></a>`optimize_for_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--optimize_for_speed"></a>`optimize_for_speed`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--password"></a>`password`
 
 Data type: `Any`
 
@@ -1880,31 +2068,31 @@ Data type: `Any`
 
 Default value: `'PleaseChangeMe'`
 
-##### `pid_directory`
+##### <a name="-bareos--director--director--pid_directory"></a>`pid_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `plugin_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `plugin_names`
+##### <a name="-bareos--director--director--plugin_directory"></a>`plugin_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `query_file`
+##### <a name="-bareos--director--director--plugin_names"></a>`plugin_names`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--query_file"></a>`query_file`
 
 Data type: `Any`
 
@@ -1912,167 +2100,167 @@ Data type: `Any`
 
 Default value: `'/usr/lib/bareos/scripts/query.sql'`
 
-##### `scripts_directory`
+##### <a name="-bareos--director--director--scripts_directory"></a>`scripts_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sd_connect_timeout`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `secure_erase_command`
+##### <a name="-bareos--director--director--sd_connect_timeout"></a>`sd_connect_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `statistics_collect_interval`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `statistics_retention`
+##### <a name="-bareos--director--director--secure_erase_command"></a>`secure_erase_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `subscriptions`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_allowed_cn`
+##### <a name="-bareos--director--director--statistics_collect_interval"></a>`statistics_collect_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_authenticate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_dir`
+##### <a name="-bareos--director--director--statistics_retention"></a>`statistics_retention`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate`
+##### <a name="-bareos--director--director--subscriptions"></a>`subscriptions`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate_revocation_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_cipher_list`
+##### <a name="-bareos--director--director--tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_dh_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_enable`
+##### <a name="-bareos--director--director--tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_key`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_require`
+##### <a name="-bareos--director--director--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_verify_peer`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `ver_id`
+##### <a name="-bareos--director--director--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `working_directory`
+##### <a name="-bareos--director--director--tls_certificate"></a>`tls_certificate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::monitor`
+##### <a name="-bareos--director--director--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--ver_id"></a>`ver_id`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--director--working_directory"></a>`working_directory`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--monitor"></a>`bareos::monitor`
 
 == Class: bareos::monitor
 This class manages the bareos (tray-) monitor package and configuration directory.
@@ -2083,9 +2271,14 @@ It is not intended to be used directly by external resources like node definitio
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor` class.
+The following parameters are available in the `bareos::monitor` class:
 
-##### `manage_package`
+* [`manage_package`](#-bareos--monitor--manage_package)
+* [`package_name`](#-bareos--monitor--package_name)
+* [`package_ensure`](#-bareos--monitor--package_ensure)
+* [`config_dir`](#-bareos--monitor--config_dir)
+
+##### <a name="-bareos--monitor--manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -2093,7 +2286,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="-bareos--monitor--package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -2101,7 +2294,7 @@ Data type: `Any`
 
 Default value: `$bareos::monitor_package_name`
 
-##### `package_ensure`
+##### <a name="-bareos--monitor--package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -2109,7 +2302,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `config_dir`
+##### <a name="-bareos--monitor--config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -2117,20 +2310,24 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/tray-monitor.d"`
 
-### `bareos::params`
+### <a name="bareos--params"></a>`bareos::params`
 
 == Class: bareos::params
 
-### `bareos::profile::client`
+### <a name="bareos--profile--client"></a>`bareos::profile::client`
 
 == Class: bareos::profile::client
 setup an simple bareos filedaemon/client
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::client` class.
+The following parameters are available in the `bareos::profile::client` class:
 
-##### `name_client`
+* [`name_client`](#-bareos--profile--client--name_client)
+* [`name_dir`](#-bareos--profile--client--name_dir)
+* [`password`](#-bareos--profile--client--password)
+
+##### <a name="-bareos--profile--client--name_client"></a>`name_client`
 
 Data type: `Any`
 
@@ -2138,7 +2335,7 @@ Data type: `Any`
 
 Default value: `$facts['networking']['fqdn']`
 
-##### `name_dir`
+##### <a name="-bareos--profile--client--name_dir"></a>`name_dir`
 
 Data type: `Any`
 
@@ -2146,7 +2343,7 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `password`
+##### <a name="-bareos--profile--client--password"></a>`password`
 
 Data type: `Any`
 
@@ -2154,16 +2351,22 @@ Data type: `Any`
 
 Default value: `'MyClientPasswordPleaseChange'`
 
-### `bareos::profile::director`
+### <a name="bareos--profile--director"></a>`bareos::profile::director`
 
 == Class: bareos::profile::director
 Ready to use director with default configs
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::director` class.
+The following parameters are available in the `bareos::profile::director` class:
 
-##### `password`
+* [`password`](#-bareos--profile--director--password)
+* [`name_dir`](#-bareos--profile--director--name_dir)
+* [`catalog_conf`](#-bareos--profile--director--catalog_conf)
+* [`storage_address`](#-bareos--profile--director--storage_address)
+* [`storage_password`](#-bareos--profile--director--storage_password)
+
+##### <a name="-bareos--profile--director--password"></a>`password`
 
 Data type: `Any`
 
@@ -2171,7 +2374,7 @@ Data type: `Any`
 
 Default value: `'MyDirectorPasswordPleaseChange'`
 
-##### `name_dir`
+##### <a name="-bareos--profile--director--name_dir"></a>`name_dir`
 
 Data type: `Any`
 
@@ -2179,18 +2382,22 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `catalog_conf`
+##### <a name="-bareos--profile--director--catalog_conf"></a>`catalog_conf`
 
 Data type: `Any`
 
 
 
-Default value: `{
-    'db_driver' => 'sqlite3',
-    'db_name'   => 'bareos_mycatalog',
-  }`
+Default value:
 
-##### `storage_address`
+```puppet
+{
+    'db_driver' => 'postgresql',
+    'db_name'   => 'bareos_mycatalog',
+  }
+```
+
+##### <a name="-bareos--profile--director--storage_address"></a>`storage_address`
 
 Data type: `Any`
 
@@ -2198,7 +2405,7 @@ Data type: `Any`
 
 Default value: `'localhost'`
 
-##### `storage_password`
+##### <a name="-bareos--profile--director--storage_password"></a>`storage_password`
 
 Data type: `Any`
 
@@ -2206,50 +2413,53 @@ Data type: `Any`
 
 Default value: `'BareosStoragePleaseChangeMe'`
 
-### `bareos::profile::director::client`
+### <a name="bareos--profile--director--client"></a>`bareos::profile::director::client`
 
 == Class: bareos::profile::director::client
 Default client, backup bareos director itself
 
-### `bareos::profile::director::fileset`
+### <a name="bareos--profile--director--fileset"></a>`bareos::profile::director::fileset`
 
 == Class: bareos::profile::director::fileset
 Default filesets
 
-### `bareos::profile::director::jobdefs`
+### <a name="bareos--profile--director--jobdefs"></a>`bareos::profile::director::jobdefs`
 
 == Class: bareos::profile::director::jobdefs
 Default jobdefs
 
-### `bareos::profile::director::messages`
+### <a name="bareos--profile--director--messages"></a>`bareos::profile::director::messages`
 
 == Class: bareos::profile::director::messages
 Default messages
 
-### `bareos::profile::director::pool`
+### <a name="bareos--profile--director--pool"></a>`bareos::profile::director::pool`
 
 == Class: bareos::profile::director::pool
 Some default pools
 
-### `bareos::profile::director::profile`
+### <a name="bareos--profile--director--profile"></a>`bareos::profile::director::profile`
 
 == Class: bareos::profile::director::profile
 
-### `bareos::profile::director::schedule`
+### <a name="bareos--profile--director--schedule"></a>`bareos::profile::director::schedule`
 
 == Class: bareos::profile::director::schedule
 Default schedules
 
-### `bareos::profile::director::storage`
+### <a name="bareos--profile--director--storage"></a>`bareos::profile::director::storage`
 
 == Class: bareos::profile::director::storage
 Default storage daemon
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::director::storage` class.
+The following parameters are available in the `bareos::profile::director::storage` class:
 
-##### `address`
+* [`address`](#-bareos--profile--director--storage--address)
+* [`password`](#-bareos--profile--director--storage--password)
+
+##### <a name="-bareos--profile--director--storage--address"></a>`address`
 
 Data type: `Any`
 
@@ -2257,7 +2467,7 @@ Data type: `Any`
 
 Default value: `'localhost'`
 
-##### `password`
+##### <a name="-bareos--profile--director--storage--password"></a>`password`
 
 Data type: `Any`
 
@@ -2265,15 +2475,20 @@ Data type: `Any`
 
 Default value: `'BareosStoragePleaseChangeMe'`
 
-### `bareos::profile::storage`
+### <a name="bareos--profile--storage"></a>`bareos::profile::storage`
 
 == Class: bareos::profile::storage
 
 #### Parameters
 
-The following parameters are available in the `bareos::profile::storage` class.
+The following parameters are available in the `bareos::profile::storage` class:
 
-##### `name_storage`
+* [`name_storage`](#-bareos--profile--storage--name_storage)
+* [`name_dir`](#-bareos--profile--storage--name_dir)
+* [`password`](#-bareos--profile--storage--password)
+* [`archive_device`](#-bareos--profile--storage--archive_device)
+
+##### <a name="-bareos--profile--storage--name_storage"></a>`name_storage`
 
 Data type: `Any`
 
@@ -2281,7 +2496,7 @@ Data type: `Any`
 
 Default value: `'bareos-sd'`
 
-##### `name_dir`
+##### <a name="-bareos--profile--storage--name_dir"></a>`name_dir`
 
 Data type: `Any`
 
@@ -2289,7 +2504,7 @@ Data type: `Any`
 
 Default value: `'bareos-dir'`
 
-##### `password`
+##### <a name="-bareos--profile--storage--password"></a>`password`
 
 Data type: `Any`
 
@@ -2297,7 +2512,7 @@ Data type: `Any`
 
 Default value: `'BareosStoragePleaseChangeMe'`
 
-##### `archive_device`
+##### <a name="-bareos--profile--storage--archive_device"></a>`archive_device`
 
 Data type: `Any`
 
@@ -2305,64 +2520,93 @@ Data type: `Any`
 
 Default value: `'/var/lib/bareos/storage'`
 
-### `bareos::repository`
+### <a name="bareos--repository"></a>`bareos::repository`
 
 == Class: bareos::repository
 
 #### Parameters
 
-The following parameters are available in the `bareos::repository` class.
+The following parameters are available in the `bareos::repository` class:
 
-##### `release`
+* [`release`](#-bareos--repository--release)
+* [`gpg_key_fingerprint`](#-bareos--repository--gpg_key_fingerprint)
+* [`subscription`](#-bareos--repository--subscription)
+* [`username`](#-bareos--repository--username)
+* [`password`](#-bareos--repository--password)
+* [`https`](#-bareos--repository--https)
 
-Data type: `String`
+##### <a name="-bareos--repository--release"></a>`release`
+
+Data type: `Enum['19.2', '20', '21']`
 
 The major bareos release version which should be used
 
-Default value: `'latest'`
+Default value: `'21'`
 
-##### `gpg_key_fingerprint`
+##### <a name="-bareos--repository--gpg_key_fingerprint"></a>`gpg_key_fingerprint`
 
 Data type: `Optional[String[1]]`
 
 The GPG fingerprint of the repos key
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `subscription`
+##### <a name="-bareos--repository--subscription"></a>`subscription`
 
 Data type: `Boolean`
 
 Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
 
-Default value: ``false``
+Default value: `false`
 
-##### `username`
-
-Data type: `Optional[String]`
-
-The major bareos release version which should be used
-
-Default value: ``undef``
-
-##### `password`
+##### <a name="-bareos--repository--username"></a>`username`
 
 Data type: `Optional[String]`
 
 The major bareos release version which should be used
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::storage`
+##### <a name="-bareos--repository--password"></a>`password`
+
+Data type: `Optional[String]`
+
+The major bareos release version which should be used
+
+Default value: `undef`
+
+##### <a name="-bareos--repository--https"></a>`https`
+
+Data type: `Boolean`
+
+Whether https should be used in repo URL
+
+Default value: `true`
+
+### <a name="bareos--storage"></a>`bareos::storage`
 
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage` class.
+The following parameters are available in the `bareos::storage` class:
 
-##### `manage_service`
+* [`manage_service`](#-bareos--storage--manage_service)
+* [`manage_package`](#-bareos--storage--manage_package)
+* [`package_name`](#-bareos--storage--package_name)
+* [`package_ensure`](#-bareos--storage--package_ensure)
+* [`service_name`](#-bareos--storage--service_name)
+* [`service_ensure`](#-bareos--storage--service_ensure)
+* [`service_enable`](#-bareos--storage--service_enable)
+* [`config_dir`](#-bareos--storage--config_dir)
+* [`autochangers`](#-bareos--storage--autochangers)
+* [`devices`](#-bareos--storage--devices)
+* [`directors`](#-bareos--storage--directors)
+* [`messages`](#-bareos--storage--messages)
+* [`ndmps`](#-bareos--storage--ndmps)
+
+##### <a name="-bareos--storage--manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -2370,7 +2614,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="-bareos--storage--manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -2378,7 +2622,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="-bareos--storage--package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -2386,7 +2630,7 @@ Data type: `Any`
 
 Default value: `$bareos::storage_package_name`
 
-##### `package_ensure`
+##### <a name="-bareos--storage--package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -2394,7 +2638,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="-bareos--storage--service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -2402,7 +2646,7 @@ Data type: `Any`
 
 Default value: `$bareos::storage_service_name`
 
-##### `service_ensure`
+##### <a name="-bareos--storage--service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -2410,7 +2654,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="-bareos--storage--service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -2418,7 +2662,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="-bareos--storage--config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -2426,7 +2670,7 @@ Data type: `Any`
 
 Default value: `"${bareos::config_dir}/bareos-sd.d"`
 
-##### `autochangers`
+##### <a name="-bareos--storage--autochangers"></a>`autochangers`
 
 Data type: `Hash`
 
@@ -2434,7 +2678,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `devices`
+##### <a name="-bareos--storage--devices"></a>`devices`
 
 Data type: `Hash`
 
@@ -2442,7 +2686,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `directors`
+##### <a name="-bareos--storage--directors"></a>`directors`
 
 Data type: `Hash`
 
@@ -2450,7 +2694,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `messages`
+##### <a name="-bareos--storage--messages"></a>`messages`
 
 Data type: `Hash`
 
@@ -2458,7 +2702,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### `ndmps`
+##### <a name="-bareos--storage--ndmps"></a>`ndmps`
 
 Data type: `Hash`
 
@@ -2466,7 +2710,7 @@ Data type: `Hash`
 
 Default value: `{}`
 
-### `bareos::storage::storage`
+### <a name="bareos--storage--storage"></a>`bareos::storage::storage`
 
 == Class: bareos::storage::storage
 In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
@@ -2844,9 +3088,63 @@ In general, the properties specified under the Storage resource dene global prop
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::storage` class.
+The following parameters are available in the `bareos::storage::storage` class:
 
-##### `ensure`
+* [`ensure`](#-bareos--storage--storage--ensure)
+* [`absolute_job_timeout`](#-bareos--storage--storage--absolute_job_timeout)
+* [`allow_bandwidth_bursting`](#-bareos--storage--storage--allow_bandwidth_bursting)
+* [`auto_x_flate_on_replication`](#-bareos--storage--storage--auto_x_flate_on_replication)
+* [`backend_directory`](#-bareos--storage--storage--backend_directory)
+* [`client_connect_wait`](#-bareos--storage--storage--client_connect_wait)
+* [`collect_device_statistics`](#-bareos--storage--storage--collect_device_statistics)
+* [`collect_job_statistics`](#-bareos--storage--storage--collect_job_statistics)
+* [`compatible`](#-bareos--storage--storage--compatible)
+* [`description`](#-bareos--storage--storage--description)
+* [`device_reserve_by_media_type`](#-bareos--storage--storage--device_reserve_by_media_type)
+* [`fd_connect_timeout`](#-bareos--storage--storage--fd_connect_timeout)
+* [`file_device_concurrent_read`](#-bareos--storage--storage--file_device_concurrent_read)
+* [`heartbeat_interval`](#-bareos--storage--storage--heartbeat_interval)
+* [`log_timestamp_format`](#-bareos--storage--storage--log_timestamp_format)
+* [`maximum_bandwidth_per_job`](#-bareos--storage--storage--maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#-bareos--storage--storage--maximum_concurrent_jobs)
+* [`maximum_connections`](#-bareos--storage--storage--maximum_connections)
+* [`maximum_network_buffer_size`](#-bareos--storage--storage--maximum_network_buffer_size)
+* [`messages`](#-bareos--storage--storage--messages)
+* [`name_storage`](#-bareos--storage--storage--name_storage)
+* [`ndmp_address`](#-bareos--storage--storage--ndmp_address)
+* [`ndmp_addresses`](#-bareos--storage--storage--ndmp_addresses)
+* [`ndmp_enable`](#-bareos--storage--storage--ndmp_enable)
+* [`ndmp_log_level`](#-bareos--storage--storage--ndmp_log_level)
+* [`ndmp_port`](#-bareos--storage--storage--ndmp_port)
+* [`ndmp_snooping`](#-bareos--storage--storage--ndmp_snooping)
+* [`pid_directory`](#-bareos--storage--storage--pid_directory)
+* [`plugin_directory`](#-bareos--storage--storage--plugin_directory)
+* [`plugin_names`](#-bareos--storage--storage--plugin_names)
+* [`scripts_directory`](#-bareos--storage--storage--scripts_directory)
+* [`sd_address`](#-bareos--storage--storage--sd_address)
+* [`sd_addresses`](#-bareos--storage--storage--sd_addresses)
+* [`sd_connect_timeout`](#-bareos--storage--storage--sd_connect_timeout)
+* [`sd_port`](#-bareos--storage--storage--sd_port)
+* [`sd_source_address`](#-bareos--storage--storage--sd_source_address)
+* [`secure_erase_command`](#-bareos--storage--storage--secure_erase_command)
+* [`statistics_collect_interval`](#-bareos--storage--storage--statistics_collect_interval)
+* [`sub_sys_directory`](#-bareos--storage--storage--sub_sys_directory)
+* [`tls_allowed_cn`](#-bareos--storage--storage--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--storage--storage--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--storage--storage--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--storage--storage--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--storage--storage--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--storage--storage--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--storage--storage--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--storage--storage--tls_dh_file)
+* [`tls_enable`](#-bareos--storage--storage--tls_enable)
+* [`tls_key`](#-bareos--storage--storage--tls_key)
+* [`tls_require`](#-bareos--storage--storage--tls_require)
+* [`tls_verify_peer`](#-bareos--storage--storage--tls_verify_peer)
+* [`ver_id`](#-bareos--storage--storage--ver_id)
+* [`working_directory`](#-bareos--storage--storage--working_directory)
+
+##### <a name="-bareos--storage--storage--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -2854,159 +3152,159 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `absolute_job_timeout`
+##### <a name="-bareos--storage--storage--absolute_job_timeout"></a>`absolute_job_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_bandwidth_bursting`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `auto_x_flate_on_replication`
+##### <a name="-bareos--storage--storage--allow_bandwidth_bursting"></a>`allow_bandwidth_bursting`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `backend_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `client_connect_wait`
+##### <a name="-bareos--storage--storage--auto_x_flate_on_replication"></a>`auto_x_flate_on_replication`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `collect_device_statistics`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `collect_job_statistics`
+##### <a name="-bareos--storage--storage--backend_directory"></a>`backend_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `compatible`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `description`
+##### <a name="-bareos--storage--storage--client_connect_wait"></a>`client_connect_wait`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `device_reserve_by_media_type`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `fd_connect_timeout`
+##### <a name="-bareos--storage--storage--collect_device_statistics"></a>`collect_device_statistics`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file_device_concurrent_read`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `heartbeat_interval`
+##### <a name="-bareos--storage--storage--collect_job_statistics"></a>`collect_job_statistics`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `log_timestamp_format`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_bandwidth_per_job`
+##### <a name="-bareos--storage--storage--compatible"></a>`compatible`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_connections`
+##### <a name="-bareos--storage--storage--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_network_buffer_size`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `messages`
+##### <a name="-bareos--storage--storage--device_reserve_by_media_type"></a>`device_reserve_by_media_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `name_storage`
+##### <a name="-bareos--storage--storage--fd_connect_timeout"></a>`fd_connect_timeout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--file_device_concurrent_read"></a>`file_device_concurrent_read`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--heartbeat_interval"></a>`heartbeat_interval`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--log_timestamp_format"></a>`log_timestamp_format`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--maximum_connections"></a>`maximum_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--maximum_network_buffer_size"></a>`maximum_network_buffer_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--messages"></a>`messages`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--name_storage"></a>`name_storage`
 
 Data type: `Any`
 
@@ -3014,263 +3312,263 @@ Data type: `Any`
 
 Default value: `'bareos-sd'`
 
-##### `ndmp_address`
+##### <a name="-bareos--storage--storage--ndmp_address"></a>`ndmp_address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ndmp_addresses`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `ndmp_enable`
+##### <a name="-bareos--storage--storage--ndmp_addresses"></a>`ndmp_addresses`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ndmp_log_level`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `ndmp_port`
+##### <a name="-bareos--storage--storage--ndmp_enable"></a>`ndmp_enable`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ndmp_snooping`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `pid_directory`
+##### <a name="-bareos--storage--storage--ndmp_log_level"></a>`ndmp_log_level`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `plugin_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `plugin_names`
+##### <a name="-bareos--storage--storage--ndmp_port"></a>`ndmp_port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `scripts_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `sd_address`
+##### <a name="-bareos--storage--storage--ndmp_snooping"></a>`ndmp_snooping`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sd_addresses`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `sd_connect_timeout`
+##### <a name="-bareos--storage--storage--pid_directory"></a>`pid_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sd_port`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `sd_source_address`
+##### <a name="-bareos--storage--storage--plugin_directory"></a>`plugin_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `secure_erase_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `statistics_collect_interval`
+##### <a name="-bareos--storage--storage--plugin_names"></a>`plugin_names`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sub_sys_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_allowed_cn`
+##### <a name="-bareos--storage--storage--scripts_directory"></a>`scripts_directory`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_authenticate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_dir`
+##### <a name="-bareos--storage--storage--sd_address"></a>`sd_address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate`
+##### <a name="-bareos--storage--storage--sd_addresses"></a>`sd_addresses`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate_revocation_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_cipher_list`
+##### <a name="-bareos--storage--storage--sd_connect_timeout"></a>`sd_connect_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_dh_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_enable`
+##### <a name="-bareos--storage--storage--sd_port"></a>`sd_port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_key`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_require`
+##### <a name="-bareos--storage--storage--sd_source_address"></a>`sd_source_address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_verify_peer`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `ver_id`
+##### <a name="-bareos--storage--storage--secure_erase_command"></a>`secure_erase_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `working_directory`
+##### <a name="-bareos--storage--storage--statistics_collect_interval"></a>`statistics_collect_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::webui`
+##### <a name="-bareos--storage--storage--sub_sys_directory"></a>`sub_sys_directory`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_allowed_cn"></a>`tls_allowed_cn`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_authenticate"></a>`tls_authenticate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--ver_id"></a>`ver_id`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--storage--working_directory"></a>`working_directory`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--webui"></a>`bareos::webui`
 
 == Class: bareos::webui
 This class manages the bareos webui service, package and configuration.
@@ -3279,9 +3577,25 @@ This class will be automatically included when a resource is defined.
 
 #### Parameters
 
-The following parameters are available in the `bareos::webui` class.
+The following parameters are available in the `bareos::webui` class:
 
-##### `manage_service`
+* [`manage_service`](#-bareos--webui--manage_service)
+* [`manage_package`](#-bareos--webui--manage_package)
+* [`package_name`](#-bareos--webui--package_name)
+* [`package_ensure`](#-bareos--webui--package_ensure)
+* [`service_name`](#-bareos--webui--service_name)
+* [`service_ensure`](#-bareos--webui--service_ensure)
+* [`service_enable`](#-bareos--webui--service_enable)
+* [`config_dir`](#-bareos--webui--config_dir)
+* [`manage_local_dir`](#-bareos--webui--manage_local_dir)
+* [`session_timeout`](#-bareos--webui--session_timeout)
+* [`pagination_values`](#-bareos--webui--pagination_values)
+* [`pagination_default_value`](#-bareos--webui--pagination_default_value)
+* [`save_previous_state`](#-bareos--webui--save_previous_state)
+* [`label_pooltype`](#-bareos--webui--label_pooltype)
+* [`directors`](#-bareos--webui--directors)
+
+##### <a name="-bareos--webui--manage_service"></a>`manage_service`
 
 Data type: `Any`
 
@@ -3289,7 +3603,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_service`
 
-##### `manage_package`
+##### <a name="-bareos--webui--manage_package"></a>`manage_package`
 
 Data type: `Any`
 
@@ -3297,7 +3611,7 @@ Data type: `Any`
 
 Default value: `$bareos::manage_package`
 
-##### `package_name`
+##### <a name="-bareos--webui--package_name"></a>`package_name`
 
 Data type: `Any`
 
@@ -3305,7 +3619,7 @@ Data type: `Any`
 
 Default value: `$bareos::webui_package_name`
 
-##### `package_ensure`
+##### <a name="-bareos--webui--package_ensure"></a>`package_ensure`
 
 Data type: `Any`
 
@@ -3313,7 +3627,7 @@ Data type: `Any`
 
 Default value: `$bareos::package_ensure`
 
-##### `service_name`
+##### <a name="-bareos--webui--service_name"></a>`service_name`
 
 Data type: `Any`
 
@@ -3321,7 +3635,7 @@ Data type: `Any`
 
 Default value: `$bareos::webui_service_name`
 
-##### `service_ensure`
+##### <a name="-bareos--webui--service_ensure"></a>`service_ensure`
 
 Data type: `Any`
 
@@ -3329,7 +3643,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_ensure`
 
-##### `service_enable`
+##### <a name="-bareos--webui--service_enable"></a>`service_enable`
 
 Data type: `Any`
 
@@ -3337,7 +3651,7 @@ Data type: `Any`
 
 Default value: `$bareos::service_enable`
 
-##### `config_dir`
+##### <a name="-bareos--webui--config_dir"></a>`config_dir`
 
 Data type: `Any`
 
@@ -3345,15 +3659,15 @@ Data type: `Any`
 
 Default value: `$bareos::config_dir_webui`
 
-##### `manage_local_dir`
+##### <a name="-bareos--webui--manage_local_dir"></a>`manage_local_dir`
 
 Data type: `Any`
 
 
 
-Default value: ``true``
+Default value: `true`
 
-##### `session_timeout`
+##### <a name="-bareos--webui--session_timeout"></a>`session_timeout`
 
 Data type: `Any`
 
@@ -3361,7 +3675,7 @@ Data type: `Any`
 
 Default value: `3600`
 
-##### `pagination_values`
+##### <a name="-bareos--webui--pagination_values"></a>`pagination_values`
 
 Data type: `Any`
 
@@ -3369,7 +3683,7 @@ Data type: `Any`
 
 Default value: `'10,25,50,100'`
 
-##### `pagination_default_value`
+##### <a name="-bareos--webui--pagination_default_value"></a>`pagination_default_value`
 
 Data type: `Any`
 
@@ -3377,15 +3691,15 @@ Data type: `Any`
 
 Default value: `25`
 
-##### `save_previous_state`
+##### <a name="-bareos--webui--save_previous_state"></a>`save_previous_state`
 
 Data type: `Any`
 
 
 
-Default value: ``false``
+Default value: `false`
 
-##### `label_pooltype`
+##### <a name="-bareos--webui--label_pooltype"></a>`label_pooltype`
 
 Data type: `Any`
 
@@ -3393,7 +3707,7 @@ Data type: `Any`
 
 Default value: `''`
 
-##### `directors`
+##### <a name="-bareos--webui--directors"></a>`directors`
 
 Data type: `Any`
 
@@ -3403,7 +3717,7 @@ Default value: `{}`
 
 ## Defined types
 
-### `bareos::client::director`
+### <a name="bareos--client--director"></a>`bareos::client::director`
 
 == Define: bareos::client::director
 The Director resource defines the name and password of the Directors that are permitted to contact this Client.
@@ -3571,9 +3885,33 @@ The Director resource defines the name and password of the Directors that are pe
 
 #### Parameters
 
-The following parameters are available in the `bareos::client::director` defined type.
+The following parameters are available in the `bareos::client::director` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--client--director--ensure)
+* [`address`](#-bareos--client--director--address)
+* [`allowed_job_command`](#-bareos--client--director--allowed_job_command)
+* [`allowed_script_dir`](#-bareos--client--director--allowed_script_dir)
+* [`connection_from_client_to_director`](#-bareos--client--director--connection_from_client_to_director)
+* [`connection_from_director_to_client`](#-bareos--client--director--connection_from_director_to_client)
+* [`description`](#-bareos--client--director--description)
+* [`maximum_bandwidth_per_job`](#-bareos--client--director--maximum_bandwidth_per_job)
+* [`monitor`](#-bareos--client--director--monitor)
+* [`password`](#-bareos--client--director--password)
+* [`port`](#-bareos--client--director--port)
+* [`tls_allowed_cn`](#-bareos--client--director--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--client--director--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--client--director--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--client--director--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--client--director--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--client--director--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--client--director--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--client--director--tls_dh_file)
+* [`tls_enable`](#-bareos--client--director--tls_enable)
+* [`tls_key`](#-bareos--client--director--tls_key)
+* [`tls_require`](#-bareos--client--director--tls_require)
+* [`tls_verify_peer`](#-bareos--client--director--tls_verify_peer)
+
+##### <a name="-bareos--client--director--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -3581,183 +3919,183 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="-bareos--client--director--address"></a>`address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allowed_job_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `allowed_script_dir`
+##### <a name="-bareos--client--director--allowed_job_command"></a>`allowed_job_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `connection_from_client_to_director`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `connection_from_director_to_client`
+##### <a name="-bareos--client--director--allowed_script_dir"></a>`allowed_script_dir`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_bandwidth_per_job`
+##### <a name="-bareos--client--director--connection_from_client_to_director"></a>`connection_from_client_to_director`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `monitor`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `password`
+##### <a name="-bareos--client--director--connection_from_director_to_client"></a>`connection_from_director_to_client`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `port`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_allowed_cn`
+##### <a name="-bareos--client--director--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_authenticate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_dir`
+##### <a name="-bareos--client--director--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate`
+##### <a name="-bareos--client--director--monitor"></a>`monitor`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate_revocation_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_cipher_list`
+##### <a name="-bareos--client--director--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_dh_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_enable`
+##### <a name="-bareos--client--director--port"></a>`port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_key`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_require`
+##### <a name="-bareos--client--director--tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_verify_peer`
+##### <a name="-bareos--client--director--tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::client::messages`
+##### <a name="-bareos--client--director--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--director--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--client--messages"></a>`bareos::client::messages`
 
 == Define: bareos::client::messages
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
@@ -3892,9 +4230,27 @@ The Messages resource defines how messages are to be handled and destinations to
 
 #### Parameters
 
-The following parameters are available in the `bareos::client::messages` defined type.
+The following parameters are available in the `bareos::client::messages` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--client--messages--ensure)
+* [`append`](#-bareos--client--messages--append)
+* [`catalog`](#-bareos--client--messages--catalog)
+* [`console`](#-bareos--client--messages--console)
+* [`description`](#-bareos--client--messages--description)
+* [`director`](#-bareos--client--messages--director)
+* [`file`](#-bareos--client--messages--file)
+* [`mail`](#-bareos--client--messages--mail)
+* [`mail_command`](#-bareos--client--messages--mail_command)
+* [`mail_on_error`](#-bareos--client--messages--mail_on_error)
+* [`mail_on_success`](#-bareos--client--messages--mail_on_success)
+* [`operator`](#-bareos--client--messages--operator)
+* [`operator_command`](#-bareos--client--messages--operator_command)
+* [`stderr`](#-bareos--client--messages--stderr)
+* [`stdout`](#-bareos--client--messages--stdout)
+* [`syslog`](#-bareos--client--messages--syslog)
+* [`timestamp_format`](#-bareos--client--messages--timestamp_format)
+
+##### <a name="-bareos--client--messages--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -3902,135 +4258,135 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `append`
+##### <a name="-bareos--client--messages--append"></a>`append`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `catalog`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `console`
+##### <a name="-bareos--client--messages--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `director`
+##### <a name="-bareos--client--messages--console"></a>`console`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `mail`
+##### <a name="-bareos--client--messages--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mail_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `mail_on_error`
+##### <a name="-bareos--client--messages--director"></a>`director`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mail_on_success`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `operator`
+##### <a name="-bareos--client--messages--file"></a>`file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `operator_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `stderr`
+##### <a name="-bareos--client--messages--mail"></a>`mail`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `stdout`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `syslog`
+##### <a name="-bareos--client--messages--mail_command"></a>`mail_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `timestamp_format`
+##### <a name="-bareos--client--messages--mail_on_error"></a>`mail_on_error`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::console::console`
+##### <a name="-bareos--client--messages--mail_on_success"></a>`mail_on_success`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--messages--operator"></a>`operator`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--messages--operator_command"></a>`operator_command`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--messages--stderr"></a>`stderr`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--messages--stdout"></a>`stdout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--messages--syslog"></a>`syslog`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--client--messages--timestamp_format"></a>`timestamp_format`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--console--console"></a>`bareos::console::console`
 
 == Define: bareos::console::console
 
@@ -4174,9 +4530,30 @@ Default value: ``undef``
 
 #### Parameters
 
-The following parameters are available in the `bareos::console::console` defined type.
+The following parameters are available in the `bareos::console::console` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--console--console--ensure)
+* [`description`](#-bareos--console--console--description)
+* [`director`](#-bareos--console--console--director)
+* [`heartbeat_interval`](#-bareos--console--console--heartbeat_interval)
+* [`history_file`](#-bareos--console--console--history_file)
+* [`history_length`](#-bareos--console--console--history_length)
+* [`password`](#-bareos--console--console--password)
+* [`rc_file`](#-bareos--console--console--rc_file)
+* [`tls_allowed_cn`](#-bareos--console--console--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--console--console--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--console--console--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--console--console--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--console--console--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--console--console--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--console--console--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--console--console--tls_dh_file)
+* [`tls_enable`](#-bareos--console--console--tls_enable)
+* [`tls_key`](#-bareos--console--console--tls_key)
+* [`tls_require`](#-bareos--console--console--tls_require)
+* [`tls_verify_peer`](#-bareos--console--console--tls_verify_peer)
+
+##### <a name="-bareos--console--console--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -4184,159 +4561,159 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="-bareos--console--console--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `director`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `heartbeat_interval`
+##### <a name="-bareos--console--console--director"></a>`director`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `history_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `history_length`
+##### <a name="-bareos--console--console--heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `password`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `rc_file`
+##### <a name="-bareos--console--console--history_file"></a>`history_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_allowed_cn`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_authenticate`
+##### <a name="-bareos--console--console--history_length"></a>`history_length`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_dir`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_file`
+##### <a name="-bareos--console--console--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate_revocation_list`
+##### <a name="-bareos--console--console--rc_file"></a>`rc_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_cipher_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_dh_file`
+##### <a name="-bareos--console--console--tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_enable`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_key`
+##### <a name="-bareos--console--console--tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_require`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_verify_peer`
+##### <a name="-bareos--console--console--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::console::director`
+##### <a name="-bareos--console--console--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--console--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--console--director"></a>`bareos::console::director`
 
 == Define: bareos:console::director
 The Director resource defines the attributes of the Director running on the network.
@@ -4469,9 +4846,28 @@ If you have more than one, you will be prompted to choose one when you start the
 
 #### Parameters
 
-The following parameters are available in the `bareos::console::director` defined type.
+The following parameters are available in the `bareos::console::director` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--console--director--ensure)
+* [`address`](#-bareos--console--director--address)
+* [`description`](#-bareos--console--director--description)
+* [`dir_port`](#-bareos--console--director--dir_port)
+* [`heartbeat_interval`](#-bareos--console--director--heartbeat_interval)
+* [`password`](#-bareos--console--director--password)
+* [`tls_allowed_cn`](#-bareos--console--director--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--console--director--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--console--director--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--console--director--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--console--director--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--console--director--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--console--director--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--console--director--tls_dh_file)
+* [`tls_enable`](#-bareos--console--director--tls_enable)
+* [`tls_key`](#-bareos--console--director--tls_key)
+* [`tls_require`](#-bareos--console--director--tls_require)
+* [`tls_verify_peer`](#-bareos--console--director--tls_verify_peer)
+
+##### <a name="-bareos--console--director--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -4479,143 +4875,143 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="-bareos--console--director--address"></a>`address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `dir_port`
+##### <a name="-bareos--console--director--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `heartbeat_interval`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `password`
+##### <a name="-bareos--console--director--dir_port"></a>`dir_port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_allowed_cn`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_authenticate`
+##### <a name="-bareos--console--director--heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_dir`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_file`
+##### <a name="-bareos--console--director--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate_revocation_list`
+##### <a name="-bareos--console--director--tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_cipher_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_dh_file`
+##### <a name="-bareos--console--director--tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_enable`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_key`
+##### <a name="-bareos--console--director--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_require`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_verify_peer`
+##### <a name="-bareos--console--director--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::catalog`
+##### <a name="-bareos--console--director--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--director--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--director--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--director--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--director--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--director--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--director--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--console--director--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--catalog"></a>`bareos::director::catalog`
 
 [*validate_timeout*]
   Validate Timeout
@@ -4626,9 +5022,28 @@ Default value: ``undef``
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::catalog` defined type.
+The following parameters are available in the `bareos::director::catalog` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--catalog--ensure)
+* [`db_address`](#-bareos--director--catalog--db_address)
+* [`db_driver`](#-bareos--director--catalog--db_driver)
+* [`db_name`](#-bareos--director--catalog--db_name)
+* [`db_password`](#-bareos--director--catalog--db_password)
+* [`db_port`](#-bareos--director--catalog--db_port)
+* [`db_socket`](#-bareos--director--catalog--db_socket)
+* [`db_user`](#-bareos--director--catalog--db_user)
+* [`description`](#-bareos--director--catalog--description)
+* [`disable_batch_insert`](#-bareos--director--catalog--disable_batch_insert)
+* [`exit_on_fatal`](#-bareos--director--catalog--exit_on_fatal)
+* [`idle_timeout`](#-bareos--director--catalog--idle_timeout)
+* [`inc_connections`](#-bareos--director--catalog--inc_connections)
+* [`max_connections`](#-bareos--director--catalog--max_connections)
+* [`min_connections`](#-bareos--director--catalog--min_connections)
+* [`multiple_connections`](#-bareos--director--catalog--multiple_connections)
+* [`reconnect`](#-bareos--director--catalog--reconnect)
+* [`validate_timeout`](#-bareos--director--catalog--validate_timeout)
+
+##### <a name="-bareos--director--catalog--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -4636,143 +5051,143 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `db_address`
+##### <a name="-bareos--director--catalog--db_address"></a>`db_address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `db_driver`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `db_name`
+##### <a name="-bareos--director--catalog--db_driver"></a>`db_driver`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `db_password`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `db_port`
+##### <a name="-bareos--director--catalog--db_name"></a>`db_name`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `db_socket`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `db_user`
+##### <a name="-bareos--director--catalog--db_password"></a>`db_password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `disable_batch_insert`
+##### <a name="-bareos--director--catalog--db_port"></a>`db_port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `exit_on_fatal`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `idle_timeout`
+##### <a name="-bareos--director--catalog--db_socket"></a>`db_socket`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `inc_connections`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `max_connections`
+##### <a name="-bareos--director--catalog--db_user"></a>`db_user`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `min_connections`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `multiple_connections`
+##### <a name="-bareos--director--catalog--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reconnect`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `validate_timeout`
+##### <a name="-bareos--director--catalog--disable_batch_insert"></a>`disable_batch_insert`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::client`
+##### <a name="-bareos--director--catalog--exit_on_fatal"></a>`exit_on_fatal`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--catalog--idle_timeout"></a>`idle_timeout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--catalog--inc_connections"></a>`inc_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--catalog--max_connections"></a>`max_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--catalog--min_connections"></a>`min_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--catalog--multiple_connections"></a>`multiple_connections`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--catalog--reconnect"></a>`reconnect`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--catalog--validate_timeout"></a>`validate_timeout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--client"></a>`bareos::director::client`
 
 == Define: bareos::director::client
 To define what Client is to be backed up.
@@ -5052,9 +5467,49 @@ Each Job will reference only a single client.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::client` defined type.
+The following parameters are available in the `bareos::director::client` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--client--ensure)
+* [`address`](#-bareos--director--client--address)
+* [`auth_type`](#-bareos--director--client--auth_type)
+* [`auto_prune`](#-bareos--director--client--auto_prune)
+* [`catalog`](#-bareos--director--client--catalog)
+* [`connection_from_client_to_director`](#-bareos--director--client--connection_from_client_to_director)
+* [`connection_from_director_to_client`](#-bareos--director--client--connection_from_director_to_client)
+* [`description`](#-bareos--director--client--description)
+* [`enabled`](#-bareos--director--client--enabled)
+* [`file_retention`](#-bareos--director--client--file_retention)
+* [`hard_quota`](#-bareos--director--client--hard_quota)
+* [`heartbeat_interval`](#-bareos--director--client--heartbeat_interval)
+* [`job_retention`](#-bareos--director--client--job_retention)
+* [`maximum_bandwidth_per_job`](#-bareos--director--client--maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#-bareos--director--client--maximum_concurrent_jobs)
+* [`ndmp_block_size`](#-bareos--director--client--ndmp_block_size)
+* [`ndmp_log_level`](#-bareos--director--client--ndmp_log_level)
+* [`ndmp_use_lmdb`](#-bareos--director--client--ndmp_use_lmdb)
+* [`passive`](#-bareos--director--client--passive)
+* [`password`](#-bareos--director--client--password)
+* [`port`](#-bareos--director--client--port)
+* [`protocol`](#-bareos--director--client--protocol)
+* [`quota_include_failed_jobs`](#-bareos--director--client--quota_include_failed_jobs)
+* [`soft_quota`](#-bareos--director--client--soft_quota)
+* [`soft_quota_grace_period`](#-bareos--director--client--soft_quota_grace_period)
+* [`strict_quotas`](#-bareos--director--client--strict_quotas)
+* [`tls_allowed_cn`](#-bareos--director--client--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--director--client--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--director--client--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--director--client--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--director--client--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--director--client--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--director--client--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--director--client--tls_dh_file)
+* [`tls_enable`](#-bareos--director--client--tls_enable)
+* [`tls_key`](#-bareos--director--client--tls_key)
+* [`tls_require`](#-bareos--director--client--tls_require)
+* [`tls_verify_peer`](#-bareos--director--client--tls_verify_peer)
+* [`username`](#-bareos--director--client--username)
+
+##### <a name="-bareos--director--client--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -5062,311 +5517,311 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="-bareos--director--client--address"></a>`address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `auth_type`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `auto_prune`
+##### <a name="-bareos--director--client--auth_type"></a>`auth_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `catalog`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `connection_from_client_to_director`
+##### <a name="-bareos--director--client--auto_prune"></a>`auto_prune`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `connection_from_director_to_client`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `description`
+##### <a name="-bareos--director--client--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `enabled`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `file_retention`
+##### <a name="-bareos--director--client--connection_from_client_to_director"></a>`connection_from_client_to_director`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `hard_quota`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `heartbeat_interval`
+##### <a name="-bareos--director--client--connection_from_director_to_client"></a>`connection_from_director_to_client`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_retention`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_bandwidth_per_job`
+##### <a name="-bareos--director--client--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `ndmp_block_size`
+##### <a name="-bareos--director--client--enabled"></a>`enabled`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ndmp_log_level`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `ndmp_use_lmdb`
+##### <a name="-bareos--director--client--file_retention"></a>`file_retention`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `passive`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `password`
+##### <a name="-bareos--director--client--hard_quota"></a>`hard_quota`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `port`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `protocol`
+##### <a name="-bareos--director--client--heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `quota_include_failed_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `soft_quota`
+##### <a name="-bareos--director--client--job_retention"></a>`job_retention`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `soft_quota_grace_period`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `strict_quotas`
+##### <a name="-bareos--director--client--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_allowed_cn`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_authenticate`
+##### <a name="-bareos--director--client--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_dir`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_file`
+##### <a name="-bareos--director--client--ndmp_block_size"></a>`ndmp_block_size`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate_revocation_list`
+##### <a name="-bareos--director--client--ndmp_log_level"></a>`ndmp_log_level`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_cipher_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_dh_file`
+##### <a name="-bareos--director--client--ndmp_use_lmdb"></a>`ndmp_use_lmdb`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_enable`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_key`
+##### <a name="-bareos--director--client--passive"></a>`passive`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_require`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_verify_peer`
+##### <a name="-bareos--director--client--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `username`
+##### <a name="-bareos--director--client--port"></a>`port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::console`
+##### <a name="-bareos--director--client--protocol"></a>`protocol`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--quota_include_failed_jobs"></a>`quota_include_failed_jobs`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--soft_quota"></a>`soft_quota`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--soft_quota_grace_period"></a>`soft_quota_grace_period`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--strict_quotas"></a>`strict_quotas`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_allowed_cn"></a>`tls_allowed_cn`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_authenticate"></a>`tls_authenticate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--client--username"></a>`username`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--console"></a>`bareos::director::console`
 
 == Define: bareos::director::console
 Configure an **Named Console** aka **Restricted Console**.
@@ -5553,6 +6008,13 @@ Both the names and the passwords in these two entries must match much as is the 
   Bareos Default: true
   Required: false
 
+[*use_pam_authentication*]
+  Use Pam Authentication: If set to yes, PAM will be used to authenticate the user on this console. Otherwise, only the credentials of this console resource are used for authentication.
+
+  Bareos Datatype: boolean
+  Bareos Default: false
+  Required: false
+
 [*where_acl*]
   Where ACL
 
@@ -5562,225 +6024,262 @@ Both the names and the passwords in these two entries must match much as is the 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::console` defined type.
+The following parameters are available in the `bareos::director::console` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--console--ensure)
+* [`catalog_acl`](#-bareos--director--console--catalog_acl)
+* [`client_acl`](#-bareos--director--console--client_acl)
+* [`command_acl`](#-bareos--director--console--command_acl)
+* [`description`](#-bareos--director--console--description)
+* [`file_set_acl`](#-bareos--director--console--file_set_acl)
+* [`job_acl`](#-bareos--director--console--job_acl)
+* [`password`](#-bareos--director--console--password)
+* [`plugin_options_acl`](#-bareos--director--console--plugin_options_acl)
+* [`pool_acl`](#-bareos--director--console--pool_acl)
+* [`profile`](#-bareos--director--console--profile)
+* [`run_acl`](#-bareos--director--console--run_acl)
+* [`schedule_acl`](#-bareos--director--console--schedule_acl)
+* [`storage_acl`](#-bareos--director--console--storage_acl)
+* [`tls_allowed_cn`](#-bareos--director--console--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--director--console--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--director--console--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--director--console--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--director--console--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--director--console--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--director--console--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--director--console--tls_dh_file)
+* [`tls_enable`](#-bareos--director--console--tls_enable)
+* [`tls_key`](#-bareos--director--console--tls_key)
+* [`tls_require`](#-bareos--director--console--tls_require)
+* [`tls_verify_peer`](#-bareos--director--console--tls_verify_peer)
+* [`use_pam_authentication`](#-bareos--director--console--use_pam_authentication)
+* [`where_acl`](#-bareos--director--console--where_acl)
 
-Data type: `Any`
+##### <a name="-bareos--director--console--ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
 
 
 
 Default value: `present`
 
-##### `catalog_acl`
+##### <a name="-bareos--director--console--catalog_acl"></a>`catalog_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client_acl`
+##### <a name="-bareos--director--console--client_acl"></a>`client_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `command_acl`
+##### <a name="-bareos--director--console--command_acl"></a>`command_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
+##### <a name="-bareos--director--console--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file_set_acl`
+##### <a name="-bareos--director--console--file_set_acl"></a>`file_set_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_acl`
+##### <a name="-bareos--director--console--job_acl"></a>`job_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `password`
+##### <a name="-bareos--director--console--password"></a>`password`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `plugin_options_acl`
+##### <a name="-bareos--director--console--plugin_options_acl"></a>`plugin_options_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pool_acl`
+##### <a name="-bareos--director--console--pool_acl"></a>`pool_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `profile`
+##### <a name="-bareos--director--console--profile"></a>`profile`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_acl`
+##### <a name="-bareos--director--console--run_acl"></a>`run_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `schedule_acl`
+##### <a name="-bareos--director--console--schedule_acl"></a>`schedule_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `storage_acl`
+##### <a name="-bareos--director--console--storage_acl"></a>`storage_acl`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_allowed_cn`
+##### <a name="-bareos--director--console--tls_allowed_cn"></a>`tls_allowed_cn`
 
-Data type: `Any`
+Data type: `Optional[Bareos::List]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_authenticate`
+##### <a name="-bareos--director--console--tls_authenticate"></a>`tls_authenticate`
 
-Data type: `Any`
+Data type: `Optional[Bareos::Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_dir`
+##### <a name="-bareos--director--console--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_file`
+##### <a name="-bareos--director--console--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate`
+##### <a name="-bareos--director--console--tls_certificate"></a>`tls_certificate`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate_revocation_list`
+##### <a name="-bareos--director--console--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_cipher_list`
+##### <a name="-bareos--director--console--tls_cipher_list"></a>`tls_cipher_list`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_dh_file`
+##### <a name="-bareos--director--console--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_enable`
+##### <a name="-bareos--director--console--tls_enable"></a>`tls_enable`
 
-Data type: `Any`
+Data type: `Optional[Bareos::Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_key`
+##### <a name="-bareos--director--console--tls_key"></a>`tls_key`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_require`
+##### <a name="-bareos--director--console--tls_require"></a>`tls_require`
 
-Data type: `Any`
+Data type: `Optional[Bareos::Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_verify_peer`
+##### <a name="-bareos--director--console--tls_verify_peer"></a>`tls_verify_peer`
 
-Data type: `Any`
+Data type: `Optional[Bareos::Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `where_acl`
+##### <a name="-bareos--director--console--use_pam_authentication"></a>`use_pam_authentication`
 
-Data type: `Any`
+Data type: `Optional[Bareos::Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::counter`
+##### <a name="-bareos--director--console--where_acl"></a>`where_acl`
+
+Data type: `Optional[Bareos::List]`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--counter"></a>`bareos::director::counter`
 
 == Define: bareos::director::counter
 The Counter Resource defines a counter variable that can be accessed by variable expansion used
@@ -5827,9 +6326,16 @@ for creating Volume labels with the Label Format Dir Pool directive.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::counter` defined type.
+The following parameters are available in the `bareos::director::counter` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--counter--ensure)
+* [`catalog`](#-bareos--director--counter--catalog)
+* [`description`](#-bareos--director--counter--description)
+* [`maximum`](#-bareos--director--counter--maximum)
+* [`minimum`](#-bareos--director--counter--minimum)
+* [`wrap_counter`](#-bareos--director--counter--wrap_counter)
+
+##### <a name="-bareos--director--counter--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -5837,47 +6343,47 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `catalog`
+##### <a name="-bareos--director--counter--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum`
+##### <a name="-bareos--director--counter--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `minimum`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `wrap_counter`
+##### <a name="-bareos--director--counter--maximum"></a>`maximum`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::fileset`
+##### <a name="-bareos--director--counter--minimum"></a>`minimum`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--counter--wrap_counter"></a>`wrap_counter`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--fileset"></a>`bareos::director::fileset`
 
 == Define: bareos::director::fileset
 To define the set of files to be backed up for each Client.
@@ -5924,9 +6430,16 @@ You may have any number of FileSets but each Job will reference only one.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::fileset` defined type.
+The following parameters are available in the `bareos::director::fileset` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--fileset--ensure)
+* [`description`](#-bareos--director--fileset--description)
+* [`enable_vss`](#-bareos--director--fileset--enable_vss)
+* [`exclude`](#-bareos--director--fileset--exclude)
+* [`ignore_file_set_changes`](#-bareos--director--fileset--ignore_file_set_changes)
+* [`include`](#-bareos--director--fileset--include)
+
+##### <a name="-bareos--director--fileset--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -5934,47 +6447,47 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="-bareos--director--fileset--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `enable_vss`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `exclude`
+##### <a name="-bareos--director--fileset--enable_vss"></a>`enable_vss`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `ignore_file_set_changes`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `include`
+##### <a name="-bareos--director--fileset--exclude"></a>`exclude`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::job`
+##### <a name="-bareos--director--fileset--ignore_file_set_changes"></a>`ignore_file_set_changes`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--fileset--include"></a>`include`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--job"></a>`bareos::director::job`
 
 == Define: bareos::director::job
 To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
@@ -6574,9 +7087,94 @@ Normally, you will Jobs of different names corresponding to each client
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::job` defined type.
+The following parameters are available in the `bareos::director::job` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--job--ensure)
+* [`accurate`](#-bareos--director--job--accurate)
+* [`add_prefix`](#-bareos--director--job--add_prefix)
+* [`add_suffix`](#-bareos--director--job--add_suffix)
+* [`allow_duplicate_jobs`](#-bareos--director--job--allow_duplicate_jobs)
+* [`allow_higher_duplicates`](#-bareos--director--job--allow_higher_duplicates)
+* [`allow_mixed_priority`](#-bareos--director--job--allow_mixed_priority)
+* [`always_incremental`](#-bareos--director--job--always_incremental)
+* [`always_incremental_job_retention`](#-bareos--director--job--always_incremental_job_retention)
+* [`always_incremental_keep_number`](#-bareos--director--job--always_incremental_keep_number)
+* [`always_incremental_max_full_age`](#-bareos--director--job--always_incremental_max_full_age)
+* [`backup_format`](#-bareos--director--job--backup_format)
+* [`base`](#-bareos--director--job--base)
+* [`bootstrap`](#-bareos--director--job--bootstrap)
+* [`cancel_lower_level_duplicates`](#-bareos--director--job--cancel_lower_level_duplicates)
+* [`cancel_queued_duplicates`](#-bareos--director--job--cancel_queued_duplicates)
+* [`cancel_running_duplicates`](#-bareos--director--job--cancel_running_duplicates)
+* [`catalog`](#-bareos--director--job--catalog)
+* [`client`](#-bareos--director--job--client)
+* [`client_run_after_job`](#-bareos--director--job--client_run_after_job)
+* [`client_run_before_job`](#-bareos--director--job--client_run_before_job)
+* [`description`](#-bareos--director--job--description)
+* [`differential_backup_pool`](#-bareos--director--job--differential_backup_pool)
+* [`differential_max_runtime`](#-bareos--director--job--differential_max_runtime)
+* [`dir_plugin_options`](#-bareos--director--job--dir_plugin_options)
+* [`enabled`](#-bareos--director--job--enabled)
+* [`fd_plugin_options`](#-bareos--director--job--fd_plugin_options)
+* [`file_history_size`](#-bareos--director--job--file_history_size)
+* [`file_set`](#-bareos--director--job--file_set)
+* [`full_backup_pool`](#-bareos--director--job--full_backup_pool)
+* [`full_max_runtime`](#-bareos--director--job--full_max_runtime)
+* [`incremental_backup_pool`](#-bareos--director--job--incremental_backup_pool)
+* [`incremental_max_runtime`](#-bareos--director--job--incremental_max_runtime)
+* [`job_defs`](#-bareos--director--job--job_defs)
+* [`job_to_verify`](#-bareos--director--job--job_to_verify)
+* [`level`](#-bareos--director--job--level)
+* [`max_concurrent_copies`](#-bareos--director--job--max_concurrent_copies)
+* [`max_diff_interval`](#-bareos--director--job--max_diff_interval)
+* [`max_full_consolidations`](#-bareos--director--job--max_full_consolidations)
+* [`max_full_interval`](#-bareos--director--job--max_full_interval)
+* [`max_run_sched_time`](#-bareos--director--job--max_run_sched_time)
+* [`max_run_time`](#-bareos--director--job--max_run_time)
+* [`max_start_delay`](#-bareos--director--job--max_start_delay)
+* [`max_virtual_full_interval`](#-bareos--director--job--max_virtual_full_interval)
+* [`max_wait_time`](#-bareos--director--job--max_wait_time)
+* [`maximum_bandwidth`](#-bareos--director--job--maximum_bandwidth)
+* [`maximum_concurrent_jobs`](#-bareos--director--job--maximum_concurrent_jobs)
+* [`messages`](#-bareos--director--job--messages)
+* [`next_pool`](#-bareos--director--job--next_pool)
+* [`pool`](#-bareos--director--job--pool)
+* [`prefer_mounted_volumes`](#-bareos--director--job--prefer_mounted_volumes)
+* [`prefix_links`](#-bareos--director--job--prefix_links)
+* [`priority`](#-bareos--director--job--priority)
+* [`protocol`](#-bareos--director--job--protocol)
+* [`prune_files`](#-bareos--director--job--prune_files)
+* [`prune_jobs`](#-bareos--director--job--prune_jobs)
+* [`prune_volumes`](#-bareos--director--job--prune_volumes)
+* [`purge_migration_job`](#-bareos--director--job--purge_migration_job)
+* [`regex_where`](#-bareos--director--job--regex_where)
+* [`replace`](#-bareos--director--job--replace)
+* [`rerun_failed_levels`](#-bareos--director--job--rerun_failed_levels)
+* [`reschedule_interval`](#-bareos--director--job--reschedule_interval)
+* [`reschedule_on_error`](#-bareos--director--job--reschedule_on_error)
+* [`reschedule_times`](#-bareos--director--job--reschedule_times)
+* [`run`](#-bareos--director--job--run)
+* [`run_after_failed_job`](#-bareos--director--job--run_after_failed_job)
+* [`run_after_job`](#-bareos--director--job--run_after_job)
+* [`run_before_job`](#-bareos--director--job--run_before_job)
+* [`run_script`](#-bareos--director--job--run_script)
+* [`save_file_history`](#-bareos--director--job--save_file_history)
+* [`schedule_res`](#-bareos--director--job--schedule_res)
+* [`sd_plugin_options`](#-bareos--director--job--sd_plugin_options)
+* [`selection_pattern`](#-bareos--director--job--selection_pattern)
+* [`selection_type`](#-bareos--director--job--selection_type)
+* [`spool_attributes`](#-bareos--director--job--spool_attributes)
+* [`spool_data`](#-bareos--director--job--spool_data)
+* [`spool_size`](#-bareos--director--job--spool_size)
+* [`storage`](#-bareos--director--job--storage)
+* [`strip_prefix`](#-bareos--director--job--strip_prefix)
+* [`type`](#-bareos--director--job--type)
+* [`virtual_full_backup_pool`](#-bareos--director--job--virtual_full_backup_pool)
+* [`where`](#-bareos--director--job--where)
+* [`write_bootstrap`](#-bareos--director--job--write_bootstrap)
+* [`write_verify_list`](#-bareos--director--job--write_verify_list)
+
+##### <a name="-bareos--director--job--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -6584,671 +7182,671 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `accurate`
+##### <a name="-bareos--director--job--accurate"></a>`accurate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `add_prefix`
+##### <a name="-bareos--director--job--add_prefix"></a>`add_prefix`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `add_suffix`
+##### <a name="-bareos--director--job--add_suffix"></a>`add_suffix`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_duplicate_jobs`
+##### <a name="-bareos--director--job--allow_duplicate_jobs"></a>`allow_duplicate_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_higher_duplicates`
+##### <a name="-bareos--director--job--allow_higher_duplicates"></a>`allow_higher_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_mixed_priority`
+##### <a name="-bareos--director--job--allow_mixed_priority"></a>`allow_mixed_priority`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental`
+##### <a name="-bareos--director--job--always_incremental"></a>`always_incremental`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental_job_retention`
+##### <a name="-bareos--director--job--always_incremental_job_retention"></a>`always_incremental_job_retention`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental_keep_number`
+##### <a name="-bareos--director--job--always_incremental_keep_number"></a>`always_incremental_keep_number`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental_max_full_age`
+##### <a name="-bareos--director--job--always_incremental_max_full_age"></a>`always_incremental_max_full_age`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `backup_format`
+##### <a name="-bareos--director--job--backup_format"></a>`backup_format`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `base`
+##### <a name="-bareos--director--job--base"></a>`base`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `bootstrap`
+##### <a name="-bareos--director--job--bootstrap"></a>`bootstrap`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `cancel_lower_level_duplicates`
+##### <a name="-bareos--director--job--cancel_lower_level_duplicates"></a>`cancel_lower_level_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `cancel_queued_duplicates`
+##### <a name="-bareos--director--job--cancel_queued_duplicates"></a>`cancel_queued_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `cancel_running_duplicates`
+##### <a name="-bareos--director--job--cancel_running_duplicates"></a>`cancel_running_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `catalog`
+##### <a name="-bareos--director--job--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client`
+##### <a name="-bareos--director--job--client"></a>`client`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client_run_after_job`
+##### <a name="-bareos--director--job--client_run_after_job"></a>`client_run_after_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client_run_before_job`
+##### <a name="-bareos--director--job--client_run_before_job"></a>`client_run_before_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
+##### <a name="-bareos--director--job--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `differential_backup_pool`
+##### <a name="-bareos--director--job--differential_backup_pool"></a>`differential_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `differential_max_runtime`
+##### <a name="-bareos--director--job--differential_max_runtime"></a>`differential_max_runtime`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `dir_plugin_options`
+##### <a name="-bareos--director--job--dir_plugin_options"></a>`dir_plugin_options`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `enabled`
+##### <a name="-bareos--director--job--enabled"></a>`enabled`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fd_plugin_options`
+##### <a name="-bareos--director--job--fd_plugin_options"></a>`fd_plugin_options`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file_history_size`
+##### <a name="-bareos--director--job--file_history_size"></a>`file_history_size`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file_set`
+##### <a name="-bareos--director--job--file_set"></a>`file_set`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `full_backup_pool`
+##### <a name="-bareos--director--job--full_backup_pool"></a>`full_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `full_max_runtime`
+##### <a name="-bareos--director--job--full_max_runtime"></a>`full_max_runtime`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `incremental_backup_pool`
+##### <a name="-bareos--director--job--incremental_backup_pool"></a>`incremental_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `incremental_max_runtime`
+##### <a name="-bareos--director--job--incremental_max_runtime"></a>`incremental_max_runtime`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_defs`
+##### <a name="-bareos--director--job--job_defs"></a>`job_defs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_to_verify`
+##### <a name="-bareos--director--job--job_to_verify"></a>`job_to_verify`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `level`
+##### <a name="-bareos--director--job--level"></a>`level`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_concurrent_copies`
+##### <a name="-bareos--director--job--max_concurrent_copies"></a>`max_concurrent_copies`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_diff_interval`
+##### <a name="-bareos--director--job--max_diff_interval"></a>`max_diff_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_full_consolidations`
+##### <a name="-bareos--director--job--max_full_consolidations"></a>`max_full_consolidations`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_full_interval`
+##### <a name="-bareos--director--job--max_full_interval"></a>`max_full_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_run_sched_time`
+##### <a name="-bareos--director--job--max_run_sched_time"></a>`max_run_sched_time`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_run_time`
+##### <a name="-bareos--director--job--max_run_time"></a>`max_run_time`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_start_delay`
+##### <a name="-bareos--director--job--max_start_delay"></a>`max_start_delay`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_virtual_full_interval`
+##### <a name="-bareos--director--job--max_virtual_full_interval"></a>`max_virtual_full_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_wait_time`
+##### <a name="-bareos--director--job--max_wait_time"></a>`max_wait_time`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_bandwidth`
+##### <a name="-bareos--director--job--maximum_bandwidth"></a>`maximum_bandwidth`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_jobs`
+##### <a name="-bareos--director--job--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `messages`
+##### <a name="-bareos--director--job--messages"></a>`messages`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `next_pool`
+##### <a name="-bareos--director--job--next_pool"></a>`next_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pool`
+##### <a name="-bareos--director--job--pool"></a>`pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prefer_mounted_volumes`
+##### <a name="-bareos--director--job--prefer_mounted_volumes"></a>`prefer_mounted_volumes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prefix_links`
+##### <a name="-bareos--director--job--prefix_links"></a>`prefix_links`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `priority`
+##### <a name="-bareos--director--job--priority"></a>`priority`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `protocol`
+##### <a name="-bareos--director--job--protocol"></a>`protocol`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prune_files`
+##### <a name="-bareos--director--job--prune_files"></a>`prune_files`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prune_jobs`
+##### <a name="-bareos--director--job--prune_jobs"></a>`prune_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prune_volumes`
+##### <a name="-bareos--director--job--prune_volumes"></a>`prune_volumes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `purge_migration_job`
+##### <a name="-bareos--director--job--purge_migration_job"></a>`purge_migration_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `regex_where`
+##### <a name="-bareos--director--job--regex_where"></a>`regex_where`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `replace`
+##### <a name="-bareos--director--job--replace"></a>`replace`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `rerun_failed_levels`
+##### <a name="-bareos--director--job--rerun_failed_levels"></a>`rerun_failed_levels`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reschedule_interval`
+##### <a name="-bareos--director--job--reschedule_interval"></a>`reschedule_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reschedule_on_error`
+##### <a name="-bareos--director--job--reschedule_on_error"></a>`reschedule_on_error`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reschedule_times`
+##### <a name="-bareos--director--job--reschedule_times"></a>`reschedule_times`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run`
+##### <a name="-bareos--director--job--run"></a>`run`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_after_failed_job`
+##### <a name="-bareos--director--job--run_after_failed_job"></a>`run_after_failed_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_after_job`
+##### <a name="-bareos--director--job--run_after_job"></a>`run_after_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_before_job`
+##### <a name="-bareos--director--job--run_before_job"></a>`run_before_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_script`
+##### <a name="-bareos--director--job--run_script"></a>`run_script`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `save_file_history`
+##### <a name="-bareos--director--job--save_file_history"></a>`save_file_history`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `schedule_res`
+##### <a name="-bareos--director--job--schedule_res"></a>`schedule_res`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sd_plugin_options`
+##### <a name="-bareos--director--job--sd_plugin_options"></a>`sd_plugin_options`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `selection_pattern`
+##### <a name="-bareos--director--job--selection_pattern"></a>`selection_pattern`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `selection_type`
+##### <a name="-bareos--director--job--selection_type"></a>`selection_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `spool_attributes`
+##### <a name="-bareos--director--job--spool_attributes"></a>`spool_attributes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `spool_data`
+##### <a name="-bareos--director--job--spool_data"></a>`spool_data`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `spool_size`
+##### <a name="-bareos--director--job--spool_size"></a>`spool_size`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `storage`
+##### <a name="-bareos--director--job--storage"></a>`storage`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `strip_prefix`
+##### <a name="-bareos--director--job--strip_prefix"></a>`strip_prefix`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `type`
+##### <a name="-bareos--director--job--type"></a>`type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `virtual_full_backup_pool`
+##### <a name="-bareos--director--job--virtual_full_backup_pool"></a>`virtual_full_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `where`
+##### <a name="-bareos--director--job--where"></a>`where`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `write_bootstrap`
+##### <a name="-bareos--director--job--write_bootstrap"></a>`write_bootstrap`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `write_verify_list`
+##### <a name="-bareos--director--job--write_verify_list"></a>`write_verify_list`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::jobdefs`
+### <a name="bareos--director--jobdefs"></a>`bareos::director::jobdefs`
 
 == Define: bareos::director::jobdefs
 JobDefs are optional resources for providing defaults for Job resources.
@@ -7847,9 +8445,94 @@ Almost the same like `Job`.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::jobdefs` defined type.
+The following parameters are available in the `bareos::director::jobdefs` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--jobdefs--ensure)
+* [`accurate`](#-bareos--director--jobdefs--accurate)
+* [`add_prefix`](#-bareos--director--jobdefs--add_prefix)
+* [`add_suffix`](#-bareos--director--jobdefs--add_suffix)
+* [`allow_duplicate_jobs`](#-bareos--director--jobdefs--allow_duplicate_jobs)
+* [`allow_higher_duplicates`](#-bareos--director--jobdefs--allow_higher_duplicates)
+* [`allow_mixed_priority`](#-bareos--director--jobdefs--allow_mixed_priority)
+* [`always_incremental`](#-bareos--director--jobdefs--always_incremental)
+* [`always_incremental_job_retention`](#-bareos--director--jobdefs--always_incremental_job_retention)
+* [`always_incremental_keep_number`](#-bareos--director--jobdefs--always_incremental_keep_number)
+* [`always_incremental_max_full_age`](#-bareos--director--jobdefs--always_incremental_max_full_age)
+* [`backup_format`](#-bareos--director--jobdefs--backup_format)
+* [`base`](#-bareos--director--jobdefs--base)
+* [`bootstrap`](#-bareos--director--jobdefs--bootstrap)
+* [`cancel_lower_level_duplicates`](#-bareos--director--jobdefs--cancel_lower_level_duplicates)
+* [`cancel_queued_duplicates`](#-bareos--director--jobdefs--cancel_queued_duplicates)
+* [`cancel_running_duplicates`](#-bareos--director--jobdefs--cancel_running_duplicates)
+* [`catalog`](#-bareos--director--jobdefs--catalog)
+* [`client`](#-bareos--director--jobdefs--client)
+* [`client_run_after_job`](#-bareos--director--jobdefs--client_run_after_job)
+* [`client_run_before_job`](#-bareos--director--jobdefs--client_run_before_job)
+* [`description`](#-bareos--director--jobdefs--description)
+* [`differential_backup_pool`](#-bareos--director--jobdefs--differential_backup_pool)
+* [`differential_max_runtime`](#-bareos--director--jobdefs--differential_max_runtime)
+* [`dir_plugin_options`](#-bareos--director--jobdefs--dir_plugin_options)
+* [`enabled`](#-bareos--director--jobdefs--enabled)
+* [`fd_plugin_options`](#-bareos--director--jobdefs--fd_plugin_options)
+* [`file_history_size`](#-bareos--director--jobdefs--file_history_size)
+* [`file_set`](#-bareos--director--jobdefs--file_set)
+* [`full_backup_pool`](#-bareos--director--jobdefs--full_backup_pool)
+* [`full_max_runtime`](#-bareos--director--jobdefs--full_max_runtime)
+* [`incremental_backup_pool`](#-bareos--director--jobdefs--incremental_backup_pool)
+* [`incremental_max_runtime`](#-bareos--director--jobdefs--incremental_max_runtime)
+* [`job_defs`](#-bareos--director--jobdefs--job_defs)
+* [`job_to_verify`](#-bareos--director--jobdefs--job_to_verify)
+* [`level`](#-bareos--director--jobdefs--level)
+* [`max_concurrent_copies`](#-bareos--director--jobdefs--max_concurrent_copies)
+* [`max_diff_interval`](#-bareos--director--jobdefs--max_diff_interval)
+* [`max_full_consolidations`](#-bareos--director--jobdefs--max_full_consolidations)
+* [`max_full_interval`](#-bareos--director--jobdefs--max_full_interval)
+* [`max_run_sched_time`](#-bareos--director--jobdefs--max_run_sched_time)
+* [`max_run_time`](#-bareos--director--jobdefs--max_run_time)
+* [`max_start_delay`](#-bareos--director--jobdefs--max_start_delay)
+* [`max_virtual_full_interval`](#-bareos--director--jobdefs--max_virtual_full_interval)
+* [`max_wait_time`](#-bareos--director--jobdefs--max_wait_time)
+* [`maximum_bandwidth`](#-bareos--director--jobdefs--maximum_bandwidth)
+* [`maximum_concurrent_jobs`](#-bareos--director--jobdefs--maximum_concurrent_jobs)
+* [`messages`](#-bareos--director--jobdefs--messages)
+* [`next_pool`](#-bareos--director--jobdefs--next_pool)
+* [`pool`](#-bareos--director--jobdefs--pool)
+* [`prefer_mounted_volumes`](#-bareos--director--jobdefs--prefer_mounted_volumes)
+* [`prefix_links`](#-bareos--director--jobdefs--prefix_links)
+* [`priority`](#-bareos--director--jobdefs--priority)
+* [`protocol`](#-bareos--director--jobdefs--protocol)
+* [`prune_files`](#-bareos--director--jobdefs--prune_files)
+* [`prune_jobs`](#-bareos--director--jobdefs--prune_jobs)
+* [`prune_volumes`](#-bareos--director--jobdefs--prune_volumes)
+* [`purge_migration_job`](#-bareos--director--jobdefs--purge_migration_job)
+* [`regex_where`](#-bareos--director--jobdefs--regex_where)
+* [`replace`](#-bareos--director--jobdefs--replace)
+* [`rerun_failed_levels`](#-bareos--director--jobdefs--rerun_failed_levels)
+* [`reschedule_interval`](#-bareos--director--jobdefs--reschedule_interval)
+* [`reschedule_on_error`](#-bareos--director--jobdefs--reschedule_on_error)
+* [`reschedule_times`](#-bareos--director--jobdefs--reschedule_times)
+* [`run`](#-bareos--director--jobdefs--run)
+* [`run_after_failed_job`](#-bareos--director--jobdefs--run_after_failed_job)
+* [`run_after_job`](#-bareos--director--jobdefs--run_after_job)
+* [`run_before_job`](#-bareos--director--jobdefs--run_before_job)
+* [`run_script`](#-bareos--director--jobdefs--run_script)
+* [`save_file_history`](#-bareos--director--jobdefs--save_file_history)
+* [`schedule_res`](#-bareos--director--jobdefs--schedule_res)
+* [`sd_plugin_options`](#-bareos--director--jobdefs--sd_plugin_options)
+* [`selection_pattern`](#-bareos--director--jobdefs--selection_pattern)
+* [`selection_type`](#-bareos--director--jobdefs--selection_type)
+* [`spool_attributes`](#-bareos--director--jobdefs--spool_attributes)
+* [`spool_data`](#-bareos--director--jobdefs--spool_data)
+* [`spool_size`](#-bareos--director--jobdefs--spool_size)
+* [`storage`](#-bareos--director--jobdefs--storage)
+* [`strip_prefix`](#-bareos--director--jobdefs--strip_prefix)
+* [`type`](#-bareos--director--jobdefs--type)
+* [`virtual_full_backup_pool`](#-bareos--director--jobdefs--virtual_full_backup_pool)
+* [`where`](#-bareos--director--jobdefs--where)
+* [`write_bootstrap`](#-bareos--director--jobdefs--write_bootstrap)
+* [`write_verify_list`](#-bareos--director--jobdefs--write_verify_list)
+
+##### <a name="-bareos--director--jobdefs--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -7857,671 +8540,671 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `accurate`
+##### <a name="-bareos--director--jobdefs--accurate"></a>`accurate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `add_prefix`
+##### <a name="-bareos--director--jobdefs--add_prefix"></a>`add_prefix`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `add_suffix`
+##### <a name="-bareos--director--jobdefs--add_suffix"></a>`add_suffix`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_duplicate_jobs`
+##### <a name="-bareos--director--jobdefs--allow_duplicate_jobs"></a>`allow_duplicate_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_higher_duplicates`
+##### <a name="-bareos--director--jobdefs--allow_higher_duplicates"></a>`allow_higher_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_mixed_priority`
+##### <a name="-bareos--director--jobdefs--allow_mixed_priority"></a>`allow_mixed_priority`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental`
+##### <a name="-bareos--director--jobdefs--always_incremental"></a>`always_incremental`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental_job_retention`
+##### <a name="-bareos--director--jobdefs--always_incremental_job_retention"></a>`always_incremental_job_retention`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental_keep_number`
+##### <a name="-bareos--director--jobdefs--always_incremental_keep_number"></a>`always_incremental_keep_number`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_incremental_max_full_age`
+##### <a name="-bareos--director--jobdefs--always_incremental_max_full_age"></a>`always_incremental_max_full_age`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `backup_format`
+##### <a name="-bareos--director--jobdefs--backup_format"></a>`backup_format`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `base`
+##### <a name="-bareos--director--jobdefs--base"></a>`base`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `bootstrap`
+##### <a name="-bareos--director--jobdefs--bootstrap"></a>`bootstrap`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `cancel_lower_level_duplicates`
+##### <a name="-bareos--director--jobdefs--cancel_lower_level_duplicates"></a>`cancel_lower_level_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `cancel_queued_duplicates`
+##### <a name="-bareos--director--jobdefs--cancel_queued_duplicates"></a>`cancel_queued_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `cancel_running_duplicates`
+##### <a name="-bareos--director--jobdefs--cancel_running_duplicates"></a>`cancel_running_duplicates`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `catalog`
+##### <a name="-bareos--director--jobdefs--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client`
+##### <a name="-bareos--director--jobdefs--client"></a>`client`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client_run_after_job`
+##### <a name="-bareos--director--jobdefs--client_run_after_job"></a>`client_run_after_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client_run_before_job`
+##### <a name="-bareos--director--jobdefs--client_run_before_job"></a>`client_run_before_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
+##### <a name="-bareos--director--jobdefs--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `differential_backup_pool`
+##### <a name="-bareos--director--jobdefs--differential_backup_pool"></a>`differential_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `differential_max_runtime`
+##### <a name="-bareos--director--jobdefs--differential_max_runtime"></a>`differential_max_runtime`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `dir_plugin_options`
+##### <a name="-bareos--director--jobdefs--dir_plugin_options"></a>`dir_plugin_options`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `enabled`
+##### <a name="-bareos--director--jobdefs--enabled"></a>`enabled`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fd_plugin_options`
+##### <a name="-bareos--director--jobdefs--fd_plugin_options"></a>`fd_plugin_options`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file_history_size`
+##### <a name="-bareos--director--jobdefs--file_history_size"></a>`file_history_size`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file_set`
+##### <a name="-bareos--director--jobdefs--file_set"></a>`file_set`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `full_backup_pool`
+##### <a name="-bareos--director--jobdefs--full_backup_pool"></a>`full_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `full_max_runtime`
+##### <a name="-bareos--director--jobdefs--full_max_runtime"></a>`full_max_runtime`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `incremental_backup_pool`
+##### <a name="-bareos--director--jobdefs--incremental_backup_pool"></a>`incremental_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `incremental_max_runtime`
+##### <a name="-bareos--director--jobdefs--incremental_max_runtime"></a>`incremental_max_runtime`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_defs`
+##### <a name="-bareos--director--jobdefs--job_defs"></a>`job_defs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_to_verify`
+##### <a name="-bareos--director--jobdefs--job_to_verify"></a>`job_to_verify`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `level`
+##### <a name="-bareos--director--jobdefs--level"></a>`level`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_concurrent_copies`
+##### <a name="-bareos--director--jobdefs--max_concurrent_copies"></a>`max_concurrent_copies`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_diff_interval`
+##### <a name="-bareos--director--jobdefs--max_diff_interval"></a>`max_diff_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_full_consolidations`
+##### <a name="-bareos--director--jobdefs--max_full_consolidations"></a>`max_full_consolidations`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_full_interval`
+##### <a name="-bareos--director--jobdefs--max_full_interval"></a>`max_full_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_run_sched_time`
+##### <a name="-bareos--director--jobdefs--max_run_sched_time"></a>`max_run_sched_time`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_run_time`
+##### <a name="-bareos--director--jobdefs--max_run_time"></a>`max_run_time`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_start_delay`
+##### <a name="-bareos--director--jobdefs--max_start_delay"></a>`max_start_delay`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_virtual_full_interval`
+##### <a name="-bareos--director--jobdefs--max_virtual_full_interval"></a>`max_virtual_full_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `max_wait_time`
+##### <a name="-bareos--director--jobdefs--max_wait_time"></a>`max_wait_time`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_bandwidth`
+##### <a name="-bareos--director--jobdefs--maximum_bandwidth"></a>`maximum_bandwidth`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_jobs`
+##### <a name="-bareos--director--jobdefs--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `messages`
+##### <a name="-bareos--director--jobdefs--messages"></a>`messages`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `next_pool`
+##### <a name="-bareos--director--jobdefs--next_pool"></a>`next_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pool`
+##### <a name="-bareos--director--jobdefs--pool"></a>`pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prefer_mounted_volumes`
+##### <a name="-bareos--director--jobdefs--prefer_mounted_volumes"></a>`prefer_mounted_volumes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prefix_links`
+##### <a name="-bareos--director--jobdefs--prefix_links"></a>`prefix_links`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `priority`
+##### <a name="-bareos--director--jobdefs--priority"></a>`priority`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `protocol`
+##### <a name="-bareos--director--jobdefs--protocol"></a>`protocol`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prune_files`
+##### <a name="-bareos--director--jobdefs--prune_files"></a>`prune_files`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prune_jobs`
+##### <a name="-bareos--director--jobdefs--prune_jobs"></a>`prune_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `prune_volumes`
+##### <a name="-bareos--director--jobdefs--prune_volumes"></a>`prune_volumes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `purge_migration_job`
+##### <a name="-bareos--director--jobdefs--purge_migration_job"></a>`purge_migration_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `regex_where`
+##### <a name="-bareos--director--jobdefs--regex_where"></a>`regex_where`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `replace`
+##### <a name="-bareos--director--jobdefs--replace"></a>`replace`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `rerun_failed_levels`
+##### <a name="-bareos--director--jobdefs--rerun_failed_levels"></a>`rerun_failed_levels`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reschedule_interval`
+##### <a name="-bareos--director--jobdefs--reschedule_interval"></a>`reschedule_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reschedule_on_error`
+##### <a name="-bareos--director--jobdefs--reschedule_on_error"></a>`reschedule_on_error`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `reschedule_times`
+##### <a name="-bareos--director--jobdefs--reschedule_times"></a>`reschedule_times`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run`
+##### <a name="-bareos--director--jobdefs--run"></a>`run`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_after_failed_job`
+##### <a name="-bareos--director--jobdefs--run_after_failed_job"></a>`run_after_failed_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_after_job`
+##### <a name="-bareos--director--jobdefs--run_after_job"></a>`run_after_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_before_job`
+##### <a name="-bareos--director--jobdefs--run_before_job"></a>`run_before_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `run_script`
+##### <a name="-bareos--director--jobdefs--run_script"></a>`run_script`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `save_file_history`
+##### <a name="-bareos--director--jobdefs--save_file_history"></a>`save_file_history`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `schedule_res`
+##### <a name="-bareos--director--jobdefs--schedule_res"></a>`schedule_res`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sd_plugin_options`
+##### <a name="-bareos--director--jobdefs--sd_plugin_options"></a>`sd_plugin_options`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `selection_pattern`
+##### <a name="-bareos--director--jobdefs--selection_pattern"></a>`selection_pattern`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `selection_type`
+##### <a name="-bareos--director--jobdefs--selection_type"></a>`selection_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `spool_attributes`
+##### <a name="-bareos--director--jobdefs--spool_attributes"></a>`spool_attributes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `spool_data`
+##### <a name="-bareos--director--jobdefs--spool_data"></a>`spool_data`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `spool_size`
+##### <a name="-bareos--director--jobdefs--spool_size"></a>`spool_size`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `storage`
+##### <a name="-bareos--director--jobdefs--storage"></a>`storage`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `strip_prefix`
+##### <a name="-bareos--director--jobdefs--strip_prefix"></a>`strip_prefix`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `type`
+##### <a name="-bareos--director--jobdefs--type"></a>`type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `virtual_full_backup_pool`
+##### <a name="-bareos--director--jobdefs--virtual_full_backup_pool"></a>`virtual_full_backup_pool`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `where`
+##### <a name="-bareos--director--jobdefs--where"></a>`where`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `write_bootstrap`
+##### <a name="-bareos--director--jobdefs--write_bootstrap"></a>`write_bootstrap`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `write_verify_list`
+##### <a name="-bareos--director--jobdefs--write_verify_list"></a>`write_verify_list`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::messages`
+### <a name="bareos--director--messages"></a>`bareos::director::messages`
 
 == Define: bareos::director::messages
 To define where error and information messages are to be sent or logged.
@@ -8657,9 +9340,27 @@ You may define multiple different message resources and hence direct particular 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::messages` defined type.
+The following parameters are available in the `bareos::director::messages` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--messages--ensure)
+* [`append`](#-bareos--director--messages--append)
+* [`catalog`](#-bareos--director--messages--catalog)
+* [`console`](#-bareos--director--messages--console)
+* [`description`](#-bareos--director--messages--description)
+* [`director`](#-bareos--director--messages--director)
+* [`file`](#-bareos--director--messages--file)
+* [`mail`](#-bareos--director--messages--mail)
+* [`mail_command`](#-bareos--director--messages--mail_command)
+* [`mail_on_error`](#-bareos--director--messages--mail_on_error)
+* [`mail_on_success`](#-bareos--director--messages--mail_on_success)
+* [`operator`](#-bareos--director--messages--operator)
+* [`operator_command`](#-bareos--director--messages--operator_command)
+* [`stderr`](#-bareos--director--messages--stderr)
+* [`stdout`](#-bareos--director--messages--stdout)
+* [`syslog`](#-bareos--director--messages--syslog)
+* [`timestamp_format`](#-bareos--director--messages--timestamp_format)
+
+##### <a name="-bareos--director--messages--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -8667,135 +9368,135 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `append`
+##### <a name="-bareos--director--messages--append"></a>`append`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `catalog`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `console`
+##### <a name="-bareos--director--messages--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `director`
+##### <a name="-bareos--director--messages--console"></a>`console`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `mail`
+##### <a name="-bareos--director--messages--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mail_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `mail_on_error`
+##### <a name="-bareos--director--messages--director"></a>`director`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mail_on_success`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `operator`
+##### <a name="-bareos--director--messages--file"></a>`file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `operator_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `stderr`
+##### <a name="-bareos--director--messages--mail"></a>`mail`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `stdout`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `syslog`
+##### <a name="-bareos--director--messages--mail_command"></a>`mail_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `timestamp_format`
+##### <a name="-bareos--director--messages--mail_on_error"></a>`mail_on_error`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::pool`
+##### <a name="-bareos--director--messages--mail_on_success"></a>`mail_on_success`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--messages--operator"></a>`operator`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--messages--operator_command"></a>`operator_command`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--messages--stderr"></a>`stderr`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--messages--stdout"></a>`stdout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--messages--syslog"></a>`syslog`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--messages--timestamp_format"></a>`timestamp_format`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--pool"></a>`bareos::director::pool`
 
 == Define: bareos::director::pool
 To define the pool of Volumes that can be used for a particular Job.
@@ -9027,9 +9728,42 @@ Pools allow you to restrict a Job (or a Client) to use only a particular set of 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::pool` defined type.
+The following parameters are available in the `bareos::director::pool` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--pool--ensure)
+* [`action_on_purge`](#-bareos--director--pool--action_on_purge)
+* [`auto_prune`](#-bareos--director--pool--auto_prune)
+* [`catalog`](#-bareos--director--pool--catalog)
+* [`catalog_files`](#-bareos--director--pool--catalog_files)
+* [`cleaning_prefix`](#-bareos--director--pool--cleaning_prefix)
+* [`description`](#-bareos--director--pool--description)
+* [`file_retention`](#-bareos--director--pool--file_retention)
+* [`job_retention`](#-bareos--director--pool--job_retention)
+* [`label_format`](#-bareos--director--pool--label_format)
+* [`label_type`](#-bareos--director--pool--label_type)
+* [`maximum_block_size`](#-bareos--director--pool--maximum_block_size)
+* [`maximum_volume_bytes`](#-bareos--director--pool--maximum_volume_bytes)
+* [`maximum_volume_files`](#-bareos--director--pool--maximum_volume_files)
+* [`maximum_volume_jobs`](#-bareos--director--pool--maximum_volume_jobs)
+* [`maximum_volumes`](#-bareos--director--pool--maximum_volumes)
+* [`migration_high_bytes`](#-bareos--director--pool--migration_high_bytes)
+* [`migration_low_bytes`](#-bareos--director--pool--migration_low_bytes)
+* [`migration_time`](#-bareos--director--pool--migration_time)
+* [`minimum_block_size`](#-bareos--director--pool--minimum_block_size)
+* [`next_pool`](#-bareos--director--pool--next_pool)
+* [`pool_type`](#-bareos--director--pool--pool_type)
+* [`purge_oldest_volume`](#-bareos--director--pool--purge_oldest_volume)
+* [`recycle`](#-bareos--director--pool--recycle)
+* [`recycle_current_volume`](#-bareos--director--pool--recycle_current_volume)
+* [`recycle_oldest_volume`](#-bareos--director--pool--recycle_oldest_volume)
+* [`recycle_pool`](#-bareos--director--pool--recycle_pool)
+* [`scratch_pool`](#-bareos--director--pool--scratch_pool)
+* [`storage`](#-bareos--director--pool--storage)
+* [`use_catalog`](#-bareos--director--pool--use_catalog)
+* [`volume_retention`](#-bareos--director--pool--volume_retention)
+* [`volume_use_duration`](#-bareos--director--pool--volume_use_duration)
+
+##### <a name="-bareos--director--pool--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9037,255 +9771,255 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `action_on_purge`
+##### <a name="-bareos--director--pool--action_on_purge"></a>`action_on_purge`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `auto_prune`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `catalog`
+##### <a name="-bareos--director--pool--auto_prune"></a>`auto_prune`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `catalog_files`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `cleaning_prefix`
+##### <a name="-bareos--director--pool--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `file_retention`
+##### <a name="-bareos--director--pool--catalog_files"></a>`catalog_files`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_retention`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `label_format`
+##### <a name="-bareos--director--pool--cleaning_prefix"></a>`cleaning_prefix`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `label_type`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_block_size`
+##### <a name="-bareos--director--pool--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_volume_bytes`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_volume_files`
+##### <a name="-bareos--director--pool--file_retention"></a>`file_retention`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_volume_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_volumes`
+##### <a name="-bareos--director--pool--job_retention"></a>`job_retention`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `migration_high_bytes`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `migration_low_bytes`
+##### <a name="-bareos--director--pool--label_format"></a>`label_format`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `migration_time`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `minimum_block_size`
+##### <a name="-bareos--director--pool--label_type"></a>`label_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `next_pool`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `pool_type`
+##### <a name="-bareos--director--pool--maximum_block_size"></a>`maximum_block_size`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `purge_oldest_volume`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `recycle`
+##### <a name="-bareos--director--pool--maximum_volume_bytes"></a>`maximum_volume_bytes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `recycle_current_volume`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `recycle_oldest_volume`
+##### <a name="-bareos--director--pool--maximum_volume_files"></a>`maximum_volume_files`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `recycle_pool`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `scratch_pool`
+##### <a name="-bareos--director--pool--maximum_volume_jobs"></a>`maximum_volume_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `storage`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `use_catalog`
+##### <a name="-bareos--director--pool--maximum_volumes"></a>`maximum_volumes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `volume_retention`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `volume_use_duration`
+##### <a name="-bareos--director--pool--migration_high_bytes"></a>`migration_high_bytes`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::profile`
+##### <a name="-bareos--director--pool--migration_low_bytes"></a>`migration_low_bytes`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--migration_time"></a>`migration_time`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--minimum_block_size"></a>`minimum_block_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--next_pool"></a>`next_pool`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--pool_type"></a>`pool_type`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--purge_oldest_volume"></a>`purge_oldest_volume`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--recycle"></a>`recycle`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--recycle_current_volume"></a>`recycle_current_volume`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--recycle_oldest_volume"></a>`recycle_oldest_volume`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--recycle_pool"></a>`recycle_pool`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--scratch_pool"></a>`scratch_pool`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--storage"></a>`storage`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--use_catalog"></a>`use_catalog`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--volume_retention"></a>`volume_retention`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--pool--volume_use_duration"></a>`volume_use_duration`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--profile"></a>`bareos::director::profile`
 
 == Define: bareos::director::profile
 The Profile Resource defines a set of ACLs.
@@ -9374,9 +10108,22 @@ Console Resources can be tight to one or more profiles, making it easier to use 
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::profile` defined type.
+The following parameters are available in the `bareos::director::profile` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--profile--ensure)
+* [`catalog_acl`](#-bareos--director--profile--catalog_acl)
+* [`client_acl`](#-bareos--director--profile--client_acl)
+* [`command_acl`](#-bareos--director--profile--command_acl)
+* [`description`](#-bareos--director--profile--description)
+* [`file_set_acl`](#-bareos--director--profile--file_set_acl)
+* [`job_acl`](#-bareos--director--profile--job_acl)
+* [`plugin_options_acl`](#-bareos--director--profile--plugin_options_acl)
+* [`pool_acl`](#-bareos--director--profile--pool_acl)
+* [`schedule_acl`](#-bareos--director--profile--schedule_acl)
+* [`storage_acl`](#-bareos--director--profile--storage_acl)
+* [`where_acl`](#-bareos--director--profile--where_acl)
+
+##### <a name="-bareos--director--profile--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9384,95 +10131,95 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `catalog_acl`
+##### <a name="-bareos--director--profile--catalog_acl"></a>`catalog_acl`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `client_acl`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `command_acl`
+##### <a name="-bareos--director--profile--client_acl"></a>`client_acl`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `file_set_acl`
+##### <a name="-bareos--director--profile--command_acl"></a>`command_acl`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `job_acl`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `plugin_options_acl`
+##### <a name="-bareos--director--profile--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `pool_acl`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `schedule_acl`
+##### <a name="-bareos--director--profile--file_set_acl"></a>`file_set_acl`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `storage_acl`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `where_acl`
+##### <a name="-bareos--director--profile--job_acl"></a>`job_acl`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::schedule`
+##### <a name="-bareos--director--profile--plugin_options_acl"></a>`plugin_options_acl`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--profile--pool_acl"></a>`pool_acl`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--profile--schedule_acl"></a>`schedule_acl`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--profile--storage_acl"></a>`storage_acl`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--profile--where_acl"></a>`where_acl`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--schedule"></a>`bareos::director::schedule`
 
 == Define: bareos::director::schedule
 The Schedule resource provides a means of automatically scheduling a Job
@@ -9508,9 +10255,14 @@ In general, you specify an action to be taken and when.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::schedule` defined type.
+The following parameters are available in the `bareos::director::schedule` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--schedule--ensure)
+* [`description`](#-bareos--director--schedule--description)
+* [`enabled`](#-bareos--director--schedule--enabled)
+* [`run`](#-bareos--director--schedule--run)
+
+##### <a name="-bareos--director--schedule--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9518,31 +10270,31 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="-bareos--director--schedule--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `enabled`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `run`
+##### <a name="-bareos--director--schedule--enabled"></a>`enabled`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::director::storage`
+##### <a name="-bareos--director--schedule--run"></a>`run`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--director--storage"></a>`bareos::director::storage`
 
 == Define: bareos::director::storage
 To define on what physical device the Volumes should be mounted.
@@ -9787,9 +10539,44 @@ You may have one or more Storage definitions.
 
 #### Parameters
 
-The following parameters are available in the `bareos::director::storage` defined type.
+The following parameters are available in the `bareos::director::storage` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--director--storage--ensure)
+* [`address`](#-bareos--director--storage--address)
+* [`allow_compression`](#-bareos--director--storage--allow_compression)
+* [`auth_type`](#-bareos--director--storage--auth_type)
+* [`auto_changer`](#-bareos--director--storage--auto_changer)
+* [`cache_status_interval`](#-bareos--director--storage--cache_status_interval)
+* [`changer_device`](#-bareos--director--storage--changer_device)
+* [`collect_statistics`](#-bareos--director--storage--collect_statistics)
+* [`description`](#-bareos--director--storage--description)
+* [`device`](#-bareos--director--storage--device)
+* [`enabled`](#-bareos--director--storage--enabled)
+* [`heartbeat_interval`](#-bareos--director--storage--heartbeat_interval)
+* [`maximum_bandwidth_per_job`](#-bareos--director--storage--maximum_bandwidth_per_job)
+* [`maximum_concurrent_jobs`](#-bareos--director--storage--maximum_concurrent_jobs)
+* [`maximum_concurrent_read_jobs`](#-bareos--director--storage--maximum_concurrent_read_jobs)
+* [`media_type`](#-bareos--director--storage--media_type)
+* [`paired_storage`](#-bareos--director--storage--paired_storage)
+* [`password`](#-bareos--director--storage--password)
+* [`port`](#-bareos--director--storage--port)
+* [`protocol`](#-bareos--director--storage--protocol)
+* [`tape_device`](#-bareos--director--storage--tape_device)
+* [`tls_allowed_cn`](#-bareos--director--storage--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--director--storage--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--director--storage--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--director--storage--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--director--storage--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--director--storage--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--director--storage--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--director--storage--tls_dh_file)
+* [`tls_enable`](#-bareos--director--storage--tls_enable)
+* [`tls_key`](#-bareos--director--storage--tls_key)
+* [`tls_require`](#-bareos--director--storage--tls_require)
+* [`tls_verify_peer`](#-bareos--director--storage--tls_verify_peer)
+* [`username`](#-bareos--director--storage--username)
+
+##### <a name="-bareos--director--storage--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -9797,271 +10584,271 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="-bareos--director--storage--address"></a>`address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `allow_compression`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `auth_type`
+##### <a name="-bareos--director--storage--allow_compression"></a>`allow_compression`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `auto_changer`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `cache_status_interval`
+##### <a name="-bareos--director--storage--auth_type"></a>`auth_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `changer_device`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `collect_statistics`
+##### <a name="-bareos--director--storage--auto_changer"></a>`auto_changer`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `device`
+##### <a name="-bareos--director--storage--cache_status_interval"></a>`cache_status_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `enabled`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `heartbeat_interval`
+##### <a name="-bareos--director--storage--changer_device"></a>`changer_device`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_bandwidth_per_job`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_concurrent_jobs`
+##### <a name="-bareos--director--storage--collect_statistics"></a>`collect_statistics`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_read_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `media_type`
+##### <a name="-bareos--director--storage--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `paired_storage`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `password`
+##### <a name="-bareos--director--storage--device"></a>`device`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `port`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `protocol`
+##### <a name="-bareos--director--storage--enabled"></a>`enabled`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tape_device`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_allowed_cn`
+##### <a name="-bareos--director--storage--heartbeat_interval"></a>`heartbeat_interval`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_authenticate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_dir`
+##### <a name="-bareos--director--storage--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate`
+##### <a name="-bareos--director--storage--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate_revocation_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_cipher_list`
+##### <a name="-bareos--director--storage--maximum_concurrent_read_jobs"></a>`maximum_concurrent_read_jobs`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_dh_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_enable`
+##### <a name="-bareos--director--storage--media_type"></a>`media_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_key`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_require`
+##### <a name="-bareos--director--storage--paired_storage"></a>`paired_storage`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_verify_peer`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `username`
+##### <a name="-bareos--director--storage--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::monitor::client`
+##### <a name="-bareos--director--storage--port"></a>`port`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--protocol"></a>`protocol`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tape_device"></a>`tape_device`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_allowed_cn"></a>`tls_allowed_cn`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_authenticate"></a>`tls_authenticate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--director--storage--username"></a>`username`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--monitor--client"></a>`bareos::monitor::client`
 
 == Define: bareos::monitor::client
 The Client resource defines the attributes of the Clients that are monitored by this Monitor.
@@ -10107,9 +10894,16 @@ The Client resource defines the attributes of the Clients that are monitored by 
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::client` defined type.
+The following parameters are available in the `bareos::monitor::client` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--monitor--client--ensure)
+* [`address`](#-bareos--monitor--client--address)
+* [`description`](#-bareos--monitor--client--description)
+* [`enable_ssl`](#-bareos--monitor--client--enable_ssl)
+* [`fd_port`](#-bareos--monitor--client--fd_port)
+* [`password`](#-bareos--monitor--client--password)
+
+##### <a name="-bareos--monitor--client--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10117,47 +10911,47 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="-bareos--monitor--client--address"></a>`address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `enable_ssl`
+##### <a name="-bareos--monitor--client--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fd_port`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `password`
+##### <a name="-bareos--monitor--client--enable_ssl"></a>`enable_ssl`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::monitor::director`
+##### <a name="-bareos--monitor--client--fd_port"></a>`fd_port`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--monitor--client--password"></a>`password`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--monitor--director"></a>`bareos::monitor::director`
 
 == Define: bareos::monitor::director
 The Director resource defines the attributes of the Directors that are monitored by this Monitor.
@@ -10196,9 +10990,15 @@ The Director resource defines the attributes of the Directors that are monitored
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::director` defined type.
+The following parameters are available in the `bareos::monitor::director` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--monitor--director--ensure)
+* [`address`](#-bareos--monitor--director--address)
+* [`description`](#-bareos--monitor--director--description)
+* [`dir_port`](#-bareos--monitor--director--dir_port)
+* [`enable_ssl`](#-bareos--monitor--director--enable_ssl)
+
+##### <a name="-bareos--monitor--director--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10206,39 +11006,39 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="-bareos--monitor--director--address"></a>`address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `dir_port`
+##### <a name="-bareos--monitor--director--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `enable_ssl`
+##### <a name="-bareos--monitor--director--dir_port"></a>`dir_port`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::monitor::monitor`
+##### <a name="-bareos--monitor--director--enable_ssl"></a>`enable_ssl`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--monitor--monitor"></a>`bareos::monitor::monitor`
 
 == Define: bareos::monitor::monitor
 The Monitor resource defines the attributes of the Monitor running on the network.
@@ -10300,9 +11100,18 @@ in Clients and Storages configuration files, and as a Console resource in Direct
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::monitor` defined type.
+The following parameters are available in the `bareos::monitor::monitor` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--monitor--monitor--ensure)
+* [`description`](#-bareos--monitor--monitor--description)
+* [`dir_connect_timeout`](#-bareos--monitor--monitor--dir_connect_timeout)
+* [`fd_connect_timeout`](#-bareos--monitor--monitor--fd_connect_timeout)
+* [`password`](#-bareos--monitor--monitor--password)
+* [`refresh_interval`](#-bareos--monitor--monitor--refresh_interval)
+* [`require_ssl`](#-bareos--monitor--monitor--require_ssl)
+* [`sd_connect_timeout`](#-bareos--monitor--monitor--sd_connect_timeout)
+
+##### <a name="-bareos--monitor--monitor--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10310,63 +11119,63 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="-bareos--monitor--monitor--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `dir_connect_timeout`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `fd_connect_timeout`
+##### <a name="-bareos--monitor--monitor--dir_connect_timeout"></a>`dir_connect_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `password`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `refresh_interval`
+##### <a name="-bareos--monitor--monitor--fd_connect_timeout"></a>`fd_connect_timeout`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `require_ssl`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `sd_connect_timeout`
+##### <a name="-bareos--monitor--monitor--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::monitor::storage`
+##### <a name="-bareos--monitor--monitor--refresh_interval"></a>`refresh_interval`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--monitor--monitor--require_ssl"></a>`require_ssl`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--monitor--monitor--sd_connect_timeout"></a>`sd_connect_timeout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--monitor--storage"></a>`bareos::monitor::storage`
 
 == Define: bareos::monitor::storage
 The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
@@ -10426,9 +11235,18 @@ The Storage resource defines the attributes of the Storages that are monitored b
 
 #### Parameters
 
-The following parameters are available in the `bareos::monitor::storage` defined type.
+The following parameters are available in the `bareos::monitor::storage` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--monitor--storage--ensure)
+* [`address`](#-bareos--monitor--storage--address)
+* [`description`](#-bareos--monitor--storage--description)
+* [`enable_ssl`](#-bareos--monitor--storage--enable_ssl)
+* [`password`](#-bareos--monitor--storage--password)
+* [`sd_address`](#-bareos--monitor--storage--sd_address)
+* [`sd_password`](#-bareos--monitor--storage--sd_password)
+* [`sd_port`](#-bareos--monitor--storage--sd_port)
+
+##### <a name="-bareos--monitor--storage--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10436,63 +11254,63 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `address`
+##### <a name="-bareos--monitor--storage--address"></a>`address`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `enable_ssl`
+##### <a name="-bareos--monitor--storage--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `password`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `sd_address`
+##### <a name="-bareos--monitor--storage--enable_ssl"></a>`enable_ssl`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `sd_password`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `sd_port`
+##### <a name="-bareos--monitor--storage--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::storage::autochanger`
+##### <a name="-bareos--monitor--storage--sd_address"></a>`sd_address`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--monitor--storage--sd_password"></a>`sd_password`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--monitor--storage--sd_port"></a>`sd_port`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--storage--autochanger"></a>`bareos::storage::autochanger`
 
 == Define: bareos::storage::autochanger
 The Autochanger resource supports single or multiple drive autochangers
@@ -10534,9 +11352,15 @@ by grouping one or more Device resources into one unit called an autochanger in 
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::autochanger` defined type.
+The following parameters are available in the `bareos::storage::autochanger` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--storage--autochanger--ensure)
+* [`changer_command`](#-bareos--storage--autochanger--changer_command)
+* [`changer_device`](#-bareos--storage--autochanger--changer_device)
+* [`description`](#-bareos--storage--autochanger--description)
+* [`device`](#-bareos--storage--autochanger--device)
+
+##### <a name="-bareos--storage--autochanger--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -10544,39 +11368,39 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `changer_command`
+##### <a name="-bareos--storage--autochanger--changer_command"></a>`changer_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `changer_device`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `description`
+##### <a name="-bareos--storage--autochanger--changer_device"></a>`changer_device`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `device`
+##### <a name="-bareos--storage--autochanger--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::storage::device`
+##### <a name="-bareos--storage--autochanger--device"></a>`device`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--storage--device"></a>`bareos::storage::device`
 
 == Define: bareos::storage::device
 The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon.
@@ -10725,6 +11549,13 @@ In general, the properties specified within the Device resource are specific to 
 
   Bareos Datatype: boolean
   Bareos Default: true
+  Required: false
+
+[*count*]
+  Count
+
+  Bareos Datatype: pint32
+  Bareos Default: 1
   Required: false
 
 [*description*]
@@ -11016,9 +11847,73 @@ In general, the properties specified within the Device resource are specific to 
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::device` defined type.
+The following parameters are available in the `bareos::storage::device` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--storage--device--ensure)
+* [`alert_command`](#-bareos--storage--device--alert_command)
+* [`always_open`](#-bareos--storage--device--always_open)
+* [`archive_device`](#-bareos--storage--device--archive_device)
+* [`auto_deflate`](#-bareos--storage--device--auto_deflate)
+* [`auto_deflate_algorithm`](#-bareos--storage--device--auto_deflate_algorithm)
+* [`auto_deflate_level`](#-bareos--storage--device--auto_deflate_level)
+* [`auto_inflate`](#-bareos--storage--device--auto_inflate)
+* [`auto_select`](#-bareos--storage--device--auto_select)
+* [`autochanger`](#-bareos--storage--device--autochanger)
+* [`automatic_mount`](#-bareos--storage--device--automatic_mount)
+* [`backward_space_file`](#-bareos--storage--device--backward_space_file)
+* [`backward_space_record`](#-bareos--storage--device--backward_space_record)
+* [`block_checksum`](#-bareos--storage--device--block_checksum)
+* [`block_positioning`](#-bareos--storage--device--block_positioning)
+* [`bsf_at_eom`](#-bareos--storage--device--bsf_at_eom)
+* [`changer_command`](#-bareos--storage--device--changer_command)
+* [`changer_device`](#-bareos--storage--device--changer_device)
+* [`check_labels`](#-bareos--storage--device--check_labels)
+* [`close_on_poll`](#-bareos--storage--device--close_on_poll)
+* [`collect_statistics`](#-bareos--storage--device--collect_statistics)
+* [`count`](#-bareos--storage--device--count)
+* [`description`](#-bareos--storage--device--description)
+* [`device_options`](#-bareos--storage--device--device_options)
+* [`device_type`](#-bareos--storage--device--device_type)
+* [`diagnostic_device`](#-bareos--storage--device--diagnostic_device)
+* [`drive_crypto_enabled`](#-bareos--storage--device--drive_crypto_enabled)
+* [`drive_index`](#-bareos--storage--device--drive_index)
+* [`drive_tape_alert_enabled`](#-bareos--storage--device--drive_tape_alert_enabled)
+* [`fast_forward_space_file`](#-bareos--storage--device--fast_forward_space_file)
+* [`forward_space_file`](#-bareos--storage--device--forward_space_file)
+* [`forward_space_record`](#-bareos--storage--device--forward_space_record)
+* [`hardware_end_of_file`](#-bareos--storage--device--hardware_end_of_file)
+* [`hardware_end_of_medium`](#-bareos--storage--device--hardware_end_of_medium)
+* [`label_block_size`](#-bareos--storage--device--label_block_size)
+* [`label_media`](#-bareos--storage--device--label_media)
+* [`label_type`](#-bareos--storage--device--label_type)
+* [`maximum_block_size`](#-bareos--storage--device--maximum_block_size)
+* [`maximum_changer_wait`](#-bareos--storage--device--maximum_changer_wait)
+* [`maximum_concurrent_jobs`](#-bareos--storage--device--maximum_concurrent_jobs)
+* [`maximum_file_size`](#-bareos--storage--device--maximum_file_size)
+* [`maximum_job_spool_size`](#-bareos--storage--device--maximum_job_spool_size)
+* [`maximum_network_buffer_size`](#-bareos--storage--device--maximum_network_buffer_size)
+* [`maximum_open_volumes`](#-bareos--storage--device--maximum_open_volumes)
+* [`maximum_open_wait`](#-bareos--storage--device--maximum_open_wait)
+* [`maximum_rewind_wait`](#-bareos--storage--device--maximum_rewind_wait)
+* [`maximum_spool_size`](#-bareos--storage--device--maximum_spool_size)
+* [`media_type`](#-bareos--storage--device--media_type)
+* [`minimum_block_size`](#-bareos--storage--device--minimum_block_size)
+* [`mount_command`](#-bareos--storage--device--mount_command)
+* [`mount_point`](#-bareos--storage--device--mount_point)
+* [`no_rewind_on_close`](#-bareos--storage--device--no_rewind_on_close)
+* [`offline_on_unmount`](#-bareos--storage--device--offline_on_unmount)
+* [`query_crypto_status`](#-bareos--storage--device--query_crypto_status)
+* [`random_access`](#-bareos--storage--device--random_access)
+* [`removable_media`](#-bareos--storage--device--removable_media)
+* [`requires_mount`](#-bareos--storage--device--requires_mount)
+* [`spool_directory`](#-bareos--storage--device--spool_directory)
+* [`two_eof`](#-bareos--storage--device--two_eof)
+* [`unmount_command`](#-bareos--storage--device--unmount_command)
+* [`use_mtiocget`](#-bareos--storage--device--use_mtiocget)
+* [`volume_capacity`](#-bareos--storage--device--volume_capacity)
+* [`volume_poll_interval`](#-bareos--storage--device--volume_poll_interval)
+
+##### <a name="-bareos--storage--device--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -11026,495 +11921,503 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `alert_command`
+##### <a name="-bareos--storage--device--alert_command"></a>`alert_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `always_open`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `archive_device`
+##### <a name="-bareos--storage--device--always_open"></a>`always_open`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `auto_deflate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `auto_deflate_algorithm`
+##### <a name="-bareos--storage--device--archive_device"></a>`archive_device`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `auto_deflate_level`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `auto_inflate`
+##### <a name="-bareos--storage--device--auto_deflate"></a>`auto_deflate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `auto_select`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `autochanger`
+##### <a name="-bareos--storage--device--auto_deflate_algorithm"></a>`auto_deflate_algorithm`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `automatic_mount`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `backward_space_file`
+##### <a name="-bareos--storage--device--auto_deflate_level"></a>`auto_deflate_level`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `backward_space_record`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `block_checksum`
+##### <a name="-bareos--storage--device--auto_inflate"></a>`auto_inflate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `block_positioning`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `bsf_at_eom`
+##### <a name="-bareos--storage--device--auto_select"></a>`auto_select`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `changer_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `changer_device`
+##### <a name="-bareos--storage--device--autochanger"></a>`autochanger`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `check_labels`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `close_on_poll`
+##### <a name="-bareos--storage--device--automatic_mount"></a>`automatic_mount`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `collect_statistics`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `description`
+##### <a name="-bareos--storage--device--backward_space_file"></a>`backward_space_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `device_options`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `device_type`
+##### <a name="-bareos--storage--device--backward_space_record"></a>`backward_space_record`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `diagnostic_device`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `drive_crypto_enabled`
+##### <a name="-bareos--storage--device--block_checksum"></a>`block_checksum`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `drive_index`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `drive_tape_alert_enabled`
+##### <a name="-bareos--storage--device--block_positioning"></a>`block_positioning`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `fast_forward_space_file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `forward_space_file`
+##### <a name="-bareos--storage--device--bsf_at_eom"></a>`bsf_at_eom`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `forward_space_record`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `hardware_end_of_file`
+##### <a name="-bareos--storage--device--changer_command"></a>`changer_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `hardware_end_of_medium`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `label_block_size`
+##### <a name="-bareos--storage--device--changer_device"></a>`changer_device`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `label_media`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `label_type`
+##### <a name="-bareos--storage--device--check_labels"></a>`check_labels`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_block_size`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_changer_wait`
+##### <a name="-bareos--storage--device--close_on_poll"></a>`close_on_poll`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_concurrent_jobs`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_file_size`
+##### <a name="-bareos--storage--device--collect_statistics"></a>`collect_statistics`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_job_spool_size`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_network_buffer_size`
+##### <a name="-bareos--storage--device--count"></a>`count`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_open_volumes`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_open_wait`
+##### <a name="-bareos--storage--device--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `maximum_rewind_wait`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_spool_size`
+##### <a name="-bareos--storage--device--device_options"></a>`device_options`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `media_type`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `minimum_block_size`
+##### <a name="-bareos--storage--device--device_type"></a>`device_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mount_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `mount_point`
+##### <a name="-bareos--storage--device--diagnostic_device"></a>`diagnostic_device`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `no_rewind_on_close`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `offline_on_unmount`
+##### <a name="-bareos--storage--device--drive_crypto_enabled"></a>`drive_crypto_enabled`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `query_crypto_status`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `random_access`
+##### <a name="-bareos--storage--device--drive_index"></a>`drive_index`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `removable_media`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `requires_mount`
+##### <a name="-bareos--storage--device--drive_tape_alert_enabled"></a>`drive_tape_alert_enabled`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `spool_directory`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `two_eof`
+##### <a name="-bareos--storage--device--fast_forward_space_file"></a>`fast_forward_space_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `unmount_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `use_mtiocget`
+##### <a name="-bareos--storage--device--forward_space_file"></a>`forward_space_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `volume_capacity`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `volume_poll_interval`
+##### <a name="-bareos--storage--device--forward_space_record"></a>`forward_space_record`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::storage::director`
+##### <a name="-bareos--storage--device--hardware_end_of_file"></a>`hardware_end_of_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--hardware_end_of_medium"></a>`hardware_end_of_medium`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--label_block_size"></a>`label_block_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--label_media"></a>`label_media`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--label_type"></a>`label_type`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_block_size"></a>`maximum_block_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_changer_wait"></a>`maximum_changer_wait`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_file_size"></a>`maximum_file_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_job_spool_size"></a>`maximum_job_spool_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_network_buffer_size"></a>`maximum_network_buffer_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_open_volumes"></a>`maximum_open_volumes`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_open_wait"></a>`maximum_open_wait`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_rewind_wait"></a>`maximum_rewind_wait`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--maximum_spool_size"></a>`maximum_spool_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--media_type"></a>`media_type`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--minimum_block_size"></a>`minimum_block_size`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--mount_command"></a>`mount_command`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--mount_point"></a>`mount_point`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--no_rewind_on_close"></a>`no_rewind_on_close`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--offline_on_unmount"></a>`offline_on_unmount`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--query_crypto_status"></a>`query_crypto_status`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--random_access"></a>`random_access`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--removable_media"></a>`removable_media`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--requires_mount"></a>`requires_mount`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--spool_directory"></a>`spool_directory`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--two_eof"></a>`two_eof`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--unmount_command"></a>`unmount_command`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--use_mtiocget"></a>`use_mtiocget`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--volume_capacity"></a>`volume_capacity`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--device--volume_poll_interval"></a>`volume_poll_interval`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--storage--director"></a>`bareos::storage::director`
 
 == Define: bareos::storage::director
 The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
@@ -11647,9 +12550,28 @@ The Director Name and Password must match the corresponding values in the Direct
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::director` defined type.
+The following parameters are available in the `bareos::storage::director` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--storage--director--ensure)
+* [`description`](#-bareos--storage--director--description)
+* [`key_encryption_key`](#-bareos--storage--director--key_encryption_key)
+* [`maximum_bandwidth_per_job`](#-bareos--storage--director--maximum_bandwidth_per_job)
+* [`monitor`](#-bareos--storage--director--monitor)
+* [`password`](#-bareos--storage--director--password)
+* [`tls_allowed_cn`](#-bareos--storage--director--tls_allowed_cn)
+* [`tls_authenticate`](#-bareos--storage--director--tls_authenticate)
+* [`tls_ca_certificate_dir`](#-bareos--storage--director--tls_ca_certificate_dir)
+* [`tls_ca_certificate_file`](#-bareos--storage--director--tls_ca_certificate_file)
+* [`tls_certificate`](#-bareos--storage--director--tls_certificate)
+* [`tls_certificate_revocation_list`](#-bareos--storage--director--tls_certificate_revocation_list)
+* [`tls_cipher_list`](#-bareos--storage--director--tls_cipher_list)
+* [`tls_dh_file`](#-bareos--storage--director--tls_dh_file)
+* [`tls_enable`](#-bareos--storage--director--tls_enable)
+* [`tls_key`](#-bareos--storage--director--tls_key)
+* [`tls_require`](#-bareos--storage--director--tls_require)
+* [`tls_verify_peer`](#-bareos--storage--director--tls_verify_peer)
+
+##### <a name="-bareos--storage--director--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -11657,143 +12579,143 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `description`
+##### <a name="-bareos--storage--director--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `key_encryption_key`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `maximum_bandwidth_per_job`
+##### <a name="-bareos--storage--director--key_encryption_key"></a>`key_encryption_key`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `monitor`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `password`
+##### <a name="-bareos--storage--director--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_allowed_cn`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_authenticate`
+##### <a name="-bareos--storage--director--monitor"></a>`monitor`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_ca_certificate_dir`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_ca_certificate_file`
+##### <a name="-bareos--storage--director--password"></a>`password`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_certificate`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_certificate_revocation_list`
+##### <a name="-bareos--storage--director--tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_cipher_list`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_dh_file`
+##### <a name="-bareos--storage--director--tls_authenticate"></a>`tls_authenticate`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_enable`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_key`
+##### <a name="-bareos--storage--director--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `tls_require`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `tls_verify_peer`
+##### <a name="-bareos--storage--director--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::storage::messages`
+##### <a name="-bareos--storage--director--tls_certificate"></a>`tls_certificate`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--director--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--director--tls_cipher_list"></a>`tls_cipher_list`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--director--tls_dh_file"></a>`tls_dh_file`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--director--tls_enable"></a>`tls_enable`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--director--tls_key"></a>`tls_key`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--director--tls_require"></a>`tls_require`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--director--tls_verify_peer"></a>`tls_verify_peer`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--storage--messages"></a>`bareos::storage::messages`
 
 == Define: bareos::storage::messages
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
@@ -11928,9 +12850,27 @@ The Messages resource defines how messages are to be handled and destinations to
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::messages` defined type.
+The following parameters are available in the `bareos::storage::messages` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--storage--messages--ensure)
+* [`append`](#-bareos--storage--messages--append)
+* [`catalog`](#-bareos--storage--messages--catalog)
+* [`console`](#-bareos--storage--messages--console)
+* [`description`](#-bareos--storage--messages--description)
+* [`director`](#-bareos--storage--messages--director)
+* [`file`](#-bareos--storage--messages--file)
+* [`mail`](#-bareos--storage--messages--mail)
+* [`mail_command`](#-bareos--storage--messages--mail_command)
+* [`mail_on_error`](#-bareos--storage--messages--mail_on_error)
+* [`mail_on_success`](#-bareos--storage--messages--mail_on_success)
+* [`operator`](#-bareos--storage--messages--operator)
+* [`operator_command`](#-bareos--storage--messages--operator_command)
+* [`stderr`](#-bareos--storage--messages--stderr)
+* [`stdout`](#-bareos--storage--messages--stdout)
+* [`syslog`](#-bareos--storage--messages--syslog)
+* [`timestamp_format`](#-bareos--storage--messages--timestamp_format)
+
+##### <a name="-bareos--storage--messages--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -11938,135 +12878,135 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `append`
+##### <a name="-bareos--storage--messages--append"></a>`append`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `catalog`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `console`
+##### <a name="-bareos--storage--messages--catalog"></a>`catalog`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `director`
+##### <a name="-bareos--storage--messages--console"></a>`console`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `file`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `mail`
+##### <a name="-bareos--storage--messages--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mail_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `mail_on_error`
+##### <a name="-bareos--storage--messages--director"></a>`director`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `mail_on_success`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `operator`
+##### <a name="-bareos--storage--messages--file"></a>`file`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `operator_command`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `stderr`
+##### <a name="-bareos--storage--messages--mail"></a>`mail`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `stdout`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `syslog`
+##### <a name="-bareos--storage--messages--mail_command"></a>`mail_command`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `timestamp_format`
+##### <a name="-bareos--storage--messages--mail_on_error"></a>`mail_on_error`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::storage::ndmp`
+##### <a name="-bareos--storage--messages--mail_on_success"></a>`mail_on_success`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--messages--operator"></a>`operator`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--messages--operator_command"></a>`operator_command`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--messages--stderr"></a>`stderr`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--messages--stdout"></a>`stdout`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--messages--syslog"></a>`syslog`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--messages--timestamp_format"></a>`timestamp_format`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--storage--ndmp"></a>`bareos::storage::ndmp`
 
 == Define: bareos::storage::ndmp
 The NDMP Resource specifies the authentication details of each NDMP client.
@@ -12114,9 +13054,16 @@ In general, the properties specified within the NDMP resource are specific to on
 
 #### Parameters
 
-The following parameters are available in the `bareos::storage::ndmp` defined type.
+The following parameters are available in the `bareos::storage::ndmp` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--storage--ndmp--ensure)
+* [`auth_type`](#-bareos--storage--ndmp--auth_type)
+* [`description`](#-bareos--storage--ndmp--description)
+* [`log_level`](#-bareos--storage--ndmp--log_level)
+* [`password`](#-bareos--storage--ndmp--password)
+* [`username`](#-bareos--storage--ndmp--username)
+
+##### <a name="-bareos--storage--ndmp--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -12124,47 +13071,47 @@ Data type: `Any`
 
 Default value: `present`
 
-##### `auth_type`
+##### <a name="-bareos--storage--ndmp--auth_type"></a>`auth_type`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `description`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `log_level`
+##### <a name="-bareos--storage--ndmp--description"></a>`description`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `password`
-
-Data type: `Any`
-
-
-
-Default value: ``undef``
-
-##### `username`
+##### <a name="-bareos--storage--ndmp--log_level"></a>`log_level`
 
 Data type: `Any`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### `bareos::webui::director`
+##### <a name="-bareos--storage--ndmp--password"></a>`password`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--storage--ndmp--username"></a>`username`
+
+Data type: `Any`
+
+
+
+Default value: `undef`
+
+### <a name="bareos--webui--director"></a>`bareos::webui::director`
 
 == Class: bareos::webui::director
 Configures an director to use with the webui.
@@ -12197,53 +13144,91 @@ Configures an director to use with the webui.
 [*enabled*]
   Enable or disable section. Possible values are "yes" or "no", the default is "yes".
 
+[*pam_console_name*]
+  Pam Console Name
+
+  Bareos datatype: res
+  Bareos default: not set
+  Required: false
+
+[*pam_console_password*]
+  Pam Console Password
+
+  Bareos datatype: res
+  Bareos default: not set
+  Required: false
+
 #### Parameters
 
-The following parameters are available in the `bareos::webui::director` defined type.
+The following parameters are available in the `bareos::webui::director` defined type:
 
-##### `ensure`
+* [`ensure`](#-bareos--webui--director--ensure)
+* [`catalog`](#-bareos--webui--director--catalog)
+* [`dir_address`](#-bareos--webui--director--dir_address)
+* [`dir_port`](#-bareos--webui--director--dir_port)
+* [`enabled`](#-bareos--webui--director--enabled)
+* [`pam_console_name`](#-bareos--webui--director--pam_console_name)
+* [`pam_console_password`](#-bareos--webui--director--pam_console_password)
 
-Data type: `Any`
+##### <a name="-bareos--webui--director--ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
 
 
 
 Default value: `present`
 
-##### `catalog`
+##### <a name="-bareos--webui--director--catalog"></a>`catalog`
 
-Data type: `Any`
+Data type: `Optional[Bareos::Resource]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `dir_address`
+##### <a name="-bareos--webui--director--dir_address"></a>`dir_address`
 
-Data type: `Any`
+Data type: `Stdlib::Host`
 
 
 
 Default value: `'localhost'`
 
-##### `dir_port`
+##### <a name="-bareos--webui--director--dir_port"></a>`dir_port`
 
-Data type: `Any`
+Data type: `Stdlib::Port`
 
 
 
 Default value: `9101`
 
-##### `enabled`
+##### <a name="-bareos--webui--director--enabled"></a>`enabled`
 
-Data type: `Any`
+Data type: `Enum['yes', 'no']`
 
 
 
 Default value: `'yes'`
 
+##### <a name="-bareos--webui--director--pam_console_name"></a>`pam_console_name`
+
+Data type: `Optional[Bareos::Resource]`
+
+
+
+Default value: `undef`
+
+##### <a name="-bareos--webui--director--pam_console_password"></a>`pam_console_password`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
 ## Functions
 
-### `bareos_settings`
+### <a name="bareos_settings"></a>`bareos_settings`
 
 Type: Ruby 3.x API
 
@@ -12254,4 +13239,24 @@ Helper function to parse settings for bareos and return prepared lines for confi
 Helper function to parse settings for bareos and return prepared lines for config file
 
 Returns: `Any`
+
+## Data types
+
+### <a name="Bareos--Boolean"></a>`Bareos::Boolean`
+
+Bareos boolean datatype
+
+Alias of `Variant[Boolean, Enum['yes', 'no']]`
+
+### <a name="Bareos--List"></a>`Bareos::List`
+
+Bareos List data type
+
+Alias of `Variant[String, Array[String]]`
+
+### <a name="Bareos--Resource"></a>`Bareos::Resource`
+
+Bareos Resource data type
+
+Alias of `Pattern[/(?i:^[a-z][a-z0-9\.\-_ \$]{0,126}$)/]`
 
