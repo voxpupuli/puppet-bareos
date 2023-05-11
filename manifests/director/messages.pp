@@ -159,7 +159,7 @@ define bareos::director::messages (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$append, 'Append', 'messages_list', false],
       [$catalog, 'Catalog', 'messages_list', false],

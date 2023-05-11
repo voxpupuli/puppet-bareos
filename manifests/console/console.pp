@@ -170,7 +170,7 @@ define bareos::console::console (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$director, 'Director', 'string', false],
       [$heartbeat_interval, 'Heartbeat Interval', 'time', false],

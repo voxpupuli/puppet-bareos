@@ -7,7 +7,7 @@ class bareos::params {
   $file_group = 'bareos'
   $config_dir = '/etc/bareos'
   $config_dir_webui = '/etc/bareos-webui'
-  $repo_release = '20'
+  $repo_release = '21'
 
   # service/package specific
   # bconsole
@@ -21,9 +21,7 @@ class bareos::params {
     'bareos-director',
     'bareos-director-python-plugin',
     'bareos-database-common',
-    'bareos-database-mysql',
     'bareos-database-postgresql',
-    'bareos-database-sqlite3',
     'bareos-database-tools',
   ]
   $director_service_name = 'bareos-dir'

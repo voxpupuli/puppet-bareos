@@ -46,7 +46,7 @@ define bareos::director::schedule (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$enabled, 'Enabled', 'boolean', false],
       [$run, 'Run', 'schedule_run_command_list', false]

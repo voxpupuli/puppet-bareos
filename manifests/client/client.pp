@@ -399,7 +399,7 @@ class bareos::client::client (
         $_require_res_messages,
     ])
 
-    $_settings = bareos_settings( [$name_client, 'Name', 'name', true],
+    $_settings = bareos_settings([$name_client, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$absolute_job_timeout, 'Absolute Job Timeout', 'pint32', false],
       [$allow_bandwidth_bursting, 'Allow Bandwidth Bursting', 'boolean', false],

@@ -17,15 +17,22 @@
 #   The major bareos release version which should be used
 # @param password
 #   The major bareos release version which should be used
+# @param https
+#   Whether https should be used in repo URL
 #
 class bareos::repository (
-  Enum['18.2', '19.2', '20', '21']  $release             = $bareos::params::repo_release,
-  Optional[String[1]]               $gpg_key_fingerprint = undef,
-  Boolean                           $subscription        = false,
-  Optional[String]                  $username            = undef,
-  Optional[String]                  $password            = undef,
+  Enum['19.2', '20', '21'] $release             = $bareos::params::repo_release,
+  Optional[String[1]]      $gpg_key_fingerprint = undef,
+  Boolean                  $subscription        = false,
+  Optional[String]         $username            = undef,
+  Optional[String]         $password            = undef,
+  Boolean                  $https               = true,
 ) inherits bareos::params {
-  $scheme = 'http://'
+  if $https {
+    $scheme = 'https://'
+  } else {
+    $scheme = 'http://'
+  }
   if $subscription {
     if empty($username) or empty($password) {
       fail('For Bareos subscription repos both username and password are required.')
@@ -74,7 +81,7 @@ class bareos::repository (
           $location = "${url}RHEL_${osmajrelease}"
         }
         'Centos', 'Rocky', 'AlmaLinux': {
-          if versioncmp($release, '21') >= 0 {
+          if versioncmp($release, '21') >= 0 and versioncmp($osmajrelease, '8') >= 0 {
             $location = "${url}EL_${osmajrelease}"
           } else {
             $location = "${url}CentOS_${osmajrelease}"
@@ -150,8 +157,8 @@ class bareos::repository (
         repos    => '',
         key      => $key,
       }
-      Apt::Source['bareos'] -> Package<|tag == 'bareos'|>
-      Class['Apt::Update']  -> Package<|tag == 'bareos'|>
+      Apt::Source['bareos'] -> Package <| provider == 'apt' |>
+      Class['Apt::Update']  -> Package <| provider == 'apt' |>
     }
     default: {
       fail('Operatingsystem is not supported by this module')

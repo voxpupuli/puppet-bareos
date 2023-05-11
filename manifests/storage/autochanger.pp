@@ -56,7 +56,7 @@ define bareos::storage::autochanger (
     $_require_resource = [
       Bareos::Storage::Device[$device],
     ]
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$changer_command, 'Changer Command', 'strname', true],
       [$changer_device, 'Changer Device', 'strname', true],

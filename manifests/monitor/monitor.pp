@@ -76,7 +76,7 @@ define bareos::monitor::monitor (
   }
 
   if $ensure == 'present' {
-    $_settings = bareos_settings( [$name, 'Name', 'name', true],
+    $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$dir_connect_timeout, 'Dir Connect Timeout', 'time', false],
       [$fd_connect_timeout, 'Fd Connect Timeout', 'time', false],
