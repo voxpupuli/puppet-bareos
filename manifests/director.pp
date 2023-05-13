@@ -15,6 +15,7 @@ class bareos::director (
   $service_ensure             = $bareos::service_ensure,
   $service_enable             = $bareos::service_enable,
   $config_dir                 = "${bareos::config_dir}/bareos-dir.d",
+  $export_dir                 = "${bareos::config_dir}/bareos-dir-export",
   Array[String] $managed_dirs = $bareos::director_managed_dirs,
   Hash $catalogs              = {},
   Hash $clients               = {},
@@ -55,8 +56,10 @@ class bareos::director (
     }
   }
 
-  file { $config_dir:
+  file { [$config_dir, $export_dir]:
     ensure  => directory,
+    purge   => true,
+    recurse => true,
     force   => true,
     mode    => $bareos::file_dir_mode,
     owner   => $bareos::file_owner,
@@ -83,6 +86,7 @@ class bareos::director (
 
   if $manage_database {
     File <| tag == 'bareos_director' |> -> exec { 'bareos director init catalog':
+      user        => 'postgres',
       command     => '/usr/lib/bareos/scripts/create_bareos_database && /usr/lib/bareos/scripts/make_bareos_tables && /usr/lib/bareos/scripts/grant_bareos_privileges',
       notify      => Service[$bareos::director::service_name],
       refreshonly => true,

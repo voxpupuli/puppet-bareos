@@ -1,23 +1,42 @@
-# The baseline for module testing used by Puppet Labs is that each manifest
-# should have a corresponding test manifest that declares that class or defined
-# type.
-#
-# Tests are then run by using puppet apply --noop (to check for compilation
-# errors and view a log of events) or by fully applying the test in a virtual
-# environment (to compare the resulting system state to the desired state).
-#
-# Learn more about module testing here:
-# https://docs.puppet.com/guides/tests_smoke.html
-#
-class { 'bareos':
-  manage_repo => false,
+include postgresql::server
+$storage_password = 'Password of the storage instance'
+
+postgresql::server::db { 'bareos_catalog':
+  user     => 'dbuser',
+  password => postgresql::postgresql_password('bareos_catalog', 'dbpass'),
 }
-class { 'bareos::director::director':
-  password => 'pw',
+# Install and configure an Director Server
+-> class { 'bareos::profile::director':
+  password         => 'Password of the director instance itself',
+  storage_address  => 'localhost',
+  storage_password => $storage_password,
+  catalog_conf     => {
+    'db_name'     => 'bareos_catalog',
+    'db_address'  => '127.0.0.1',
+    'db_port'     => 5432,
+    'db_user'     => 'dbuser',
+    'db_password' => 'dbpass',
+  },
 }
-class { 'bareos::client::client':
+
+include bareos::profile::director::fileset
+include bareos::profile::director::jobdefs
+
+# add storage server to the same machine
+class { 'bareos::profile::storage':
+  password       => $storage_password,
+  archive_device => '/var/lib/bareos/storage',
 }
-class { 'bareos::storage::storage':
+
+# add the client to the config
+bareos::director::client { 'bareos-client':
+  description => 'Your fancy client to backup',
+  password    => 'MyClientPasswordPleaseChange',
+  address     => 'localhost',
 }
-include bareos::console
-include bareos::monitor
+
+# Create an backup job by referencing to the jobDef template.
+bareos::director::job { 'backup-bareos-client':
+  job_defs => 'DefaultJob',
+  client   => 'bareos-client', # which client to assign this job
+}
