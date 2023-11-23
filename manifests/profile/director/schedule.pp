@@ -2,7 +2,7 @@
 # Default schedules
 class bareos::profile::director::schedule {
   # Default Cycles
-  ::bareos::director::schedule { 'WeeklyCycle':
+  bareos::director::schedule { 'WeeklyCycle':
     description => 'Default Backup shedule.',
     run         => [
       'Full 1st sat at 21:00',
@@ -11,12 +11,12 @@ class bareos::profile::director::schedule {
     ],
   }
 
-  ::bareos::director::schedule { 'WeeklyCycleAfterBackup':
+  bareos::director::schedule { 'WeeklyCycleAfterBackup':
     description => 'This schedule does the catalog backup.',
     run         => 'Full mon-sun at 23:30',
   }
 
-  ::bareos::director::schedule { 'Hourly':
+  bareos::director::schedule { 'Hourly':
     run         => [
       'Full daily at 01:00',
       'Incremental hourly at 0:30',
@@ -25,7 +25,7 @@ class bareos::profile::director::schedule {
 
   # These cycles are set up so that we can spread out the full backups of our
   # servers across the week. Some at the weekend, some mid-week.
-  ::bareos::director::schedule { 'WeeklyOnMonday':
+  bareos::director::schedule { 'WeeklyOnMonday':
     run         => [
       'Full First Mon at 18:30',
       'Differential Second-Fifth Mon at 18:30',
@@ -33,7 +33,7 @@ class bareos::profile::director::schedule {
     ],
   }
 
-  ::bareos::director::schedule { 'WeeklyOnTuesday':
+  bareos::director::schedule { 'WeeklyOnTuesday':
     run         => [
       'Full First Tue at 18:30',
       'Differential Second-Fifth Tue at 18:30',
@@ -41,7 +41,7 @@ class bareos::profile::director::schedule {
     ],
   }
 
-  ::bareos::director::schedule { 'WeeklyOnWednesday':
+  bareos::director::schedule { 'WeeklyOnWednesday':
     run         => [
       'Full First Wed at 18:30',
       'Differential Second-Fifth Wed at 18:30',
@@ -49,7 +49,7 @@ class bareos::profile::director::schedule {
     ],
   }
 
-  ::bareos::director::schedule { 'WeeklyOnThursday':
+  bareos::director::schedule { 'WeeklyOnThursday':
     run         => [
       'Full First Thu at 18:30',
       'Differential Second-Fifth Thu at 18:30',
@@ -57,7 +57,7 @@ class bareos::profile::director::schedule {
     ],
   }
 
-  ::bareos::director::schedule { 'WeeklyOnFriday':
+  bareos::director::schedule { 'WeeklyOnFriday':
     run         => [
       'Full First Fri at 18:30',
       'Differential Second-Fifth Fri at 18:30',
@@ -65,7 +65,7 @@ class bareos::profile::director::schedule {
     ],
   }
 
-  ::bareos::director::schedule { 'WeeklyOnSaturday':
+  bareos::director::schedule { 'WeeklyOnSaturday':
     run         => [
       'Full First Sat at 15:30',
       'Differential Second-Fifth Sat at 15:30',
@@ -73,7 +73,7 @@ class bareos::profile::director::schedule {
     ],
   }
 
-  ::bareos::director::schedule { 'WeeklyOnSunday':
+  bareos::director::schedule { 'WeeklyOnSunday':
     run         => [
       'Full First Sun at 15:30',
       'Differential Second-Fifth Sun at 15:30',

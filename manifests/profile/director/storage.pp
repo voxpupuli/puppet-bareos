@@ -4,7 +4,7 @@ class bareos::profile::director::storage (
   $address = 'localhost',
   $password = 'BareosStoragePleaseChangeMe',
 ) {
-  ::bareos::director::storage { 'File':
+  bareos::director::storage { 'File':
     address    => $address,
     password   => $password,
     device     => 'FileStorage',
