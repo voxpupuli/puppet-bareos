@@ -1,7 +1,7 @@
 # == Class: bareos::profile::director::fileset
 # Default filesets
 class bareos::profile::director::fileset {
-  ::bareos::director::fileset { 'BareosCatalog':
+  bareos::director::fileset { 'BareosCatalog':
     description => 'Backup the catalog dump and Bareos configuration files.',
     include     => {
       'Options' => {
@@ -19,7 +19,7 @@ class bareos::profile::director::fileset {
     },
   }
 
-  ::bareos::director::fileset { 'LinuxAll':
+  bareos::director::fileset { 'LinuxAll':
     description => 'Backup all regular filesystems, determined by filesystem type.',
     include     => {
       'Options' => {
@@ -67,7 +67,7 @@ class bareos::profile::director::fileset {
     },
   }
 
-  ::bareos::director::fileset { 'WindowsAll':
+  bareos::director::fileset { 'WindowsAll':
     enable_vss => true,
     include    => {
       'Options' => {

@@ -52,7 +52,7 @@ Please note, this is only the minimal subset of an bareos configuration. You may
 ```puppet
 # Install and configure an Director Server
 $storage_password = 'Password of the storage instance',
-class { '::bareos::profile::director':
+class { 'bareos::profile::director':
   password     => 'Password of the director instance itself',
   catalog_conf => {
     'db_name'     => 'bareos_catalog',
@@ -66,7 +66,7 @@ class { '::bareos::profile::director':
 }
 
 # add storage server to the same machine
-class { '::bareos::profile::storage':
+class { 'bareos::profile::storage':
   password        => $storage_password,
   archive_device => '/var/lib/bareos/storage',
 }
@@ -94,7 +94,7 @@ class { 'bareos::profile::client':
 ```
 ## Reference
 
-All bareos configuration directives are reflected to an puppet define ressource. It has almost the following schema: ::bareos::**component**::**directive**.
+All bareos configuration directives are reflected to an puppet define ressource. It has almost the following schema: bareos::**component**::**directive**.
 There are only three exceptions were a class is used instead of an define: `bareos::client::client`, `bareos::director::director` and `bareos::storage::storage`. They are only allowed to exist once a time in the bareos configuration.
 
 While bareos has a lot of configuration settings, most of the documentation and available parameter are inside the puppet manifests. Please consult also the bareos [documentation](http://doc.bareos.org/master/html/bareos-manual-main-reference.html).
@@ -108,7 +108,7 @@ This class will be automatically included when a resource is defined.
 
 Here you can define various behaviours for your setup.
 ```puppet
-class { '::bareos':
+class { 'bareos':
   repo_release => '16.2', # Highly recommend to fix your bareos release. Defaults to 'latest'
   manage_repo => true, # use the internally shipped repo management
   manage_user => true, # manage the bareos user and group (usually also created by the package)
@@ -119,7 +119,7 @@ class { '::bareos':
 }
 ```
 ### Client/FileDaemon
-`Class ::bareos::client`
+`Class bareos::client`
 
 This class manages the bareos client (file-daemon) service, packages and configuration directory.
 Parameters should be configured in the upper class `::bareos`.
@@ -127,20 +127,20 @@ Parameters should be configured in the upper class `::bareos`.
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
-#### Client - Class ::bareos::client::client
+#### Client - Class bareos::client::client
 
 The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as well as the port on which the Client listens for Director connections.
 
-#### Director - Define ::bareos::client::director
+#### Director - Define bareos::client::director
 
 The Director resource defines the name and password of the Directors that are permitted to contact this Client.
 
-#### Messages - Define ::bareos::client::messages
+#### Messages - Define bareos::client::messages
 
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
 
 ### Console
-`Class ::bareos::console`
+`Class bareos::console`
 
 This class manages the bareos console (bconsole cli tool) package and configuration directory.
 Parameters should be configured in the upper class `::bareos`.
@@ -148,13 +148,13 @@ Parameters should be configured in the upper class `::bareos`.
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
-#### Console - Define ::bareos::console::Console
+#### Console - Define bareos::console::Console
 
 Usually not required to define. The bareos documentation is almost the same like in the director, but its unclear what it affects regarding the bconsole.
 
 If someone has more information, feel free to add this info ;-).
 
-#### Director - Define ::bareos::console::director
+#### Director - Define bareos::console::director
 
 The Director resource defines the attributes of the Director running on the network.
 You may have multiple Director resource specifications in a single Console configuration file.
@@ -169,7 +169,7 @@ If you have more than one, you will be prompted to choose one when you start the
 ```
 
 ### Director
-`Class ::bareos::director`
+`Class bareos::director`
 
 This class manages the bareos director service, packages and configuration directory.
 Parameters should be configured in the upper class `::bareos`.
@@ -177,33 +177,33 @@ Parameters should be configured in the upper class `::bareos`.
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
-#### Director - Class ::bareos::director::director
+#### Director - Class bareos::director::director
 
 To define the Director's name and its access password used for authenticating the Console program.
 Only a single Director resource definition may appear in the Director's configuration file.
 
-#### Catalog - Define ::bareos::director::catalog
+#### Catalog - Define bareos::director::catalog
 
 To define in what database to keep the list of files and the Volume names where they are backed up.
 Most people only use a single catalog.
 It is possible, however not adviced and not supported to use multiple catalogs.
 
-#### Client - Define ::bareos::director::client
+#### Client - Define bareos::director::client
 
 To define what Client is to be backed up.
 You will generally have multiple Client definitions.
 Each Job will reference only a single client.
 
-#### Console - Define ::bareos::director::console
+#### Console - Define bareos::director::console
 
 Configure an **Named Console** aka **Restricted Console**.
 Both the names and the passwords in these two entries must match much as is the case for Client programs.
 
-#### Counter - Define ::bareos::director::counter
+#### Counter - Define bareos::director::counter
 
 The Counter Resource defines a counter variable that can be accessed by variable expansion used for creating Volume labels with the Label Format Dir Pool directive.
 
-#### FileSet - Define ::bareos::director::fileset
+#### FileSet - Define bareos::director::fileset
 
 To define the set of files to be backed up for each Client.
 You may have any number of FileSets but each Job will reference only one.
@@ -225,7 +225,7 @@ FileSets do use `Include Exclude Items`, which are represented by hash. Hash val
 }
 ```
 
-#### Job - Define ::bareos::director::job
+#### Job - Define bareos::director::job
 To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
 Normally, you will Jobs of different names corresponding to each client (i.e. one Job per client, but a different one with a different name for each client).
 
@@ -252,43 +252,43 @@ Jobs does have `Run Script`, which is represented by hash. Hash values are only 
   }
 }
 ```
-#### JobDefs - Define ::bareos::director::jobdefs
+#### JobDefs - Define bareos::director::jobdefs
 JobDefs are optional resources for providing defaults for Job resources.
 
 Almost the same like `Job`.
 
-#### Messages - Define ::bareos::director::messages
+#### Messages - Define bareos::director::messages
 
 To define where error and information messages are to be sent or logged.
 You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
 
-#### Pool - Define ::bareos::director::pool
+#### Pool - Define bareos::director::pool
 
 To define the pool of Volumes that can be used for a particular Job.
 Most people use a single default Pool.
 However, if you have a large number of clients or volumes, you may want to have multiple Pools.
 Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
 
-#### Profile - Define ::bareos::director::profile
+#### Profile - Define bareos::director::profile
 
 The Profile Resource defines a set of ACLs.
 Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
 
 
-#### Schedule - Define ::bareos::director::schedule
+#### Schedule - Define bareos::director::schedule
 
 The Schedule resource provides a means of automatically scheduling a Job
  as well as the ability to override the default Level, Pool, Storage and Messages resources.
 If a Schedule resource is not referenced in a Job, the Job can only be run manually.
 In general, you specify an action to be taken and when.
 
-#### Storage - Define ::bareos::director::storage
+#### Storage - Define bareos::director::storage
 
 To define on what physical device the Volumes should be mounted.
 You may have one or more Storage definitions.
 
 ### Monitor
-`Class ::bareos::monitor`
+`Class bareos::monitor`
 
 This class manages the bareos (tray-) monitor package and configuration directory.
 Parameters should be configured in the upper class `::bareos`.
@@ -296,22 +296,22 @@ Parameters should be configured in the upper class `::bareos`.
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
-#### Client - Define ::bareos::monitor::client
+#### Client - Define bareos::monitor::client
 The Client resource defines the attributes of the Clients that are monitored by this Monitor.
 
-#### Director - Define ::bareos::monitor::director
+#### Director - Define bareos::monitor::director
 The Director resource defines the attributes of the Directors that are monitored by this Monitor.
 
-#### Monitor - Define ::bareos::monitor::monitor
+#### Monitor - Define bareos::monitor::monitor
 The Monitor resource defines the attributes of the Monitor running on the network.
 The parameters you define here must be configured as a Director resource
 in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
 
-#### Storage - Define ::bareos::monitor::storage
+#### Storage - Define bareos::monitor::storage
 The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
 
 ### Storage
-`Class ::bareos::storage`
+`Class bareos::storage`
 
 This class manages the bareos storage service, packages and configuration directory.
 Parameters should be configured in the upper class `::bareos`.
@@ -319,46 +319,46 @@ Parameters should be configured in the upper class `::bareos`.
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
 
-#### Storage - Class ::bareos::storage::storage
+#### Storage - Class bareos::storage::storage
 
 In general, the properties specified under the Storage resource define global properties of the Storage daemon.
 
-#### Autochange - Define ::bareos::storage::autochanger
+#### Autochange - Define bareos::storage::autochanger
 
 The Autochanger resource supports single or multiple drive autochangers
 by grouping one or more Device resources into one unit called an autochanger in Bareos
 (often referred to as a "tape library" by autochanger manufacturers).
 
-#### Device - Define ::bareos::storage::device
+#### Device - Define bareos::storage::device
 
 The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon.
 There may be multiple Device resources for a single Storage daemon.
 In general, the properties specified within the Device resource are specific to the Device.
 
-#### Director - Define ::bareos::storage::director
+#### Director - Define bareos::storage::director
 
 The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
 There may be multiple Director resources.
 The Director Name and Password must match the corresponding values in the Director's configuration file.
 
-#### Messages - Define ::bareos::storage::messages
+#### Messages - Define bareos::storage::messages
 
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
 
-#### NDMP - Define ::bareos::storage::ndmp
+#### NDMP - Define bareos::storage::ndmp
 
 The NDMP Resource specifies the authentication details of each NDMP client.
 There may be multiple NDMP resources for a single Storage daemon.
 In general, the properties specified within the NDMP resource are specific to one client.
 
 ### WebUI
-`Class ::bareos::webui`
+`Class bareos::webui`
 
 This class manages the bareos webui service, package and configuration.
 
 This class will be automatically included when a resource is defined.
 
-#### Director - Define ::bareos::webui::director
+#### Director - Define bareos::webui::director
 
 Configures an director to use with the webui.
 

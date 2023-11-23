@@ -1,7 +1,7 @@
 # == Class: bareos::profile::director::jobdefs
 # Default jobdefs
 class bareos::profile::director::jobdefs {
-  ::bareos::director::jobdefs { 'DefaultJob':
+  bareos::director::jobdefs { 'DefaultJob':
     type                     => 'backup',
     file_set                 => 'LinuxAll', # selftest
     storage                  => 'File',
@@ -14,7 +14,7 @@ class bareos::profile::director::jobdefs {
     incremental_backup_pool  => 'Incremental',
   }
 
-  ::bareos::director::jobdefs { 'BackupBareosCatalog':
+  bareos::director::jobdefs { 'BackupBareosCatalog':
     description     => 'Backup the catalog database (after the nightly save)',
     job_defs        => 'DefaultJob',
     level           => 'Full',
@@ -26,7 +26,7 @@ class bareos::profile::director::jobdefs {
     priority        => 11,
   }
 
-  ::bareos::director::jobdefs { 'RestoreFiles':
+  bareos::director::jobdefs { 'RestoreFiles':
     description => 'Standard Restore template. Only one such job is needed for all standard Jobs/Clients/Storage ...',
     type        => 'restore',
     file_set    => 'LinuxAll',

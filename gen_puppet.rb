@@ -103,7 +103,7 @@ end
 
 # print end of params
 puts ") {
-  include ::bareos::#{comp_name}
+  include bareos::#{comp_name}
 
   $_resource = '#{resource}'
   $_resource_dir = '#{resource.downcase}'
@@ -145,11 +145,11 @@ end
 puts "
   file { \"${::bareos::#{comp_name}::config_dir}/${_resource_dir}/${name}.conf\":
     ensure  => $ensure,
-    mode    => $::bareos::file_mode,
-    owner   => $::bareos::file_owner,
-    group   => $::bareos::file_group,
+    mode    => $bareos::file_mode,
+    owner   => $bareos::file_owner,
+    group   => $bareos::file_group,
     content => template('bareos/resource.erb'),
-    notify  => Service[$::bareos::#{comp_name}::service_name],"
+    notify  => Service[$bareos::#{comp_name}::service_name],"
 puts '    require => $_require_resource' unless res_requires.empty?
 puts '  }
 }'

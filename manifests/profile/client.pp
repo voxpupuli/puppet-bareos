@@ -11,11 +11,11 @@ class bareos::profile::client (
   }
 
   # allow bareos server to connect
-  ::bareos::client::director { $name_dir:
+  bareos::client::director { $name_dir:
     password => $password,
   }
 
-  ::bareos::client::messages { 'Standard':
+  bareos::client::messages { 'Standard':
     description => 'Send relevant messages to the Director.',
     director    => 'bareos-dir = all, !skipped, !restored',
   }

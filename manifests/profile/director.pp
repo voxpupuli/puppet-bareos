@@ -11,7 +11,7 @@ class bareos::profile::director (
   $storage_password = 'BareosStoragePleaseChangeMe',
 ) {
   # ensure bconsole is installed and can connect to director
-  ::bareos::console::director { $name_dir:
+  bareos::console::director { $name_dir:
     description => 'Bareos console credentials for local director',
     address     => 'localhost',
     password    => $password,
