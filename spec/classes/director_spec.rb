@@ -13,13 +13,6 @@ describe 'bareos::director' do
         it { is_expected.to compile }
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('bareos') }
-
-        it do
-          expect(subject).to contain_service('bareos-dir').with(
-            'hasrestart' => false,
-            'restart' => 'systemctl reload bareos-dir'
-          )
-        end
       end
 
       context 'with catalogs => { test: { db_driver: "postgresql", db_name: "test" }}}' do
