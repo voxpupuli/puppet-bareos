@@ -122,7 +122,7 @@ class bareos::repository (
         $url = "${scheme}${address}"
       }
       if $os  == 'Ubuntu' {
-        unless $osrelease in ['12.04', '14.04', '16.04', '18.04', '20.04'] {
+        unless $osrelease in ['20.04'] {
           fail('Only Ubunutu LTS Versions are supported')
         }
         $location = "${url}xUbuntu_${osrelease}"
