@@ -480,6 +480,13 @@
 #   Bareos Default: Not set
 #   Required: false
 #
+# [*run_on_incoming_connect_interval*]
+#   Run On Incoming Connect Interval
+#
+#   Bareos Datatype: time
+#   Bareos Default: 0
+#   Required: false
+#
 # [*run_script*]
 #   Run Script
 #
@@ -663,6 +670,7 @@ define bareos::director::job (
   $run_after_failed_job = undef,
   $run_after_job = undef,
   $run_before_job = undef,
+  $run_on_incoming_connect_interval = undef,
   $run_script = undef,
   $save_file_history = undef,
   $schedule_res = undef,
@@ -793,6 +801,7 @@ define bareos::director::job (
       [$run_after_failed_job, 'Run After Failed Job', 'runscript_short', false],
       [$run_after_job, 'Run After Job', 'runscript_short', false],
       [$run_before_job, 'Run Before Job', 'runscript_short', false],
+      [$run_on_incoming_connect_interval, 'Run On Incoming Connect Interval', 'time', false],
       [$run_script, 'Run Script', 'runscript', false],
       [$save_file_history, 'Save File History', 'boolean', false],
       [$schedule_res, 'Schedule', 'res', false],

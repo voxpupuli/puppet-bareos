@@ -112,6 +112,7 @@ describe 'bareos::director::job' do
           param('run_after_failed_job', 'Run After Failed Job', 'runscript_short').
           param('run_after_job', 'Run After Job', 'runscript_short').
           param('run_before_job', 'Run Before Job', 'runscript_short').
+          param('run_on_incoming_connect_interval', 'Run On Incoming Connect Interval', 'time').
           param('run_script', 'Run Script', 'runscript').
           param('save_file_history', 'Save File History', 'boolean').
           param('schedule_res', 'Schedule', 'res').
