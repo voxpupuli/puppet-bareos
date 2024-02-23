@@ -1,82 +1,79 @@
-# == Define: bareos::director::profile
-# The Profile Resource defines a set of ACLs.
-# Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   The Profile Resource defines a set of ACLs.
+#   Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
+# @param ensure
 #   present or absent the config file.
-#
-# [*catalog_acl*]
+# @param catalog_acl
 #   Catalog ACL: Lists the Catalog resources, this resource has access to. The special keyword *all* allows access to all Catalog resources.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*client_acl*]
+# @param client_acl
 #   Client ACL: Lists the Client resources, this resource has access to. The special keyword *all* allows access to all Client resources.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*command_acl*]
+# @param command_acl
 #   Command ACL: Lists the commands, this resource has access to. The special keyword *all* allows using commands.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description: Additional information about the resource. Only used for UIs.
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*file_set_acl*]
+# @param file_set_acl
 #   File Set ACL: Lists the File Set resources, this resource has access to. The special keyword *all* allows access to all File Set resources.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*job_acl*]
+# @param job_acl
 #   Job ACL: Lists the Job resources, this resource has access to. The special keyword *all* allows access to all Job resources.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*plugin_options_acl*]
+# @param plugin_options_acl
 #   Plugin Options ACL: Specifies the allowed plugin options. An empty strings allows all Plugin Options.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*pool_acl*]
+# @param pool_acl
 #   Pool ACL: Lists the Pool resources, this resource has access to. The special keyword *all* allows access to all Pool resources.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*schedule_acl*]
+# @param schedule_acl
 #   Schedule ACL: Lists the Schedule resources, this resource has access to. The special keyword *all* allows access to all Schedule resources.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*storage_acl*]
+# @param storage_acl
 #   Storage ACL: Lists the Storage resources, this resource has access to. The special keyword *all* allows access to all Storage resources.
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*where_acl*]
+# @param where_acl
 #   Where ACL: Specifies the base directories, where files could be restored. An empty string allows restores to all directories.
 #
 #   Bareos Datatype: acl

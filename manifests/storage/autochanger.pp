@@ -1,34 +1,32 @@
-# == Define: bareos::storage::autochanger
-# The Autochanger resource supports single or multiple drive autochangers
-# by grouping one or more Device resources into one unit called an autochanger in Bareos
-# (often referred to as a "tape library" by autochanger manufacturers).
+# @summary
+#   The Autochanger resource supports single or multiple drive autochangers
+#   by grouping one or more Device resources into one unit called an autochanger in Bareos
+#   (often referred to as a "tape library" by autochanger manufacturers).
 #
-# == Parameters
-# [*ensure*]
+# @param ensure
 #   present or absent the config file.
-#
-# [*changer_command*]
+# @param changer_command
 #   Changer Command
 #
 #   Bareos Datatype: strname
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*changer_device*]
+# @param changer_device
 #   Changer Device
 #
 #   Bareos Datatype: strname
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*device*]
+# @param device
 #   Device
 #
 #   May be specified as Array.

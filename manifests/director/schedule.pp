@@ -1,28 +1,27 @@
-# == Define: bareos::director::schedule
-# The Schedule resource provides a means of automatically scheduling a Job
-# as well as the ability to override the default Level, Pool, Storage and Messages resources.
-# If a Schedule resource is not referenced in a Job, the Job can only be run manually.
-# In general, you specify an action to be taken and when.
+# @summary 
+#   The Schedule resource provides a means of automatically scheduling a Job
+#   as well as the ability to override the default Level, Pool, Storage and Messages resources.
+#   If a Schedule resource is not referenced in a Job, the Job can only be run manually.
+#   In general, you specify an action to be taken and when.
 #
-# == Parameters
-# [*ensure*]
+# @param ensure
 #   present or absent the config file.
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*enabled*]
+# @param enabled
 #   Enabled: En- or disable this resource.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*run*]
+# @param run
 #   Run
 #
 #   May be specified as Array.

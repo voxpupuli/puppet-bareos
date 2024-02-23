@@ -1,188 +1,185 @@
-# == Define: bareos::director::client
-# To define what Client is to be backed up.
-# You will generally have multiple Client definitions.
-# Each Job will reference only a single client.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   To define what Client is to be backed up.
+#   You will generally have multiple Client definitions.
+#   Each Job will reference only a single client.
+# @param ensure
 #   present or absent the config file.
-#
-# [*address*]
+# @param address
 #   Address
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*auth_type*]
+# @param auth_type
 #   Auth Type
 #
 #   Bareos Datatype: auth_type
 #   Bareos Default: None
 #   Required: false
 #
-# [*auto_prune*]
+# @param auto_prune
 #   Auto Prune
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*catalog*]
+# @param catalog
 #   Catalog
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*connection_from_client_to_director*]
+# @param connection_from_client_to_director
 #   Connection From Client To Director: The Director will accept incoming network connection from this Client.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*connection_from_director_to_client*]
+# @param connection_from_director_to_client
 #   Connection From Director To Client: Let the Director initiate the network connection to the Client.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*enabled*]
+# @param enabled
 #   Enabled: En- or disable this resource.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*file_retention*]
+# @param file_retention
 #   File Retention
 #
 #   Bareos Datatype: time
 #   Bareos Default: 5184000
 #   Required: false
 #
-# [*hard_quota*]
+# @param hard_quota
 #   Hard Quota
 #
 #   Bareos Datatype: size64
 #   Bareos Default: 0
 #   Required: false
 #
-# [*heartbeat_interval*]
+# @param heartbeat_interval
 #   Heartbeat Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: 0
 #   Required: false
 #
-# [*job_retention*]
+# @param job_retention
 #   Job Retention
 #
 #   Bareos Datatype: time
 #   Bareos Default: 15552000
 #   Required: false
 #
-# [*maximum_bandwidth_per_job*]
+# @param maximum_bandwidth_per_job
 #   Maximum Bandwidth Per Job
 #
 #   Bareos Datatype: speed
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_concurrent_jobs*]
+# @param maximum_concurrent_jobs
 #   Maximum Concurrent Jobs
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 1
 #   Required: false
 #
-# [*ndmp_block_size*]
+# @param ndmp_block_size
 #   Ndmp Block Size
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 64512
 #   Required: false
 #
-# [*ndmp_log_level*]
+# @param ndmp_log_level
 #   Ndmp Log Level
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 4
 #   Required: false
 #
-# [*ndmp_use_lmdb*]
+# @param ndmp_use_lmdb
 #   Ndmp Use Lmdb
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*passive*]
+# @param passive
 #   Passive: If enabled, the Storage Daemon will initiate the network connection to the Client. If disabled, the Client will initiate the netowrk connection to the Storage Daemon.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: autopassword
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*port*]
+# @param port
 #   Port
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 9102
 #   Required: false
 #
-# [*protocol*]
+# @param protocol
 #   Protocol
 #
 #   Bareos Datatype: auth_protocol_type
 #   Bareos Default: Native
 #   Required: false
 #
-# [*quota_include_failed_jobs*]
+# @param quota_include_failed_jobs
 #   Quota Include Failed Jobs
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*soft_quota*]
+# @param soft_quota
 #   Soft Quota
 #
 #   Bareos Datatype: size64
 #   Bareos Default: 0
 #   Required: false
 #
-# [*soft_quota_grace_period*]
+# @param soft_quota_grace_period
 #   Soft Quota Grace Period
 #
 #   Bareos Datatype: time
 #   Bareos Default: 0
 #   Required: false
 #
-# [*strict_quotas*]
+# @param strict_quotas
 #   Strict Quotas
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_allowed_cn*]
+# @param tls_allowed_cn
 #   Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 #
 #   May be specified as Array.
@@ -190,84 +187,84 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_authenticate*]
+# @param tls_authenticate
 #   Tls Authenticate: Use TLS only to authenticate, not for encryption.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_ca_certificate_dir*]
+# @param tls_ca_certificate_dir
 #   Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_ca_certificate_file*]
+# @param tls_ca_certificate_file
 #   Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate*]
+# @param tls_certificate
 #   Tls Certificate: Path of a PEM encoded TLS certificate.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate_revocation_list*]
+# @param tls_certificate_revocation_list
 #   Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_cipher_list*]
+# @param tls_cipher_list
 #   Tls Cipher List: List of valid TLS Ciphers.
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_dh_file*]
+# @param tls_dh_file
 #   Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_enable*]
+# @param tls_enable
 #   Tls Enable: Enable TLS support.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_key*]
+# @param tls_key
 #   Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_require*]
+# @param tls_require
 #   Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_verify_peer*]
+# @param tls_verify_peer
 #   Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*username*]
+# @param username
 #   Username
 #
 #   Bareos Datatype: string

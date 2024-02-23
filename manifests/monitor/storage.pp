@@ -1,53 +1,50 @@
-# == Define: bareos::monitor::storage
-# The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
-#
-# == Parameters
-# [*ensure*]
+# @summary
+#   The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
+# @param ensure
 #   present or absent the config file.
-#
-# [*address*]
+# @param address
 #   Address
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*enable_ssl*]
+# @param enable_ssl
 #   Enable Ssl
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: md5password
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*sd_address*]
+# @param sd_address
 #   Sd Address
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*sd_password*]
+# @param sd_password
 #   Sd Password
 #
 #   Bareos Datatype: md5password
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*sd_port*]
+# @param sd_port
 #   Sd Port
 #
 #   Bareos Datatype: pint32

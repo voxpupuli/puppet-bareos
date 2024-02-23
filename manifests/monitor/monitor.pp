@@ -1,55 +1,52 @@
-# == Define: bareos::monitor::monitor
-# The Monitor resource defines the attributes of the Monitor running on the network.
-# The parameters you define here must be configured as a Director resource
-# in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
-#
-# == Parameters
-# [*ensure*]
+# @summary  
+#   The Monitor resource defines the attributes of the Monitor running on the network.
+#   The parameters you define here must be configured as a Director resource
+#   in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
+# @param ensure
 #   present or absent the config file.
-#
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*dir_connect_timeout*]
+# @param dir_connect_timeout
 #   Dir Connect Timeout
 #
 #   Bareos Datatype: time
 #   Bareos Default: 10
 #   Required: false
 #
-# [*fd_connect_timeout*]
+# @param fd_connect_timeout
 #   Fd Connect Timeout
 #
 #   Bareos Datatype: time
 #   Bareos Default: 10
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: md5password
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*refresh_interval*]
+# @param refresh_interval
 #   Refresh Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: 60
 #   Required: false
 #
-# [*require_ssl*]
+# @param require_ssl
 #   Require Ssl
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*sd_connect_timeout*]
+# @param sd_connect_timeout
 #   Sd Connect Timeout
 #
 #   Bareos Datatype: time

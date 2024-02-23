@@ -1,7 +1,23 @@
-# == Class: bareos::webui
-# This class manages the bareos webui service, package and configuration.
+# @summary
+#  This class manages the bareos webui service, package and configuration.
+#  This class will be automatically included when a resource is defined.
 #
-# This class will be automatically included when a resource is defined.
+# @param manage_service
+# @param manage_package
+# @param package_name
+# @param package_ensure
+# @param service_name
+# @param service_ensure
+# @param service_enable
+# @param config_dir
+# @param manage_local_dir
+# @param session_timeout
+# @param pagination_values
+# @param pagination_default_value
+# @param save_previous_state
+# @param label_pooltype
+# @param directors
+#
 class bareos::webui (
   $manage_service = $bareos::manage_service,
   $manage_package = $bareos::manage_package,

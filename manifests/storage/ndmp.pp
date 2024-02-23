@@ -1,41 +1,38 @@
-# == Define: bareos::storage::ndmp
-# The NDMP Resource specifies the authentication details of each NDMP client.
-# There may be multiple NDMP resources for a single Storage daemon.
-# In general, the properties specified within the NDMP resource are specific to one client.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   The NDMP Resource specifies the authentication details of each NDMP client.
+#   There may be multiple NDMP resources for a single Storage daemon.
+#   In general, the properties specified within the NDMP resource are specific to one client.
+# @param ensure
 #   present or absent the config file.
-#
-# [*auth_type*]
+# @param auth_type
 #   Auth Type
 #
 #   Bareos Datatype: auth_type
 #   Bareos Default: None
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*log_level*]
+# @param log_level
 #   Log Level
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 4
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: autopassword
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*username*]
+# @param username
 #   Username
 #
 #   Bareos Datatype: string

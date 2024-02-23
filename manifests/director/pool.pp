@@ -1,203 +1,200 @@
-# == Define: bareos::director::pool
-# To define the pool of Volumes that can be used for a particular Job.
-# Most people use a single default Pool.
-# However, if you have a large number of clients or volumes, you may want to have multiple Pools.
-# Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   To define the pool of Volumes that can be used for a particular Job.
+#   Most people use a single default Pool.
+#   However, if you have a large number of clients or volumes, you may want to have multiple Pools.
+#   Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
+# @param ensure
 #   present or absent the config file.
-#
-# [*action_on_purge*]
+# @param action_on_purge
 #   Action On Purge
 #
 #   Bareos Datatype: action_on_purge
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*auto_prune*]
+# @param auto_prune
 #   Auto Prune
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*catalog*]
+# @param catalog
 #   Catalog
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*catalog_files*]
+# @param catalog_files
 #   Catalog Files
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*cleaning_prefix*]
+# @param cleaning_prefix
 #   Cleaning Prefix
 #
 #   Bareos Datatype: strname
 #   Bareos Default: CLN
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*file_retention*]
+# @param file_retention
 #   File Retention
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*job_retention*]
+# @param job_retention
 #   Job Retention
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*label_format*]
+# @param label_format
 #   Label Format
 #
 #   Bareos Datatype: strname
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*label_type*]
+# @param label_type
 #   Label Type
 #
 #   Bareos Datatype: label
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_block_size*]
+# @param maximum_block_size
 #   Maximum Block Size
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_volume_bytes*]
+# @param maximum_volume_bytes
 #   Maximum Volume Bytes
 #
 #   Bareos Datatype: size64
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_volume_files*]
+# @param maximum_volume_files
 #   Maximum Volume Files
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_volume_jobs*]
+# @param maximum_volume_jobs
 #   Maximum Volume Jobs
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_volumes*]
+# @param maximum_volumes
 #   Maximum Volumes
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*migration_high_bytes*]
+# @param migration_high_bytes
 #   Migration High Bytes
 #
 #   Bareos Datatype: size64
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*migration_low_bytes*]
+# @param migration_low_bytes
 #   Migration Low Bytes
 #
 #   Bareos Datatype: size64
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*migration_time*]
+# @param migration_time
 #   Migration Time
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*minimum_block_size*]
+# @param minimum_block_size
 #   Minimum Block Size
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*next_pool*]
+# @param next_pool
 #   Next Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*pool_type*]
+# @param pool_type
 #   Pool Type
 #
 #   Bareos Datatype: pooltype
 #   Bareos Default: Backup
 #   Required: false
 #
-# [*purge_oldest_volume*]
+# @param purge_oldest_volume
 #   Purge Oldest Volume
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*recycle*]
+# @param recycle
 #   Recycle
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*recycle_current_volume*]
+# @param recycle_current_volume
 #   Recycle Current Volume
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*recycle_oldest_volume*]
+# @param recycle_oldest_volume
 #   Recycle Oldest Volume
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*recycle_pool*]
+# @param recycle_pool
 #   Recycle Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*scratch_pool*]
+# @param scratch_pool
 #   Scratch Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*storage*]
+# @param storage
 #   Storage
 #
 #   May be specified as Array.
@@ -205,21 +202,21 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*use_catalog*]
+# @param use_catalog
 #   Use Catalog
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*volume_retention*]
+# @param volume_retention
 #   Volume Retention
 #
 #   Bareos Datatype: time
 #   Bareos Default: 31536000
 #   Required: false
 #
-# [*volume_use_duration*]
+# @param volume_use_duration
 #   Volume Use Duration
 #
 #   Bareos Datatype: time

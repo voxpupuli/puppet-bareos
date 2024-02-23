@@ -1,5 +1,11 @@
-# == Class: bareos::profile::director
-# Ready to use director with default configs
+# @summary 
+#   Ready to use director with default configs
+# @param password
+# @param name_dir
+# @param catalog_conf
+# @param storage_address
+# @param storage_password
+#
 class bareos::profile::director (
   $password = 'MyDirectorPasswordPleaseChange',
   $name_dir = 'bareos-dir',
