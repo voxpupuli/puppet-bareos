@@ -21,12 +21,12 @@
 #   Whether https should be used in repo URL
 #
 class bareos::repository (
-  Enum['19.2', '20', '21'] $release             = '21',
-  Optional[String[1]]      $gpg_key_fingerprint = undef,
-  Boolean                  $subscription        = false,
-  Optional[String]         $username            = undef,
-  Optional[String]         $password            = undef,
-  Boolean                  $https               = true,
+  Enum['19.2', '20', '21', 'current'] $release             = '21',
+  Optional[String[1]]                 $gpg_key_fingerprint = undef,
+  Boolean                             $subscription        = false,
+  Optional[String]                    $username            = undef,
+  Optional[String]                    $password            = undef,
+  Boolean                             $https               = true,
 ) {
   if $https {
     $scheme = 'https://'
@@ -40,7 +40,7 @@ class bareos::repository (
     # note the .com
     $address = "download.bareos.com/bareos/release/${release}/"
   } else {
-    $address = "download.bareos.org/bareos/release/${release}/"
+    $address = "download.bareos.org/${release}/"
   }
 
   $os = $facts['os']['name']
@@ -49,6 +49,9 @@ class bareos::repository (
 
   if $gpg_key_fingerprint {
     $_gpg_key_fingerprint = $gpg_key_fingerprint
+  } elsif ($release == 'current') {
+    # Release is current?
+    $_gpg_key_fingerprint = '8283 4CF0 02D8 9BA5 5C1E D0AA 42DA 24A6 DFEF 9127'
   } elsif versioncmp($release, '21') >= 0 {
     # >= bareos 21
     $_gpg_key_fingerprint = '91DA 1DC3 564A E20A 76C4  CA88 E019 57D6 C9FE D482'
@@ -81,7 +84,13 @@ class bareos::repository (
           $location = "${url}RHEL_${osmajrelease}"
         }
         'Centos', 'Rocky', 'AlmaLinux': {
-          if versioncmp($release, '21') >= 0 and versioncmp($osmajrelease, '8') >= 0 {
+          if (
+            (
+              (versioncmp($release, '21') >= 0) or
+              ($release == 'current')
+            ) and
+            (versioncmp($osmajrelease, '8') >= 0)
+          ) {
             $location = "${url}EL_${osmajrelease}"
           } else {
             $location = "${url}CentOS_${osmajrelease}"
