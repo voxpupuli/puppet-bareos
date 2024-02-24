@@ -1,5 +1,5 @@
 # @summary
-#   Manages the bareos repository. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined.
+#   Manages the bareos repository. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
 #
 # @param release
 #   The major bareos release version which should be used
@@ -22,7 +22,6 @@ class bareos::repository (
   Optional[String]         $password            = undef,
   Boolean                  $https               = true,
 ) {
-  assert_private()
   if $https {
     $scheme = 'https://'
   } else {

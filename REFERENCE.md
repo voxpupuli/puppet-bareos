@@ -7,18 +7,12 @@
 ### Classes
 
 * [`bareos`](#bareos): This puppet module configures and manage all aspects of an complex bareos installation
-* [`bareos::client`](#bareos--client): This class manages the bareos client (file-daemon) service, packages and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
-* [`bareos::client::client`](#bareos--client--client): The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director)
-as well as the port on which the Client listens for Director connections.
-* [`bareos::console`](#bareos--console): This class manages the bareos console (bconsole cli tool) package and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
-* [`bareos::director`](#bareos--director): This class manages the bareos director service, packages and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
-* [`bareos::director::director`](#bareos--director--director): To define the Director's name and its access password used for authenticating the Console program.
-Only a single Director resource definition may appear in the Director's configuration file.
-* [`bareos::monitor`](#bareos--monitor): This class manages the bareos (tray-) monitor package and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
+* [`bareos::client`](#bareos--client): Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+* [`bareos::client::client`](#bareos--client--client): The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as well as the port on which the Client listens for Director connections.
+* [`bareos::console`](#bareos--console): Manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+* [`bareos::director`](#bareos--director): Manages the bareos director service, packages and configuration directory. Parameters should be configured in the bareos class.
+* [`bareos::director::director`](#bareos--director--director): To define the director's name and its access password used for authenticating the console program. Only a single director resource definition may appear in the director's configuration file.
+* [`bareos::monitor`](#bareos--monitor): Manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured in the bareos class.
 * [`bareos::params`](#bareos--params): == Class: bareos::params
 * [`bareos::profile::client`](#bareos--profile--client): setup an simple bareos filedaemon/client
 * [`bareos::profile::director`](#bareos--profile--director): Ready to use director with default configs
@@ -31,75 +25,43 @@ Parameters should be configured in the upper class `::bareos`.
 * [`bareos::profile::director::schedule`](#bareos--profile--director--schedule): == Class: bareos::profile::director::schedule Default schedules
 * [`bareos::profile::director::storage`](#bareos--profile--director--storage): Default storage daemon
 * [`bareos::profile::storage`](#bareos--profile--storage)
-* [`bareos::repository`](#bareos--repository): This class manages the bareos repository
-Parameters should be configured in the upper class `::bareos`.
-
-This class will be automatically included when a resource is defined.
-It is not intended to be used directly by external resources like node definitions or other modules.
-* [`bareos::storage`](#bareos--storage): This class manages the bareos storage service, packages and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
+* [`bareos::repository`](#bareos--repository): Manages the bareos repository. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+* [`bareos::storage`](#bareos--storage): Manages the bareos storage service, packages and configuration directory. Parameters should be configured in the bareos class.
 * [`bareos::storage::storage`](#bareos--storage--storage): In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
-* [`bareos::webui`](#bareos--webui): This class manages the bareos webui service, package and configuration.
-This class will be automatically included when a resource is defined.
+* [`bareos::webui`](#bareos--webui): This class manages the bareos webui service, package and configuration, it will be automatically included when a resource is defined.
 
 ### Defined types
 
 * [`bareos::client::director`](#bareos--client--director): The Director resource defines the name and password of the Directors that are permitted to contact this Client.
 * [`bareos::client::messages`](#bareos--client--messages): The Messages resource defines how messages are to be handled and destinations to which they should be sent.
 * [`bareos::console::console`](#bareos--console--console)
-* [`bareos::console::director`](#bareos--console--director): The Director resource defines the attributes of the Director running on the network.
-You may have multiple Director resource specifications in a single Console configuration file.
-If you have more than one, you will be prompted to choose one when you start the Console program.
-* [`bareos::director::catalog`](#bareos--director--catalog): To define in what database to keep the list of files and the Volume names where they are backed up.
-Most people only use a single catalog.
-It is possible, however not adviced and not supported to use multiple catalogs.
+* [`bareos::console::director`](#bareos--console--director): The Director resource defines the attributes of the Director running on the network. You may have multiple Director resource specifications in a single Console configuration file. If you have more than one, you will be prompted to choose one when you start the Console program.
+* [`bareos::director::catalog`](#bareos--director--catalog): To define in what database to keep the list of files and the Volume names where they are backed up. Most people only use a single catalog. It is possible, however not adviced and not supported to use multiple catalogs.
 * [`bareos::director::client`](#bareos--director--client): To define what Client is to be backed up.
 You will generally have multiple Client definitions.
 Each Job will reference only a single client.
-* [`bareos::director::console`](#bareos--director--console): Configure an **Named Console** aka **Restricted Console**.
-Both the names and the passwords in these two entries must match much as is the case for Client programs.
-* [`bareos::director::counter`](#bareos--director--counter): The Counter Resource defines a counter variable that can be accessed by variable expansion used
-for creating Volume labels with the Label Format Dir Pool directive.
+* [`bareos::director::console`](#bareos--director--console): Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two entries must match much as is the case for Client programs.
+* [`bareos::director::counter`](#bareos--director--counter): The Counter Resource defines a counter variable that can be accessed by variable expansion used for creating Volume labels with the Label Format Dir Pool directive.
 * [`bareos::director::fileset`](#bareos--director--fileset): To define the set of files to be backed up for each Client.
 You may have any number of FileSets but each Job will reference only one.
-* [`bareos::director::job`](#bareos--director--job): To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
-Normally, you will Jobs of different names corresponding to each client
-(i.e. one Job per client, but a different one with a different name for each client).
+* [`bareos::director::job`](#bareos--director--job): To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job. Normally, you will Jobs of different names corresponding to each client (i.e. one Job per client, but a different one with a different name for each client).
 * [`bareos::director::jobdefs`](#bareos--director--jobdefs): JobDefs are optional resources for providing defaults for Job resources.
 Almost the same like `Job`.
-* [`bareos::director::messages`](#bareos--director--messages): To define where error and information messages are to be sent or logged.
-You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
-* [`bareos::director::pool`](#bareos--director--pool): To define the pool of Volumes that can be used for a particular Job.
-Most people use a single default Pool.
-However, if you have a large number of clients or volumes, you may want to have multiple Pools.
-Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
-* [`bareos::director::profile`](#bareos--director--profile): The Profile Resource defines a set of ACLs.
-Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
-* [`bareos::director::schedule`](#bareos--director--schedule): The Schedule resource provides a means of automatically scheduling a Job
-as well as the ability to override the default Level, Pool, Storage and Messages resources.
-If a Schedule resource is not referenced in a Job, the Job can only be run manually.
-In general, you specify an action to be taken and when.
+* [`bareos::director::messages`](#bareos--director--messages): Defines where error and information messages are to be sent or logged. You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
+* [`bareos::director::pool`](#bareos--director--pool): To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool. However, if you have a large number of clients or volumes, you may want to have multiple Pools. Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
+* [`bareos::director::profile`](#bareos--director--profile): Defines a set of ACLs. Console Resources can be tied to one or more profiles, making it easier to use a common set of ACLs.
+* [`bareos::director::schedule`](#bareos--director--schedule): Provides a means of automatically scheduling a job as well as the ability to override the default level, pool, storage and messages resources. If a schedule resource is not referenced in a job, the jjob can only be run manually. In general, you specify an action to be taken and when.
 * [`bareos::director::storage`](#bareos--director--storage): To define on what physical device the Volumes should be mounted.
 You may have one or more Storage definitions.
 * [`bareos::monitor::client`](#bareos--monitor--client): The Client resource defines the attributes of the Clients that are monitored by this Monitor.
 * [`bareos::monitor::director`](#bareos--monitor--director): The Director resource defines the attributes of the Directors that are monitored by this Monitor.
-* [`bareos::monitor::monitor`](#bareos--monitor--monitor): The Monitor resource defines the attributes of the Monitor running on the network.
-The parameters you define here must be configured as a Director resource
-in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
+* [`bareos::monitor::monitor`](#bareos--monitor--monitor): The Monitor resource defines the attributes of the Monitor running on the network. 0The parameters you define here must be configured as a Director resource in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
 * [`bareos::monitor::storage`](#bareos--monitor--storage): The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
-* [`bareos::storage::autochanger`](#bareos--storage--autochanger): The Autochanger resource supports single or multiple drive autochangers
-by grouping one or more Device resources into one unit called an autochanger in Bareos
-(often referred to as a "tape library" by autochanger manufacturers).
-* [`bareos::storage::device`](#bareos--storage--device): The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon.
-There may be multiple Device resources for a single Storage daemon.
-In general, the properties specified within the Device resource are specific to the Device.
-* [`bareos::storage::director`](#bareos--storage--director): The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
-There may be multiple Director resources.
-The Director Name and Password must match the corresponding values in the Director's configuration file.
+* [`bareos::storage::autochanger`](#bareos--storage--autochanger): Supports single or multiple drive autochangers by grouping one or more device resources into one unit called an autochanger in Bareos (often referred to as a "tape library" by autochanger manufacturers).
+* [`bareos::storage::device`](#bareos--storage--device): The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon. There may be multiple Device resources for a single Storage daemon. In general, the properties specified within the Device resource are specific to the Device.
+* [`bareos::storage::director`](#bareos--storage--director): Specifies the name of the director which is permitted to use the services of the storage daemon. The director name and password must match the corresponding values in the director's configuration file.
 * [`bareos::storage::messages`](#bareos--storage--messages): The Messages resource defines how messages are to be handled and destinations to which they should be sent.
-* [`bareos::storage::ndmp`](#bareos--storage--ndmp): The NDMP Resource specifies the authentication details of each NDMP client.
-There may be multiple NDMP resources for a single Storage daemon.
-In general, the properties specified within the NDMP resource are specific to one client.
+* [`bareos::storage::ndmp`](#bareos--storage--ndmp): The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resources for a single Storage daemon. In general, the properties specified within the NDMP resource are specific to one client.
 * [`bareos::webui::director`](#bareos--webui--director): Configures an director to use with the webui.
 
 ### Functions
@@ -386,8 +348,7 @@ Default value: `$bareos::params::storage_service_name`
 
 ### <a name="bareos--client"></a>`bareos::client`
 
-This class will be automatically included when a resource is defined.
-It is not intended to be used directly by external resources like node definitions or other modules.
+Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
@@ -468,8 +429,7 @@ Default value: `"${bareos::config_dir}/bareos-fd.d"`
 
 ### <a name="bareos--client--client"></a>`bareos::client::client`
 
-The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director)
-as well as the port on which the Client listens for Director connections.
+The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as well as the port on which the Client listens for Director connections.
 
 #### Parameters
 
@@ -1091,8 +1051,7 @@ Default value: `undef`
 
 ### <a name="bareos--console"></a>`bareos::console`
 
-This class will be automatically included when a resource is defined.
-It is not intended to be used directly by external resources like node definitions or other modules.
+Manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
@@ -1354,8 +1313,7 @@ Default value: `{}`
 
 ### <a name="bareos--director--director"></a>`bareos::director::director`
 
-To define the Director's name and its access password used for authenticating the Console program.
-Only a single Director resource definition may appear in the Director's configuration file.
+To define the director's name and its access password used for authenticating the console program. Only a single director resource definition may appear in the director's configuration file.
 
 #### Parameters
 
@@ -2254,7 +2212,7 @@ Default value: `'/var/lib/bareos/storage'`
 
 ### <a name="bareos--repository"></a>`bareos::repository`
 
-== Class: bareos::repository
+Manages the bareos repository. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
@@ -3141,8 +3099,7 @@ Default value: `undef`
 
 ### <a name="bareos--webui"></a>`bareos::webui`
 
-This class manages the bareos webui service, package and configuration.
-This class will be automatically included when a resource is defined.
+This class manages the bareos webui service, package and configuration, it will be automatically included when a resource is defined.
 
 #### Parameters
 
@@ -4099,9 +4056,7 @@ Default value: `undef`
 
 ### <a name="bareos--console--director"></a>`bareos::console::director`
 
-The Director resource defines the attributes of the Director running on the network.
-You may have multiple Director resource specifications in a single Console configuration file.
-If you have more than one, you will be prompted to choose one when you start the Console program.
+The Director resource defines the attributes of the Director running on the network. You may have multiple Director resource specifications in a single Console configuration file. If you have more than one, you will be prompted to choose one when you start the Console program.
 
 #### Parameters
 
@@ -4341,9 +4296,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--catalog"></a>`bareos::director::catalog`
 
-To define in what database to keep the list of files and the Volume names where they are backed up.
-Most people only use a single catalog.
-It is possible, however not adviced and not supported to use multiple catalogs.
+To define in what database to keep the list of files and the Volume names where they are backed up. Most people only use a single catalog. It is possible, however not adviced and not supported to use multiple catalogs.
 
 #### Parameters
 
@@ -5102,8 +5055,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--console"></a>`bareos::director::console`
 
-Configure an **Named Console** aka **Restricted Console**.
-Both the names and the passwords in these two entries must match much as is the case for Client programs.
+Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two entries must match much as is the case for Client programs.
 
 #### Parameters
 
@@ -5474,8 +5426,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--counter"></a>`bareos::director::counter`
 
-The Counter Resource defines a counter variable that can be accessed by variable expansion used
-for creating Volume labels with the Label Format Dir Pool directive.
+The Counter Resource defines a counter variable that can be accessed by variable expansion used for creating Volume labels with the Label Format Dir Pool directive.
 
 #### Parameters
 
@@ -5642,9 +5593,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--job"></a>`bareos::director::job`
 
-To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
-Normally, you will Jobs of different names corresponding to each client
-(i.e. one Job per client, but a different one with a different name for each client).
+To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job. Normally, you will Jobs of different names corresponding to each client (i.e. one Job per client, but a different one with a different name for each client).
 
 #### Parameters
 
@@ -7851,8 +7800,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--messages"></a>`bareos::director::messages`
 
-To define where error and information messages are to be sent or logged.
-You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
+Defines where error and information messages are to be sent or logged. You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
 
 #### Parameters
 
@@ -8090,10 +8038,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--pool"></a>`bareos::director::pool`
 
-To define the pool of Volumes that can be used for a particular Job.
-Most people use a single default Pool.
-However, if you have a large number of clients or volumes, you may want to have multiple Pools.
-Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
+To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool. However, if you have a large number of clients or volumes, you may want to have multiple Pools. Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
 
 #### Parameters
 
@@ -8515,8 +8460,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--profile"></a>`bareos::director::profile`
 
-The Profile Resource defines a set of ACLs.
-Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
+Defines a set of ACLs. Console Resources can be tied to one or more profiles, making it easier to use a common set of ACLs.
 
 #### Parameters
 
@@ -8677,10 +8621,7 @@ Default value: `undef`
 
 ### <a name="bareos--director--schedule"></a>`bareos::director::schedule`
 
-The Schedule resource provides a means of automatically scheduling a Job
-as well as the ability to override the default Level, Pool, Storage and Messages resources.
-If a Schedule resource is not referenced in a Job, the Job can only be run manually.
-In general, you specify an action to be taken and when.
+Provides a means of automatically scheduling a job as well as the ability to override the default level, pool, storage and messages resources. If a schedule resource is not referenced in a job, the jjob can only be run manually. In general, you specify an action to be taken and when.
 
 #### Parameters
 
@@ -9341,9 +9282,7 @@ Default value: `undef`
 
 ### <a name="bareos--monitor--monitor"></a>`bareos::monitor::monitor`
 
-The Monitor resource defines the attributes of the Monitor running on the network.
-The parameters you define here must be configured as a Director resource
-in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
+The Monitor resource defines the attributes of the Monitor running on the network. 0The parameters you define here must be configured as a Director resource in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
 
 #### Parameters
 
@@ -9561,9 +9500,7 @@ Default value: `undef`
 
 ### <a name="bareos--storage--autochanger"></a>`bareos::storage::autochanger`
 
-The Autochanger resource supports single or multiple drive autochangers
-by grouping one or more Device resources into one unit called an autochanger in Bareos
-(often referred to as a "tape library" by autochanger manufacturers).
+Supports single or multiple drive autochangers by grouping one or more device resources into one unit called an autochanger in Bareos (often referred to as a "tape library" by autochanger manufacturers).
 
 #### Parameters
 
@@ -9634,9 +9571,7 @@ Default value: `undef`
 
 ### <a name="bareos--storage--device"></a>`bareos::storage::device`
 
-The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon.
-There may be multiple Device resources for a single Storage daemon.
-In general, the properties specified within the Device resource are specific to the Device.
+The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon. There may be multiple Device resources for a single Storage daemon. In general, the properties specified within the Device resource are specific to the Device.
 
 #### Parameters
 
@@ -10460,9 +10395,7 @@ Default value: `undef`
 
 ### <a name="bareos--storage--director"></a>`bareos::storage::director`
 
-The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
-There may be multiple Director resources.
-The Director Name and Password must match the corresponding values in the Director's configuration file.
+Specifies the name of the director which is permitted to use the services of the storage daemon. The director name and password must match the corresponding values in the director's configuration file.
 
 #### Parameters
 
@@ -10940,9 +10873,7 @@ Default value: `undef`
 
 ### <a name="bareos--storage--ndmp"></a>`bareos::storage::ndmp`
 
-The NDMP Resource specifies the authentication details of each NDMP client.
-There may be multiple NDMP resources for a single Storage daemon.
-In general, the properties specified within the NDMP resource are specific to one client.
+The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resources for a single Storage daemon. In general, the properties specified within the NDMP resource are specific to one client.
 
 #### Parameters
 
