@@ -1,7 +1,9 @@
 # @summary 
 #   The Director resource defines the name and password of the Directors that are permitted to contact this Client.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param address
 #   Address: Director Network Address. Only required if "Connection From Client To Director" is enabled.
 #
@@ -160,7 +162,7 @@
 #   Required: false
 #
 define bareos::client::director (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $address = undef,
   $allowed_job_command = undef,
   $allowed_script_dir = undef,
@@ -188,10 +190,6 @@ define bareos::client::director (
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

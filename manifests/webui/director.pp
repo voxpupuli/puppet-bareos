@@ -50,10 +50,6 @@ define bareos::webui::director (
 ) {
   include bareos::webui
 
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
-
   if $ensure == 'present' {
     # just for validation
     $_validate = bareos_settings([$catalog, 'Catalog', 'res', false],

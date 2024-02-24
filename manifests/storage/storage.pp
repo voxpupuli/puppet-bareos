@@ -413,7 +413,7 @@ class bareos::storage::storage (
   $sub_sys_directory = undef,
   $tls_allowed_cn = undef,
   $tls_authenticate = undef,
-  Optional[Stdlib::Absolutepath] $tls_ca_certificate_dir = undef,
+  Optional[String[1]] $tls_ca_certificate_dir = undef,
   $tls_ca_certificate_file = undef,
   $tls_certificate = undef,
   $tls_certificate_revocation_list = undef,
@@ -424,7 +424,7 @@ class bareos::storage::storage (
   $tls_require = undef,
   $tls_verify_peer = undef,
   $ver_id = undef,
-  Optional[Stdlib::Absolutepath] $working_directory      = undef,
+  Optional[String[1]] $working_directory      = undef,
 ) {
   include bareos::storage
 

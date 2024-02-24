@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param description
 #   Description
 #
@@ -53,7 +54,7 @@
 #   Required: false
 #
 define bareos::monitor::monitor (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $description = undef,
   $dir_connect_timeout = undef,
   $fd_connect_timeout = undef,
@@ -66,10 +67,6 @@ define bareos::monitor::monitor (
 
   $_resource = 'Monitor'
   $_resource_dir = 'monitor'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param action_on_purge
 #   Action On Purge
 #
@@ -222,7 +223,7 @@
 #   Required: false
 #
 define bareos::director::pool (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $action_on_purge = undef,
   $auto_prune = undef,
   $catalog = undef,
@@ -259,10 +260,6 @@ define bareos::director::pool (
 
   $_resource = 'Pool'
   $_resource_dir = 'pool'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     # set various resource dependencies

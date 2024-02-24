@@ -28,10 +28,10 @@
 #   Bareos Datatype: string
 #
 define bareos::storage::ndmp (
-  String[1] $auth_type,
-  String[1] $password,
-  String[1] $username,
-  Integer[0] $log_level = 4,
+  Optional[String[1]] $auth_type   = undef,
+  Optional[String[1]] $password    = undef,
+  Optional[String[1]] $username    = undef,
+  Optional[Integer[0]] $log_level  = undef,
   Enum['present','absent'] $ensure = present,
   Optional[String[1]] $description = undef,
 ) {

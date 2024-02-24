@@ -333,7 +333,7 @@
 #   Required: false
 #
 class bareos::client::client (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $absolute_job_timeout = undef,
   $allow_bandwidth_bursting = undef,
   $allowed_job_command = undef,
@@ -353,7 +353,7 @@ class bareos::client::client (
   $maximum_connections = undef,
   $maximum_network_buffer_size = undef,
   $messages = undef,
-  $name_client = 'bareos-fd',
+  String[1] $name_client = 'bareos-fd',
   $pid_directory = undef,
   $pki_cipher = undef,
   $pki_encryption = undef,
@@ -385,10 +385,6 @@ class bareos::client::client (
 
   $_resource = 'Client'
   $_resource_dir = 'client'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Client::Messages[$messages] }

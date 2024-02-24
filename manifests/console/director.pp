@@ -124,7 +124,7 @@
 #   Required: false
 #
 define bareos::console::director (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $address = undef,
   $description = undef,
   $dir_port = undef,
@@ -147,10 +147,6 @@ define bareos::console::director (
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

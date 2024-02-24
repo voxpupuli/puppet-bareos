@@ -1,5 +1,6 @@
 # @param ensure
 #   present or absent the config file.
+#
 # @param description
 #   Description
 #
@@ -135,7 +136,7 @@
 #   Required: false
 #
 define bareos::console::console (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $description = undef,
   $director = undef,
   $heartbeat_interval = undef,
@@ -160,10 +161,6 @@ define bareos::console::console (
 
   $_resource = 'Console'
   $_resource_dir = 'console'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

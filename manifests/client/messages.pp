@@ -1,7 +1,9 @@
 # @summary
 #   The Messages resource defines how messages are to be handled and destinations to which they should be sent.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param append
 #   Append
 #
@@ -127,7 +129,7 @@
 #   Required: false
 #
 define bareos::client::messages (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $append = undef,
   $catalog = undef,
   $console = undef,
@@ -149,10 +151,6 @@ define bareos::client::messages (
 
   $_resource = 'Messages'
   $_resource_dir = 'messages'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

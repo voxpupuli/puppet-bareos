@@ -82,7 +82,7 @@
 #   Required: false
 #
 define bareos::director::profile (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $catalog_acl = undef,
   $client_acl = undef,
   $command_acl = undef,
@@ -99,10 +99,6 @@ define bareos::director::profile (
 
   $_resource = 'Profile'
   $_resource_dir = 'profile'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],
