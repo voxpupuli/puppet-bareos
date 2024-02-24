@@ -6,10 +6,10 @@
 # @param config_dir
 #
 class bareos::console (
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::console_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $config_dir     = "${bareos::config_dir}/bconsole.d"
+  Boolean $manage_package = $bareos::manage_package,
+  String[1] $package_name   = $bareos::console_package_name,
+  String[1] $package_ensure = $bareos::package_ensure,
+  String[1] $config_dir     = "${bareos::config_dir}/bconsole.d"
 ) inherits bareos {
   if $manage_package {
     package { $package_name:
