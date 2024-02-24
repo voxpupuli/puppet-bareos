@@ -1,6 +1,5 @@
 # @summary 
-#   To define where error and information messages are to be sent or logged.
-#   You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
+#   Defines where error and information messages are to be sent or logged. You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
 #
 # @param ensure
 #   present or absent the config file.

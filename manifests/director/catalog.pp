@@ -1,7 +1,6 @@
 # @summary 
-#   To define in what database to keep the list of files and the Volume names where they are backed up.
-#   Most people only use a single catalog.
-#   It is possible, however not adviced and not supported to use multiple catalogs.
+#   To define in what database to keep the list of files and the Volume names where they are backed up. Most people only use a single catalog. It is possible, however not adviced and not supported to use multiple catalogs.
+#
 # @param ensure
 #   present or absent the config file.
 # @param db_address

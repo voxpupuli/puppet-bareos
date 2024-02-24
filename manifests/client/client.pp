@@ -1,6 +1,6 @@
 # @summary
-#   The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director)
-#   as well as the port on which the Client listens for Director connections.
+#   The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as well as the port on which the Client listens for Director connections.
+#
 # @param ensure
 #   present or absent the config file.
 #

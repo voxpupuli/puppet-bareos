@@ -1,8 +1,9 @@
 # @summary 
-#   The Profile Resource defines a set of ACLs.
-#   Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
+#   Defines a set of ACLs. Console Resources can be tied to one or more profiles, making it easier to use a common set of ACLs.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param catalog_acl
 #   Catalog ACL: Lists the Catalog resources, this resource has access to. The special keyword *all* allows access to all Catalog resources.
 #

@@ -1,8 +1,6 @@
 # @summary 
-#   To define the pool of Volumes that can be used for a particular Job.
-#   Most people use a single default Pool.
-#   However, if you have a large number of clients or volumes, you may want to have multiple Pools.
-#   Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
+#   To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool. However, if you have a large number of clients or volumes, you may want to have multiple Pools. Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
+#
 # @param ensure
 #   present or absent the config file.
 # @param action_on_purge

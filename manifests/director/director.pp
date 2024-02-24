@@ -1,6 +1,5 @@
 # @summary
-#   To define the Director's name and its access password used for authenticating the Console program.
-#   Only a single Director resource definition may appear in the Director's configuration file.
+#   To define the director's name and its access password used for authenticating the console program. Only a single director resource definition may appear in the director's configuration file.
 #
 # @param ensure
 #   present or absent the config file.

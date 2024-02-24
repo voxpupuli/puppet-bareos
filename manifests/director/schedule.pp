@@ -1,8 +1,5 @@
 # @summary 
-#   The Schedule resource provides a means of automatically scheduling a Job
-#   as well as the ability to override the default Level, Pool, Storage and Messages resources.
-#   If a Schedule resource is not referenced in a Job, the Job can only be run manually.
-#   In general, you specify an action to be taken and when.
+#   Provides a means of automatically scheduling a job as well as the ability to override the default level, pool, storage and messages resources. If a schedule resource is not referenced in a job, the jjob can only be run manually. In general, you specify an action to be taken and when.
 #
 # @param ensure
 #   present or absent the config file.

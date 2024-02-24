@@ -1,9 +1,9 @@
 # @summary 
-#   The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
-#   There may be multiple Director resources. 
-#   The Director Name and Password must match the corresponding values in the Director's configuration file.
+#   Specifies the name of the director which is permitted to use the services of the storage daemon. The director name and password must match the corresponding values in the director's configuration file.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param description
 #   Description
 #

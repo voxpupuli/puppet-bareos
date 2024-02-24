@@ -1,6 +1,5 @@
 # @summary 
-#   This class manages the bareos (tray-) monitor package and configuration directory.
-#   Parameters should be configured in the upper class `::bareos`.
+#   Manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured in the bareos class.
 # @param manage_package
 # @param package_name
 # @param package_ensure

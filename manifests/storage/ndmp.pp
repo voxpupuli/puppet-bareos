@@ -1,7 +1,6 @@
 # @summary 
-#   The NDMP Resource specifies the authentication details of each NDMP client.
-#   There may be multiple NDMP resources for a single Storage daemon.
-#   In general, the properties specified within the NDMP resource are specific to one client.
+#   The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resources for a single Storage daemon. In general, the properties specified within the NDMP resource are specific to one client.
+#
 # @param ensure
 #   present or absent the config file.
 # @param auth_type

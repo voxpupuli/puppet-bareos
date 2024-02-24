@@ -1,7 +1,5 @@
 # @summary
-#   The Autochanger resource supports single or multiple drive autochangers
-#   by grouping one or more Device resources into one unit called an autochanger in Bareos
-#   (often referred to as a "tape library" by autochanger manufacturers).
+#   Supports single or multiple drive autochangers by grouping one or more device resources into one unit called an autochanger in Bareos (often referred to as a "tape library" by autochanger manufacturers).
 #
 # @param ensure
 #   present or absent the config file.

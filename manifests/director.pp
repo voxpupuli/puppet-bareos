@@ -1,6 +1,5 @@
 # @summary 
-#   This class manages the bareos director service, packages and configuration directory.
-#   Parameters should be configured in the upper class `::bareos`.
+#   Manages the bareos director service, packages and configuration directory. Parameters should be configured in the bareos class.
 # @param manage_service
 # @param manage_package
 # @param manage_database

@@ -1,6 +1,6 @@
 # @summary
-#   This class manages the bareos client (file-daemon) service, packages and configuration directory.
-#   Parameters should be configured in the upper class `::bareos`.
+#   Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters should be configured in the bareos class.
+#
 # @param manage_service
 # @param manage_package
 # @param package_name
@@ -10,8 +10,6 @@
 # @param service_enable
 # @param config_dir
 #
-# This class will be automatically included when a resource is defined.
-# It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::client (
   $manage_service = $bareos::manage_service,
   $manage_package = $bareos::manage_package,
@@ -22,6 +20,8 @@ class bareos::client (
   $service_enable = $bareos::service_enable,
   $config_dir     = "${bareos::config_dir}/bareos-fd.d"
 ) inherits bareos {
+  assert_private()
+
   include bareos::client::client
 
   if $manage_package {

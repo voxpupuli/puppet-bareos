@@ -1,6 +1,6 @@
 # @summary 
-#   Configure an **Named Console** aka **Restricted Console**.
-#   Both the names and the passwords in these two entries must match much as is the case for Client programs.
+#   Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two entries must match much as is the case for Client programs.
+#
 # @param ensure
 #   present or absent the config file.
 # @param catalog_acl
