@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param auth_type
 #   Auth Type
 #
@@ -12,48 +13,32 @@
 #
 # @param description
 #   Description
-#
 #   Bareos Datatype: string
-#   Bareos Default: Not set
-#   Required: false
 #
 # @param log_level
 #   Log Level
-#
 #   Bareos Datatype: pint32
-#   Bareos Default: 4
-#   Required: false
 #
 # @param password
 #   Password
-#
 #   Bareos Datatype: autopassword
-#   Bareos Default: Not set
-#   Required: true
 #
 # @param username
 #   Username
-#
 #   Bareos Datatype: string
-#   Bareos Default: Not set
-#   Required: true
 #
 define bareos::storage::ndmp (
-  $ensure = present,
-  $auth_type = undef,
-  $description = undef,
-  $log_level = undef,
-  $password = undef,
-  $username = undef,
+  String[1] $auth_type,
+  String[1] $password,
+  String[1] $username,
+  Integer[0] $log_level = 4,
+  Enum['present','absent'] $ensure = present,
+  Optional[String[1]] $description = undef,
 ) {
   include bareos::storage
 
   $_resource = 'Ndmp'
   $_resource_dir = 'ndmp'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

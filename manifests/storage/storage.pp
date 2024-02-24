@@ -1,7 +1,9 @@
 # @summary
 #   In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param absolute_job_timeout
 #   Absolute Job Timeout
 #
@@ -370,7 +372,7 @@
 #   Required: false
 #
 class bareos::storage::storage (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $absolute_job_timeout = undef,
   $allow_bandwidth_bursting = undef,
   $auto_x_flate_on_replication = undef,
@@ -390,7 +392,7 @@ class bareos::storage::storage (
   $maximum_connections = undef,
   $maximum_network_buffer_size = undef,
   $messages = undef,
-  $name_storage = 'bareos-sd',
+  String[1] $name_storage = 'bareos-sd',
   $ndmp_address = undef,
   $ndmp_addresses = undef,
   $ndmp_enable = undef,
@@ -411,7 +413,7 @@ class bareos::storage::storage (
   $sub_sys_directory = undef,
   $tls_allowed_cn = undef,
   $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
+  Optional[Stdlib::Absolutepath] $tls_ca_certificate_dir = undef,
   $tls_ca_certificate_file = undef,
   $tls_certificate = undef,
   $tls_certificate_revocation_list = undef,
@@ -422,16 +424,12 @@ class bareos::storage::storage (
   $tls_require = undef,
   $tls_verify_peer = undef,
   $ver_id = undef,
-  $working_directory = undef,
+  Optional[Stdlib::Absolutepath] $working_directory      = undef,
 ) {
   include bareos::storage
 
   $_resource = 'Storage'
   $_resource_dir = 'storage'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Storage::Messages[$messages] }
