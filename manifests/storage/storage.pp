@@ -1,32 +1,29 @@
-# == Class: bareos::storage::storage
-# In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
-#
-# == Parameters
-# [*ensure*]
+# @summary
+#   In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
+# @param ensure
 #   present or absent the config file.
-#
-# [*absolute_job_timeout*]
+# @param absolute_job_timeout
 #   Absolute Job Timeout
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*allow_bandwidth_bursting*]
+# @param allow_bandwidth_bursting
 #   Allow Bandwidth Bursting
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*auto_x_flate_on_replication*]
+# @param auto_x_flate_on_replication
 #   Auto X Flate On Replication
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*backend_directory*]
+# @param backend_directory
 #   Backend Directory
 #
 #   May be specified as Array.
@@ -34,112 +31,112 @@
 #   Bareos Default: /usr/lib/bareos/backends
 #   Required: false
 #
-# [*client_connect_wait*]
+# @param client_connect_wait
 #   Client Connect Wait
 #
 #   Bareos Datatype: time
 #   Bareos Default: 1800
 #   Required: false
 #
-# [*collect_device_statistics*]
+# @param collect_device_statistics
 #   Collect Device Statistics
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*collect_job_statistics*]
+# @param collect_job_statistics
 #   Collect Job Statistics
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*compatible*]
+# @param compatible
 #   Compatible
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*device_reserve_by_media_type*]
+# @param device_reserve_by_media_type
 #   Device Reserve By Media Type
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*fd_connect_timeout*]
+# @param fd_connect_timeout
 #   Fd Connect Timeout
 #
 #   Bareos Datatype: time
 #   Bareos Default: 1800
 #   Required: false
 #
-# [*file_device_concurrent_read*]
+# @param file_device_concurrent_read
 #   File Device Concurrent Read
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*heartbeat_interval*]
+# @param heartbeat_interval
 #   Heartbeat Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: 0
 #   Required: false
 #
-# [*log_timestamp_format*]
+# @param log_timestamp_format
 #   Log Timestamp Format
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_bandwidth_per_job*]
+# @param maximum_bandwidth_per_job
 #   Maximum Bandwidth Per Job
 #
 #   Bareos Datatype: speed
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_concurrent_jobs*]
+# @param maximum_concurrent_jobs
 #   Maximum Concurrent Jobs
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 20
 #   Required: false
 #
-# [*maximum_connections*]
+# @param maximum_connections
 #   Maximum Connections
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 42
 #   Required: false
 #
-# [*maximum_network_buffer_size*]
+# @param maximum_network_buffer_size
 #   Maximum Network Buffer Size
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*messages*]
+# @param messages
 #   Messages
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*name_storage*]
+# @param name_storage
 #   Name of this storage.
 #   Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_storage.
 #
@@ -147,133 +144,133 @@
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*ndmp_address*]
+# @param ndmp_address
 #   Ndmp Address
 #
 #   Bareos Datatype: address
 #   Bareos Default: 10000
 #   Required: false
 #
-# [*ndmp_addresses*]
+# @param ndmp_addresses
 #   Ndmp Addresses
 #
 #   Bareos Datatype: addresses
 #   Bareos Default: 10000
 #   Required: false
 #
-# [*ndmp_enable*]
+# @param ndmp_enable
 #   Ndmp Enable
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*ndmp_log_level*]
+# @param ndmp_log_level
 #   Ndmp Log Level
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 4
 #   Required: false
 #
-# [*ndmp_port*]
+# @param ndmp_port
 #   Ndmp Port
 #
 #   Bareos Datatype: port
 #   Bareos Default: 10000
 #   Required: false
 #
-# [*ndmp_snooping*]
+# @param ndmp_snooping
 #   Ndmp Snooping
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*pid_directory*]
+# @param pid_directory
 #   Pid Directory
 #
 #   Bareos Datatype: directory
 #   Bareos Default: /var/lib/bareos
 #   Required: false
 #
-# [*plugin_directory*]
+# @param plugin_directory
 #   Plugin Directory
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*plugin_names*]
+# @param plugin_names
 #   Plugin Names
 #
 #   Bareos Datatype: plugin_names
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*scripts_directory*]
+# @param scripts_directory
 #   Scripts Directory
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*sd_address*]
+# @param sd_address
 #   Sd Address
 #
 #   Bareos Datatype: address
 #   Bareos Default: 9103
 #   Required: false
 #
-# [*sd_addresses*]
+# @param sd_addresses
 #   Sd Addresses
 #
 #   Bareos Datatype: addresses
 #   Bareos Default: 9103
 #   Required: false
 #
-# [*sd_connect_timeout*]
+# @param sd_connect_timeout
 #   Sd Connect Timeout
 #
 #   Bareos Datatype: time
 #   Bareos Default: 1800
 #   Required: false
 #
-# [*sd_port*]
+# @param sd_port
 #   Sd Port
 #
 #   Bareos Datatype: port
 #   Bareos Default: 9103
 #   Required: false
 #
-# [*sd_source_address*]
+# @param sd_source_address
 #   Sd Source Address
 #
 #   Bareos Datatype: address
 #   Bareos Default: 0
 #   Required: false
 #
-# [*secure_erase_command*]
+# @param secure_erase_command
 #   Secure Erase Command: Specify command that will be called when bareos unlinks files.
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*statistics_collect_interval*]
+# @param statistics_collect_interval
 #   Statistics Collect Interval
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 30
 #   Required: false
 #
-# [*sub_sys_directory*]
+# @param sub_sys_directory
 #   Sub Sys Directory
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_allowed_cn*]
+# @param tls_allowed_cn
 #   Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 #
 #   May be specified as Array.
@@ -281,91 +278,91 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_authenticate*]
+# @param tls_authenticate
 #   Tls Authenticate: Use TLS only to authenticate, not for encryption.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_ca_certificate_dir*]
+# @param tls_ca_certificate_dir
 #   Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_ca_certificate_file*]
+# @param tls_ca_certificate_file
 #   Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate*]
+# @param tls_certificate
 #   Tls Certificate: Path of a PEM encoded TLS certificate.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate_revocation_list*]
+# @param tls_certificate_revocation_list
 #   Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_cipher_list*]
+# @param tls_cipher_list
 #   Tls Cipher List: List of valid TLS Ciphers.
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_dh_file*]
+# @param tls_dh_file
 #   Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_enable*]
+# @param tls_enable
 #   Tls Enable: Enable TLS support.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_key*]
+# @param tls_key
 #   Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_require*]
+# @param tls_require
 #   Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_verify_peer*]
+# @param tls_verify_peer
 #   Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*ver_id*]
+# @param ver_id
 #   Ver Id
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*working_directory*]
+# @param working_directory
 #   Working Directory
 #
 #   Bareos Datatype: directory

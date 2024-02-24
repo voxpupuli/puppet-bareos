@@ -1,7 +1,19 @@
-# == Class: bareos::storage
-# This class manages the bareos storage service, packages and configuration directory.
-# Parameters should be configured in the upper class `::bareos`.
-
+# @summary
+#   Manages the bareos storage service, packages and configuration directory. Parameters should be configured in the bareos class.
+# @param manage_service
+# @param manage_package
+# @param package_name
+# @param package_ensure
+# @param service_name
+# @param service_ensure
+# @param service_enable
+# @param config_dir
+# @param autochangers
+# @param devices
+# @param directors
+# @param messages
+# @param ndmps
+#
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::storage (

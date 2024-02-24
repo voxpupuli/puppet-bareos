@@ -1,9 +1,15 @@
-# == Class: bareos::client
-# This class manages the bareos client (file-daemon) service, packages and configuration directory.
-# Parameters should be configured in the upper class `::bareos`.
-
-# This class will be automatically included when a resource is defined.
-# It is not intended to be used directly by external resources like node definitions or other modules.
+# @summary
+#   Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+#
+# @param manage_service
+# @param manage_package
+# @param package_name
+# @param package_ensure
+# @param service_name
+# @param service_ensure
+# @param service_enable
+# @param config_dir
+#
 class bareos::client (
   $manage_service = $bareos::manage_service,
   $manage_package = $bareos::manage_package,

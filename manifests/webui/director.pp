@@ -1,42 +1,39 @@
-# == Class: bareos::webui::director
-# Configures an director to use with the webui.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   Configures an director to use with the webui.
+# @param ensure
 #   present or absent the config file.
-#
-# [*catalog*]
+# @param catalog
 #   Catalog
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*dir_address*]
+# @param dir_address
 #   Dir Address
 #
 #   Bareos Datatype: address
 #   Bareos Default: 9101
 #   Required: false
 #
-# [*dir_port*]
+# @param dir_port
 #   Dir Port
 #
 #   Bareos Datatype: port
 #   Bareos Default: 9101
 #   Required: false
 #
-# [*enabled*]
+# @param enabled
 #   Enable or disable section. Possible values are "yes" or "no", the default is "yes".
 #
-# [*pam_console_name*]
+# @param pam_console_name
 #   Pam Console Name
 #
 #   Bareos datatype: res
 #   Bareos default: not set
 #   Required: false
 #
-# [*pam_console_password*]
+# @param pam_console_password
 #   Pam Console Password
 #
 #   Bareos datatype: res

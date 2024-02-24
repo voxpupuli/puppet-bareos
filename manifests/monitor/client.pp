@@ -1,39 +1,36 @@
-# == Define: bareos::monitor::client
-# The Client resource defines the attributes of the Clients that are monitored by this Monitor.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   The Client resource defines the attributes of the Clients that are monitored by this Monitor.
+# @param ensure
 #   present or absent the config file.
-#
-# [*address*]
+# @param address
 #   Address
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*enable_ssl*]
+# @param enable_ssl
 #   Enable Ssl
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*fd_port*]
+# @param fd_port
 #   Fd Port
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 9102
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: md5password

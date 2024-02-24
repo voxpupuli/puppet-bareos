@@ -1,32 +1,29 @@
-# == Define: bareos::monitor::director
-# The Director resource defines the attributes of the Directors that are monitored by this Monitor.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   The Director resource defines the attributes of the Directors that are monitored by this Monitor.
+# @param ensure
 #   present or absent the config file.
-#
-# [*address*]
+# @param address
 #   Address
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*dir_port*]
+# @param dir_port
 #   Dir Port
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 9101
 #   Required: false
 #
-# [*enable_ssl*]
+# @param enable_ssl
 #   Enable Ssl
 #
 #   Bareos Datatype: boolean

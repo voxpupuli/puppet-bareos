@@ -1,48 +1,45 @@
-# == Define: bareos::storage::director
-# The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
-# There may be multiple Director resources. 
-# The Director Name and Password must match the corresponding values in the Director's configuration file.
+# @summary 
+#   Specifies the name of the director which is permitted to use the services of the storage daemon. The director name and password must match the corresponding values in the director's configuration file.
 #
-# == Parameters
-# [*ensure*]
+# @param ensure
 #   present or absent the config file.
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*key_encryption_key*]
+# @param key_encryption_key
 #   Key Encryption Key
 #
 #   Bareos Datatype: autopassword
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_bandwidth_per_job*]
+# @param maximum_bandwidth_per_job
 #   Maximum Bandwidth Per Job
 #
 #   Bareos Datatype: speed
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*monitor*]
+# @param monitor
 #   Monitor
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: autopassword
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*tls_allowed_cn*]
+# @param tls_allowed_cn
 #   Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 #
 #   May be specified as Array.
@@ -50,77 +47,77 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_authenticate*]
+# @param tls_authenticate
 #   Tls Authenticate: Use TLS only to authenticate, not for encryption.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_ca_certificate_dir*]
+# @param tls_ca_certificate_dir
 #   Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_ca_certificate_file*]
+# @param tls_ca_certificate_file
 #   Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate*]
+# @param tls_certificate
 #   Tls Certificate: Path of a PEM encoded TLS certificate.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate_revocation_list*]
+# @param tls_certificate_revocation_list
 #   Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_cipher_list*]
+# @param tls_cipher_list
 #   Tls Cipher List: List of valid TLS Ciphers.
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_dh_file*]
+# @param tls_dh_file
 #   Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_enable*]
+# @param tls_enable
 #   Tls Enable: Enable TLS support.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_key*]
+# @param tls_key
 #   Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_require*]
+# @param tls_require
 #   Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_verify_peer*]
+# @param tls_verify_peer
 #   Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 #
 #   Bareos Datatype: boolean

@@ -7,15 +7,15 @@
 ### Classes
 
 * [`bareos`](#bareos): This puppet module configures and manage all aspects of an complex bareos installation
-* [`bareos::client`](#bareos--client): This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node 
-* [`bareos::client::client`](#bareos--client--client): == Class: bareos::client::client The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as wel
-* [`bareos::console`](#bareos--console): == Class: bareos::console This class manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be
-* [`bareos::director`](#bareos--director): == Class: bareos::director This class manages the bareos director service, packages and configuration directory. Parameters should be configu
-* [`bareos::director::director`](#bareos--director--director): == Class: bareos::director::director To define the Director's name and its access password used for authenticating the Console program. Only 
-* [`bareos::monitor`](#bareos--monitor): == Class: bareos::monitor This class manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured 
+* [`bareos::client`](#bareos--client): Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+* [`bareos::client::client`](#bareos--client--client): The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as well as the port on which the Client listens for Director connections.
+* [`bareos::console`](#bareos--console): Manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+* [`bareos::director`](#bareos--director): Manages the bareos director service, packages and configuration directory. Parameters should be configured in the bareos class.
+* [`bareos::director::director`](#bareos--director--director): To define the director's name and its access password used for authenticating the console program. Only a single director resource definition may appear in the director's configuration file.
+* [`bareos::monitor`](#bareos--monitor): Manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured in the bareos class.
 * [`bareos::params`](#bareos--params): == Class: bareos::params
-* [`bareos::profile::client`](#bareos--profile--client): == Class: bareos::profile::client setup an simple bareos filedaemon/client
-* [`bareos::profile::director`](#bareos--profile--director): == Class: bareos::profile::director Ready to use director with default configs
+* [`bareos::profile::client`](#bareos--profile--client): setup an simple bareos filedaemon/client
+* [`bareos::profile::director`](#bareos--profile--director): Ready to use director with default configs
 * [`bareos::profile::director::client`](#bareos--profile--director--client): == Class: bareos::profile::director::client Default client, backup bareos director itself
 * [`bareos::profile::director::fileset`](#bareos--profile--director--fileset): == Class: bareos::profile::director::fileset Default filesets
 * [`bareos::profile::director::jobdefs`](#bareos--profile--director--jobdefs): == Class: bareos::profile::director::jobdefs Default jobdefs
@@ -23,45 +23,46 @@
 * [`bareos::profile::director::pool`](#bareos--profile--director--pool): == Class: bareos::profile::director::pool Some default pools
 * [`bareos::profile::director::profile`](#bareos--profile--director--profile): == Class: bareos::profile::director::profile
 * [`bareos::profile::director::schedule`](#bareos--profile--director--schedule): == Class: bareos::profile::director::schedule Default schedules
-* [`bareos::profile::director::storage`](#bareos--profile--director--storage): == Class: bareos::profile::director::storage Default storage daemon
-* [`bareos::profile::storage`](#bareos--profile--storage): == Class: bareos::profile::storage
-* [`bareos::repository`](#bareos--repository): This class manages the bareos repository
-Parameters should be configured in the upper class `::bareos`.
-
-This class will be automatically included when a resource is defined.
-It is not intended to be used directly by external resources like node definitions or other modules.
-* [`bareos::storage`](#bareos--storage): This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node 
-* [`bareos::storage::storage`](#bareos--storage--storage): == Class: bareos::storage::storage In general, the properties specified under the Storage resource dene global properties of the Storage daem
-* [`bareos::webui`](#bareos--webui): == Class: bareos::webui This class manages the bareos webui service, package and configuration.  This class will be automatically included wh
+* [`bareos::profile::director::storage`](#bareos--profile--director--storage): Default storage daemon
+* [`bareos::profile::storage`](#bareos--profile--storage)
+* [`bareos::repository`](#bareos--repository): Manages the bareos repository. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+* [`bareos::storage`](#bareos--storage): Manages the bareos storage service, packages and configuration directory. Parameters should be configured in the bareos class.
+* [`bareos::storage::storage`](#bareos--storage--storage): In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
+* [`bareos::webui`](#bareos--webui): This class manages the bareos webui service, package and configuration, it will be automatically included when a resource is defined.
 
 ### Defined types
 
-* [`bareos::client::director`](#bareos--client--director): == Define: bareos::client::director The Director resource defines the name and password of the Directors that are permitted to contact this C
-* [`bareos::client::messages`](#bareos--client--messages): == Define: bareos::client::messages The Messages resource defines how messages are to be handled and destinations to which they should be sen
-* [`bareos::console::console`](#bareos--console--console): == Define: bareos::console::console  == Parameters [*ensure*]   present or absent the config file.  [*description*]   Description    Bareos D
-* [`bareos::console::director`](#bareos--console--director): == Define: bareos:console::director The Director resource defines the attributes of the Director running on the network. You may have multipl
-* [`bareos::director::catalog`](#bareos--director--catalog): [*validate_timeout*]   Validate Timeout    Bareos Datatype: pint32   Bareos Default: 120   Required: false
-* [`bareos::director::client`](#bareos--director--client): == Define: bareos::director::client To define what Client is to be backed up. You will generally have multiple Client definitions. Each Job w
-* [`bareos::director::console`](#bareos--director--console): == Define: bareos::director::console Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two
-* [`bareos::director::counter`](#bareos--director--counter): == Define: bareos::director::counter The Counter Resource defines a counter variable that can be accessed by variable expansion used for crea
-* [`bareos::director::fileset`](#bareos--director--fileset): == Define: bareos::director::fileset To define the set of files to be backed up for each Client. You may have any number of FileSets but each
-* [`bareos::director::job`](#bareos--director--job): == Define: bareos::director::job To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used 
-* [`bareos::director::jobdefs`](#bareos--director--jobdefs): == Define: bareos::director::jobdefs JobDefs are optional resources for providing defaults for Job resources. Almost the same like `Job`.  ==
-* [`bareos::director::messages`](#bareos--director--messages): == Define: bareos::director::messages To define where error and information messages are to be sent or logged. You may define multiple differ
-* [`bareos::director::pool`](#bareos--director--pool): == Define: bareos::director::pool To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool.
-* [`bareos::director::profile`](#bareos--director--profile): == Define: bareos::director::profile The Profile Resource defines a set of ACLs. Console Resources can be tight to one or more profiles, maki
-* [`bareos::director::schedule`](#bareos--director--schedule): == Define: bareos::director::schedule The Schedule resource provides a means of automatically scheduling a Job as well as the ability to over
-* [`bareos::director::storage`](#bareos--director--storage): == Define: bareos::director::storage To define on what physical device the Volumes should be mounted. You may have one or more Storage defini
-* [`bareos::monitor::client`](#bareos--monitor--client): == Define: bareos::monitor::client The Client resource defines the attributes of the Clients that are monitored by this Monitor.  == Paramete
-* [`bareos::monitor::director`](#bareos--monitor--director): == Define: bareos::monitor::director The Director resource defines the attributes of the Directors that are monitored by this Monitor.  == Pa
-* [`bareos::monitor::monitor`](#bareos--monitor--monitor): == Define: bareos::monitor::monitor The Monitor resource defines the attributes of the Monitor running on the network. The parameters you def
-* [`bareos::monitor::storage`](#bareos--monitor--storage): == Define: bareos::monitor::storage The Storage resource defines the attributes of the Storages that are monitored by this Monitor.  == Param
-* [`bareos::storage::autochanger`](#bareos--storage--autochanger): == Define: bareos::storage::autochanger The Autochanger resource supports single or multiple drive autochangers by grouping one or more Devic
-* [`bareos::storage::device`](#bareos--storage--device): == Define: bareos::storage::device The Device Resource specifies the details of each device (normally a tape drive) that can be used by the S
-* [`bareos::storage::director`](#bareos--storage--director): == Define: bareos::storage::director The Director resource specifies the Name of the Director which is permitted to use the services of the S
-* [`bareos::storage::messages`](#bareos--storage--messages): == Define: bareos::storage::messages The Messages resource defines how messages are to be handled and destinations to which they should be se
-* [`bareos::storage::ndmp`](#bareos--storage--ndmp): == Define: bareos::storage::ndmp The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resou
-* [`bareos::webui::director`](#bareos--webui--director): == Class: bareos::webui::director Configures an director to use with the webui.  == Parameters [*ensure*]   present or absent the config file
+* [`bareos::client::director`](#bareos--client--director): The Director resource defines the name and password of the Directors that are permitted to contact this Client.
+* [`bareos::client::messages`](#bareos--client--messages): The Messages resource defines how messages are to be handled and destinations to which they should be sent.
+* [`bareos::console::console`](#bareos--console--console)
+* [`bareos::console::director`](#bareos--console--director): The Director resource defines the attributes of the Director running on the network. You may have multiple Director resource specifications in a single Console configuration file. If you have more than one, you will be prompted to choose one when you start the Console program.
+* [`bareos::director::catalog`](#bareos--director--catalog): To define in what database to keep the list of files and the Volume names where they are backed up. Most people only use a single catalog. It is possible, however not adviced and not supported to use multiple catalogs.
+* [`bareos::director::client`](#bareos--director--client): To define what Client is to be backed up.
+You will generally have multiple Client definitions.
+Each Job will reference only a single client.
+* [`bareos::director::console`](#bareos--director--console): Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two entries must match much as is the case for Client programs.
+* [`bareos::director::counter`](#bareos--director--counter): The Counter Resource defines a counter variable that can be accessed by variable expansion used for creating Volume labels with the Label Format Dir Pool directive.
+* [`bareos::director::fileset`](#bareos--director--fileset): To define the set of files to be backed up for each Client.
+You may have any number of FileSets but each Job will reference only one.
+* [`bareos::director::job`](#bareos--director--job): To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job. Normally, you will Jobs of different names corresponding to each client (i.e. one Job per client, but a different one with a different name for each client).
+* [`bareos::director::jobdefs`](#bareos--director--jobdefs): JobDefs are optional resources for providing defaults for Job resources.
+Almost the same like `Job`.
+* [`bareos::director::messages`](#bareos--director--messages): Defines where error and information messages are to be sent or logged. You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
+* [`bareos::director::pool`](#bareos--director--pool): To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool. However, if you have a large number of clients or volumes, you may want to have multiple Pools. Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
+* [`bareos::director::profile`](#bareos--director--profile): Defines a set of ACLs. Console Resources can be tied to one or more profiles, making it easier to use a common set of ACLs.
+* [`bareos::director::schedule`](#bareos--director--schedule): Provides a means of automatically scheduling a job as well as the ability to override the default level, pool, storage and messages resources. If a schedule resource is not referenced in a job, the jjob can only be run manually. In general, you specify an action to be taken and when.
+* [`bareos::director::storage`](#bareos--director--storage): To define on what physical device the Volumes should be mounted.
+You may have one or more Storage definitions.
+* [`bareos::monitor::client`](#bareos--monitor--client): The Client resource defines the attributes of the Clients that are monitored by this Monitor.
+* [`bareos::monitor::director`](#bareos--monitor--director): The Director resource defines the attributes of the Directors that are monitored by this Monitor.
+* [`bareos::monitor::monitor`](#bareos--monitor--monitor): The Monitor resource defines the attributes of the Monitor running on the network. 0The parameters you define here must be configured as a Director resource in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
+* [`bareos::monitor::storage`](#bareos--monitor--storage): The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
+* [`bareos::storage::autochanger`](#bareos--storage--autochanger): Supports single or multiple drive autochangers by grouping one or more device resources into one unit called an autochanger in Bareos (often referred to as a "tape library" by autochanger manufacturers).
+* [`bareos::storage::device`](#bareos--storage--device): The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon. There may be multiple Device resources for a single Storage daemon. In general, the properties specified within the Device resource are specific to the Device.
+* [`bareos::storage::director`](#bareos--storage--director): Specifies the name of the director which is permitted to use the services of the storage daemon. The director name and password must match the corresponding values in the director's configuration file.
+* [`bareos::storage::messages`](#bareos--storage--messages): The Messages resource defines how messages are to be handled and destinations to which they should be sent.
+* [`bareos::storage::ndmp`](#bareos--storage--ndmp): The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resources for a single Storage daemon. In general, the properties specified within the NDMP resource are specific to one client.
+* [`bareos::webui::director`](#bareos--webui--director): Configures an director to use with the webui.
 
 ### Functions
 
@@ -347,8 +348,7 @@ Default value: `$bareos::params::storage_service_name`
 
 ### <a name="bareos--client"></a>`bareos::client`
 
-This class will be automatically included when a resource is defined.
-It is not intended to be used directly by external resources like node definitions or other modules.
+Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
@@ -429,341 +429,7 @@ Default value: `"${bareos::config_dir}/bareos-fd.d"`
 
 ### <a name="bareos--client--client"></a>`bareos::client::client`
 
-== Class: bareos::client::client
-The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director)
-as well as the port on which the Client listens for Director connections.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*absolute_job_timeout*]
-  Absolute Job Timeout
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*allow_bandwidth_bursting*]
-  Allow Bandwidth Bursting
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*allowed_job_command*]
-  Allowed Job Command
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*allowed_script_dir*]
-  Allowed Script Dir
-
-  May be specified as Array.
-  Bareos Datatype: directory_list
-  Bareos Default: Not set
-  Required: false
-
-[*always_use_lmdb*]
-  Always Use Lmdb
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*compatible*]
-  Compatible
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*fd_address*]
-  Fd Address
-
-  Bareos Datatype: address
-  Bareos Default: 9102
-  Required: false
-
-[*fd_addresses*]
-  Fd Addresses
-
-  Bareos Datatype: addresses
-  Bareos Default: 9102
-  Required: false
-
-[*fd_port*]
-  Fd Port
-
-  Bareos Datatype: port
-  Bareos Default: 9102
-  Required: false
-
-[*fd_source_address*]
-  Fd Source Address
-
-  Bareos Datatype: address
-  Bareos Default: 0
-  Required: false
-
-[*heartbeat_interval*]
-  Heartbeat Interval
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*lmdb_threshold*]
-  Lmdb Threshold
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*log_timestamp_format*]
-  Log Timestamp Format
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_bandwidth_per_job*]
-  Maximum Bandwidth Per Job
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 20
-  Required: false
-
-[*maximum_connections*]
-  Maximum Connections
-
-  Bareos Datatype: pint32
-  Bareos Default: 42
-  Required: false
-
-[*maximum_network_buffer_size*]
-  Maximum Network Buffer Size
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*messages*]
-  Messages
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*name_client*]
-  Name of this client.
-  Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_client.
-
-  Bareos Datatype: name
-  Bareos Default: Not set
-  Required: true
-
-[*pid_directory*]
-  Pid Directory
-
-  Bareos Datatype: directory
-  Bareos Default: /var/lib/bareos
-  Required: false
-
-[*pki_cipher*]
-  Pki Cipher
-
-  Bareos Datatype: encryption_cipher
-  Bareos Default: aes128
-  Required: false
-
-[*pki_encryption*]
-  Pki Encryption
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*pki_key_pair*]
-  Pki Key Pair
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*pki_master_key*]
-  Pki Master Key
-
-  May be specified as Array.
-  Bareos Datatype: directory_list
-  Bareos Default: Not set
-  Required: false
-
-[*pki_signatures*]
-  Pki Signatures
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*pki_signer*]
-  Pki Signer
-
-  May be specified as Array.
-  Bareos Datatype: directory_list
-  Bareos Default: Not set
-  Required: false
-
-[*plugin_directory*]
-  Plugin Directory
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*plugin_names*]
-  Plugin Names
-
-  Bareos Datatype: plugin_names
-  Bareos Default: Not set
-  Required: false
-
-[*scripts_directory*]
-  Scripts Directory
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*sd_connect_timeout*]
-  Sd Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 1800
-  Required: false
-
-[*secure_erase_command*]
-  Secure Erase Command: Specify command that will be called when bareos unlinks files.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*ver_id*]
-  Ver Id
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*working_directory*]
-  Working Directory
-
-  Bareos Datatype: directory
-  Bareos Default: /var/lib/bareos
-  Required: false
+The Client Resource (or FileDaemon) resource defines the name of the Client (as used by the Director) as well as the port on which the Client listens for Director connections.
 
 #### Parameters
 
@@ -821,7 +487,7 @@ The following parameters are available in the `bareos::client::client` class:
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -829,7 +495,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Absolute Job Timeout
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -837,7 +507,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Bandwidth Bursting
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -845,7 +519,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allowed Job Command
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -853,7 +532,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allowed Script Dir
 
+May be specified as Array.
+Bareos Datatype: directory_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -861,7 +545,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Use Lmdb
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -869,7 +557,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Compatible
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -877,7 +569,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -885,7 +581,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Address
 
+Bareos Datatype: address
+Bareos Default: 9102
+Required: false
 
 Default value: `undef`
 
@@ -893,7 +593,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Addresses
 
+Bareos Datatype: addresses
+Bareos Default: 9102
+Required: false
 
 Default value: `undef`
 
@@ -901,7 +605,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Port
 
+Bareos Datatype: port
+Bareos Default: 9102
+Required: false
 
 Default value: `undef`
 
@@ -909,7 +617,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Source Address
 
+Bareos Datatype: address
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -917,7 +629,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Heartbeat Interval
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -925,7 +641,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Lmdb Threshold
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -933,7 +653,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Log Timestamp Format
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -941,7 +665,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth Per Job
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -949,7 +677,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 20
+Required: false
 
 Default value: `undef`
 
@@ -957,7 +689,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Connections
 
+Bareos Datatype: pint32
+Bareos Default: 42
+Required: false
 
 Default value: `undef`
 
@@ -965,7 +701,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Network Buffer Size
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -973,7 +713,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Messages
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -981,7 +725,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Name of this client.
+Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_client.
 
+Bareos Datatype: name
+Bareos Default: Not set
+Required: true
 
 Default value: `'bareos-fd'`
 
@@ -989,7 +738,11 @@ Default value: `'bareos-fd'`
 
 Data type: `Any`
 
+Pid Directory
 
+Bareos Datatype: directory
+Bareos Default: /var/lib/bareos
+Required: false
 
 Default value: `undef`
 
@@ -997,7 +750,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pki Cipher
 
+Bareos Datatype: encryption_cipher
+Bareos Default: aes128
+Required: false
 
 Default value: `undef`
 
@@ -1005,7 +762,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pki Encryption
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -1013,7 +774,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pki Key Pair
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1021,7 +786,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pki Master Key
 
+May be specified as Array.
+Bareos Datatype: directory_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1029,7 +799,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pki Signatures
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -1037,7 +811,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pki Signer
 
+May be specified as Array.
+Bareos Datatype: directory_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1045,7 +824,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Plugin Directory
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1053,7 +836,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Plugin Names
 
+Bareos Datatype: plugin_names
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1061,7 +848,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Scripts Directory
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1069,7 +860,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 1800
+Required: false
 
 Default value: `undef`
 
@@ -1077,7 +872,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Secure Erase Command: Specify command that will be called when bareos unlinks files.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1085,7 +884,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1093,7 +897,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -1101,7 +909,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1109,7 +921,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1117,7 +933,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1125,7 +945,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1133,7 +957,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1141,7 +969,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1149,7 +981,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -1157,7 +993,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1165,7 +1005,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -1173,7 +1017,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -1181,7 +1029,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ver Id
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1189,18 +1041,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Working Directory
 
+Bareos Datatype: directory
+Bareos Default: /var/lib/bareos
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--console"></a>`bareos::console`
 
-== Class: bareos::console
-This class manages the bareos console (bconsole cli tool) package and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
-
-This class will be automatically included when a resource is defined.
-It is not intended to be used directly by external resources like node definitions or other modules.
+Manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
@@ -1244,10 +1095,6 @@ Data type: `Any`
 Default value: `"${bareos::config_dir}/bconsole.d"`
 
 ### <a name="bareos--director"></a>`bareos::director`
-
-== Class: bareos::director
-This class manages the bareos director service, packages and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
 
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
@@ -1466,353 +1313,7 @@ Default value: `{}`
 
 ### <a name="bareos--director--director"></a>`bareos::director::director`
 
-== Class: bareos::director::director
-To define the Director's name and its access password used for authenticating the Console program.
-Only a single Director resource definition may appear in the Director's configuration file.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*absolute_job_timeout*]
-  Absolute Job Timeout
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*audit_events*]
-  Audit Events
-
-  May be specified as Array.
-  Bareos Datatype: audit_command_list
-  Bareos Default: Not set
-  Required: false
-
-[*auditing*]
-  Auditing
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*backend_directory*]
-  Backend Directory
-
-  May be specified as Array.
-  Bareos Datatype: directory_list
-  Bareos Default: /usr/lib/bareos/backends
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*dir_address*]
-  Dir Address
-
-  Bareos Datatype: address
-  Bareos Default: 9101
-  Required: false
-
-[*dir_addresses*]
-  Dir Addresses
-
-  Bareos Datatype: addresses
-  Bareos Default: 9101
-  Required: false
-
-[*dir_port*]
-  Dir Port
-
-  Bareos Datatype: port
-  Bareos Default: 9101
-  Required: false
-
-[*dir_source_address*]
-  Dir Source Address
-
-  Bareos Datatype: address
-  Bareos Default: 0
-  Required: false
-
-[*fd_connect_timeout*]
-  Fd Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 180
-  Required: false
-
-[*heartbeat_interval*]
-  Heartbeat Interval
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*key_encryption_key*]
-  Key Encryption Key
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: false
-
-[*log_timestamp_format*]
-  Log Timestamp Format
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 1
-  Required: false
-
-[*maximum_connections*]
-  Maximum Connections
-
-  Bareos Datatype: pint32
-  Bareos Default: 30
-  Required: false
-
-[*maximum_console_connections*]
-  Maximum Console Connections
-
-  Bareos Datatype: pint32
-  Bareos Default: 20
-  Required: false
-
-[*messages*]
-  Messages
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*name_director*]
-  Name of this director.
-  Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_director.
-
-  Bareos Datatype: name
-  Bareos Default: Not set
-  Required: true
-
-[*ndmp_log_level*]
-  Ndmp Log Level
-
-  Bareos Datatype: pint32
-  Bareos Default: 4
-  Required: false
-
-[*ndmp_snooping*]
-  Ndmp Snooping
-
-  Bareos Datatype: boolean
-  Bareos Default: Not set
-  Required: false
-
-[*omit_defaults*]
-  Omit Defaults
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*optimize_for_size*]
-  Optimize For Size
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*optimize_for_speed*]
-  Optimize For Speed
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: true
-
-[*pid_directory*]
-  Pid Directory
-
-  Bareos Datatype: directory
-  Bareos Default: /var/lib/bareos
-  Required: false
-
-[*plugin_directory*]
-  Plugin Directory: Plugins are loaded from this directory. To load only specific plugins, use 'Plugin Names'.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*plugin_names*]
-  Plugin Names: List of plugins, that should get loaded from 'Plugin Directory' (only basenames, '-dir.so' is added automatically). If empty, all plugins will get loaded.
-
-  Bareos Datatype: plugin_names
-  Bareos Default: Not set
-  Required: false
-
-[*query_file*]
-  Query File
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: true
-
-[*scripts_directory*]
-  Scripts Directory: This directive is currently unused.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*sd_connect_timeout*]
-  Sd Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 1800
-  Required: false
-
-[*secure_erase_command*]
-  Secure Erase Command: Specify command that will be called when bareos unlinks files.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*statistics_collect_interval*]
-  Statistics Collect Interval
-
-  Bareos Datatype: pint32
-  Bareos Default: 150
-  Required: false
-
-[*statistics_retention*]
-  Statistics Retention
-
-  Bareos Datatype: time
-  Bareos Default: 160704000
-  Required: false
-
-[*subscriptions*]
-  Subscriptions
-
-  Bareos Datatype: pint32
-  Bareos Default: 0
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*ver_id*]
-  Ver Id
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*working_directory*]
-  Working Directory
-
-  Bareos Datatype: directory
-  Bareos Default: /var/lib/bareos
-  Required: false
+To define the director's name and its access password used for authenticating the console program. Only a single director resource definition may appear in the director's configuration file.
 
 #### Parameters
 
@@ -1872,7 +1373,7 @@ The following parameters are available in the `bareos::director::director` class
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -1880,7 +1381,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Absolute Job Timeout
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1888,7 +1393,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Audit Events
 
+May be specified as Array.
+Bareos Datatype: audit_command_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1896,7 +1406,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auditing
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -1904,7 +1418,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Backend Directory
 
+May be specified as Array.
+Bareos Datatype: directory_list
+Bareos Default: /usr/lib/bareos/backends
+Required: false
 
 Default value: `undef`
 
@@ -1912,7 +1431,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1920,7 +1443,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Address
 
+Bareos Datatype: address
+Bareos Default: 9101
+Required: false
 
 Default value: `undef`
 
@@ -1928,7 +1455,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Addresses
 
+Bareos Datatype: addresses
+Bareos Default: 9101
+Required: false
 
 Default value: `undef`
 
@@ -1936,7 +1467,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Port
 
+Bareos Datatype: port
+Bareos Default: 9101
+Required: false
 
 Default value: `undef`
 
@@ -1944,7 +1479,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Source Address
 
+Bareos Datatype: address
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -1952,7 +1491,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 180
+Required: false
 
 Default value: `undef`
 
@@ -1960,7 +1503,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Heartbeat Interval
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -1968,7 +1515,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Key Encryption Key
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1976,7 +1527,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Log Timestamp Format
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -1984,7 +1539,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -1992,7 +1551,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Connections
 
+Bareos Datatype: pint32
+Bareos Default: 30
+Required: false
 
 Default value: `undef`
 
@@ -2000,7 +1563,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Console Connections
 
+Bareos Datatype: pint32
+Bareos Default: 20
+Required: false
 
 Default value: `undef`
 
@@ -2008,7 +1575,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Messages
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2016,7 +1587,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Name of this director.
+Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_director.
 
+Bareos Datatype: name
+Bareos Default: Not set
+Required: true
 
 Default value: `'bareos-dir'`
 
@@ -2024,7 +1600,11 @@ Default value: `'bareos-dir'`
 
 Data type: `Any`
 
+Ndmp Log Level
 
+Bareos Datatype: pint32
+Bareos Default: 4
+Required: false
 
 Default value: `undef`
 
@@ -2032,7 +1612,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Snooping
 
+Bareos Datatype: boolean
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2040,7 +1624,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Omit Defaults
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -2048,7 +1636,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Optimize For Size
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -2056,7 +1648,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Optimize For Speed
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -2064,7 +1660,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: true
 
 Default value: `'PleaseChangeMe'`
 
@@ -2072,7 +1672,11 @@ Default value: `'PleaseChangeMe'`
 
 Data type: `Any`
 
+Pid Directory
 
+Bareos Datatype: directory
+Bareos Default: /var/lib/bareos
+Required: false
 
 Default value: `undef`
 
@@ -2080,7 +1684,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Plugin Directory: Plugins are loaded from this directory. To load only specific plugins, use 'Plugin Names'.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2088,7 +1696,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Plugin Names: List of plugins, that should get loaded from 'Plugin Directory' (only basenames, '-dir.so' is added automatically). If empty, all plugins will get loaded.
 
+Bareos Datatype: plugin_names
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2096,7 +1708,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Query File
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: true
 
 Default value: `'/usr/lib/bareos/scripts/query.sql'`
 
@@ -2104,7 +1720,11 @@ Default value: `'/usr/lib/bareos/scripts/query.sql'`
 
 Data type: `Any`
 
+Scripts Directory: This directive is currently unused.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2112,7 +1732,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 1800
+Required: false
 
 Default value: `undef`
 
@@ -2120,7 +1744,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Secure Erase Command: Specify command that will be called when bareos unlinks files.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2128,7 +1756,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Statistics Collect Interval
 
+Bareos Datatype: pint32
+Bareos Default: 150
+Required: false
 
 Default value: `undef`
 
@@ -2136,7 +1768,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Statistics Retention
 
+Bareos Datatype: time
+Bareos Default: 160704000
+Required: false
 
 Default value: `undef`
 
@@ -2144,7 +1780,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Subscriptions
 
+Bareos Datatype: pint32
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -2152,7 +1792,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2160,7 +1805,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -2168,7 +1817,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2176,7 +1829,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2184,7 +1841,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2192,7 +1853,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2200,7 +1865,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2208,7 +1877,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2216,7 +1889,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -2224,7 +1901,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2232,7 +1913,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -2240,7 +1925,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -2248,7 +1937,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ver Id
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -2256,15 +1949,15 @@ Default value: `undef`
 
 Data type: `Any`
 
+Working Directory
 
+Bareos Datatype: directory
+Bareos Default: /var/lib/bareos
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--monitor"></a>`bareos::monitor`
-
-== Class: bareos::monitor
-This class manages the bareos (tray-) monitor package and configuration directory.
-Parameters should be configured in the upper class `::bareos`.
 
 This class will be automatically included when a resource is defined.
 It is not intended to be used directly by external resources like node definitions or other modules.
@@ -2316,7 +2009,6 @@ Default value: `"${bareos::config_dir}/tray-monitor.d"`
 
 ### <a name="bareos--profile--client"></a>`bareos::profile::client`
 
-== Class: bareos::profile::client
 setup an simple bareos filedaemon/client
 
 #### Parameters
@@ -2353,7 +2045,6 @@ Default value: `'MyClientPasswordPleaseChange'`
 
 ### <a name="bareos--profile--director"></a>`bareos::profile::director`
 
-== Class: bareos::profile::director
 Ready to use director with default configs
 
 #### Parameters
@@ -2449,7 +2140,6 @@ Default schedules
 
 ### <a name="bareos--profile--director--storage"></a>`bareos::profile::director::storage`
 
-== Class: bareos::profile::director::storage
 Default storage daemon
 
 #### Parameters
@@ -2477,7 +2167,7 @@ Default value: `'BareosStoragePleaseChangeMe'`
 
 ### <a name="bareos--profile--storage"></a>`bareos::profile::storage`
 
-== Class: bareos::profile::storage
+The bareos::profile::storage class.
 
 #### Parameters
 
@@ -2522,7 +2212,7 @@ Default value: `'/var/lib/bareos/storage'`
 
 ### <a name="bareos--repository"></a>`bareos::repository`
 
-== Class: bareos::repository
+Manages the bareos repository. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
 
 #### Parameters
 
@@ -2712,379 +2402,7 @@ Default value: `{}`
 
 ### <a name="bareos--storage--storage"></a>`bareos::storage::storage`
 
-== Class: bareos::storage::storage
 In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*absolute_job_timeout*]
-  Absolute Job Timeout
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*allow_bandwidth_bursting*]
-  Allow Bandwidth Bursting
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*auto_x_flate_on_replication*]
-  Auto X Flate On Replication
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*backend_directory*]
-  Backend Directory
-
-  May be specified as Array.
-  Bareos Datatype: directory_list
-  Bareos Default: /usr/lib/bareos/backends
-  Required: false
-
-[*client_connect_wait*]
-  Client Connect Wait
-
-  Bareos Datatype: time
-  Bareos Default: 1800
-  Required: false
-
-[*collect_device_statistics*]
-  Collect Device Statistics
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*collect_job_statistics*]
-  Collect Job Statistics
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*compatible*]
-  Compatible
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*device_reserve_by_media_type*]
-  Device Reserve By Media Type
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*fd_connect_timeout*]
-  Fd Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 1800
-  Required: false
-
-[*file_device_concurrent_read*]
-  File Device Concurrent Read
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*heartbeat_interval*]
-  Heartbeat Interval
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*log_timestamp_format*]
-  Log Timestamp Format
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_bandwidth_per_job*]
-  Maximum Bandwidth Per Job
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 20
-  Required: false
-
-[*maximum_connections*]
-  Maximum Connections
-
-  Bareos Datatype: pint32
-  Bareos Default: 42
-  Required: false
-
-[*maximum_network_buffer_size*]
-  Maximum Network Buffer Size
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*messages*]
-  Messages
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*name_storage*]
-  Name of this storage.
-  Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_storage.
-
-  Bareos Datatype: name
-  Bareos Default: Not set
-  Required: true
-
-[*ndmp_address*]
-  Ndmp Address
-
-  Bareos Datatype: address
-  Bareos Default: 10000
-  Required: false
-
-[*ndmp_addresses*]
-  Ndmp Addresses
-
-  Bareos Datatype: addresses
-  Bareos Default: 10000
-  Required: false
-
-[*ndmp_enable*]
-  Ndmp Enable
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*ndmp_log_level*]
-  Ndmp Log Level
-
-  Bareos Datatype: pint32
-  Bareos Default: 4
-  Required: false
-
-[*ndmp_port*]
-  Ndmp Port
-
-  Bareos Datatype: port
-  Bareos Default: 10000
-  Required: false
-
-[*ndmp_snooping*]
-  Ndmp Snooping
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*pid_directory*]
-  Pid Directory
-
-  Bareos Datatype: directory
-  Bareos Default: /var/lib/bareos
-  Required: false
-
-[*plugin_directory*]
-  Plugin Directory
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*plugin_names*]
-  Plugin Names
-
-  Bareos Datatype: plugin_names
-  Bareos Default: Not set
-  Required: false
-
-[*scripts_directory*]
-  Scripts Directory
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*sd_address*]
-  Sd Address
-
-  Bareos Datatype: address
-  Bareos Default: 9103
-  Required: false
-
-[*sd_addresses*]
-  Sd Addresses
-
-  Bareos Datatype: addresses
-  Bareos Default: 9103
-  Required: false
-
-[*sd_connect_timeout*]
-  Sd Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 1800
-  Required: false
-
-[*sd_port*]
-  Sd Port
-
-  Bareos Datatype: port
-  Bareos Default: 9103
-  Required: false
-
-[*sd_source_address*]
-  Sd Source Address
-
-  Bareos Datatype: address
-  Bareos Default: 0
-  Required: false
-
-[*secure_erase_command*]
-  Secure Erase Command: Specify command that will be called when bareos unlinks files.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*statistics_collect_interval*]
-  Statistics Collect Interval
-
-  Bareos Datatype: pint32
-  Bareos Default: 30
-  Required: false
-
-[*sub_sys_directory*]
-  Sub Sys Directory
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*ver_id*]
-  Ver Id
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*working_directory*]
-  Working Directory
-
-  Bareos Datatype: directory
-  Bareos Default: /var/lib/bareos
-  Required: false
 
 #### Parameters
 
@@ -3148,7 +2466,7 @@ The following parameters are available in the `bareos::storage::storage` class:
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -3156,7 +2474,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Absolute Job Timeout
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3164,7 +2486,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Bandwidth Bursting
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3172,7 +2498,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto X Flate On Replication
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3180,7 +2510,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Backend Directory
 
+May be specified as Array.
+Bareos Datatype: directory_list
+Bareos Default: /usr/lib/bareos/backends
+Required: false
 
 Default value: `undef`
 
@@ -3188,7 +2523,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client Connect Wait
 
+Bareos Datatype: time
+Bareos Default: 1800
+Required: false
 
 Default value: `undef`
 
@@ -3196,7 +2535,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Collect Device Statistics
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3204,7 +2547,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Collect Job Statistics
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3212,7 +2559,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Compatible
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3220,7 +2571,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3228,7 +2583,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Device Reserve By Media Type
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3236,7 +2595,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 1800
+Required: false
 
 Default value: `undef`
 
@@ -3244,7 +2607,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File Device Concurrent Read
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3252,7 +2619,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Heartbeat Interval
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -3260,7 +2631,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Log Timestamp Format
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3268,7 +2643,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth Per Job
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3276,7 +2655,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 20
+Required: false
 
 Default value: `undef`
 
@@ -3284,7 +2667,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Connections
 
+Bareos Datatype: pint32
+Bareos Default: 42
+Required: false
 
 Default value: `undef`
 
@@ -3292,7 +2679,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Network Buffer Size
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3300,7 +2691,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Messages
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3308,7 +2703,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Name of this storage.
+Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_storage.
 
+Bareos Datatype: name
+Bareos Default: Not set
+Required: true
 
 Default value: `'bareos-sd'`
 
@@ -3316,7 +2716,11 @@ Default value: `'bareos-sd'`
 
 Data type: `Any`
 
+Ndmp Address
 
+Bareos Datatype: address
+Bareos Default: 10000
+Required: false
 
 Default value: `undef`
 
@@ -3324,7 +2728,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Addresses
 
+Bareos Datatype: addresses
+Bareos Default: 10000
+Required: false
 
 Default value: `undef`
 
@@ -3332,7 +2740,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Enable
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3340,7 +2752,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Log Level
 
+Bareos Datatype: pint32
+Bareos Default: 4
+Required: false
 
 Default value: `undef`
 
@@ -3348,7 +2764,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Port
 
+Bareos Datatype: port
+Bareos Default: 10000
+Required: false
 
 Default value: `undef`
 
@@ -3356,7 +2776,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Snooping
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3364,7 +2788,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pid Directory
 
+Bareos Datatype: directory
+Bareos Default: /var/lib/bareos
+Required: false
 
 Default value: `undef`
 
@@ -3372,7 +2800,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Plugin Directory
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3380,7 +2812,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Plugin Names
 
+Bareos Datatype: plugin_names
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3388,7 +2824,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Scripts Directory
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3396,7 +2836,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Address
 
+Bareos Datatype: address
+Bareos Default: 9103
+Required: false
 
 Default value: `undef`
 
@@ -3404,7 +2848,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Addresses
 
+Bareos Datatype: addresses
+Bareos Default: 9103
+Required: false
 
 Default value: `undef`
 
@@ -3412,7 +2860,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 1800
+Required: false
 
 Default value: `undef`
 
@@ -3420,7 +2872,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Port
 
+Bareos Datatype: port
+Bareos Default: 9103
+Required: false
 
 Default value: `undef`
 
@@ -3428,7 +2884,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Source Address
 
+Bareos Datatype: address
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -3436,7 +2896,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Secure Erase Command: Specify command that will be called when bareos unlinks files.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3444,7 +2908,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Statistics Collect Interval
 
+Bareos Datatype: pint32
+Bareos Default: 30
+Required: false
 
 Default value: `undef`
 
@@ -3452,7 +2920,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sub Sys Directory
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3460,7 +2932,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3468,7 +2945,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3476,7 +2957,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3484,7 +2969,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3492,7 +2981,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3500,7 +2993,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3508,7 +3005,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3516,7 +3017,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3524,7 +3029,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3532,7 +3041,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3540,7 +3053,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3548,7 +3065,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -3556,7 +3077,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ver Id
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3564,16 +3089,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Working Directory
 
+Bareos Datatype: directory
+Bareos Default: /var/lib/bareos
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--webui"></a>`bareos::webui`
 
-== Class: bareos::webui
-This class manages the bareos webui service, package and configuration.
-
-This class will be automatically included when a resource is defined.
+This class manages the bareos webui service, package and configuration, it will be automatically included when a resource is defined.
 
 #### Parameters
 
@@ -3719,169 +3245,7 @@ Default value: `{}`
 
 ### <a name="bareos--client--director"></a>`bareos::client::director`
 
-== Define: bareos::client::director
 The Director resource defines the name and password of the Directors that are permitted to contact this Client.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*address*]
-  Address: Director Network Address. Only required if "Connection From Client To Director" is enabled.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*allowed_job_command*]
-  Allowed Job Command
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*allowed_script_dir*]
-  Allowed Script Dir
-
-  May be specified as Array.
-  Bareos Datatype: directory_list
-  Bareos Default: Not set
-  Required: false
-
-[*connection_from_client_to_director*]
-  Connection From Client To Director: Let the Filedaemon initiate network connections to the Director.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*connection_from_director_to_client*]
-  Connection From Director To Client: This Client will accept incoming network connection from this Director.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_bandwidth_per_job*]
-  Maximum Bandwidth Per Job
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*monitor*]
-  Monitor
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: md5password
-  Bareos Default: Not set
-  Required: true
-
-[*port*]
-  Port: Director Network Port. Only used if "Connection From Client To Director" is enabled.
-
-  Bareos Datatype: pint32
-  Bareos Default: 9101
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
 
 #### Parameters
 
@@ -3915,7 +3279,7 @@ The following parameters are available in the `bareos::client::director` defined
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -3923,7 +3287,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Address: Director Network Address. Only required if "Connection From Client To Director" is enabled.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3931,7 +3299,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allowed Job Command
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3939,7 +3312,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allowed Script Dir
 
+May be specified as Array.
+Bareos Datatype: directory_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3947,7 +3325,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Connection From Client To Director: Let the Filedaemon initiate network connections to the Director.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3955,7 +3337,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Connection From Director To Client: This Client will accept incoming network connection from this Director.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -3963,7 +3349,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3971,7 +3361,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth Per Job
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -3979,7 +3373,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Monitor
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -3987,7 +3385,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: md5password
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -3995,7 +3397,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Port: Director Network Port. Only used if "Connection From Client To Director" is enabled.
 
+Bareos Datatype: pint32
+Bareos Default: 9101
+Required: false
 
 Default value: `undef`
 
@@ -4003,7 +3409,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4011,7 +3422,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4019,7 +3434,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4027,7 +3446,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4035,7 +3458,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4043,7 +3470,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4051,7 +3482,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4059,7 +3494,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4067,7 +3506,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4075,7 +3518,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4083,7 +3530,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4091,142 +3542,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--client--messages"></a>`bareos::client::messages`
 
-== Define: bareos::client::messages
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*append*]
-  Append
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*catalog*]
-  Catalog
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*console*]
-  Console
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*director*]
-  Director
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*file*]
-  File
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail*]
-  Mail
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail_command*]
-  Mail Command
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*mail_on_error*]
-  Mail On Error
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail_on_success*]
-  Mail On Success
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*operator*]
-  Operator
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*operator_command*]
-  Operator Command
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*stderr*]
-  Stderr
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*stdout*]
-  Stdout
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*syslog*]
-  Syslog
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*timestamp_format*]
-  Timestamp Format
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
 
 #### Parameters
 
@@ -4254,7 +3580,7 @@ The following parameters are available in the `bareos::client::messages` defined
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -4262,7 +3588,12 @@ Default value: `present`
 
 Data type: `Any`
 
+Append
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4270,7 +3601,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4278,7 +3614,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Console
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4286,7 +3627,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4294,7 +3639,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Director
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4302,7 +3652,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+File
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4310,7 +3665,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4318,7 +3678,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail Command
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4326,7 +3690,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail On Error
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4334,7 +3703,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail On Success
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4342,7 +3716,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Operator
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4350,7 +3729,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Operator Command
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4358,7 +3741,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Stderr
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4366,7 +3754,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Stdout
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4374,7 +3767,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Syslog
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4382,151 +3780,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Timestamp Format
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--console--console"></a>`bareos::console::console`
 
-== Define: bareos::console::console
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*director*]
-  Director
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*heartbeat_interval*]
-  Heartbeat Interval
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*history_file*]
-  History File
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*history_length*]
-  History Length
-
-  Bareos Datatype: pint32
-  Bareos Default: 100
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: md5password
-  Bareos Default: Not set
-  Required: true
-
-[*rc_file*]
-  Rc File
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
+The bareos::console::console class.
 
 #### Parameters
 
@@ -4557,7 +3821,7 @@ The following parameters are available in the `bareos::console::console` defined
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -4565,7 +3829,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4573,7 +3841,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Director
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4581,7 +3853,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Heartbeat Interval
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -4589,7 +3865,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+History File
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4597,7 +3877,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+History Length
 
+Bareos Datatype: pint32
+Bareos Default: 100
+Required: false
 
 Default value: `undef`
 
@@ -4605,7 +3889,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: md5password
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -4613,7 +3901,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Rc File
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4621,7 +3913,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4629,7 +3926,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4637,7 +3938,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4645,7 +3950,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4653,7 +3962,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4661,7 +3974,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4669,7 +3986,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4677,7 +3998,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4685,7 +4010,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4693,7 +4022,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4701,7 +4034,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4709,140 +4046,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--console--director"></a>`bareos::console::director`
 
-== Define: bareos:console::director
-The Director resource defines the attributes of the Director running on the network.
-You may have multiple Director resource specifications in a single Console configuration file.
-If you have more than one, you will be prompted to choose one when you start the Console program.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*address*]
-  Address
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*dir_port*]
-  Dir Port
-
-  Bareos Datatype: pint32
-  Bareos Default: 9101
-  Required: false
-
-[*heartbeat_interval*]
-  Heartbeat Interval
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: md5password
-  Bareos Default: Not set
-  Required: true
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
+The Director resource defines the attributes of the Director running on the network. You may have multiple Director resource specifications in a single Console configuration file. If you have more than one, you will be prompted to choose one when you start the Console program.
 
 #### Parameters
 
@@ -4871,7 +4085,7 @@ The following parameters are available in the `bareos::console::director` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -4879,7 +4093,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4887,7 +4105,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4895,7 +4117,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Port
 
+Bareos Datatype: pint32
+Bareos Default: 9101
+Required: false
 
 Default value: `undef`
 
@@ -4903,7 +4129,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Heartbeat Interval
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -4911,7 +4141,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: md5password
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -4919,7 +4153,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4927,7 +4166,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4935,7 +4178,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4943,7 +4190,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4951,7 +4202,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4959,7 +4214,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4967,7 +4226,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4975,7 +4238,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4983,7 +4250,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -4991,7 +4262,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -4999,7 +4274,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5007,18 +4286,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--catalog"></a>`bareos::director::catalog`
 
-[*validate_timeout*]
-  Validate Timeout
-
-  Bareos Datatype: pint32
-  Bareos Default: 120
-  Required: false
+To define in what database to keep the list of files and the Volume names where they are backed up. Most people only use a single catalog. It is possible, however not adviced and not supported to use multiple catalogs.
 
 #### Parameters
 
@@ -5047,7 +4325,7 @@ The following parameters are available in the `bareos::director::catalog` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -5055,7 +4333,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Db Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5063,7 +4345,16 @@ Default value: `undef`
 
 Data type: `Any`
 
+Db Driver
 
+Bareos Datatype: string
+Bareos Default: postgresql
+Required: false
+
+This parameter is deprecated. The only valid value under bareos >= 21 is
+`postgresql`.
+
+See https://docs.bareos.org/Configuration/Director.html#config-Dir_Catalog_DbDriver
 
 Default value: `undef`
 
@@ -5071,7 +4362,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Db Name
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -5079,7 +4374,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Db Password
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5087,7 +4386,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Db Port
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5095,7 +4398,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Db Socket
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5103,7 +4410,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Db User
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5111,7 +4422,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5119,7 +4434,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Disable Batch Insert
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5127,7 +4446,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Exit On Fatal: Make any fatal error in the connection to the database exit the program
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5135,7 +4458,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Idle Timeout
 
+Bareos Datatype: pint32
+Bareos Default: 30
+Required: false
 
 Default value: `undef`
 
@@ -5143,7 +4470,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Inc Connections
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -5151,7 +4482,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Connections
 
+Bareos Datatype: pint32
+Bareos Default: 5
+Required: false
 
 Default value: `undef`
 
@@ -5159,7 +4494,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Min Connections
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -5167,7 +4506,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Multiple Connections
 
+Bareos Datatype: bit
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5175,7 +4518,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Reconnect: Try to reconnect a database connection when its dropped
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5183,287 +4530,19 @@ Default value: `undef`
 
 Data type: `Any`
 
+Validate Timeout
 
+Bareos Datatype: pint32
+Bareos Default: 120
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--client"></a>`bareos::director::client`
 
-== Define: bareos::director::client
 To define what Client is to be backed up.
 You will generally have multiple Client definitions.
 Each Job will reference only a single client.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*address*]
-  Address
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: true
-
-[*auth_type*]
-  Auth Type
-
-  Bareos Datatype: auth_type
-  Bareos Default: None
-  Required: false
-
-[*auto_prune*]
-  Auto Prune
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*catalog*]
-  Catalog
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*connection_from_client_to_director*]
-  Connection From Client To Director: The Director will accept incoming network connection from this Client.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*connection_from_director_to_client*]
-  Connection From Director To Client: Let the Director initiate the network connection to the Client.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*enabled*]
-  Enabled: En- or disable this resource.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*file_retention*]
-  File Retention
-
-  Bareos Datatype: time
-  Bareos Default: 5184000
-  Required: false
-
-[*hard_quota*]
-  Hard Quota
-
-  Bareos Datatype: size64
-  Bareos Default: 0
-  Required: false
-
-[*heartbeat_interval*]
-  Heartbeat Interval
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*job_retention*]
-  Job Retention
-
-  Bareos Datatype: time
-  Bareos Default: 15552000
-  Required: false
-
-[*maximum_bandwidth_per_job*]
-  Maximum Bandwidth Per Job
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 1
-  Required: false
-
-[*ndmp_block_size*]
-  Ndmp Block Size
-
-  Bareos Datatype: pint32
-  Bareos Default: 64512
-  Required: false
-
-[*ndmp_log_level*]
-  Ndmp Log Level
-
-  Bareos Datatype: pint32
-  Bareos Default: 4
-  Required: false
-
-[*ndmp_use_lmdb*]
-  Ndmp Use Lmdb
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*passive*]
-  Passive: If enabled, the Storage Daemon will initiate the network connection to the Client. If disabled, the Client will initiate the netowrk connection to the Storage Daemon.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: true
-
-[*port*]
-  Port
-
-  Bareos Datatype: pint32
-  Bareos Default: 9102
-  Required: false
-
-[*protocol*]
-  Protocol
-
-  Bareos Datatype: auth_protocol_type
-  Bareos Default: Native
-  Required: false
-
-[*quota_include_failed_jobs*]
-  Quota Include Failed Jobs
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*soft_quota*]
-  Soft Quota
-
-  Bareos Datatype: size64
-  Bareos Default: 0
-  Required: false
-
-[*soft_quota_grace_period*]
-  Soft Quota Grace Period
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*strict_quotas*]
-  Strict Quotas
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*username*]
-  Username
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
 
 #### Parameters
 
@@ -5513,7 +4592,7 @@ The following parameters are available in the `bareos::director::client` defined
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -5521,7 +4600,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -5529,7 +4612,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auth Type
 
+Bareos Datatype: auth_type
+Bareos Default: None
+Required: false
 
 Default value: `undef`
 
@@ -5537,7 +4624,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Prune
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5545,7 +4636,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5553,7 +4648,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Connection From Client To Director: The Director will accept incoming network connection from this Client.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5561,7 +4660,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Connection From Director To Client: Let the Director initiate the network connection to the Client.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -5569,7 +4672,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5577,7 +4684,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enabled: En- or disable this resource.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -5585,7 +4696,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File Retention
 
+Bareos Datatype: time
+Bareos Default: 5184000
+Required: false
 
 Default value: `undef`
 
@@ -5593,7 +4708,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Hard Quota
 
+Bareos Datatype: size64
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -5601,7 +4720,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Heartbeat Interval
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -5609,7 +4732,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Job Retention
 
+Bareos Datatype: time
+Bareos Default: 15552000
+Required: false
 
 Default value: `undef`
 
@@ -5617,7 +4744,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth Per Job
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5625,7 +4756,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -5633,7 +4768,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Block Size
 
+Bareos Datatype: pint32
+Bareos Default: 64512
+Required: false
 
 Default value: `undef`
 
@@ -5641,7 +4780,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Log Level
 
+Bareos Datatype: pint32
+Bareos Default: 4
+Required: false
 
 Default value: `undef`
 
@@ -5649,7 +4792,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ndmp Use Lmdb
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -5657,7 +4804,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Passive: If enabled, the Storage Daemon will initiate the network connection to the Client. If disabled, the Client will initiate the netowrk connection to the Storage Daemon.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5665,7 +4816,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -5673,7 +4828,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Port
 
+Bareos Datatype: pint32
+Bareos Default: 9102
+Required: false
 
 Default value: `undef`
 
@@ -5681,7 +4840,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Protocol
 
+Bareos Datatype: auth_protocol_type
+Bareos Default: Native
+Required: false
 
 Default value: `undef`
 
@@ -5689,7 +4852,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Quota Include Failed Jobs
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -5697,7 +4864,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Soft Quota
 
+Bareos Datatype: size64
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -5705,7 +4876,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Soft Quota Grace Period
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -5713,7 +4888,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Strict Quotas
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5721,7 +4900,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5729,7 +4913,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5737,7 +4925,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5745,7 +4937,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5753,7 +4949,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5761,7 +4961,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5769,7 +4973,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5777,7 +4985,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5785,7 +4997,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5793,7 +5009,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -5801,7 +5021,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -5809,7 +5033,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -5817,210 +5045,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Username
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--console"></a>`bareos::director::console`
 
-== Define: bareos::director::console
-Configure an **Named Console** aka **Restricted Console**.
-Both the names and the passwords in these two entries must match much as is the case for Client programs.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*catalog_acl*]
-  Catalog ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*client_acl*]
-  Client ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*command_acl*]
-  Command ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*file_set_acl*]
-  File Set ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*job_acl*]
-  Job ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: true
-
-[*plugin_options_acl*]
-  Plugin Options ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*pool_acl*]
-  Pool ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*profile*]
-  Profile: Profiles can be assigned to a Console. ACL are checked until either a deny ACL is found or an allow ACL. First the console ACL is checked then any profile the console is linked to.
-
-  May be specified as Array.
-  Bareos Datatype: resource_list
-  Bareos Default: Not set
-  Required: false
-
-[*run_acl*]
-  Run ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*schedule_acl*]
-  Schedule ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*storage_acl*]
-  Storage ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*use_pam_authentication*]
-  Use Pam Authentication: If set to yes, PAM will be used to authenticate the user on this console. Otherwise, only the credentials of this console resource are used for authentication.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*where_acl*]
-  Where ACL
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
+Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two entries must match much as is the case for Client programs.
 
 #### Parameters
 
@@ -6059,7 +5094,7 @@ The following parameters are available in the `bareos::director::console` define
 
 Data type: `Enum['present', 'absent']`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -6067,7 +5102,11 @@ Default value: `present`
 
 Data type: `Optional[Bareos::List]`
 
+Catalog ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6075,7 +5114,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Client ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6083,7 +5126,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Command ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6091,7 +5138,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6099,7 +5150,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+File Set ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6107,7 +5162,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Job ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6115,7 +5174,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Password
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -6123,7 +5186,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Plugin Options ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6131,7 +5198,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Pool ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6139,7 +5210,12 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Profile: Profiles can be assigned to a Console. ACL are checked until either a deny ACL is found or an allow ACL. First the console ACL is checked then any profile the console is linked to.
 
+May be specified as Array.
+Bareos Datatype: resource_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6147,7 +5223,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Run ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6155,7 +5235,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Schedule ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6163,7 +5247,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Storage ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6171,7 +5259,12 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6179,7 +5272,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::Boolean]`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -6187,7 +5284,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6195,7 +5296,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6203,7 +5308,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6211,7 +5320,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6219,7 +5332,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6227,7 +5344,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6235,7 +5356,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::Boolean]`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -6243,7 +5368,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6251,7 +5380,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::Boolean]`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -6259,7 +5392,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::Boolean]`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -6267,7 +5404,11 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::Boolean]`
 
+Use Pam Authentication: If set to yes, PAM will be used to authenticate the user on this console. Otherwise, only the credentials of this console resource are used for authentication.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -6275,54 +5416,17 @@ Default value: `undef`
 
 Data type: `Optional[Bareos::List]`
 
+Where ACL
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--counter"></a>`bareos::director::counter`
 
-== Define: bareos::director::counter
-The Counter Resource defines a counter variable that can be accessed by variable expansion used
-for creating Volume labels with the Label Format Dir Pool directive.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*catalog*]
-  Catalog
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*maximum*]
-  Maximum
-
-  Bareos Datatype: pint32
-  Bareos Default: 2147483647
-  Required: false
-
-[*minimum*]
-  Minimum
-
-  Bareos Datatype: int32
-  Bareos Default: 0
-  Required: false
-
-[*wrap_counter*]
-  Wrap Counter
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
+The Counter Resource defines a counter variable that can be accessed by variable expansion used for creating Volume labels with the Label Format Dir Pool directive.
 
 #### Parameters
 
@@ -6339,7 +5443,7 @@ The following parameters are available in the `bareos::director::counter` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -6347,7 +5451,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Catalog
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6355,7 +5463,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6363,7 +5475,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum
 
+Bareos Datatype: pint32
+Bareos Default: 2147483647
+Required: false
 
 Default value: `undef`
 
@@ -6371,7 +5487,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Minimum
 
+Bareos Datatype: int32
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -6379,54 +5499,18 @@ Default value: `undef`
 
 Data type: `Any`
 
+Wrap Counter
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--fileset"></a>`bareos::director::fileset`
 
-== Define: bareos::director::fileset
 To define the set of files to be backed up for each Client.
 You may have any number of FileSets but each Job will reference only one.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*enable_vss*]
-  Enable VSS
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*exclude*]
-  Exclude
-
-  Bareos Datatype: include_exclude_item
-  Bareos Default: Not set
-  Required: false
-
-[*ignore_file_set_changes*]
-  Ignore File Set Changes
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*include*]
-  Include
-
-  Bareos Datatype: include_exclude_item
-  Bareos Default: Not set
-  Required: false
 
 #### Parameters
 
@@ -6443,7 +5527,7 @@ The following parameters are available in the `bareos::director::fileset` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -6451,7 +5535,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6459,7 +5547,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enable VSS
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -6467,7 +5559,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Exclude
 
+Bareos Datatype: include_exclude_item
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -6475,7 +5571,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Ignore File Set Changes
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -6483,607 +5583,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Include
 
+Bareos Datatype: include_exclude_item
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--job"></a>`bareos::director::job`
 
-== Define: bareos::director::job
-To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
-Normally, you will Jobs of different names corresponding to each client
-(i.e. one Job per client, but a different one with a different name for each client).
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*accurate*]
-  Accurate
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*add_prefix*]
-  Add Prefix
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*add_suffix*]
-  Add Suffix
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*allow_duplicate_jobs*]
-  Allow Duplicate Jobs
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*allow_higher_duplicates*]
-  Allow Higher Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*allow_mixed_priority*]
-  Allow Mixed Priority
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*always_incremental*]
-  Always Incremental: Enable/disable always incremental backup scheme.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*always_incremental_job_retention*]
-  Always Incremental Job Retention: Backup Jobs older than the specified time duration will be merged into a new Virtual backup.
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*always_incremental_keep_number*]
-  Always Incremental Keep Number: Guarantee that at least the specified number of Backup Jobs will persist, even if they are older than "Always Incremental Job Retention".
-
-  Bareos Datatype: pint32
-  Bareos Default: 0
-  Required: false
-
-[*always_incremental_max_full_age*]
-  Always Incremental Max Full Age: If "AlwaysIncrementalMaxFullAge" is set, during consolidations only incremental backups will be considered while the Full Backup remains to reduce the amount of data being consolidated. Only if the Full Backup is older than "AlwaysIncrementalMaxFullAge", the Full Backup will be part of the consolidation to avoid the Full Backup becoming too old .
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*backup_format*]
-  Backup Format
-
-  Bareos Datatype: string
-  Bareos Default: Native
-  Required: false
-
-[*base*]
-  Base
-
-  May be specified as Array.
-  Bareos Datatype: resource_list
-  Bareos Default: Not set
-  Required: false
-
-[*bootstrap*]
-  Bootstrap
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*cancel_lower_level_duplicates*]
-  Cancel Lower Level Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*cancel_queued_duplicates*]
-  Cancel Queued Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*cancel_running_duplicates*]
-  Cancel Running Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*catalog*]
-  Catalog
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*client*]
-  Client
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*client_run_after_job*]
-  Client Run After Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*client_run_before_job*]
-  Client Run Before Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*differential_backup_pool*]
-  Differential Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*differential_max_runtime*]
-  Differential Max Runtime
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*dir_plugin_options*]
-  Dir Plugin Options
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*enabled*]
-  Enabled: En- or disable this resource.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*fd_plugin_options*]
-  Fd Plugin Options
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*file_history_size*]
-  File History Size
-
-  Bareos Datatype: size64
-  Bareos Default: 10000000
-  Required: false
-
-[*file_set*]
-  File Set
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*full_backup_pool*]
-  Full Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*full_max_runtime*]
-  Full Max Runtime
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*incremental_backup_pool*]
-  Incremental Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*incremental_max_runtime*]
-  Incremental Max Runtime
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*job_defs*]
-  Job Defs
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*job_to_verify*]
-  Job To Verify
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*level*]
-  Level
-
-  Bareos Datatype: backup_level
-  Bareos Default: Not set
-  Required: false
-
-[*max_concurrent_copies*]
-  Max Concurrent Copies
-
-  Bareos Datatype: pint32
-  Bareos Default: 100
-  Required: false
-
-[*max_diff_interval*]
-  Max Diff Interval
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_full_consolidations*]
-  Max Full Consolidations: If "AlwaysIncrementalMaxFullAge" is configured, do not run more than "MaxFullConsolidations" consolidation jobs that include the Full backup.
-
-  Bareos Datatype: pint32
-  Bareos Default: 0
-  Required: false
-
-[*max_full_interval*]
-  Max Full Interval
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_run_sched_time*]
-  Max Run Sched Time
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_run_time*]
-  Max Run Time
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_start_delay*]
-  Max Start Delay
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_virtual_full_interval*]
-  Max Virtual Full Interval
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_wait_time*]
-  Max Wait Time
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_bandwidth*]
-  Maximum Bandwidth
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 1
-  Required: false
-
-[*messages*]
-  Messages
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: true
-
-[*next_pool*]
-  Next Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*pool*]
-  Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: true
-
-[*prefer_mounted_volumes*]
-  Prefer Mounted Volumes
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*prefix_links*]
-  Prefix Links
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*priority*]
-  Priority
-
-  Bareos Datatype: pint32
-  Bareos Default: 10
-  Required: false
-
-[*protocol*]
-  Protocol
-
-  Bareos Datatype: protocol_type
-  Bareos Default: Native
-  Required: false
-
-[*prune_files*]
-  Prune Files
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*prune_jobs*]
-  Prune Jobs
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*prune_volumes*]
-  Prune Volumes
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*purge_migration_job*]
-  Purge Migration Job
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*regex_where*]
-  Regex Where
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*replace*]
-  Replace
-
-  Bareos Datatype: replace_option
-  Bareos Default: Always
-  Required: false
-
-[*rerun_failed_levels*]
-  Rerun Failed Levels
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*reschedule_interval*]
-  Reschedule Interval
-
-  Bareos Datatype: time
-  Bareos Default: 1800
-  Required: false
-
-[*reschedule_on_error*]
-  Reschedule On Error
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*reschedule_times*]
-  Reschedule Times
-
-  Bareos Datatype: pint32
-  Bareos Default: 5
-  Required: false
-
-[*run*]
-  Run
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*run_after_failed_job*]
-  Run After Failed Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*run_after_job*]
-  Run After Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*run_before_job*]
-  Run Before Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*run_script*]
-  Run Script
-
-  Bareos Datatype: runscript
-  Bareos Default: Not set
-  Required: false
-
-[*save_file_history*]
-  Save File History
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*schedule_res*]
-  Schedule
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*sd_plugin_options*]
-  Sd Plugin Options
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*selection_pattern*]
-  Selection Pattern
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*selection_type*]
-  Selection Type
-
-  Bareos Datatype: migration_type
-  Bareos Default: Not set
-  Required: false
-
-[*spool_attributes*]
-  Spool Attributes
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*spool_data*]
-  Spool Data
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*spool_size*]
-  Spool Size
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*storage*]
-  Storage
-
-  May be specified as Array.
-  Bareos Datatype: resource_list
-  Bareos Default: Not set
-  Required: false
-
-[*strip_prefix*]
-  Strip Prefix
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*type*]
-  Type
-
-  Bareos Datatype: job_type
-  Bareos Default: Not set
-  Required: true
-
-[*virtual_full_backup_pool*]
-  Virtual Full Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*where*]
-  Where
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*write_bootstrap*]
-  Write Bootstrap
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*write_verify_list*]
-  Write Verify List
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
+To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job. Normally, you will Jobs of different names corresponding to each client (i.e. one Job per client, but a different one with a different name for each client).
 
 #### Parameters
 
@@ -7178,7 +5688,7 @@ The following parameters are available in the `bareos::director::job` defined ty
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -7186,7 +5696,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Accurate
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7194,7 +5708,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Add Prefix
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7202,7 +5720,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Add Suffix
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7210,7 +5732,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Duplicate Jobs
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -7218,7 +5744,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Higher Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -7226,7 +5756,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Mixed Priority
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7234,7 +5768,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental: Enable/disable always incremental backup scheme.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7242,7 +5780,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental Job Retention: Backup Jobs older than the specified time duration will be merged into a new Virtual backup.
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -7250,7 +5792,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental Keep Number: Guarantee that at least the specified number of Backup Jobs will persist, even if they are older than "Always Incremental Job Retention".
 
+Bareos Datatype: pint32
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -7258,7 +5804,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental Max Full Age: If "AlwaysIncrementalMaxFullAge" is set, during consolidations only incremental backups will be considered while the Full Backup remains to reduce the amount of data being consolidated. Only if the Full Backup is older than "AlwaysIncrementalMaxFullAge", the Full Backup will be part of the consolidation to avoid the Full Backup becoming too old .
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7266,7 +5816,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Backup Format
 
+Bareos Datatype: string
+Bareos Default: Native
+Required: false
 
 Default value: `undef`
 
@@ -7274,7 +5828,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Base
 
+May be specified as Array.
+Bareos Datatype: resource_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7282,7 +5841,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Bootstrap
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7290,7 +5853,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cancel Lower Level Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7298,7 +5865,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cancel Queued Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7306,7 +5877,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cancel Running Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7314,7 +5889,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7322,7 +5901,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7330,7 +5913,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client Run After Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7338,7 +5925,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client Run Before Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7346,7 +5937,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7354,7 +5949,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Differential Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7362,7 +5961,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Differential Max Runtime
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7370,7 +5973,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Plugin Options
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7378,7 +5986,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enabled: En- or disable this resource.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -7386,7 +5998,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Plugin Options
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7394,7 +6011,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File History Size
 
+Bareos Datatype: size64
+Bareos Default: 10000000
+Required: false
 
 Default value: `undef`
 
@@ -7402,7 +6023,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File Set
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7410,7 +6035,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Full Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7418,7 +6047,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Full Max Runtime
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7426,7 +6059,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Incremental Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7434,7 +6071,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Incremental Max Runtime
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7442,7 +6083,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Job Defs
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7450,7 +6095,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Job To Verify
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7458,7 +6107,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Level
 
+Bareos Datatype: backup_level
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7466,7 +6119,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Concurrent Copies
 
+Bareos Datatype: pint32
+Bareos Default: 100
+Required: false
 
 Default value: `undef`
 
@@ -7474,7 +6131,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Diff Interval
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7482,7 +6143,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Full Consolidations: If "AlwaysIncrementalMaxFullAge" is configured, do not run more than "MaxFullConsolidations" consolidation jobs that include the Full backup.
 
+Bareos Datatype: pint32
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -7490,7 +6155,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Full Interval
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7498,7 +6167,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Run Sched Time
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7506,7 +6179,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Run Time
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7514,7 +6191,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Start Delay
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7522,7 +6203,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Virtual Full Interval
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7530,7 +6215,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Wait Time
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7538,7 +6227,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7546,7 +6239,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -7554,7 +6251,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Messages
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -7562,7 +6263,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Next Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7570,7 +6275,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -7578,7 +6287,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prefer Mounted Volumes
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -7586,7 +6299,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prefix Links
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7594,7 +6311,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Priority
 
+Bareos Datatype: pint32
+Bareos Default: 10
+Required: false
 
 Default value: `undef`
 
@@ -7602,7 +6323,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Protocol
 
+Bareos Datatype: protocol_type
+Bareos Default: Native
+Required: false
 
 Default value: `undef`
 
@@ -7610,7 +6335,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prune Files
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7618,7 +6347,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prune Jobs
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7626,7 +6359,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prune Volumes
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7634,7 +6371,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Purge Migration Job
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7642,7 +6383,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Regex Where
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7650,7 +6395,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Replace
 
+Bareos Datatype: replace_option
+Bareos Default: Always
+Required: false
 
 Default value: `undef`
 
@@ -7658,7 +6407,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Rerun Failed Levels
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7666,7 +6419,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Reschedule Interval
 
+Bareos Datatype: time
+Bareos Default: 1800
+Required: false
 
 Default value: `undef`
 
@@ -7674,7 +6431,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Reschedule On Error
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7682,7 +6443,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Reschedule Times
 
+Bareos Datatype: pint32
+Bareos Default: 5
+Required: false
 
 Default value: `undef`
 
@@ -7690,7 +6455,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7698,7 +6468,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run After Failed Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7706,7 +6480,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run After Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7714,7 +6492,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run Before Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7722,7 +6504,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run Script
 
+Bareos Datatype: runscript
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7730,7 +6516,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Save File History
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -7738,7 +6528,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Schedule
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7746,7 +6540,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Plugin Options
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7754,7 +6553,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Selection Pattern
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7762,7 +6565,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Selection Type
 
+Bareos Datatype: migration_type
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7770,7 +6577,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Spool Attributes
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7778,7 +6589,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Spool Data
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -7786,7 +6601,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Spool Size
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7794,7 +6613,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Storage
 
+May be specified as Array.
+Bareos Datatype: resource_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7802,7 +6626,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Strip Prefix
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7810,7 +6638,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Type
 
+Bareos Datatype: job_type
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -7818,7 +6650,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Virtual Full Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7826,7 +6662,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Where
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7834,7 +6674,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Write Bootstrap
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -7842,606 +6686,18 @@ Default value: `undef`
 
 Data type: `Any`
 
+Write Verify List
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--jobdefs"></a>`bareos::director::jobdefs`
 
-== Define: bareos::director::jobdefs
 JobDefs are optional resources for providing defaults for Job resources.
 Almost the same like `Job`.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*accurate*]
-  Accurate
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*add_prefix*]
-  Add Prefix
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*add_suffix*]
-  Add Suffix
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*allow_duplicate_jobs*]
-  Allow Duplicate Jobs
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*allow_higher_duplicates*]
-  Allow Higher Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*allow_mixed_priority*]
-  Allow Mixed Priority
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*always_incremental*]
-  Always Incremental: Enable/disable always incremental backup scheme.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*always_incremental_job_retention*]
-  Always Incremental Job Retention: Backup Jobs older than the specified time duration will be merged into a new Virtual backup.
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*always_incremental_keep_number*]
-  Always Incremental Keep Number: Guarantee that at least the specified number of Backup Jobs will persist, even if they are older than "Always Incremental Job Retention".
-
-  Bareos Datatype: pint32
-  Bareos Default: 0
-  Required: false
-
-[*always_incremental_max_full_age*]
-  Always Incremental Max Full Age: If "AlwaysIncrementalMaxFullAge" is set, during consolidations only incremental backups will be considered while the Full Backup remains to reduce the amount of data being consolidated. Only if the Full Backup is older than "AlwaysIncrementalMaxFullAge", the Full Backup will be part of the consolidation to avoid the Full Backup becoming too old .
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*backup_format*]
-  Backup Format
-
-  Bareos Datatype: string
-  Bareos Default: Native
-  Required: false
-
-[*base*]
-  Base
-
-  May be specified as Array.
-  Bareos Datatype: resource_list
-  Bareos Default: Not set
-  Required: false
-
-[*bootstrap*]
-  Bootstrap
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*cancel_lower_level_duplicates*]
-  Cancel Lower Level Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*cancel_queued_duplicates*]
-  Cancel Queued Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*cancel_running_duplicates*]
-  Cancel Running Duplicates
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*catalog*]
-  Catalog
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*client*]
-  Client
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*client_run_after_job*]
-  Client Run After Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*client_run_before_job*]
-  Client Run Before Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*differential_backup_pool*]
-  Differential Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*differential_max_runtime*]
-  Differential Max Runtime
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*dir_plugin_options*]
-  Dir Plugin Options
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*enabled*]
-  Enabled: En- or disable this resource.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*fd_plugin_options*]
-  Fd Plugin Options
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*file_history_size*]
-  File History Size
-
-  Bareos Datatype: size64
-  Bareos Default: 10000000
-  Required: false
-
-[*file_set*]
-  File Set
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*full_backup_pool*]
-  Full Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*full_max_runtime*]
-  Full Max Runtime
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*incremental_backup_pool*]
-  Incremental Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*incremental_max_runtime*]
-  Incremental Max Runtime
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*job_defs*]
-  Job Defs
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*job_to_verify*]
-  Job To Verify
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*level*]
-  Level
-
-  Bareos Datatype: backup_level
-  Bareos Default: Not set
-  Required: false
-
-[*max_concurrent_copies*]
-  Max Concurrent Copies
-
-  Bareos Datatype: pint32
-  Bareos Default: 100
-  Required: false
-
-[*max_diff_interval*]
-  Max Diff Interval
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_full_consolidations*]
-  Max Full Consolidations: If "AlwaysIncrementalMaxFullAge" is configured, do not run more than "MaxFullConsolidations" consolidation jobs that include the Full backup.
-
-  Bareos Datatype: pint32
-  Bareos Default: 0
-  Required: false
-
-[*max_full_interval*]
-  Max Full Interval
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_run_sched_time*]
-  Max Run Sched Time
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_run_time*]
-  Max Run Time
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_start_delay*]
-  Max Start Delay
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_virtual_full_interval*]
-  Max Virtual Full Interval
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*max_wait_time*]
-  Max Wait Time
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_bandwidth*]
-  Maximum Bandwidth
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 1
-  Required: false
-
-[*messages*]
-  Messages
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: true
-
-[*next_pool*]
-  Next Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*pool*]
-  Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: true
-
-[*prefer_mounted_volumes*]
-  Prefer Mounted Volumes
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*prefix_links*]
-  Prefix Links
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*priority*]
-  Priority
-
-  Bareos Datatype: pint32
-  Bareos Default: 10
-  Required: false
-
-[*protocol*]
-  Protocol
-
-  Bareos Datatype: protocol_type
-  Bareos Default: Native
-  Required: false
-
-[*prune_files*]
-  Prune Files
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*prune_jobs*]
-  Prune Jobs
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*prune_volumes*]
-  Prune Volumes
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*purge_migration_job*]
-  Purge Migration Job
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*regex_where*]
-  Regex Where
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*replace*]
-  Replace
-
-  Bareos Datatype: replace_option
-  Bareos Default: Always
-  Required: false
-
-[*rerun_failed_levels*]
-  Rerun Failed Levels
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*reschedule_interval*]
-  Reschedule Interval
-
-  Bareos Datatype: time
-  Bareos Default: 1800
-  Required: false
-
-[*reschedule_on_error*]
-  Reschedule On Error
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*reschedule_times*]
-  Reschedule Times
-
-  Bareos Datatype: pint32
-  Bareos Default: 5
-  Required: false
-
-[*run*]
-  Run
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*run_after_failed_job*]
-  Run After Failed Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*run_after_job*]
-  Run After Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*run_before_job*]
-  Run Before Job
-
-  Bareos Datatype: runscript_short
-  Bareos Default: Not set
-  Required: false
-
-[*run_script*]
-  Run Script
-
-  Bareos Datatype: runscript
-  Bareos Default: Not set
-  Required: false
-
-[*save_file_history*]
-  Save File History
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*schedule_res*]
-  Schedule
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*sd_plugin_options*]
-  Sd Plugin Options
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*selection_pattern*]
-  Selection Pattern
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*selection_type*]
-  Selection Type
-
-  Bareos Datatype: migration_type
-  Bareos Default: Not set
-  Required: false
-
-[*spool_attributes*]
-  Spool Attributes
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*spool_data*]
-  Spool Data
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*spool_size*]
-  Spool Size
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*storage*]
-  Storage
-
-  May be specified as Array.
-  Bareos Datatype: resource_list
-  Bareos Default: Not set
-  Required: false
-
-[*strip_prefix*]
-  Strip Prefix
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*type*]
-  Type
-
-  Bareos Datatype: job_type
-  Bareos Default: Not set
-  Required: true
-
-[*virtual_full_backup_pool*]
-  Virtual Full Backup Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*where*]
-  Where
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*write_bootstrap*]
-  Write Bootstrap
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*write_verify_list*]
-  Write Verify List
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
 
 #### Parameters
 
@@ -8536,7 +6792,7 @@ The following parameters are available in the `bareos::director::jobdefs` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -8544,7 +6800,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Accurate
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8552,7 +6812,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Add Prefix
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8560,7 +6824,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Add Suffix
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8568,7 +6836,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Duplicate Jobs
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -8576,7 +6848,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Higher Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -8584,7 +6860,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Mixed Priority
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8592,7 +6872,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental: Enable/disable always incremental backup scheme.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8600,7 +6884,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental Job Retention: Backup Jobs older than the specified time duration will be merged into a new Virtual backup.
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -8608,7 +6896,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental Keep Number: Guarantee that at least the specified number of Backup Jobs will persist, even if they are older than "Always Incremental Job Retention".
 
+Bareos Datatype: pint32
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -8616,7 +6908,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Incremental Max Full Age: If "AlwaysIncrementalMaxFullAge" is set, during consolidations only incremental backups will be considered while the Full Backup remains to reduce the amount of data being consolidated. Only if the Full Backup is older than "AlwaysIncrementalMaxFullAge", the Full Backup will be part of the consolidation to avoid the Full Backup becoming too old .
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8624,7 +6920,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Backup Format
 
+Bareos Datatype: string
+Bareos Default: Native
+Required: false
 
 Default value: `undef`
 
@@ -8632,7 +6932,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Base
 
+May be specified as Array.
+Bareos Datatype: resource_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8640,7 +6945,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Bootstrap
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8648,7 +6957,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cancel Lower Level Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8656,7 +6969,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cancel Queued Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8664,7 +6981,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cancel Running Duplicates
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8672,7 +6993,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8680,7 +7005,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8688,7 +7017,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client Run After Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8696,7 +7029,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client Run Before Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8704,7 +7041,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8712,7 +7053,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Differential Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8720,7 +7065,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Differential Max Runtime
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8728,7 +7077,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Plugin Options
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8736,7 +7090,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enabled: En- or disable this resource.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -8744,7 +7102,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Plugin Options
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8752,7 +7115,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File History Size
 
+Bareos Datatype: size64
+Bareos Default: 10000000
+Required: false
 
 Default value: `undef`
 
@@ -8760,7 +7127,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File Set
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8768,7 +7139,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Full Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8776,7 +7151,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Full Max Runtime
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8784,7 +7163,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Incremental Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8792,7 +7175,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Incremental Max Runtime
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8800,7 +7187,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Job Defs
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8808,7 +7199,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Job To Verify
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8816,7 +7211,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Level
 
+Bareos Datatype: backup_level
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8824,7 +7223,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Concurrent Copies
 
+Bareos Datatype: pint32
+Bareos Default: 100
+Required: false
 
 Default value: `undef`
 
@@ -8832,7 +7235,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Diff Interval
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8840,7 +7247,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Full Consolidations: If "AlwaysIncrementalMaxFullAge" is configured, do not run more than "MaxFullConsolidations" consolidation jobs that include the Full backup.
 
+Bareos Datatype: pint32
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -8848,7 +7259,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Full Interval
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8856,7 +7271,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Run Sched Time
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8864,7 +7283,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Run Time
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8872,7 +7295,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Start Delay
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8880,7 +7307,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Virtual Full Interval
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8888,7 +7319,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Max Wait Time
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8896,7 +7331,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8904,7 +7343,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -8912,7 +7355,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Messages
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -8920,7 +7367,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Next Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -8928,7 +7379,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -8936,7 +7391,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prefer Mounted Volumes
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -8944,7 +7403,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prefix Links
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8952,7 +7415,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Priority
 
+Bareos Datatype: pint32
+Bareos Default: 10
+Required: false
 
 Default value: `undef`
 
@@ -8960,7 +7427,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Protocol
 
+Bareos Datatype: protocol_type
+Bareos Default: Native
+Required: false
 
 Default value: `undef`
 
@@ -8968,7 +7439,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prune Files
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8976,7 +7451,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prune Jobs
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8984,7 +7463,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Prune Volumes
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -8992,7 +7475,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Purge Migration Job
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9000,7 +7487,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Regex Where
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9008,7 +7499,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Replace
 
+Bareos Datatype: replace_option
+Bareos Default: Always
+Required: false
 
 Default value: `undef`
 
@@ -9016,7 +7511,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Rerun Failed Levels
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9024,7 +7523,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Reschedule Interval
 
+Bareos Datatype: time
+Bareos Default: 1800
+Required: false
 
 Default value: `undef`
 
@@ -9032,7 +7535,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Reschedule On Error
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9040,7 +7547,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Reschedule Times
 
+Bareos Datatype: pint32
+Bareos Default: 5
+Required: false
 
 Default value: `undef`
 
@@ -9048,7 +7559,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9056,7 +7572,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run After Failed Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9064,7 +7584,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run After Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9072,7 +7596,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run Before Job
 
+Bareos Datatype: runscript_short
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9080,7 +7608,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run Script
 
+Bareos Datatype: runscript
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9088,7 +7620,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Save File History
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -9096,7 +7632,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Schedule
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9104,7 +7644,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Plugin Options
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9112,7 +7657,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Selection Pattern
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9120,7 +7669,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Selection Type
 
+Bareos Datatype: migration_type
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9128,7 +7681,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Spool Attributes
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9136,7 +7693,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Spool Data
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9144,7 +7705,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Spool Size
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9152,7 +7717,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Storage
 
+May be specified as Array.
+Bareos Datatype: resource_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9160,7 +7730,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Strip Prefix
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9168,7 +7742,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Type
 
+Bareos Datatype: job_type
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -9176,7 +7754,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Virtual Full Backup Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9184,7 +7766,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Where
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9192,7 +7778,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Write Bootstrap
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9200,143 +7790,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Write Verify List
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--messages"></a>`bareos::director::messages`
 
-== Define: bareos::director::messages
-To define where error and information messages are to be sent or logged.
-You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*append*]
-  Append
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*catalog*]
-  Catalog
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*console*]
-  Console
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*director*]
-  Director
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*file*]
-  File
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail*]
-  Mail
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail_command*]
-  Mail Command
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*mail_on_error*]
-  Mail On Error
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail_on_success*]
-  Mail On Success
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*operator*]
-  Operator
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*operator_command*]
-  Operator Command
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*stderr*]
-  Stderr
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*stdout*]
-  Stdout
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*syslog*]
-  Syslog
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*timestamp_format*]
-  Timestamp Format
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
+Defines where error and information messages are to be sent or logged. You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
 
 #### Parameters
 
@@ -9364,7 +7828,7 @@ The following parameters are available in the `bareos::director::messages` defin
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -9372,7 +7836,12 @@ Default value: `present`
 
 Data type: `Any`
 
+Append
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9380,7 +7849,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9388,7 +7862,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Console
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9396,7 +7875,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9404,7 +7887,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Director
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9412,7 +7900,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+File
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9420,7 +7913,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9428,7 +7926,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail Command
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9436,7 +7938,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail On Error
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9444,7 +7951,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail On Success
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9452,7 +7964,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Operator
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9460,7 +7977,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Operator Command
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9468,7 +7989,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Stderr
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9476,7 +8002,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Stdout
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9484,7 +8015,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Syslog
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9492,239 +8028,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Timestamp Format
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--pool"></a>`bareos::director::pool`
 
-== Define: bareos::director::pool
-To define the pool of Volumes that can be used for a particular Job.
-Most people use a single default Pool.
-However, if you have a large number of clients or volumes, you may want to have multiple Pools.
-Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*action_on_purge*]
-  Action On Purge
-
-  Bareos Datatype: action_on_purge
-  Bareos Default: Not set
-  Required: false
-
-[*auto_prune*]
-  Auto Prune
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*catalog*]
-  Catalog
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*catalog_files*]
-  Catalog Files
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*cleaning_prefix*]
-  Cleaning Prefix
-
-  Bareos Datatype: strname
-  Bareos Default: CLN
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*file_retention*]
-  File Retention
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*job_retention*]
-  Job Retention
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*label_format*]
-  Label Format
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*label_type*]
-  Label Type
-
-  Bareos Datatype: label
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_block_size*]
-  Maximum Block Size
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_volume_bytes*]
-  Maximum Volume Bytes
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_volume_files*]
-  Maximum Volume Files
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_volume_jobs*]
-  Maximum Volume Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_volumes*]
-  Maximum Volumes
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*migration_high_bytes*]
-  Migration High Bytes
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*migration_low_bytes*]
-  Migration Low Bytes
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*migration_time*]
-  Migration Time
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
-
-[*minimum_block_size*]
-  Minimum Block Size
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*next_pool*]
-  Next Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*pool_type*]
-  Pool Type
-
-  Bareos Datatype: pooltype
-  Bareos Default: Backup
-  Required: false
-
-[*purge_oldest_volume*]
-  Purge Oldest Volume
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*recycle*]
-  Recycle
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*recycle_current_volume*]
-  Recycle Current Volume
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*recycle_oldest_volume*]
-  Recycle Oldest Volume
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*recycle_pool*]
-  Recycle Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*scratch_pool*]
-  Scratch Pool
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*storage*]
-  Storage
-
-  May be specified as Array.
-  Bareos Datatype: resource_list
-  Bareos Default: Not set
-  Required: false
-
-[*use_catalog*]
-  Use Catalog
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*volume_retention*]
-  Volume Retention
-
-  Bareos Datatype: time
-  Bareos Default: 31536000
-  Required: false
-
-[*volume_use_duration*]
-  Volume Use Duration
-
-  Bareos Datatype: time
-  Bareos Default: Not set
-  Required: false
+To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool. However, if you have a large number of clients or volumes, you may want to have multiple Pools. Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
 
 #### Parameters
 
@@ -9767,7 +8081,7 @@ The following parameters are available in the `bareos::director::pool` defined t
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -9775,7 +8089,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Action On Purge
 
+Bareos Datatype: action_on_purge
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9783,7 +8101,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Prune
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -9791,7 +8113,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9799,7 +8125,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog Files
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -9807,7 +8137,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cleaning Prefix
 
+Bareos Datatype: strname
+Bareos Default: CLN
+Required: false
 
 Default value: `undef`
 
@@ -9815,7 +8149,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9823,7 +8161,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File Retention
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9831,7 +8173,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Job Retention
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9839,7 +8185,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Label Format
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9847,7 +8197,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Label Type
 
+Bareos Datatype: label
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9855,7 +8209,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Block Size
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9863,7 +8221,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Volume Bytes
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9871,7 +8233,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Volume Files
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9879,7 +8245,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Volume Jobs
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9887,7 +8257,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Volumes
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9895,7 +8269,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Migration High Bytes
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9903,7 +8281,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Migration Low Bytes
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9911,7 +8293,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Migration Time
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9919,7 +8305,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Minimum Block Size
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9927,7 +8317,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Next Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9935,7 +8329,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pool Type
 
+Bareos Datatype: pooltype
+Bareos Default: Backup
+Required: false
 
 Default value: `undef`
 
@@ -9943,7 +8341,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Purge Oldest Volume
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9951,7 +8353,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Recycle
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -9959,7 +8365,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Recycle Current Volume
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9967,7 +8377,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Recycle Oldest Volume
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -9975,7 +8389,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Recycle Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9983,7 +8401,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Scratch Pool
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9991,7 +8413,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Storage
 
+May be specified as Array.
+Bareos Datatype: resource_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -9999,7 +8426,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Use Catalog
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -10007,7 +8438,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Volume Retention
 
+Bareos Datatype: time
+Bareos Default: 31536000
+Required: false
 
 Default value: `undef`
 
@@ -10015,96 +8450,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Volume Use Duration
 
+Bareos Datatype: time
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--profile"></a>`bareos::director::profile`
 
-== Define: bareos::director::profile
-The Profile Resource defines a set of ACLs.
-Console Resources can be tight to one or more profiles, making it easier to use a common set of ACLs.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*catalog_acl*]
-  Catalog ACL: Lists the Catalog resources, this resource has access to. The special keyword *all* allows access to all Catalog resources.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*client_acl*]
-  Client ACL: Lists the Client resources, this resource has access to. The special keyword *all* allows access to all Client resources.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*command_acl*]
-  Command ACL: Lists the commands, this resource has access to. The special keyword *all* allows using commands.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description: Additional information about the resource. Only used for UIs.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*file_set_acl*]
-  File Set ACL: Lists the File Set resources, this resource has access to. The special keyword *all* allows access to all File Set resources.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*job_acl*]
-  Job ACL: Lists the Job resources, this resource has access to. The special keyword *all* allows access to all Job resources.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*plugin_options_acl*]
-  Plugin Options ACL: Specifies the allowed plugin options. An empty strings allows all Plugin Options.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*pool_acl*]
-  Pool ACL: Lists the Pool resources, this resource has access to. The special keyword *all* allows access to all Pool resources.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*schedule_acl*]
-  Schedule ACL: Lists the Schedule resources, this resource has access to. The special keyword *all* allows access to all Schedule resources.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*storage_acl*]
-  Storage ACL: Lists the Storage resources, this resource has access to. The special keyword *all* allows access to all Storage resources.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
-
-[*where_acl*]
-  Where ACL: Specifies the base directories, where files could be restored. An empty string allows restores to all directories.
-
-  Bareos Datatype: acl
-  Bareos Default: Not set
-  Required: false
+Defines a set of ACLs. Console Resources can be tied to one or more profiles, making it easier to use a common set of ACLs.
 
 #### Parameters
 
@@ -10127,7 +8483,7 @@ The following parameters are available in the `bareos::director::profile` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -10135,7 +8491,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Catalog ACL: Lists the Catalog resources, this resource has access to. The special keyword *all* allows access to all Catalog resources.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10143,7 +8503,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Client ACL: Lists the Client resources, this resource has access to. The special keyword *all* allows access to all Client resources.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10151,7 +8515,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Command ACL: Lists the commands, this resource has access to. The special keyword *all* allows using commands.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10159,7 +8527,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description: Additional information about the resource. Only used for UIs.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10167,7 +8539,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+File Set ACL: Lists the File Set resources, this resource has access to. The special keyword *all* allows access to all File Set resources.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10175,7 +8551,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Job ACL: Lists the Job resources, this resource has access to. The special keyword *all* allows access to all Job resources.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10183,7 +8563,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Plugin Options ACL: Specifies the allowed plugin options. An empty strings allows all Plugin Options.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10191,7 +8575,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Pool ACL: Lists the Pool resources, this resource has access to. The special keyword *all* allows access to all Pool resources.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10199,7 +8587,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Schedule ACL: Lists the Schedule resources, this resource has access to. The special keyword *all* allows access to all Schedule resources.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10207,7 +8599,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Storage ACL: Lists the Storage resources, this resource has access to. The special keyword *all* allows access to all Storage resources.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10215,43 +8611,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Where ACL: Specifies the base directories, where files could be restored. An empty string allows restores to all directories.
 
+Bareos Datatype: acl
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--schedule"></a>`bareos::director::schedule`
 
-== Define: bareos::director::schedule
-The Schedule resource provides a means of automatically scheduling a Job
-as well as the ability to override the default Level, Pool, Storage and Messages resources.
-If a Schedule resource is not referenced in a Job, the Job can only be run manually.
-In general, you specify an action to be taken and when.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*enabled*]
-  Enabled: En- or disable this resource.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*run*]
-  Run
-
-  May be specified as Array.
-  Bareos Datatype: schedule_run_command
-  Bareos Default: Not set
-  Required: false
+Provides a means of automatically scheduling a job as well as the ability to override the default level, pool, storage and messages resources. If a schedule resource is not referenced in a job, the jjob can only be run manually. In general, you specify an action to be taken and when.
 
 #### Parameters
 
@@ -10266,7 +8636,7 @@ The following parameters are available in the `bareos::director::schedule` defin
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -10274,7 +8644,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10282,7 +8656,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enabled: En- or disable this resource.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -10290,252 +8668,19 @@ Default value: `undef`
 
 Data type: `Any`
 
+Run
 
+May be specified as Array.
+Bareos Datatype: schedule_run_command
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--director--storage"></a>`bareos::director::storage`
 
-== Define: bareos::director::storage
 To define on what physical device the Volumes should be mounted.
 You may have one or more Storage definitions.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*address*]
-  Address
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: true
-
-[*allow_compression*]
-  Allow Compression
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*auth_type*]
-  Auth Type
-
-  Bareos Datatype: auth_type
-  Bareos Default: None
-  Required: false
-
-[*auto_changer*]
-  Auto Changer
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*cache_status_interval*]
-  Cache Status Interval
-
-  Bareos Datatype: time
-  Bareos Default: 30
-  Required: false
-
-[*changer_device*]
-  Changer Device
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*collect_statistics*]
-  Collect Statistics
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*device*]
-  Device
-
-  Bareos Datatype: device
-  Bareos Default: Not set
-  Required: true
-
-[*enabled*]
-  Enabled: En- or disable this resource.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*heartbeat_interval*]
-  Heartbeat Interval
-
-  Bareos Datatype: time
-  Bareos Default: 0
-  Required: false
-
-[*maximum_bandwidth_per_job*]
-  Maximum Bandwidth Per Job
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 1
-  Required: false
-
-[*maximum_concurrent_read_jobs*]
-  Maximum Concurrent Read Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: 0
-  Required: false
-
-[*media_type*]
-  Media Type
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: true
-
-[*paired_storage*]
-  Paired Storage
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: true
-
-[*port*]
-  Port
-
-  Bareos Datatype: pint32
-  Bareos Default: 9103
-  Required: false
-
-[*protocol*]
-  Protocol
-
-  Bareos Datatype: auth_protocol_type
-  Bareos Default: Native
-  Required: false
-
-[*tape_device*]
-  Tape Device
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*username*]
-  Username
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
 
 #### Parameters
 
@@ -10580,7 +8725,7 @@ The following parameters are available in the `bareos::director::storage` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -10588,7 +8733,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -10596,7 +8745,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Allow Compression
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -10604,7 +8757,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auth Type
 
+Bareos Datatype: auth_type
+Bareos Default: None
+Required: false
 
 Default value: `undef`
 
@@ -10612,7 +8769,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Changer
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -10620,7 +8781,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Cache Status Interval
 
+Bareos Datatype: time
+Bareos Default: 30
+Required: false
 
 Default value: `undef`
 
@@ -10628,7 +8793,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Changer Device
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10636,7 +8805,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Collect Statistics
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -10644,7 +8817,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10652,7 +8829,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Device
 
+Bareos Datatype: device
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -10660,7 +8841,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enabled: En- or disable this resource.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -10668,7 +8853,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Heartbeat Interval
 
+Bareos Datatype: time
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -10676,7 +8865,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth Per Job
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10684,7 +8877,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -10692,7 +8889,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Read Jobs
 
+Bareos Datatype: pint32
+Bareos Default: 0
+Required: false
 
 Default value: `undef`
 
@@ -10700,7 +8901,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Media Type
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -10708,7 +8913,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Paired Storage
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10716,7 +8925,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -10724,7 +8937,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Port
 
+Bareos Datatype: pint32
+Bareos Default: 9103
+Required: false
 
 Default value: `undef`
 
@@ -10732,7 +8949,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Protocol
 
+Bareos Datatype: auth_protocol_type
+Bareos Default: Native
+Required: false
 
 Default value: `undef`
 
@@ -10740,7 +8961,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tape Device
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10748,7 +8974,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10756,7 +8987,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -10764,7 +8999,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10772,7 +9011,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10780,7 +9023,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10788,7 +9035,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10796,7 +9047,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10804,7 +9059,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10812,7 +9071,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -10820,7 +9083,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10828,7 +9095,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -10836,7 +9107,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -10844,53 +9119,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Username
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--monitor--client"></a>`bareos::monitor::client`
 
-== Define: bareos::monitor::client
 The Client resource defines the attributes of the Clients that are monitored by this Monitor.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*address*]
-  Address
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: true
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*enable_ssl*]
-  Enable Ssl
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*fd_port*]
-  Fd Port
-
-  Bareos Datatype: pint32
-  Bareos Default: 9102
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: md5password
-  Bareos Default: Not set
-  Required: true
 
 #### Parameters
 
@@ -10907,7 +9146,7 @@ The following parameters are available in the `bareos::monitor::client` defined 
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -10915,7 +9154,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -10923,7 +9166,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -10931,7 +9178,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enable Ssl
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -10939,7 +9190,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Port
 
+Bareos Datatype: pint32
+Bareos Default: 9102
+Required: false
 
 Default value: `undef`
 
@@ -10947,46 +9202,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: md5password
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
 ### <a name="bareos--monitor--director"></a>`bareos::monitor::director`
 
-== Define: bareos::monitor::director
 The Director resource defines the attributes of the Directors that are monitored by this Monitor.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*address*]
-  Address
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: true
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*dir_port*]
-  Dir Port
-
-  Bareos Datatype: pint32
-  Bareos Default: 9101
-  Required: false
-
-[*enable_ssl*]
-  Enable Ssl
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
 
 #### Parameters
 
@@ -11002,7 +9228,7 @@ The following parameters are available in the `bareos::monitor::director` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -11010,7 +9236,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -11018,7 +9248,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11026,7 +9260,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Port
 
+Bareos Datatype: pint32
+Bareos Default: 9101
+Required: false
 
 Default value: `undef`
 
@@ -11034,69 +9272,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enable Ssl
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--monitor--monitor"></a>`bareos::monitor::monitor`
 
-== Define: bareos::monitor::monitor
-The Monitor resource defines the attributes of the Monitor running on the network.
-The parameters you define here must be configured as a Director resource
-in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*dir_connect_timeout*]
-  Dir Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 10
-  Required: false
-
-[*fd_connect_timeout*]
-  Fd Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 10
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: md5password
-  Bareos Default: Not set
-  Required: true
-
-[*refresh_interval*]
-  Refresh Interval
-
-  Bareos Datatype: time
-  Bareos Default: 60
-  Required: false
-
-[*require_ssl*]
-  Require Ssl
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*sd_connect_timeout*]
-  Sd Connect Timeout
-
-  Bareos Datatype: time
-  Bareos Default: 10
-  Required: false
+The Monitor resource defines the attributes of the Monitor running on the network. 0The parameters you define here must be configured as a Director resource in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
 
 #### Parameters
 
@@ -11115,7 +9301,7 @@ The following parameters are available in the `bareos::monitor::monitor` defined
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -11123,7 +9309,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11131,7 +9321,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Dir Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 10
+Required: false
 
 Default value: `undef`
 
@@ -11139,7 +9333,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fd Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 10
+Required: false
 
 Default value: `undef`
 
@@ -11147,7 +9345,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: md5password
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -11155,7 +9357,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Refresh Interval
 
+Bareos Datatype: time
+Bareos Default: 60
+Required: false
 
 Default value: `undef`
 
@@ -11163,7 +9369,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Require Ssl
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -11171,67 +9381,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Connect Timeout
 
+Bareos Datatype: time
+Bareos Default: 10
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--monitor--storage"></a>`bareos::monitor::storage`
 
-== Define: bareos::monitor::storage
 The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*address*]
-  Address
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: true
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*enable_ssl*]
-  Enable Ssl
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: md5password
-  Bareos Default: Not set
-  Required: true
-
-[*sd_address*]
-  Sd Address
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*sd_password*]
-  Sd Password
-
-  Bareos Datatype: md5password
-  Bareos Default: Not set
-  Required: false
-
-[*sd_port*]
-  Sd Port
-
-  Bareos Datatype: pint32
-  Bareos Default: 9103
-  Required: false
 
 #### Parameters
 
@@ -11250,7 +9410,7 @@ The following parameters are available in the `bareos::monitor::storage` defined
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -11258,7 +9418,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -11266,7 +9430,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11274,7 +9442,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Enable Ssl
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -11282,7 +9454,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: md5password
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -11290,7 +9466,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Address
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11298,7 +9478,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Password
 
+Bareos Datatype: md5password
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11306,49 +9490,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Sd Port
 
+Bareos Datatype: pint32
+Bareos Default: 9103
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--storage--autochanger"></a>`bareos::storage::autochanger`
 
-== Define: bareos::storage::autochanger
-The Autochanger resource supports single or multiple drive autochangers
-by grouping one or more Device resources into one unit called an autochanger in Bareos
-(often referred to as a "tape library" by autochanger manufacturers).
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*changer_command*]
-  Changer Command
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: true
-
-[*changer_device*]
-  Changer Device
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: true
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*device*]
-  Device
-
-  May be specified as Array.
-  Bareos Datatype: resource_list
-  Bareos Default: Not set
-  Required: true
+Supports single or multiple drive autochangers by grouping one or more device resources into one unit called an autochanger in Bareos (often referred to as a "tape library" by autochanger manufacturers).
 
 #### Parameters
 
@@ -11364,7 +9516,7 @@ The following parameters are available in the `bareos::storage::autochanger` def
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -11372,7 +9524,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Changer Command
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -11380,7 +9536,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Changer Device
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -11388,7 +9548,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11396,454 +9560,18 @@ Default value: `undef`
 
 Data type: `Any`
 
+Device
 
+May be specified as Array.
+Bareos Datatype: resource_list
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
 ### <a name="bareos--storage--device"></a>`bareos::storage::device`
 
-== Define: bareos::storage::device
-The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon.
-There may be multiple Device resources for a single Storage daemon.
-In general, the properties specified within the Device resource are specific to the Device.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*alert_command*]
-  Alert Command
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*always_open*]
-  Always Open
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*archive_device*]
-  Archive Device
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: true
-
-[*auto_deflate*]
-  Auto Deflate
-
-  Bareos Datatype: io_direction
-  Bareos Default: Not set
-  Required: false
-
-[*auto_deflate_algorithm*]
-  Auto Deflate Algorithm
-
-  Bareos Datatype: compression_algorithm
-  Bareos Default: Not set
-  Required: false
-
-[*auto_deflate_level*]
-  Auto Deflate Level
-
-  Bareos Datatype: pint16
-  Bareos Default: 6
-  Required: false
-
-[*auto_inflate*]
-  Auto Inflate
-
-  Bareos Datatype: io_direction
-  Bareos Default: Not set
-  Required: false
-
-[*auto_select*]
-  Auto Select
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*autochanger*]
-  Autochanger
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*automatic_mount*]
-  Automatic Mount
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*backward_space_file*]
-  Backward Space File
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*backward_space_record*]
-  Backward Space Record
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*block_checksum*]
-  Block Checksum
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*block_positioning*]
-  Block Positioning
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*bsf_at_eom*]
-  Bsf At Eom
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*changer_command*]
-  Changer Command
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*changer_device*]
-  Changer Device
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*check_labels*]
-  Check Labels
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*close_on_poll*]
-  Close On Poll
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*collect_statistics*]
-  Collect Statistics
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*count*]
-  Count
-
-  Bareos Datatype: pint32
-  Bareos Default: 1
-  Required: false
-
-[*description*]
-  Description: The Description directive provides easier human recognition, but is not used by Bareos directly.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*device_options*]
-  Device Options
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*device_type*]
-  Device Type
-
-  Bareos Datatype: device_type
-  Bareos Default: Not set
-  Required: false
-
-[*diagnostic_device*]
-  Diagnostic Device
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*drive_crypto_enabled*]
-  Drive Crypto Enabled
-
-  Bareos Datatype: boolean
-  Bareos Default: Not set
-  Required: false
-
-[*drive_index*]
-  Drive Index
-
-  Bareos Datatype: pint16
-  Bareos Default: Not set
-  Required: false
-
-[*drive_tape_alert_enabled*]
-  Drive Tape Alert Enabled
-
-  Bareos Datatype: boolean
-  Bareos Default: Not set
-  Required: false
-
-[*fast_forward_space_file*]
-  Fast Forward Space File
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*forward_space_file*]
-  Forward Space File
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*forward_space_record*]
-  Forward Space Record
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*hardware_end_of_file*]
-  Hardware End Of File
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*hardware_end_of_medium*]
-  Hardware End Of Medium
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*label_block_size*]
-  Label Block Size
-
-  Bareos Datatype: pint32
-  Bareos Default: 64512
-  Required: false
-
-[*label_media*]
-  Label Media
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*label_type*]
-  Label Type
-
-  Bareos Datatype: label
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_block_size*]
-  Maximum Block Size
-
-  Bareos Datatype: max_blocksize
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_changer_wait*]
-  Maximum Changer Wait
-
-  Bareos Datatype: time
-  Bareos Default: 300
-  Required: false
-
-[*maximum_concurrent_jobs*]
-  Maximum Concurrent Jobs
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_file_size*]
-  Maximum File Size
-
-  Bareos Datatype: size64
-  Bareos Default: 1000000000
-  Required: false
-
-[*maximum_job_spool_size*]
-  Maximum Job Spool Size
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_network_buffer_size*]
-  Maximum Network Buffer Size
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_open_volumes*]
-  Maximum Open Volumes
-
-  Bareos Datatype: pint32
-  Bareos Default: 1
-  Required: false
-
-[*maximum_open_wait*]
-  Maximum Open Wait
-
-  Bareos Datatype: time
-  Bareos Default: 300
-  Required: false
-
-[*maximum_rewind_wait*]
-  Maximum Rewind Wait
-
-  Bareos Datatype: time
-  Bareos Default: 300
-  Required: false
-
-[*maximum_spool_size*]
-  Maximum Spool Size
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*media_type*]
-  Media Type
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: true
-
-[*minimum_block_size*]
-  Minimum Block Size
-
-  Bareos Datatype: pint32
-  Bareos Default: Not set
-  Required: false
-
-[*mount_command*]
-  Mount Command
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*mount_point*]
-  Mount Point
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*no_rewind_on_close*]
-  No Rewind On Close
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
-
-[*offline_on_unmount*]
-  Offline On Unmount
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*query_crypto_status*]
-  Query Crypto Status
-
-  Bareos Datatype: boolean
-  Bareos Default: Not set
-  Required: false
-
-[*random_access*]
-  Random Access
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*removable_media*]
-  Removable Media
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*requires_mount*]
-  Requires Mount
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*spool_directory*]
-  Spool Directory
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*two_eof*]
-  Two Eof
-
-  Bareos Datatype: bit
-  Bareos Default: off
-  Required: false
-
-[*unmount_command*]
-  Unmount Command
-
-  Bareos Datatype: strname
-  Bareos Default: Not set
-  Required: false
-
-[*use_mtiocget*]
-  Use Mtiocget
-
-  Bareos Datatype: bit
-  Bareos Default: on
-  Required: false
-
-[*volume_capacity*]
-  Volume Capacity
-
-  Bareos Datatype: size64
-  Bareos Default: Not set
-  Required: false
-
-[*volume_poll_interval*]
-  Volume Poll Interval
-
-  Bareos Datatype: time
-  Bareos Default: 300
-  Required: false
+The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon. There may be multiple Device resources for a single Storage daemon. In general, the properties specified within the Device resource are specific to the Device.
 
 #### Parameters
 
@@ -11917,7 +9645,7 @@ The following parameters are available in the `bareos::storage::device` defined 
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -11925,7 +9653,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Alert Command
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11933,7 +9665,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Always Open
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -11941,7 +9677,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Archive Device
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -11949,7 +9689,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Deflate
 
+Bareos Datatype: io_direction
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11957,7 +9701,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Deflate Algorithm
 
+Bareos Datatype: compression_algorithm
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11965,7 +9713,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Deflate Level
 
+Bareos Datatype: pint16
+Bareos Default: 6
+Required: false
 
 Default value: `undef`
 
@@ -11973,7 +9725,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Inflate
 
+Bareos Datatype: io_direction
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -11981,7 +9737,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Auto Select
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -11989,7 +9749,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Autochanger
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -11997,7 +9761,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Automatic Mount
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12005,7 +9773,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Backward Space File
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12013,7 +9785,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Backward Space Record
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12021,7 +9797,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Block Checksum
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12029,7 +9809,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Block Positioning
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12037,7 +9821,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Bsf At Eom
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12045,7 +9833,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Changer Command
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12053,7 +9845,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Changer Device
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12061,7 +9857,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Check Labels
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12069,7 +9869,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Close On Poll
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12077,7 +9881,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Collect Statistics
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -12085,7 +9893,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Count
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -12093,7 +9905,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description: The Description directive provides easier human recognition, but is not used by Bareos directly.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12101,7 +9917,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Device Options
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12109,7 +9929,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Device Type
 
+Bareos Datatype: device_type
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12117,7 +9941,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Diagnostic Device
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12125,7 +9953,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Drive Crypto Enabled
 
+Bareos Datatype: boolean
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12133,7 +9965,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Drive Index
 
+Bareos Datatype: pint16
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12141,7 +9977,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Drive Tape Alert Enabled
 
+Bareos Datatype: boolean
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12149,7 +9989,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Fast Forward Space File
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12157,7 +10001,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Forward Space File
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12165,7 +10013,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Forward Space Record
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12173,7 +10025,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Hardware End Of File
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12181,7 +10037,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Hardware End Of Medium
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12189,7 +10049,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Label Block Size
 
+Bareos Datatype: pint32
+Bareos Default: 64512
+Required: false
 
 Default value: `undef`
 
@@ -12197,7 +10061,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Label Media
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12205,7 +10073,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Label Type
 
+Bareos Datatype: label
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12213,7 +10085,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Block Size
 
+Bareos Datatype: max_blocksize
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12221,7 +10097,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Changer Wait
 
+Bareos Datatype: time
+Bareos Default: 300
+Required: false
 
 Default value: `undef`
 
@@ -12229,7 +10109,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Concurrent Jobs
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12237,7 +10121,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum File Size
 
+Bareos Datatype: size64
+Bareos Default: 1000000000
+Required: false
 
 Default value: `undef`
 
@@ -12245,7 +10133,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Job Spool Size
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12253,7 +10145,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Network Buffer Size
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12261,7 +10157,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Open Volumes
 
+Bareos Datatype: pint32
+Bareos Default: 1
+Required: false
 
 Default value: `undef`
 
@@ -12269,7 +10169,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Open Wait
 
+Bareos Datatype: time
+Bareos Default: 300
+Required: false
 
 Default value: `undef`
 
@@ -12277,7 +10181,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Rewind Wait
 
+Bareos Datatype: time
+Bareos Default: 300
+Required: false
 
 Default value: `undef`
 
@@ -12285,7 +10193,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Spool Size
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12293,7 +10205,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Media Type
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -12301,7 +10217,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Minimum Block Size
 
+Bareos Datatype: pint32
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12309,7 +10229,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mount Command
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12317,7 +10241,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mount Point
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12325,7 +10253,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+No Rewind On Close
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
@@ -12333,7 +10265,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Offline On Unmount
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12341,7 +10277,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Query Crypto Status
 
+Bareos Datatype: boolean
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12349,7 +10289,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Random Access
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12357,7 +10301,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Removable Media
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12365,7 +10313,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Requires Mount
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12373,7 +10325,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Spool Directory
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12381,7 +10337,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Two Eof
 
+Bareos Datatype: bit
+Bareos Default: off
+Required: false
 
 Default value: `undef`
 
@@ -12389,7 +10349,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Unmount Command
 
+Bareos Datatype: strname
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12397,7 +10361,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Use Mtiocget
 
+Bareos Datatype: bit
+Bareos Default: on
+Required: false
 
 Default value: `undef`
 
@@ -12405,7 +10373,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Volume Capacity
 
+Bareos Datatype: size64
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12413,140 +10385,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Volume Poll Interval
 
+Bareos Datatype: time
+Bareos Default: 300
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--storage--director"></a>`bareos::storage::director`
 
-== Define: bareos::storage::director
-The Director resource specifies the Name of the Director which is permitted to use the services of the Storage daemon.
-There may be multiple Director resources.
-The Director Name and Password must match the corresponding values in the Director's configuration file.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*key_encryption_key*]
-  Key Encryption Key
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: false
-
-[*maximum_bandwidth_per_job*]
-  Maximum Bandwidth Per Job
-
-  Bareos Datatype: speed
-  Bareos Default: Not set
-  Required: false
-
-[*monitor*]
-  Monitor
-
-  Bareos Datatype: boolean
-  Bareos Default: Not set
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: true
-
-[*tls_allowed_cn*]
-  Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
-
-  May be specified as Array.
-  Bareos Datatype: string_list
-  Bareos Default: Not set
-  Required: false
-
-[*tls_authenticate*]
-  Tls Authenticate: Use TLS only to authenticate, not for encryption.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_ca_certificate_dir*]
-  Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_ca_certificate_file*]
-  Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate*]
-  Tls Certificate: Path of a PEM encoded TLS certificate.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_certificate_revocation_list*]
-  Tls Certificate Revocation List: Path of a Certificate Revocation List file.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_cipher_list*]
-  Tls Cipher List: List of valid TLS Ciphers.
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*tls_dh_file*]
-  Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_enable*]
-  Tls Enable: Enable TLS support.
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_key*]
-  Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
-
-  Bareos Datatype: directory
-  Bareos Default: Not set
-  Required: false
-
-[*tls_require*]
-  Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
-
-  Bareos Datatype: boolean
-  Bareos Default: false
-  Required: false
-
-[*tls_verify_peer*]
-  Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
-
-  Bareos Datatype: boolean
-  Bareos Default: true
-  Required: false
+Specifies the name of the director which is permitted to use the services of the storage daemon. The director name and password must match the corresponding values in the director's configuration file.
 
 #### Parameters
 
@@ -12575,7 +10424,7 @@ The following parameters are available in the `bareos::storage::director` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -12583,7 +10432,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12591,7 +10444,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Key Encryption Key
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12599,7 +10456,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Maximum Bandwidth Per Job
 
+Bareos Datatype: speed
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12607,7 +10468,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Monitor
 
+Bareos Datatype: boolean
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12615,7 +10480,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -12623,7 +10492,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
+May be specified as Array.
+Bareos Datatype: string_list
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12631,7 +10505,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -12639,7 +10517,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12647,7 +10529,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12655,7 +10541,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate: Path of a PEM encoded TLS certificate.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12663,7 +10553,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12671,7 +10565,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Cipher List: List of valid TLS Ciphers.
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12679,7 +10577,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12687,7 +10589,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Enable: Enable TLS support.
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -12695,7 +10601,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
+Bareos Datatype: directory
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12703,7 +10613,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
+Bareos Datatype: boolean
+Bareos Default: false
+Required: false
 
 Default value: `undef`
 
@@ -12711,142 +10625,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
+Bareos Datatype: boolean
+Bareos Default: true
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--storage--messages"></a>`bareos::storage::messages`
 
-== Define: bareos::storage::messages
 The Messages resource defines how messages are to be handled and destinations to which they should be sent.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*append*]
-  Append
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*catalog*]
-  Catalog
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*console*]
-  Console
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*director*]
-  Director
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*file*]
-  File
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail*]
-  Mail
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail_command*]
-  Mail Command
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*mail_on_error*]
-  Mail On Error
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*mail_on_success*]
-  Mail On Success
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*operator*]
-  Operator
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*operator_command*]
-  Operator Command
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*stderr*]
-  Stderr
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*stdout*]
-  Stdout
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*syslog*]
-  Syslog
-
-  May be specified as Array.
-  Bareos Datatype: messages
-  Bareos Default: Not set
-  Required: false
-
-[*timestamp_format*]
-  Timestamp Format
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
 
 #### Parameters
 
@@ -12874,7 +10663,7 @@ The following parameters are available in the `bareos::storage::messages` define
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -12882,7 +10671,12 @@ Default value: `present`
 
 Data type: `Any`
 
+Append
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12890,7 +10684,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Catalog
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12898,7 +10697,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Console
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12906,7 +10710,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12914,7 +10722,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Director
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12922,7 +10735,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+File
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12930,7 +10748,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12938,7 +10761,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail Command
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12946,7 +10773,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail On Error
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12954,7 +10786,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Mail On Success
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12962,7 +10799,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Operator
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12970,7 +10812,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Operator Command
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12978,7 +10824,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Stderr
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12986,7 +10837,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Stdout
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -12994,7 +10850,12 @@ Default value: `undef`
 
 Data type: `Any`
 
+Syslog
 
+May be specified as Array.
+Bareos Datatype: messages
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -13002,55 +10863,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Timestamp Format
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
 ### <a name="bareos--storage--ndmp"></a>`bareos::storage::ndmp`
 
-== Define: bareos::storage::ndmp
-The NDMP Resource specifies the authentication details of each NDMP client.
-There may be multiple NDMP resources for a single Storage daemon.
-In general, the properties specified within the NDMP resource are specific to one client.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*auth_type*]
-  Auth Type
-
-  Bareos Datatype: auth_type
-  Bareos Default: None
-  Required: false
-
-[*description*]
-  Description
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: false
-
-[*log_level*]
-  Log Level
-
-  Bareos Datatype: pint32
-  Bareos Default: 4
-  Required: false
-
-[*password*]
-  Password
-
-  Bareos Datatype: autopassword
-  Bareos Default: Not set
-  Required: true
-
-[*username*]
-  Username
-
-  Bareos Datatype: string
-  Bareos Default: Not set
-  Required: true
+The NDMP Resource specifies the authentication details of each NDMP client. There may be multiple NDMP resources for a single Storage daemon. In general, the properties specified within the NDMP resource are specific to one client.
 
 #### Parameters
 
@@ -13067,7 +10890,7 @@ The following parameters are available in the `bareos::storage::ndmp` defined ty
 
 Data type: `Any`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -13075,7 +10898,11 @@ Default value: `present`
 
 Data type: `Any`
 
+Auth Type
 
+Bareos Datatype: auth_type
+Bareos Default: None
+Required: false
 
 Default value: `undef`
 
@@ -13083,7 +10910,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Description
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -13091,7 +10922,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Log Level
 
+Bareos Datatype: pint32
+Bareos Default: 4
+Required: false
 
 Default value: `undef`
 
@@ -13099,7 +10934,11 @@ Default value: `undef`
 
 Data type: `Any`
 
+Password
 
+Bareos Datatype: autopassword
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
@@ -13107,56 +10946,17 @@ Default value: `undef`
 
 Data type: `Any`
 
+Username
 
+Bareos Datatype: string
+Bareos Default: Not set
+Required: true
 
 Default value: `undef`
 
 ### <a name="bareos--webui--director"></a>`bareos::webui::director`
 
-== Class: bareos::webui::director
 Configures an director to use with the webui.
-
-== Parameters
-[*ensure*]
-  present or absent the config file.
-
-[*catalog*]
-  Catalog
-
-  Bareos Datatype: res
-  Bareos Default: Not set
-  Required: false
-
-[*dir_address*]
-  Dir Address
-
-  Bareos Datatype: address
-  Bareos Default: 9101
-  Required: false
-
-[*dir_port*]
-  Dir Port
-
-  Bareos Datatype: port
-  Bareos Default: 9101
-  Required: false
-
-[*enabled*]
-  Enable or disable section. Possible values are "yes" or "no", the default is "yes".
-
-[*pam_console_name*]
-  Pam Console Name
-
-  Bareos datatype: res
-  Bareos default: not set
-  Required: false
-
-[*pam_console_password*]
-  Pam Console Password
-
-  Bareos datatype: res
-  Bareos default: not set
-  Required: false
 
 #### Parameters
 
@@ -13174,7 +10974,7 @@ The following parameters are available in the `bareos::webui::director` defined 
 
 Data type: `Enum['present', 'absent']`
 
-
+present or absent the config file.
 
 Default value: `present`
 
@@ -13182,7 +10982,11 @@ Default value: `present`
 
 Data type: `Optional[Bareos::Resource]`
 
+Catalog
 
+Bareos Datatype: res
+Bareos Default: Not set
+Required: false
 
 Default value: `undef`
 
@@ -13190,7 +10994,11 @@ Default value: `undef`
 
 Data type: `Stdlib::Host`
 
+Dir Address
 
+Bareos Datatype: address
+Bareos Default: 9101
+Required: false
 
 Default value: `'localhost'`
 
@@ -13198,7 +11006,11 @@ Default value: `'localhost'`
 
 Data type: `Stdlib::Port`
 
+Dir Port
 
+Bareos Datatype: port
+Bareos Default: 9101
+Required: false
 
 Default value: `9101`
 
@@ -13206,7 +11018,7 @@ Default value: `9101`
 
 Data type: `Enum['yes', 'no']`
 
-
+Enable or disable section. Possible values are "yes" or "no", the default is "yes".
 
 Default value: `'yes'`
 
@@ -13214,7 +11026,11 @@ Default value: `'yes'`
 
 Data type: `Optional[Bareos::Resource]`
 
+Pam Console Name
 
+Bareos datatype: res
+Bareos default: not set
+Required: false
 
 Default value: `undef`
 
@@ -13222,7 +11038,11 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+Pam Console Password
 
+Bareos datatype: res
+Bareos default: not set
+Required: false
 
 Default value: `undef`
 

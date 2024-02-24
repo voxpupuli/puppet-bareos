@@ -1,5 +1,8 @@
-# == Class: bareos::profile::client
-# setup an simple bareos filedaemon/client
+# @summary
+#   setup an simple bareos filedaemon/client
+# @param name_client
+# @param name_dir
+# @param password
 class bareos::profile::client (
   $name_client = $facts['networking']['fqdn'],
   $name_dir = 'bareos-dir',

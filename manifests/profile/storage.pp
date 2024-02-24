@@ -1,4 +1,7 @@
-# == Class: bareos::profile::storage
+# @param name_storage
+# @param name_dir
+# @param password
+# @param archive_device
 #
 class bareos::profile::storage (
   $name_storage = 'bareos-sd',
