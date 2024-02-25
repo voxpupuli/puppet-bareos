@@ -3821,7 +3821,7 @@ Default value: `present`
 
 ##### <a name="-bareos--console--console--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
 
@@ -3833,7 +3833,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--director"></a>`director`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Director
 
@@ -3845,7 +3845,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--heartbeat_interval"></a>`heartbeat_interval`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Heartbeat Interval
 
@@ -3857,7 +3857,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--history_file"></a>`history_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 History File
 
@@ -3869,7 +3869,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--history_length"></a>`history_length`
 
-Data type: `Any`
+Data type: `Optional[Integer[0]]`
 
 History Length
 
@@ -3881,7 +3881,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--password"></a>`password`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Password
 
@@ -3893,7 +3893,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--rc_file"></a>`rc_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Rc File
 
@@ -3905,7 +3905,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_allowed_cn"></a>`tls_allowed_cn`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
@@ -3918,7 +3918,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_authenticate"></a>`tls_authenticate`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
@@ -3930,7 +3930,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
@@ -3942,7 +3942,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
@@ -3954,7 +3954,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_certificate"></a>`tls_certificate`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate: Path of a PEM encoded TLS certificate.
 
@@ -3966,7 +3966,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
@@ -3978,7 +3978,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_cipher_list"></a>`tls_cipher_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Cipher List: List of valid TLS Ciphers.
 
@@ -3990,7 +3990,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
@@ -4002,7 +4002,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_enable"></a>`tls_enable`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Enable: Enable TLS support.
 
@@ -4014,7 +4014,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_key"></a>`tls_key`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
@@ -4026,7 +4026,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_require"></a>`tls_require`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
@@ -4038,7 +4038,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_verify_peer"></a>`tls_verify_peer`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
@@ -4085,7 +4085,7 @@ Default value: `present`
 
 ##### <a name="-bareos--console--director--address"></a>`address`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Address
 
@@ -4097,7 +4097,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
 
@@ -4109,7 +4109,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--dir_port"></a>`dir_port`
 
-Data type: `Any`
+Data type: `Optional[Integer[0]]`
 
 Dir Port
 
@@ -4121,7 +4121,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--heartbeat_interval"></a>`heartbeat_interval`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Heartbeat Interval
 
@@ -4133,7 +4133,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--password"></a>`password`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Password
 
@@ -4145,7 +4145,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_allowed_cn"></a>`tls_allowed_cn`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
@@ -4158,7 +4158,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_authenticate"></a>`tls_authenticate`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
@@ -4170,7 +4170,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
@@ -4182,7 +4182,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
@@ -4194,7 +4194,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_certificate"></a>`tls_certificate`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate: Path of a PEM encoded TLS certificate.
 
@@ -4206,7 +4206,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
@@ -4218,7 +4218,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_cipher_list"></a>`tls_cipher_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Cipher List: List of valid TLS Ciphers.
 
@@ -4230,7 +4230,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
@@ -4242,7 +4242,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_enable"></a>`tls_enable`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Enable: Enable TLS support.
 
@@ -4254,7 +4254,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_key"></a>`tls_key`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
@@ -4266,7 +4266,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_require"></a>`tls_require`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
@@ -4278,7 +4278,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_verify_peer"></a>`tls_verify_peer`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
