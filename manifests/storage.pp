@@ -17,19 +17,19 @@
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::storage (
-  Boolean $manage_service   = $bareos::manage_service,
-  Boolean $manage_package   = $bareos::manage_package,
-  $package_name   = $bareos::storage_package_name,
-  String[1] $package_ensure = $bareos::package_ensure,
-  String[1] $service_name   = $bareos::storage_service_name,
-  String[1] $service_ensure = $bareos::service_ensure,
-  Boolean $service_enable = $bareos::service_enable,
-  String[1] $config_dir     = "${bareos::config_dir}/bareos-sd.d",
-  Hash $autochangers        = {},
-  Hash $devices             = {},
-  Hash $directors           = {},
-  Hash $messages            = {},
-  Hash $ndmps               = {},
+  Boolean $manage_service          = $bareos::manage_service,
+  Boolean $manage_package          = $bareos::manage_package,
+  Array[String[1]] $package_name   = $bareos::storage_package_name,
+  String[1] $package_ensure        = $bareos::package_ensure,
+  String[1] $service_name          = $bareos::storage_service_name,
+  String[1] $service_ensure        = $bareos::service_ensure,
+  Boolean $service_enable          = $bareos::service_enable,
+  Stdlib::Absolutepath $config_dir = "${bareos::config_dir}/bareos-sd.d",
+  Hash $autochangers               = {},
+  Hash $devices                    = {},
+  Hash $directors                  = {},
+  Hash $messages                   = {},
+  Hash $ndmps                      = {},
 ) inherits bareos {
   include bareos::storage::storage
 
