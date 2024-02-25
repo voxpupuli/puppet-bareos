@@ -18,22 +18,21 @@
 # @param directors
 #
 class bareos::webui (
-  $manage_service = $bareos::manage_service,
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::webui_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $service_name   = $bareos::webui_service_name,
-  $service_ensure = $bareos::service_ensure,
-  $service_enable = $bareos::service_enable,
-  $config_dir     = $bareos::config_dir_webui,
-
-  $manage_local_dir = true, # setup local bareos director
-  $session_timeout = 3600,
-  $pagination_values = '10,25,50,100',
-  $pagination_default_value = 25,
-  $save_previous_state = false,
-  $label_pooltype = '',
-  $directors = {},
+  Boolean $manage_service              = $bareos::manage_service,
+  Boolean $manage_package              = $bareos::manage_package,
+  String[1] $package_name              = $bareos::webui_package_name,
+  String[1] $package_ensure            = $bareos::package_ensure,
+  String[1] $service_name              = $bareos::webui_service_name,
+  String[1] $service_ensure            = $bareos::service_ensure,
+  Boolean $service_enable              = $bareos::service_enable,
+  Stdlib::Absolutepath $config_dir     = $bareos::config_dir_webui,
+  Boolean $manage_local_dir            = true, # setup local bareos director
+  Integer[0] $session_timeout          = 3600,
+  String[1] $pagination_values         = '10,25,50,100',
+  Integer[0] $pagination_default_value = 25,
+  Boolean $save_previous_state         = false,
+  String $label_pooltype               = '',
+  Hash $directors                      = {},
 ) inherits bareos {
   if $manage_package {
     package { $package_name:

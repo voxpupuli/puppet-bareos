@@ -1,7 +1,9 @@
 # @summary
 #   The Messages resource defines how messages are to be handled and destinations to which they should be sent.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param append
 #   Append
 #
@@ -127,32 +129,28 @@
 #   Required: false
 #
 define bareos::client::messages (
-  $ensure = present,
-  $append = undef,
-  $catalog = undef,
-  $console = undef,
-  $description = undef,
-  $director = undef,
-  $file = undef,
-  $mail = undef,
-  $mail_command = undef,
-  $mail_on_error = undef,
-  $mail_on_success = undef,
-  $operator = undef,
-  $operator_command = undef,
-  $stderr = undef,
-  $stdout = undef,
-  $syslog = undef,
-  $timestamp_format = undef,
+  Enum['present','absent'] $ensure = present,
+  Optional[Variant[Array[String[1]],String[1]]] $append = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $catalog = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $console = undef,
+  Optional[String[1]] $description = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $director = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $file = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $mail = undef,
+  Optional[String[1]] $mail_command = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $mail_on_error = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $mail_on_success = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $operator = undef,
+  Optional[String[1]] $operator_command = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $stderr = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $stdout = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $syslog = undef,
+  Optional[String[1]] $timestamp_format = undef,
 ) {
   include bareos::client
 
   $_resource = 'Messages'
   $_resource_dir = 'messages'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

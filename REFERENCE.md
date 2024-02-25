@@ -16,13 +16,13 @@
 * [`bareos::params`](#bareos--params): == Class: bareos::params
 * [`bareos::profile::client`](#bareos--profile--client): setup an simple bareos filedaemon/client
 * [`bareos::profile::director`](#bareos--profile--director): Ready to use director with default configs
-* [`bareos::profile::director::client`](#bareos--profile--director--client): == Class: bareos::profile::director::client Default client, backup bareos director itself
-* [`bareos::profile::director::fileset`](#bareos--profile--director--fileset): == Class: bareos::profile::director::fileset Default filesets
-* [`bareos::profile::director::jobdefs`](#bareos--profile--director--jobdefs): == Class: bareos::profile::director::jobdefs Default jobdefs
-* [`bareos::profile::director::messages`](#bareos--profile--director--messages): == Class: bareos::profile::director::messages Default messages
-* [`bareos::profile::director::pool`](#bareos--profile--director--pool): == Class: bareos::profile::director::pool Some default pools
+* [`bareos::profile::director::client`](#bareos--profile--director--client): Default client, backup bareos director itself
+* [`bareos::profile::director::fileset`](#bareos--profile--director--fileset): Default filesets
+* [`bareos::profile::director::jobdefs`](#bareos--profile--director--jobdefs): Default jobdefs
+* [`bareos::profile::director::messages`](#bareos--profile--director--messages): Default messages
+* [`bareos::profile::director::pool`](#bareos--profile--director--pool): Some default pools
 * [`bareos::profile::director::profile`](#bareos--profile--director--profile): == Class: bareos::profile::director::profile
-* [`bareos::profile::director::schedule`](#bareos--profile--director--schedule): == Class: bareos::profile::director::schedule Default schedules
+* [`bareos::profile::director::schedule`](#bareos--profile--director--schedule): Default schedules
 * [`bareos::profile::director::storage`](#bareos--profile--director--storage): Default storage daemon
 * [`bareos::profile::storage`](#bareos--profile--storage)
 * [`bareos::repository`](#bareos--repository): Manages the bareos repository. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
@@ -116,7 +116,7 @@ The following parameters are available in the `bareos` class:
 
 ##### <a name="-bareos--repo_release"></a>`repo_release`
 
-Data type: `String`
+Data type: `String[1]`
 
 The major bareos release version which should be used
 
@@ -172,7 +172,7 @@ Default value: `true`
 
 ##### <a name="-bareos--package_ensure"></a>`package_ensure`
 
-Data type: `String`
+Data type: `String[1]`
 
 Package version to be installed
 
@@ -180,7 +180,7 @@ Default value: `present`
 
 ##### <a name="-bareos--service_ensure"></a>`service_ensure`
 
-Data type: `String`
+Data type: `String[1]`
 
 Service state which should be ensured
 
@@ -212,7 +212,7 @@ Default value: `true`
 
 ##### <a name="-bareos--package_name"></a>`package_name`
 
-Data type: `String`
+Data type: `String[1]`
 
 Name of the package which should be installed
 
@@ -220,7 +220,7 @@ Default value: `'bareos-common'`
 
 ##### <a name="-bareos--director_service_allow_restart"></a>`director_service_allow_restart`
 
-Data type: `Any`
+Data type: `Boolean`
 
 Whether puppet is allowed to restart the director service. If not it will reload
 
@@ -228,7 +228,7 @@ Default value: `false`
 
 ##### <a name="-bareos--config_dir"></a>`config_dir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -236,7 +236,7 @@ Default value: `$bareos::params::config_dir`
 
 ##### <a name="-bareos--config_dir_webui"></a>`config_dir_webui`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -244,7 +244,7 @@ Default value: `$bareos::params::config_dir_webui`
 
 ##### <a name="-bareos--file_owner"></a>`file_owner`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -252,7 +252,7 @@ Default value: `$bareos::params::file_owner`
 
 ##### <a name="-bareos--file_group"></a>`file_group`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -260,7 +260,7 @@ Default value: `$bareos::params::file_group`
 
 ##### <a name="-bareos--file_mode"></a>`file_mode`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -268,7 +268,7 @@ Default value: `$bareos::params::file_mode`
 
 ##### <a name="-bareos--file_dir_mode"></a>`file_dir_mode`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -276,7 +276,7 @@ Default value: `$bareos::params::file_dir_mode`
 
 ##### <a name="-bareos--console_package_name"></a>`console_package_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -284,7 +284,7 @@ Default value: `$bareos::params::console_package_name`
 
 ##### <a name="-bareos--monitor_package_name"></a>`monitor_package_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -292,7 +292,7 @@ Default value: `$bareos::params::monitor_package_name`
 
 ##### <a name="-bareos--director_package_name"></a>`director_package_name`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
@@ -300,7 +300,7 @@ Default value: `$bareos::params::director_package_name`
 
 ##### <a name="-bareos--director_service_name"></a>`director_service_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -308,7 +308,7 @@ Default value: `$bareos::params::director_service_name`
 
 ##### <a name="-bareos--director_managed_dirs"></a>`director_managed_dirs`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
@@ -316,7 +316,7 @@ Default value: `$bareos::params::director_managed_dirs`
 
 ##### <a name="-bareos--client_package_name"></a>`client_package_name`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
@@ -324,7 +324,7 @@ Default value: `$bareos::params::client_package_name`
 
 ##### <a name="-bareos--client_service_name"></a>`client_service_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -332,7 +332,7 @@ Default value: `$bareos::params::client_service_name`
 
 ##### <a name="-bareos--storage_package_name"></a>`storage_package_name`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
@@ -340,7 +340,7 @@ Default value: `$bareos::params::storage_package_name`
 
 ##### <a name="-bareos--storage_service_name"></a>`storage_service_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -365,7 +365,7 @@ The following parameters are available in the `bareos::client` class:
 
 ##### <a name="-bareos--client--manage_service"></a>`manage_service`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -373,7 +373,7 @@ Default value: `$bareos::manage_service`
 
 ##### <a name="-bareos--client--manage_package"></a>`manage_package`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -381,7 +381,7 @@ Default value: `$bareos::manage_package`
 
 ##### <a name="-bareos--client--package_name"></a>`package_name`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
@@ -389,7 +389,7 @@ Default value: `$bareos::client_package_name`
 
 ##### <a name="-bareos--client--package_ensure"></a>`package_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -397,7 +397,7 @@ Default value: `$bareos::package_ensure`
 
 ##### <a name="-bareos--client--service_name"></a>`service_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -405,7 +405,7 @@ Default value: `$bareos::client_service_name`
 
 ##### <a name="-bareos--client--service_ensure"></a>`service_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -413,7 +413,7 @@ Default value: `$bareos::service_ensure`
 
 ##### <a name="-bareos--client--service_enable"></a>`service_enable`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -421,7 +421,7 @@ Default value: `$bareos::service_enable`
 
 ##### <a name="-bareos--client--config_dir"></a>`config_dir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -485,7 +485,7 @@ The following parameters are available in the `bareos::client::client` class:
 
 ##### <a name="-bareos--client--client--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -493,7 +493,7 @@ Default value: `present`
 
 ##### <a name="-bareos--client--client--absolute_job_timeout"></a>`absolute_job_timeout`
 
-Data type: `Any`
+Data type: `Optional[Integer[0]]`
 
 Absolute Job Timeout
 
@@ -505,7 +505,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--allow_bandwidth_bursting"></a>`allow_bandwidth_bursting`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Allow Bandwidth Bursting
 
@@ -517,7 +517,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--allowed_job_command"></a>`allowed_job_command`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Allowed Job Command
 
@@ -530,7 +530,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--allowed_script_dir"></a>`allowed_script_dir`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Allowed Script Dir
 
@@ -543,7 +543,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--always_use_lmdb"></a>`always_use_lmdb`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Always Use Lmdb
 
@@ -555,7 +555,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--compatible"></a>`compatible`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Compatible
 
@@ -567,7 +567,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
 
@@ -579,7 +579,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--fd_address"></a>`fd_address`
 
-Data type: `Any`
+Data type: `Optional[Stdlib::Host]`
 
 Fd Address
 
@@ -603,7 +603,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--fd_port"></a>`fd_port`
 
-Data type: `Any`
+Data type: `Optional[Stdlib::Port]`
 
 Fd Port
 
@@ -615,7 +615,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--fd_source_address"></a>`fd_source_address`
 
-Data type: `Any`
+Data type: `Optional[Stdlib::Host]`
 
 Fd Source Address
 
@@ -627,7 +627,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--heartbeat_interval"></a>`heartbeat_interval`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Heartbeat Interval
 
@@ -639,7 +639,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--lmdb_threshold"></a>`lmdb_threshold`
 
-Data type: `Any`
+Data type: `Optional[Integer]`
 
 Lmdb Threshold
 
@@ -651,7 +651,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--log_timestamp_format"></a>`log_timestamp_format`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Log Timestamp Format
 
@@ -663,7 +663,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Maximum Bandwidth Per Job
 
@@ -675,7 +675,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--maximum_concurrent_jobs"></a>`maximum_concurrent_jobs`
 
-Data type: `Any`
+Data type: `Optional[Integer]`
 
 Maximum Concurrent Jobs
 
@@ -687,7 +687,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--maximum_connections"></a>`maximum_connections`
 
-Data type: `Any`
+Data type: `Optional[Integer]`
 
 Maximum Connections
 
@@ -699,7 +699,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--maximum_network_buffer_size"></a>`maximum_network_buffer_size`
 
-Data type: `Any`
+Data type: `Optional[Integer]`
 
 Maximum Network Buffer Size
 
@@ -711,7 +711,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--messages"></a>`messages`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Messages
 
@@ -723,7 +723,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--name_client"></a>`name_client`
 
-Data type: `Any`
+Data type: `String[1]`
 
 Name of this client.
 Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_client.
@@ -736,7 +736,7 @@ Default value: `'bareos-fd'`
 
 ##### <a name="-bareos--client--client--pid_directory"></a>`pid_directory`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Pid Directory
 
@@ -748,7 +748,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--pki_cipher"></a>`pki_cipher`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Pki Cipher
 
@@ -760,7 +760,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--pki_encryption"></a>`pki_encryption`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Pki Encryption
 
@@ -772,7 +772,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--pki_key_pair"></a>`pki_key_pair`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Pki Key Pair
 
@@ -784,7 +784,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--pki_master_key"></a>`pki_master_key`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Pki Master Key
 
@@ -797,7 +797,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--pki_signatures"></a>`pki_signatures`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Pki Signatures
 
@@ -809,7 +809,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--pki_signer"></a>`pki_signer`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Pki Signer
 
@@ -822,7 +822,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--plugin_directory"></a>`plugin_directory`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Plugin Directory
 
@@ -834,7 +834,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--plugin_names"></a>`plugin_names`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Plugin Names
 
@@ -846,7 +846,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--scripts_directory"></a>`scripts_directory`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Scripts Directory
 
@@ -858,7 +858,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--sd_connect_timeout"></a>`sd_connect_timeout`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Sd Connect Timeout
 
@@ -870,7 +870,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--secure_erase_command"></a>`secure_erase_command`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Secure Erase Command: Specify command that will be called when bareos unlinks files.
 
@@ -882,7 +882,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_allowed_cn"></a>`tls_allowed_cn`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
@@ -895,7 +895,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_authenticate"></a>`tls_authenticate`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
@@ -907,7 +907,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
@@ -919,7 +919,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
@@ -931,7 +931,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_certificate"></a>`tls_certificate`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate: Path of a PEM encoded TLS certificate.
 
@@ -943,7 +943,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
@@ -955,7 +955,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_cipher_list"></a>`tls_cipher_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Cipher List: List of valid TLS Ciphers.
 
@@ -967,7 +967,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
@@ -979,7 +979,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_enable"></a>`tls_enable`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Enable: Enable TLS support.
 
@@ -991,7 +991,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_key"></a>`tls_key`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
@@ -1003,7 +1003,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_require"></a>`tls_require`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
@@ -1015,7 +1015,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--tls_verify_peer"></a>`tls_verify_peer`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
@@ -1027,7 +1027,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--ver_id"></a>`ver_id`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Ver Id
 
@@ -1039,7 +1039,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--client--working_directory"></a>`working_directory`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Working Directory
 
@@ -1064,7 +1064,7 @@ The following parameters are available in the `bareos::console` class:
 
 ##### <a name="-bareos--console--manage_package"></a>`manage_package`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -1072,7 +1072,7 @@ Default value: `$bareos::manage_package`
 
 ##### <a name="-bareos--console--package_name"></a>`package_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -1080,7 +1080,7 @@ Default value: `$bareos::console_package_name`
 
 ##### <a name="-bareos--console--package_ensure"></a>`package_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -1088,7 +1088,7 @@ Default value: `$bareos::package_ensure`
 
 ##### <a name="-bareos--console--config_dir"></a>`config_dir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -1129,7 +1129,7 @@ The following parameters are available in the `bareos::director` class:
 
 ##### <a name="-bareos--director--manage_service"></a>`manage_service`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -1137,7 +1137,7 @@ Default value: `$bareos::manage_service`
 
 ##### <a name="-bareos--director--manage_package"></a>`manage_package`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -1145,7 +1145,7 @@ Default value: `$bareos::manage_package`
 
 ##### <a name="-bareos--director--manage_database"></a>`manage_database`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -1153,7 +1153,7 @@ Default value: `$bareos::manage_database`
 
 ##### <a name="-bareos--director--package_name"></a>`package_name`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
@@ -1161,7 +1161,7 @@ Default value: `$bareos::director_package_name`
 
 ##### <a name="-bareos--director--package_ensure"></a>`package_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -1169,7 +1169,7 @@ Default value: `$bareos::package_ensure`
 
 ##### <a name="-bareos--director--service_name"></a>`service_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -1177,7 +1177,7 @@ Default value: `$bareos::director_service_name`
 
 ##### <a name="-bareos--director--service_allow_restart"></a>`service_allow_restart`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -1185,7 +1185,7 @@ Default value: `$bareos::director_service_allow_restart`
 
 ##### <a name="-bareos--director--service_ensure"></a>`service_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -1193,7 +1193,7 @@ Default value: `$bareos::service_ensure`
 
 ##### <a name="-bareos--director--service_enable"></a>`service_enable`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -1201,7 +1201,7 @@ Default value: `$bareos::service_enable`
 
 ##### <a name="-bareos--director--config_dir"></a>`config_dir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -1371,7 +1371,7 @@ The following parameters are available in the `bareos::director::director` class
 
 ##### <a name="-bareos--director--director--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -1585,7 +1585,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--director--director--name_director"></a>`name_director`
 
-Data type: `Any`
+Data type: `String[1]`
 
 Name of this director.
 Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_director.
@@ -1658,7 +1658,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--director--director--password"></a>`password`
 
-Data type: `Any`
+Data type: `String[1]`
 
 Password
 
@@ -1706,7 +1706,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--director--director--query_file"></a>`query_file`
 
-Data type: `Any`
+Data type: `String[1]`
 
 Query File
 
@@ -1973,7 +1973,7 @@ The following parameters are available in the `bareos::monitor` class:
 
 ##### <a name="-bareos--monitor--manage_package"></a>`manage_package`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -1981,7 +1981,7 @@ Default value: `$bareos::manage_package`
 
 ##### <a name="-bareos--monitor--package_name"></a>`package_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -1989,7 +1989,7 @@ Default value: `$bareos::monitor_package_name`
 
 ##### <a name="-bareos--monitor--package_ensure"></a>`package_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -1997,7 +1997,7 @@ Default value: `$bareos::package_ensure`
 
 ##### <a name="-bareos--monitor--config_dir"></a>`config_dir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -2021,7 +2021,7 @@ The following parameters are available in the `bareos::profile::client` class:
 
 ##### <a name="-bareos--profile--client--name_client"></a>`name_client`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2029,7 +2029,7 @@ Default value: `$facts['networking']['fqdn']`
 
 ##### <a name="-bareos--profile--client--name_dir"></a>`name_dir`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2037,7 +2037,7 @@ Default value: `'bareos-dir'`
 
 ##### <a name="-bareos--profile--client--password"></a>`password`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2059,7 +2059,7 @@ The following parameters are available in the `bareos::profile::director` class:
 
 ##### <a name="-bareos--profile--director--password"></a>`password`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2067,7 +2067,7 @@ Default value: `'MyDirectorPasswordPleaseChange'`
 
 ##### <a name="-bareos--profile--director--name_dir"></a>`name_dir`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2075,7 +2075,7 @@ Default value: `'bareos-dir'`
 
 ##### <a name="-bareos--profile--director--catalog_conf"></a>`catalog_conf`
 
-Data type: `Any`
+Data type: `Hash`
 
 
 
@@ -2090,7 +2090,7 @@ Default value:
 
 ##### <a name="-bareos--profile--director--storage_address"></a>`storage_address`
 
-Data type: `Any`
+Data type: `Stdlib::Host`
 
 
 
@@ -2098,7 +2098,7 @@ Default value: `'localhost'`
 
 ##### <a name="-bareos--profile--director--storage_password"></a>`storage_password`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2106,27 +2106,22 @@ Default value: `'BareosStoragePleaseChangeMe'`
 
 ### <a name="bareos--profile--director--client"></a>`bareos::profile::director::client`
 
-== Class: bareos::profile::director::client
 Default client, backup bareos director itself
 
 ### <a name="bareos--profile--director--fileset"></a>`bareos::profile::director::fileset`
 
-== Class: bareos::profile::director::fileset
 Default filesets
 
 ### <a name="bareos--profile--director--jobdefs"></a>`bareos::profile::director::jobdefs`
 
-== Class: bareos::profile::director::jobdefs
 Default jobdefs
 
 ### <a name="bareos--profile--director--messages"></a>`bareos::profile::director::messages`
 
-== Class: bareos::profile::director::messages
 Default messages
 
 ### <a name="bareos--profile--director--pool"></a>`bareos::profile::director::pool`
 
-== Class: bareos::profile::director::pool
 Some default pools
 
 ### <a name="bareos--profile--director--profile"></a>`bareos::profile::director::profile`
@@ -2135,7 +2130,6 @@ Some default pools
 
 ### <a name="bareos--profile--director--schedule"></a>`bareos::profile::director::schedule`
 
-== Class: bareos::profile::director::schedule
 Default schedules
 
 ### <a name="bareos--profile--director--storage"></a>`bareos::profile::director::storage`
@@ -2151,7 +2145,7 @@ The following parameters are available in the `bareos::profile::director::storag
 
 ##### <a name="-bareos--profile--director--storage--address"></a>`address`
 
-Data type: `Any`
+Data type: `Stdlib::Host`
 
 
 
@@ -2159,7 +2153,7 @@ Default value: `'localhost'`
 
 ##### <a name="-bareos--profile--director--storage--password"></a>`password`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2180,7 +2174,7 @@ The following parameters are available in the `bareos::profile::storage` class:
 
 ##### <a name="-bareos--profile--storage--name_storage"></a>`name_storage`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2188,7 +2182,7 @@ Default value: `'bareos-sd'`
 
 ##### <a name="-bareos--profile--storage--name_dir"></a>`name_dir`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2196,7 +2190,7 @@ Default value: `'bareos-dir'`
 
 ##### <a name="-bareos--profile--storage--password"></a>`password`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2204,7 +2198,7 @@ Default value: `'BareosStoragePleaseChangeMe'`
 
 ##### <a name="-bareos--profile--storage--archive_device"></a>`archive_device`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -2298,7 +2292,7 @@ The following parameters are available in the `bareos::storage` class:
 
 ##### <a name="-bareos--storage--manage_service"></a>`manage_service`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -2306,7 +2300,7 @@ Default value: `$bareos::manage_service`
 
 ##### <a name="-bareos--storage--manage_package"></a>`manage_package`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -2314,7 +2308,7 @@ Default value: `$bareos::manage_package`
 
 ##### <a name="-bareos--storage--package_name"></a>`package_name`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
@@ -2322,7 +2316,7 @@ Default value: `$bareos::storage_package_name`
 
 ##### <a name="-bareos--storage--package_ensure"></a>`package_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2330,7 +2324,7 @@ Default value: `$bareos::package_ensure`
 
 ##### <a name="-bareos--storage--service_name"></a>`service_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2338,7 +2332,7 @@ Default value: `$bareos::storage_service_name`
 
 ##### <a name="-bareos--storage--service_ensure"></a>`service_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -2346,7 +2340,7 @@ Default value: `$bareos::service_ensure`
 
 ##### <a name="-bareos--storage--service_enable"></a>`service_enable`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -2354,7 +2348,7 @@ Default value: `$bareos::service_enable`
 
 ##### <a name="-bareos--storage--config_dir"></a>`config_dir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -2464,7 +2458,7 @@ The following parameters are available in the `bareos::storage::storage` class:
 
 ##### <a name="-bareos--storage--storage--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -2701,7 +2695,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--storage--storage--name_storage"></a>`name_storage`
 
-Data type: `Any`
+Data type: `String[1]`
 
 Name of this storage.
 Note: name is usually reserved by puppet for resource titles, since this is an class and not and define use name_storage.
@@ -2955,7 +2949,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--storage--storage--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
@@ -3087,7 +3081,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--storage--storage--working_directory"></a>`working_directory`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Working Directory
 
@@ -3123,7 +3117,7 @@ The following parameters are available in the `bareos::webui` class:
 
 ##### <a name="-bareos--webui--manage_service"></a>`manage_service`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -3131,7 +3125,7 @@ Default value: `$bareos::manage_service`
 
 ##### <a name="-bareos--webui--manage_package"></a>`manage_package`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -3139,7 +3133,7 @@ Default value: `$bareos::manage_package`
 
 ##### <a name="-bareos--webui--package_name"></a>`package_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -3147,7 +3141,7 @@ Default value: `$bareos::webui_package_name`
 
 ##### <a name="-bareos--webui--package_ensure"></a>`package_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -3155,7 +3149,7 @@ Default value: `$bareos::package_ensure`
 
 ##### <a name="-bareos--webui--service_name"></a>`service_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -3163,7 +3157,7 @@ Default value: `$bareos::webui_service_name`
 
 ##### <a name="-bareos--webui--service_ensure"></a>`service_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -3171,7 +3165,7 @@ Default value: `$bareos::service_ensure`
 
 ##### <a name="-bareos--webui--service_enable"></a>`service_enable`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -3179,7 +3173,7 @@ Default value: `$bareos::service_enable`
 
 ##### <a name="-bareos--webui--config_dir"></a>`config_dir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -3187,7 +3181,7 @@ Default value: `$bareos::config_dir_webui`
 
 ##### <a name="-bareos--webui--manage_local_dir"></a>`manage_local_dir`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -3195,7 +3189,7 @@ Default value: `true`
 
 ##### <a name="-bareos--webui--session_timeout"></a>`session_timeout`
 
-Data type: `Any`
+Data type: `Integer[0]`
 
 
 
@@ -3203,7 +3197,7 @@ Default value: `3600`
 
 ##### <a name="-bareos--webui--pagination_values"></a>`pagination_values`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -3211,7 +3205,7 @@ Default value: `'10,25,50,100'`
 
 ##### <a name="-bareos--webui--pagination_default_value"></a>`pagination_default_value`
 
-Data type: `Any`
+Data type: `Integer[0]`
 
 
 
@@ -3219,7 +3213,7 @@ Default value: `25`
 
 ##### <a name="-bareos--webui--save_previous_state"></a>`save_previous_state`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -3227,7 +3221,7 @@ Default value: `false`
 
 ##### <a name="-bareos--webui--label_pooltype"></a>`label_pooltype`
 
-Data type: `Any`
+Data type: `String`
 
 
 
@@ -3235,7 +3229,7 @@ Default value: `''`
 
 ##### <a name="-bareos--webui--directors"></a>`directors`
 
-Data type: `Any`
+Data type: `Hash`
 
 
 
@@ -3277,7 +3271,7 @@ The following parameters are available in the `bareos::client::director` defined
 
 ##### <a name="-bareos--client--director--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -3285,7 +3279,7 @@ Default value: `present`
 
 ##### <a name="-bareos--client--director--address"></a>`address`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Address: Director Network Address. Only required if "Connection From Client To Director" is enabled.
 
@@ -3297,7 +3291,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--allowed_job_command"></a>`allowed_job_command`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Allowed Job Command
 
@@ -3310,7 +3304,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--allowed_script_dir"></a>`allowed_script_dir`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Allowed Script Dir
 
@@ -3323,7 +3317,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--connection_from_client_to_director"></a>`connection_from_client_to_director`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Connection From Client To Director: Let the Filedaemon initiate network connections to the Director.
 
@@ -3335,7 +3329,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--connection_from_director_to_client"></a>`connection_from_director_to_client`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Connection From Director To Client: This Client will accept incoming network connection from this Director.
 
@@ -3347,7 +3341,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
 
@@ -3359,7 +3353,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--maximum_bandwidth_per_job"></a>`maximum_bandwidth_per_job`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Maximum Bandwidth Per Job
 
@@ -3371,7 +3365,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--monitor"></a>`monitor`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Monitor
 
@@ -3383,7 +3377,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--password"></a>`password`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Password
 
@@ -3395,7 +3389,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--port"></a>`port`
 
-Data type: `Any`
+Data type: `Optional[Stdlib::Port]`
 
 Port: Director Network Port. Only used if "Connection From Client To Director" is enabled.
 
@@ -3407,7 +3401,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_allowed_cn"></a>`tls_allowed_cn`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
@@ -3420,7 +3414,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_authenticate"></a>`tls_authenticate`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
@@ -3432,7 +3426,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
@@ -3444,7 +3438,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
@@ -3456,7 +3450,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_certificate"></a>`tls_certificate`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate: Path of a PEM encoded TLS certificate.
 
@@ -3468,7 +3462,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
@@ -3480,7 +3474,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_cipher_list"></a>`tls_cipher_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Cipher List: List of valid TLS Ciphers.
 
@@ -3492,7 +3486,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
@@ -3504,7 +3498,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_enable"></a>`tls_enable`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Enable: Enable TLS support.
 
@@ -3516,7 +3510,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_key"></a>`tls_key`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
@@ -3528,7 +3522,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_require"></a>`tls_require`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
@@ -3540,7 +3534,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--director--tls_verify_peer"></a>`tls_verify_peer`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
@@ -3578,7 +3572,7 @@ The following parameters are available in the `bareos::client::messages` defined
 
 ##### <a name="-bareos--client--messages--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -3586,7 +3580,7 @@ Default value: `present`
 
 ##### <a name="-bareos--client--messages--append"></a>`append`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Append
 
@@ -3599,7 +3593,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--catalog"></a>`catalog`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Catalog
 
@@ -3612,7 +3606,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--console"></a>`console`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Console
 
@@ -3625,7 +3619,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
 
@@ -3637,7 +3631,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--director"></a>`director`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Director
 
@@ -3650,7 +3644,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--file"></a>`file`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 File
 
@@ -3663,7 +3657,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--mail"></a>`mail`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Mail
 
@@ -3676,7 +3670,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--mail_command"></a>`mail_command`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Mail Command
 
@@ -3688,7 +3682,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--mail_on_error"></a>`mail_on_error`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Mail On Error
 
@@ -3701,7 +3695,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--mail_on_success"></a>`mail_on_success`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Mail On Success
 
@@ -3714,7 +3708,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--operator"></a>`operator`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Operator
 
@@ -3727,7 +3721,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--operator_command"></a>`operator_command`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Operator Command
 
@@ -3739,7 +3733,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--stderr"></a>`stderr`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Stderr
 
@@ -3752,7 +3746,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--stdout"></a>`stdout`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Stdout
 
@@ -3765,7 +3759,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--syslog"></a>`syslog`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Syslog
 
@@ -3778,7 +3772,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--client--messages--timestamp_format"></a>`timestamp_format`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Timestamp Format
 
@@ -3819,7 +3813,7 @@ The following parameters are available in the `bareos::console::console` defined
 
 ##### <a name="-bareos--console--console--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -3827,7 +3821,7 @@ Default value: `present`
 
 ##### <a name="-bareos--console--console--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
 
@@ -3839,7 +3833,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--director"></a>`director`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Director
 
@@ -3851,7 +3845,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--heartbeat_interval"></a>`heartbeat_interval`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Heartbeat Interval
 
@@ -3863,7 +3857,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--history_file"></a>`history_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 History File
 
@@ -3875,7 +3869,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--history_length"></a>`history_length`
 
-Data type: `Any`
+Data type: `Optional[Integer[0]]`
 
 History Length
 
@@ -3887,7 +3881,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--password"></a>`password`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Password
 
@@ -3899,7 +3893,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--rc_file"></a>`rc_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Rc File
 
@@ -3911,7 +3905,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_allowed_cn"></a>`tls_allowed_cn`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
@@ -3924,7 +3918,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_authenticate"></a>`tls_authenticate`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
@@ -3936,7 +3930,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
@@ -3948,7 +3942,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
@@ -3960,7 +3954,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_certificate"></a>`tls_certificate`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate: Path of a PEM encoded TLS certificate.
 
@@ -3972,7 +3966,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
@@ -3984,7 +3978,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_cipher_list"></a>`tls_cipher_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Cipher List: List of valid TLS Ciphers.
 
@@ -3996,7 +3990,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
@@ -4008,7 +4002,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_enable"></a>`tls_enable`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Enable: Enable TLS support.
 
@@ -4020,7 +4014,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_key"></a>`tls_key`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
@@ -4032,7 +4026,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_require"></a>`tls_require`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
@@ -4044,7 +4038,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--console--tls_verify_peer"></a>`tls_verify_peer`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
@@ -4083,7 +4077,7 @@ The following parameters are available in the `bareos::console::director` define
 
 ##### <a name="-bareos--console--director--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -4091,7 +4085,7 @@ Default value: `present`
 
 ##### <a name="-bareos--console--director--address"></a>`address`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Address
 
@@ -4103,7 +4097,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
 
@@ -4115,7 +4109,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--dir_port"></a>`dir_port`
 
-Data type: `Any`
+Data type: `Optional[Integer[0]]`
 
 Dir Port
 
@@ -4127,7 +4121,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--heartbeat_interval"></a>`heartbeat_interval`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Heartbeat Interval
 
@@ -4139,7 +4133,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--password"></a>`password`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Password
 
@@ -4151,7 +4145,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_allowed_cn"></a>`tls_allowed_cn`
 
-Data type: `Any`
+Data type: `Optional[Variant[Array[String[1]],String[1]]]`
 
 Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 
@@ -4164,7 +4158,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_authenticate"></a>`tls_authenticate`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Authenticate: Use TLS only to authenticate, not for encryption.
 
@@ -4176,7 +4170,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 
@@ -4188,7 +4182,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 
@@ -4200,7 +4194,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_certificate"></a>`tls_certificate`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate: Path of a PEM encoded TLS certificate.
 
@@ -4212,7 +4206,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_certificate_revocation_list"></a>`tls_certificate_revocation_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 
@@ -4224,7 +4218,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_cipher_list"></a>`tls_cipher_list`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Cipher List: List of valid TLS Ciphers.
 
@@ -4236,7 +4230,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 
@@ -4248,7 +4242,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_enable"></a>`tls_enable`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Enable: Enable TLS support.
 
@@ -4260,7 +4254,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_key"></a>`tls_key`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 
@@ -4272,7 +4266,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_require"></a>`tls_require`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 
@@ -4284,7 +4278,7 @@ Default value: `undef`
 
 ##### <a name="-bareos--console--director--tls_verify_peer"></a>`tls_verify_peer`
 
-Data type: `Any`
+Data type: `Optional[Boolean]`
 
 Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 
@@ -4323,7 +4317,7 @@ The following parameters are available in the `bareos::director::catalog` define
 
 ##### <a name="-bareos--director--catalog--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -4590,7 +4584,7 @@ The following parameters are available in the `bareos::director::client` defined
 
 ##### <a name="-bareos--director--client--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -5441,7 +5435,7 @@ The following parameters are available in the `bareos::director::counter` define
 
 ##### <a name="-bareos--director--counter--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -5525,7 +5519,7 @@ The following parameters are available in the `bareos::director::fileset` define
 
 ##### <a name="-bareos--director--fileset--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -5686,7 +5680,7 @@ The following parameters are available in the `bareos::director::job` defined ty
 
 ##### <a name="-bareos--director--job--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -6790,7 +6784,7 @@ The following parameters are available in the `bareos::director::jobdefs` define
 
 ##### <a name="-bareos--director--jobdefs--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -7826,7 +7820,7 @@ The following parameters are available in the `bareos::director::messages` defin
 
 ##### <a name="-bareos--director--messages--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -8079,7 +8073,7 @@ The following parameters are available in the `bareos::director::pool` defined t
 
 ##### <a name="-bareos--director--pool--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -8481,7 +8475,7 @@ The following parameters are available in the `bareos::director::profile` define
 
 ##### <a name="-bareos--director--profile--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -8634,7 +8628,7 @@ The following parameters are available in the `bareos::director::schedule` defin
 
 ##### <a name="-bareos--director--schedule--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -8723,7 +8717,7 @@ The following parameters are available in the `bareos::director::storage` define
 
 ##### <a name="-bareos--director--storage--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -9144,7 +9138,7 @@ The following parameters are available in the `bareos::monitor::client` defined 
 
 ##### <a name="-bareos--monitor--client--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -9226,7 +9220,7 @@ The following parameters are available in the `bareos::monitor::director` define
 
 ##### <a name="-bareos--monitor--director--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -9299,7 +9293,7 @@ The following parameters are available in the `bareos::monitor::monitor` defined
 
 ##### <a name="-bareos--monitor--monitor--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -9408,7 +9402,7 @@ The following parameters are available in the `bareos::monitor::storage` defined
 
 ##### <a name="-bareos--monitor--storage--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -9514,7 +9508,7 @@ The following parameters are available in the `bareos::storage::autochanger` def
 
 ##### <a name="-bareos--storage--autochanger--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -9643,7 +9637,7 @@ The following parameters are available in the `bareos::storage::device` defined 
 
 ##### <a name="-bareos--storage--device--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -10422,7 +10416,7 @@ The following parameters are available in the `bareos::storage::director` define
 
 ##### <a name="-bareos--storage--director--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -10661,7 +10655,7 @@ The following parameters are available in the `bareos::storage::messages` define
 
 ##### <a name="-bareos--storage--messages--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -10888,7 +10882,7 @@ The following parameters are available in the `bareos::storage::ndmp` defined ty
 
 ##### <a name="-bareos--storage--ndmp--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `Enum['present','absent']`
 
 present or absent the config file.
 
@@ -10896,7 +10890,7 @@ Default value: `present`
 
 ##### <a name="-bareos--storage--ndmp--auth_type"></a>`auth_type`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Auth Type
 
@@ -10908,49 +10902,37 @@ Default value: `undef`
 
 ##### <a name="-bareos--storage--ndmp--description"></a>`description`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Description
-
 Bareos Datatype: string
-Bareos Default: Not set
-Required: false
 
 Default value: `undef`
 
 ##### <a name="-bareos--storage--ndmp--log_level"></a>`log_level`
 
-Data type: `Any`
+Data type: `Optional[Integer[0]]`
 
 Log Level
-
 Bareos Datatype: pint32
-Bareos Default: 4
-Required: false
 
 Default value: `undef`
 
 ##### <a name="-bareos--storage--ndmp--password"></a>`password`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Password
-
 Bareos Datatype: autopassword
-Bareos Default: Not set
-Required: true
 
 Default value: `undef`
 
 ##### <a name="-bareos--storage--ndmp--username"></a>`username`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Username
-
 Bareos Datatype: string
-Bareos Default: Not set
-Required: true
 
 Default value: `undef`
 

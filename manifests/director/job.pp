@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param accurate
 #   Accurate
 #
@@ -591,7 +592,7 @@
 #   Required: false
 #
 define bareos::director::job (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $accurate = undef,
   $add_prefix = undef,
   $add_suffix = undef,
@@ -680,10 +681,6 @@ define bareos::director::job (
 
   $_resource = 'Job'
   $_resource_dir = 'job'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     # this can be specified in an jobdef or not, do not check here if jobdef is used

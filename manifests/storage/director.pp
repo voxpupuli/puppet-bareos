@@ -125,7 +125,7 @@
 #   Required: false
 #
 define bareos::storage::director (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $description = undef,
   $key_encryption_key = undef,
   $maximum_bandwidth_per_job = undef,
@@ -148,10 +148,6 @@ define bareos::storage::director (
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],
