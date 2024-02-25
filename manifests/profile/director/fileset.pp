@@ -1,5 +1,6 @@
-# == Class: bareos::profile::director::fileset
-# Default filesets
+# @summary 
+#   Default filesets
+#
 class bareos::profile::director::fileset {
   bareos::director::fileset { 'BareosCatalog':
     description => 'Backup the catalog dump and Bareos configuration files.',

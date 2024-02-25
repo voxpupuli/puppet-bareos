@@ -4,9 +4,9 @@
 # @param name_dir
 # @param password
 class bareos::profile::client (
-  $name_client = $facts['networking']['fqdn'],
-  $name_dir = 'bareos-dir',
-  $password = 'MyClientPasswordPleaseChange',
+  String[1] $name_client = $facts['networking']['fqdn'],
+  String[1] $name_dir    = 'bareos-dir',
+  String[1] $password    = 'MyClientPasswordPleaseChange',
 ) {
   # default client
   class { 'bareos::client::client':

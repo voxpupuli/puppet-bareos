@@ -1,7 +1,9 @@
 # @summary 
 #   Configures an director to use with the webui.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param catalog
 #   Catalog
 #

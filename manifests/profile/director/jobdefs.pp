@@ -1,5 +1,6 @@
-# == Class: bareos::profile::director::jobdefs
-# Default jobdefs
+# @summary 
+#   Default jobdefs
+#
 class bareos::profile::director::jobdefs {
   bareos::director::jobdefs { 'DefaultJob':
     type                     => 'backup',
