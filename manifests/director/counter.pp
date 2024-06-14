@@ -40,7 +40,7 @@
 #   Required: false
 #
 define bareos::director::counter (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $catalog = undef,
   $description = undef,
   $maximum = undef,
@@ -51,10 +51,6 @@ define bareos::director::counter (
 
   $_resource = 'Counter'
   $_resource_dir = 'counter'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_catalog = $catalog ? { undef => undef, default => Bareos::Director::Catalog[$catalog] }
