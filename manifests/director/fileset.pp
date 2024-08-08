@@ -1,40 +1,37 @@
-# == Define: bareos::director::fileset
-# To define the set of files to be backed up for each Client.
-# You may have any number of FileSets but each Job will reference only one.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   To define the set of files to be backed up for each Client.
+#   You may have any number of FileSets but each Job will reference only one.
+# @param ensure
 #   present or absent the config file.
-#
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*enable_vss*]
+# @param enable_vss
 #   Enable VSS
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*exclude*]
+# @param exclude
 #   Exclude
 #
 #   Bareos Datatype: include_exclude_item
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*ignore_file_set_changes*]
+# @param ignore_file_set_changes
 #   Ignore File Set Changes
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*include*]
+# @param include
 #   Include
 #
 #   Bareos Datatype: include_exclude_item

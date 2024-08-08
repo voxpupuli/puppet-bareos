@@ -1,20 +1,16 @@
-# == Define: bareos::director::catalog
-# To define in what database to keep the list of files and the Volume names where they are backed up.
-# Most people only use a single catalog.
-# It is possible, however not adviced and not supported to use multiple catalogs.
+# @summary 
+#   To define in what database to keep the list of files and the Volume names where they are backed up. Most people only use a single catalog. It is possible, however not adviced and not supported to use multiple catalogs.
 #
-# == Parameters
-# [*ensure*]
+# @param ensure
 #   present or absent the config file.
-#
-# [*db_address*]
+# @param db_address
 #   Db Address
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*db_driver*]
+# @param db_driver
 #   Db Driver
 #
 #   Bareos Datatype: string
@@ -26,105 +22,105 @@
 #
 #   See https://docs.bareos.org/Configuration/Director.html#config-Dir_Catalog_DbDriver
 #
-# [*db_name*]
+# @param db_name
 #   Db Name
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*db_password*]
+# @param db_password
 #   Db Password
 #
 #   Bareos Datatype: autopassword
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*db_port*]
+# @param db_port
 #   Db Port
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*db_socket*]
+# @param db_socket
 #   Db Socket
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*db_user*]
+# @param db_user
 #   Db User
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*disable_batch_insert*]
+# @param disable_batch_insert
 #   Disable Batch Insert
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*exit_on_fatal*]
+# @param exit_on_fatal
 #   Exit On Fatal: Make any fatal error in the connection to the database exit the program
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*idle_timeout*]
+# @param idle_timeout
 #   Idle Timeout
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 30
 #   Required: false
 #
-# [*inc_connections*]
+# @param inc_connections
 #   Inc Connections
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 1
 #   Required: false
 #
-# [*max_connections*]
+# @param max_connections
 #   Max Connections
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 5
 #   Required: false
 #
-# [*min_connections*]
+# @param min_connections
 #   Min Connections
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 1
 #   Required: false
 #
-# [*multiple_connections*]
+# @param multiple_connections
 #   Multiple Connections
 #
 #   Bareos Datatype: bit
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*reconnect*]
+# @param reconnect
 #   Reconnect: Try to reconnect a database connection when its dropped
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
-
-# [*validate_timeout*]
+#
+# @param validate_timeout
 #   Validate Timeout
 #
 #   Bareos Datatype: pint32

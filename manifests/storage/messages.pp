@@ -1,11 +1,8 @@
-# == Define: bareos::storage::messages
-# The Messages resource defines how messages are to be handled and destinations to which they should be sent.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   The Messages resource defines how messages are to be handled and destinations to which they should be sent.
+# @param ensure
 #   present or absent the config file.
-#
-# [*append*]
+# @param append
 #   Append
 #
 #   May be specified as Array.
@@ -13,7 +10,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*catalog*]
+# @param catalog
 #   Catalog
 #
 #   May be specified as Array.
@@ -21,7 +18,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*console*]
+# @param console
 #   Console
 #
 #   May be specified as Array.
@@ -29,14 +26,14 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*director*]
+# @param director
 #   Director
 #
 #   May be specified as Array.
@@ -44,7 +41,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*file*]
+# @param file
 #   File
 #
 #   May be specified as Array.
@@ -52,7 +49,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*mail*]
+# @param mail
 #   Mail
 #
 #   May be specified as Array.
@@ -60,14 +57,14 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*mail_command*]
+# @param mail_command
 #   Mail Command
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*mail_on_error*]
+# @param mail_on_error
 #   Mail On Error
 #
 #   May be specified as Array.
@@ -75,7 +72,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*mail_on_success*]
+# @param mail_on_success
 #   Mail On Success
 #
 #   May be specified as Array.
@@ -83,7 +80,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*operator*]
+# @param operator
 #   Operator
 #
 #   May be specified as Array.
@@ -91,14 +88,14 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*operator_command*]
+# @param operator_command
 #   Operator Command
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*stderr*]
+# @param stderr
 #   Stderr
 #
 #   May be specified as Array.
@@ -106,7 +103,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*stdout*]
+# @param stdout
 #   Stdout
 #
 #   May be specified as Array.
@@ -114,7 +111,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*syslog*]
+# @param syslog
 #   Syslog
 #
 #   May be specified as Array.
@@ -122,7 +119,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*timestamp_format*]
+# @param timestamp_format
 #   Timestamp Format
 #
 #   Bareos Datatype: string

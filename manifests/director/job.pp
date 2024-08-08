@@ -1,90 +1,86 @@
-# == Define: bareos::director::job
-# To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job.
-# Normally, you will Jobs of different names corresponding to each client
-# (i.e. one Job per client, but a different one with a different name for each client).
+# @summary
+#   To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job. Normally, you will Jobs of different names corresponding to each client (i.e. one Job per client, but a different one with a different name for each client).
 #
-# == Parameters
-# [*ensure*]
+# @param ensure
 #   present or absent the config file.
-#
-# [*accurate*]
+# @param accurate
 #   Accurate
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*add_prefix*]
+# @param add_prefix
 #   Add Prefix
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*add_suffix*]
+# @param add_suffix
 #   Add Suffix
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*allow_duplicate_jobs*]
+# @param allow_duplicate_jobs
 #   Allow Duplicate Jobs
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*allow_higher_duplicates*]
+# @param allow_higher_duplicates
 #   Allow Higher Duplicates
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*allow_mixed_priority*]
+# @param allow_mixed_priority
 #   Allow Mixed Priority
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*always_incremental*]
+# @param always_incremental
 #   Always Incremental: Enable/disable always incremental backup scheme.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*always_incremental_job_retention*]
+# @param always_incremental_job_retention
 #   Always Incremental Job Retention: Backup Jobs older than the specified time duration will be merged into a new Virtual backup.
 #
 #   Bareos Datatype: time
 #   Bareos Default: 0
 #   Required: false
 #
-# [*always_incremental_keep_number*]
+# @param always_incremental_keep_number
 #   Always Incremental Keep Number: Guarantee that at least the specified number of Backup Jobs will persist, even if they are older than "Always Incremental Job Retention".
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 0
 #   Required: false
 #
-# [*always_incremental_max_full_age*]
+# @param always_incremental_max_full_age
 #   Always Incremental Max Full Age: If "AlwaysIncrementalMaxFullAge" is set, during consolidations only incremental backups will be considered while the Full Backup remains to reduce the amount of data being consolidated. Only if the Full Backup is older than "AlwaysIncrementalMaxFullAge", the Full Backup will be part of the consolidation to avoid the Full Backup becoming too old .
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*backup_format*]
+# @param backup_format
 #   Backup Format
 #
 #   Bareos Datatype: string
 #   Bareos Default: Native
 #   Required: false
 #
-# [*base*]
+# @param base
 #   Base
 #
 #   May be specified as Array.
@@ -92,84 +88,84 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*bootstrap*]
+# @param bootstrap
 #   Bootstrap
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*cancel_lower_level_duplicates*]
+# @param cancel_lower_level_duplicates
 #   Cancel Lower Level Duplicates
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*cancel_queued_duplicates*]
+# @param cancel_queued_duplicates
 #   Cancel Queued Duplicates
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*cancel_running_duplicates*]
+# @param cancel_running_duplicates
 #   Cancel Running Duplicates
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*catalog*]
+# @param catalog
 #   Catalog
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*client*]
+# @param client
 #   Client
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*client_run_after_job*]
+# @param client_run_after_job
 #   Client Run After Job
 #
 #   Bareos Datatype: runscript_short
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*client_run_before_job*]
+# @param client_run_before_job
 #   Client Run Before Job
 #
 #   Bareos Datatype: runscript_short
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*differential_backup_pool*]
+# @param differential_backup_pool
 #   Differential Backup Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*differential_max_runtime*]
+# @param differential_max_runtime
 #   Differential Max Runtime
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*dir_plugin_options*]
+# @param dir_plugin_options
 #   Dir Plugin Options
 #
 #   May be specified as Array.
@@ -177,14 +173,14 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*enabled*]
+# @param enabled
 #   Enabled: En- or disable this resource.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*fd_plugin_options*]
+# @param fd_plugin_options
 #   Fd Plugin Options
 #
 #   May be specified as Array.
@@ -192,266 +188,266 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*file_history_size*]
+# @param file_history_size
 #   File History Size
 #
 #   Bareos Datatype: size64
 #   Bareos Default: 10000000
 #   Required: false
 #
-# [*file_set*]
+# @param file_set
 #   File Set
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*full_backup_pool*]
+# @param full_backup_pool
 #   Full Backup Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*full_max_runtime*]
+# @param full_max_runtime
 #   Full Max Runtime
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*incremental_backup_pool*]
+# @param incremental_backup_pool
 #   Incremental Backup Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*incremental_max_runtime*]
+# @param incremental_max_runtime
 #   Incremental Max Runtime
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*job_defs*]
+# @param job_defs
 #   Job Defs
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*job_to_verify*]
+# @param job_to_verify
 #   Job To Verify
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*level*]
+# @param level
 #   Level
 #
 #   Bareos Datatype: backup_level
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*max_concurrent_copies*]
+# @param max_concurrent_copies
 #   Max Concurrent Copies
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 100
 #   Required: false
 #
-# [*max_diff_interval*]
+# @param max_diff_interval
 #   Max Diff Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*max_full_consolidations*]
+# @param max_full_consolidations
 #   Max Full Consolidations: If "AlwaysIncrementalMaxFullAge" is configured, do not run more than "MaxFullConsolidations" consolidation jobs that include the Full backup.
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 0
 #   Required: false
 #
-# [*max_full_interval*]
+# @param max_full_interval
 #   Max Full Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*max_run_sched_time*]
+# @param max_run_sched_time
 #   Max Run Sched Time
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*max_run_time*]
+# @param max_run_time
 #   Max Run Time
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*max_start_delay*]
+# @param max_start_delay
 #   Max Start Delay
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*max_virtual_full_interval*]
+# @param max_virtual_full_interval
 #   Max Virtual Full Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*max_wait_time*]
+# @param max_wait_time
 #   Max Wait Time
 #
 #   Bareos Datatype: time
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_bandwidth*]
+# @param maximum_bandwidth
 #   Maximum Bandwidth
 #
 #   Bareos Datatype: speed
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_concurrent_jobs*]
+# @param maximum_concurrent_jobs
 #   Maximum Concurrent Jobs
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 1
 #   Required: false
 #
-# [*messages*]
+# @param messages
 #   Messages
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*next_pool*]
+# @param next_pool
 #   Next Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*pool*]
+# @param pool
 #   Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*prefer_mounted_volumes*]
+# @param prefer_mounted_volumes
 #   Prefer Mounted Volumes
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*prefix_links*]
+# @param prefix_links
 #   Prefix Links
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*priority*]
+# @param priority
 #   Priority
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 10
 #   Required: false
 #
-# [*protocol*]
+# @param protocol
 #   Protocol
 #
 #   Bareos Datatype: protocol_type
 #   Bareos Default: Native
 #   Required: false
 #
-# [*prune_files*]
+# @param prune_files
 #   Prune Files
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*prune_jobs*]
+# @param prune_jobs
 #   Prune Jobs
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*prune_volumes*]
+# @param prune_volumes
 #   Prune Volumes
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*purge_migration_job*]
+# @param purge_migration_job
 #   Purge Migration Job
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*regex_where*]
+# @param regex_where
 #   Regex Where
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*replace*]
+# @param replace
 #   Replace
 #
 #   Bareos Datatype: replace_option
 #   Bareos Default: Always
 #   Required: false
 #
-# [*rerun_failed_levels*]
+# @param rerun_failed_levels
 #   Rerun Failed Levels
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*reschedule_interval*]
+# @param reschedule_interval
 #   Reschedule Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: 1800
 #   Required: false
 #
-# [*reschedule_on_error*]
+# @param reschedule_on_error
 #   Reschedule On Error
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*reschedule_times*]
+# @param reschedule_times
 #   Reschedule Times
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 5
 #   Required: false
 #
-# [*run*]
+# @param run
 #   Run
 #
 #   May be specified as Array.
@@ -459,49 +455,49 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*run_after_failed_job*]
+# @param run_after_failed_job
 #   Run After Failed Job
 #
 #   Bareos Datatype: runscript_short
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*run_after_job*]
+# @param run_after_job
 #   Run After Job
 #
 #   Bareos Datatype: runscript_short
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*run_before_job*]
+# @param run_before_job
 #   Run Before Job
 #
 #   Bareos Datatype: runscript_short
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*run_script*]
+# @param run_script
 #   Run Script
 #
 #   Bareos Datatype: runscript
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*save_file_history*]
+# @param save_file_history
 #   Save File History
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*schedule_res*]
+# @param schedule_res
 #   Schedule
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*sd_plugin_options*]
+# @param sd_plugin_options
 #   Sd Plugin Options
 #
 #   May be specified as Array.
@@ -509,42 +505,42 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*selection_pattern*]
+# @param selection_pattern
 #   Selection Pattern
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*selection_type*]
+# @param selection_type
 #   Selection Type
 #
 #   Bareos Datatype: migration_type
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*spool_attributes*]
+# @param spool_attributes
 #   Spool Attributes
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*spool_data*]
+# @param spool_data
 #   Spool Data
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*spool_size*]
+# @param spool_size
 #   Spool Size
 #
 #   Bareos Datatype: size64
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*storage*]
+# @param storage
 #   Storage
 #
 #   May be specified as Array.
@@ -552,42 +548,42 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*strip_prefix*]
+# @param strip_prefix
 #   Strip Prefix
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*type*]
+# @param type
 #   Type
 #
 #   Bareos Datatype: job_type
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*virtual_full_backup_pool*]
+# @param virtual_full_backup_pool
 #   Virtual Full Backup Pool
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*where*]
+# @param where
 #   Where
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*write_bootstrap*]
+# @param write_bootstrap
 #   Write Bootstrap
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*write_verify_list*]
+# @param write_verify_list
 #   Write Verify List
 #
 #   Bareos Datatype: directory

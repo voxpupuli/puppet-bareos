@@ -1,10 +1,12 @@
-# == Class: bareos::profile::director::storage
-# Default storage daemon
+# @summary
+#   Default storage daemon
+# @param address
+# @param password
 class bareos::profile::director::storage (
   $address = 'localhost',
   $password = 'BareosStoragePleaseChangeMe',
 ) {
-  ::bareos::director::storage { 'File':
+  bareos::director::storage { 'File':
     address    => $address,
     password   => $password,
     device     => 'FileStorage',

@@ -1,75 +1,72 @@
-# == Define: bareos::director::console
-# Configure an **Named Console** aka **Restricted Console**.
-# Both the names and the passwords in these two entries must match much as is the case for Client programs.
+# @summary 
+#   Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two entries must match much as is the case for Client programs.
 #
-# == Parameters
-# [*ensure*]
+# @param ensure
 #   present or absent the config file.
-#
-# [*catalog_acl*]
+# @param catalog_acl
 #   Catalog ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*client_acl*]
+# @param client_acl
 #   Client ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*command_acl*]
+# @param command_acl
 #   Command ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*file_set_acl*]
+# @param file_set_acl
 #   File Set ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*job_acl*]
+# @param job_acl
 #   Job ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: autopassword
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*plugin_options_acl*]
+# @param plugin_options_acl
 #   Plugin Options ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*pool_acl*]
+# @param pool_acl
 #   Pool ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*profile*]
+# @param profile
 #   Profile: Profiles can be assigned to a Console. ACL are checked until either a deny ACL is found or an allow ACL. First the console ACL is checked then any profile the console is linked to.
 #
 #   May be specified as Array.
@@ -77,28 +74,28 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*run_acl*]
+# @param run_acl
 #   Run ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*schedule_acl*]
+# @param schedule_acl
 #   Schedule ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*storage_acl*]
+# @param storage_acl
 #   Storage ACL
 #
 #   Bareos Datatype: acl
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_allowed_cn*]
+# @param tls_allowed_cn
 #   Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 #
 #   May be specified as Array.
@@ -106,91 +103,91 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_authenticate*]
+# @param tls_authenticate
 #   Tls Authenticate: Use TLS only to authenticate, not for encryption.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_ca_certificate_dir*]
+# @param tls_ca_certificate_dir
 #   Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_ca_certificate_file*]
+# @param tls_ca_certificate_file
 #   Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate*]
+# @param tls_certificate
 #   Tls Certificate: Path of a PEM encoded TLS certificate.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate_revocation_list*]
+# @param tls_certificate_revocation_list
 #   Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_cipher_list*]
+# @param tls_cipher_list
 #   Tls Cipher List: List of valid TLS Ciphers.
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_dh_file*]
+# @param tls_dh_file
 #   Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_enable*]
+# @param tls_enable
 #   Tls Enable: Enable TLS support.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_key*]
+# @param tls_key
 #   Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_require*]
+# @param tls_require
 #   Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_verify_peer*]
+# @param tls_verify_peer
 #   Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*use_pam_authentication*]
+# @param use_pam_authentication
 #   Use Pam Authentication: If set to yes, PAM will be used to authenticate the user on this console. Otherwise, only the credentials of this console resource are used for authentication.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*where_acl*]
+# @param where_acl
 #   Where ACL
 #
 #   Bareos Datatype: acl

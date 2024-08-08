@@ -1,40 +1,38 @@
-# == Define: bareos::director::counter
-# The Counter Resource defines a counter variable that can be accessed by variable expansion used
-# for creating Volume labels with the Label Format Dir Pool directive.
+# @summary 
+#   The Counter Resource defines a counter variable that can be accessed by variable expansion used for creating Volume labels with the Label Format Dir Pool directive.
 #
-# == Parameters
-# [*ensure*]
+# @param ensure
 #   present or absent the config file.
 #
-# [*catalog*]
+# @param catalog
 #   Catalog
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum*]
+# @param maximum
 #   Maximum
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 2147483647
 #   Required: false
 #
-# [*minimum*]
+# @param minimum
 #   Minimum
 #
 #   Bareos Datatype: int32
 #   Bareos Default: 0
 #   Required: false
 #
-# [*wrap_counter*]
+# @param wrap_counter
 #   Wrap Counter
 #
 #   Bareos Datatype: res

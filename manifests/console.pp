@@ -1,9 +1,10 @@
-# == Class: bareos::console
-# This class manages the bareos console (bconsole cli tool) package and configuration directory.
-# Parameters should be configured in the upper class `::bareos`.
+# @summary
+#   Manages the bareos console (bconsole cli tool) package and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+# @param manage_package
+# @param package_name
+# @param package_ensure
+# @param config_dir
 #
-# This class will be automatically included when a resource is defined.
-# It is not intended to be used directly by external resources like node definitions or other modules.
 class bareos::console (
   $manage_package = $bareos::manage_package,
   $package_name   = $bareos::console_package_name,

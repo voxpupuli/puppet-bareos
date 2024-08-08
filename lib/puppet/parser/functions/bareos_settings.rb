@@ -3,7 +3,7 @@
 require 'resolv'
 
 module Puppet::Parser::Functions
-  newfunction(:bareos_settings, type: :rvalue, doc: <<-'ENDHEREDOC') do |args|
+  newfunction(:bareos_settings, type: :rvalue, doc: <<-ENDHEREDOC) do |args|
     Helper function to parse settings for bareos and return prepared lines for config file
   ENDHEREDOC
 
@@ -70,7 +70,7 @@ module Puppet::Parser::Functions
           raise 'Value need to be an string' unless value.is_a?(String)
 
           # validate net-address for domain name or ip
-          regex_hostname = %r{^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$}i
+          regex_hostname = %r{^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$}i
           raise 'Value needs to be an ip or host address' unless value =~ Resolv::IPv4::Regex || value =~ Resolv::IPv6::Regex || value =~ Regexp.compile(regex_hostname)
         when 'addresses'
           hash_separator = ' = '

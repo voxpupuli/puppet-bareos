@@ -1,6 +1,28 @@
-# == Class: bareos::director
-# This class manages the bareos director service, packages and configuration directory.
-# Parameters should be configured in the upper class `::bareos`.
+# @summary 
+#   Manages the bareos director service, packages and configuration directory. Parameters should be configured in the bareos class.
+# @param manage_service
+# @param manage_package
+# @param manage_database
+# @param package_name
+# @param package_ensure
+# @param service_name
+# @param service_allow_restart
+# @param service_ensure
+# @param service_enable
+# @param config_dir
+# @param managed_dirs
+# @param catalogs
+# @param clients
+# @param consoles
+# @param counters
+# @param filesets
+# @param jobs
+# @param jobdefs
+# @param messages
+# @param pools
+# @param profiles
+# @param schedules
+# @param storages
 #
 # This class will be automatically included when a resource is defined.
 # It is not intended to be used directly by external resources like node definitions or other modules.

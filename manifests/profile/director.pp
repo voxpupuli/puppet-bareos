@@ -1,5 +1,11 @@
-# == Class: bareos::profile::director
-# Ready to use director with default configs
+# @summary 
+#   Ready to use director with default configs
+# @param password
+# @param name_dir
+# @param catalog_conf
+# @param storage_address
+# @param storage_password
+#
 class bareos::profile::director (
   $password = 'MyDirectorPasswordPleaseChange',
   $name_dir = 'bareos-dir',
@@ -11,7 +17,7 @@ class bareos::profile::director (
   $storage_password = 'BareosStoragePleaseChangeMe',
 ) {
   # ensure bconsole is installed and can connect to director
-  ::bareos::console::director { $name_dir:
+  bareos::console::director { $name_dir:
     description => 'Bareos console credentials for local director',
     address     => 'localhost',
     password    => $password,

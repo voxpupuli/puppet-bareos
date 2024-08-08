@@ -1,145 +1,142 @@
-# == Define: bareos::director::storage
-# To define on what physical device the Volumes should be mounted.
-# You may have one or more Storage definitions.
-#
-# == Parameters
-# [*ensure*]
+# @summary 
+#   To define on what physical device the Volumes should be mounted.
+#   You may have one or more Storage definitions.
+# @param ensure
 #   present or absent the config file.
-#
-# [*address*]
+# @param address
 #   Address
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*allow_compression*]
+# @param allow_compression
 #   Allow Compression
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*auth_type*]
+# @param auth_type
 #   Auth Type
 #
 #   Bareos Datatype: auth_type
 #   Bareos Default: None
 #   Required: false
 #
-# [*auto_changer*]
+# @param auto_changer
 #   Auto Changer
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*cache_status_interval*]
+# @param cache_status_interval
 #   Cache Status Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: 30
 #   Required: false
 #
-# [*changer_device*]
+# @param changer_device
 #   Changer Device
 #
 #   Bareos Datatype: strname
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*collect_statistics*]
+# @param collect_statistics
 #   Collect Statistics
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*description*]
+# @param description
 #   Description
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*device*]
+# @param device
 #   Device
 #
 #   Bareos Datatype: device
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*enabled*]
+# @param enabled
 #   Enabled: En- or disable this resource.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*heartbeat_interval*]
+# @param heartbeat_interval
 #   Heartbeat Interval
 #
 #   Bareos Datatype: time
 #   Bareos Default: 0
 #   Required: false
 #
-# [*maximum_bandwidth_per_job*]
+# @param maximum_bandwidth_per_job
 #   Maximum Bandwidth Per Job
 #
 #   Bareos Datatype: speed
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*maximum_concurrent_jobs*]
+# @param maximum_concurrent_jobs
 #   Maximum Concurrent Jobs
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 1
 #   Required: false
 #
-# [*maximum_concurrent_read_jobs*]
+# @param maximum_concurrent_read_jobs
 #   Maximum Concurrent Read Jobs
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 0
 #   Required: false
 #
-# [*media_type*]
+# @param media_type
 #   Media Type
 #
 #   Bareos Datatype: strname
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*paired_storage*]
+# @param paired_storage
 #   Paired Storage
 #
 #   Bareos Datatype: res
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*password*]
+# @param password
 #   Password
 #
 #   Bareos Datatype: autopassword
 #   Bareos Default: Not set
 #   Required: true
 #
-# [*port*]
+# @param port
 #   Port
 #
 #   Bareos Datatype: pint32
 #   Bareos Default: 9103
 #   Required: false
 #
-# [*protocol*]
+# @param protocol
 #   Protocol
 #
 #   Bareos Datatype: auth_protocol_type
 #   Bareos Default: Native
 #   Required: false
 #
-# [*tape_device*]
+# @param tape_device
 #   Tape Device
 #
 #   May be specified as Array.
@@ -147,7 +144,7 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_allowed_cn*]
+# @param tls_allowed_cn
 #   Tls Allowed Cn: "Common Name"s (CNs) of the allowed peer certificates.
 #
 #   May be specified as Array.
@@ -155,84 +152,84 @@
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_authenticate*]
+# @param tls_authenticate
 #   Tls Authenticate: Use TLS only to authenticate, not for encryption.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_ca_certificate_dir*]
+# @param tls_ca_certificate_dir
 #   Tls Ca Certificate Dir: Path of a TLS CA certificate directory.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_ca_certificate_file*]
+# @param tls_ca_certificate_file
 #   Tls Ca Certificate File: Path of a PEM encoded TLS CA certificate(s) file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate*]
+# @param tls_certificate
 #   Tls Certificate: Path of a PEM encoded TLS certificate.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_certificate_revocation_list*]
+# @param tls_certificate_revocation_list
 #   Tls Certificate Revocation List: Path of a Certificate Revocation List file.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_cipher_list*]
+# @param tls_cipher_list
 #   Tls Cipher List: List of valid TLS Ciphers.
 #
 #   Bareos Datatype: string
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_dh_file*]
+# @param tls_dh_file
 #   Tls Dh File: Path to PEM encoded Diffie-Hellman parameter file. If this directive is specified, DH key exchange will be used for the ephemeral keying, allowing for forward secrecy of communications.
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_enable*]
+# @param tls_enable
 #   Tls Enable: Enable TLS support.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_key*]
+# @param tls_key
 #   Tls Key: Path of a PEM encoded private key. It must correspond to the specified "TLS Certificate".
 #
 #   Bareos Datatype: directory
 #   Bareos Default: Not set
 #   Required: false
 #
-# [*tls_require*]
+# @param tls_require
 #   Tls Require: Without setting this to yes, Bareos can fall back to use unencryption connections. Enabling this implicietly sets "TLS Enable = yes".
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: false
 #   Required: false
 #
-# [*tls_verify_peer*]
+# @param tls_verify_peer
 #   Tls Verify Peer: If disabled, all certificates signed by a known CA will be accepted. If enabled, the CN of a certificate must the Address or in the "TLS Allowed CN" list.
 #
 #   Bareos Datatype: boolean
 #   Bareos Default: true
 #   Required: false
 #
-# [*username*]
+# @param username
 #   Username
 #
 #   Bareos Datatype: string
