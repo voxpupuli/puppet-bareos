@@ -15,12 +15,12 @@
 #   Whether https should be used in repo URL
 #
 class bareos::repository (
-  Enum['19.2', '20', '21'] $release             = '21',
-  Optional[String[1]]      $gpg_key_fingerprint = undef,
-  Boolean                  $subscription        = false,
-  Optional[String]         $username            = undef,
-  Optional[String]         $password            = undef,
-  Boolean                  $https               = true,
+  Enum['19.2', '20', '21', '22', '23'] $release             = '23',
+  Optional[String[1]]                  $gpg_key_fingerprint = undef,
+  Boolean                              $subscription        = false,
+  Optional[String]                     $username            = undef,
+  Optional[String]                     $password            = undef,
+  Boolean                              $https               = true,
 ) {
   if $https {
     $scheme = 'https://'
@@ -43,6 +43,12 @@ class bareos::repository (
 
   if $gpg_key_fingerprint {
     $_gpg_key_fingerprint = $gpg_key_fingerprint
+  } elsif versioncmp($release, '23') >= 0 {
+    # >= bareos 23
+    $_gpg_key_fingerprint = '5DBE EDB2 E9D0 D238 8684  5C43 D525 2EF6 F51B CCF1'
+  } elsif versioncmp($release, '22') >= 0 {
+    # >= bareos 22
+    $_gpg_key_fingerprint = '5D44 2966 81A7 3289 DBEE  58E4 59E9 68A5 59FE 211E'
   } elsif versioncmp($release, '21') >= 0 {
     # >= bareos 21
     $_gpg_key_fingerprint = '91DA 1DC3 564A E20A 76C4  CA88 E019 57D6 C9FE D482'
@@ -147,6 +153,7 @@ class bareos::repository (
       Apt::Source['bareos'] -> Package <| provider == 'apt' |>
       Class['Apt::Update']  -> Package <| provider == 'apt' |>
     }
+    'windows': {}
     default: {
       fail('Operatingsystem is not supported by this module')
     }
