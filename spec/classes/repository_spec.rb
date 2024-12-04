@@ -64,22 +64,38 @@ describe 'bareos::repository' do
           end
         end
 
-        case facts[:operatingsystemmajrelease]
-        when '20'
-          context 'with subscription: true, username: "test", password: "test"' do
-            let(:params) do
-              {
-                subscription: true,
-                username: 'test',
-                password: 'test'
-              }
+        case facts[:operatingsystem]
+        when 'Debian'
+          case facts[:operatingsystemmajrelease]
+          when '11'
+            context 'with release: "19.2"' do
+              let(:params) do
+                {
+                  release: '19.2'
+                }
+              end
+
+              it { is_expected.to compile.and_raise_error(%r{Bareos 19.2 is not distributed for Debian 11}) }
             end
+          end
+        when 'Ubuntu'
+          case facts[:operatingsystemmajrelease]
+          when '20'
+            context 'with subscription: true, username: "test", password: "test"' do
+              let(:params) do
+                {
+                  subscription: true,
+                  username: 'test',
+                  password: 'test'
+                }
+              end
 
-            it { is_expected.to compile }
+              it { is_expected.to compile }
 
-            it do
-              expect(subject).to contain_apt__source('bareos').
-                with_location('https://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
+              it do
+                expect(subject).to contain_apt__source('bareos').
+                  with_location('https://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
+              end
             end
           end
         end

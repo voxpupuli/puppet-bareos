@@ -15,13 +15,13 @@
 #   Whether https should be used in repo URL
 #
 class bareos::repository (
-  Enum['19.2', '20', '21'] $release             = '21',
+  Enum['19.2', '20', '21'] $release             = $bareos::params::repo_release,
   Optional[String[1]]      $gpg_key_fingerprint = undef,
   Boolean                  $subscription        = false,
   Optional[String]         $username            = undef,
   Optional[String]         $password            = undef,
   Boolean                  $https               = true,
-) {
+) inherits bareos::params {
   if $https {
     $scheme = 'https://'
   } else {
@@ -118,7 +118,11 @@ class bareos::repository (
       if $os  == 'Ubuntu' {
         $location = "${url}xUbuntu_${osrelease}"
       } else {
-        if $osmajrelease == '10' {
+        if versioncmp($osmajrelease, '10') >= 0 {
+          if (versioncmp($release, '18.2') <= 0)
+          or ((versioncmp($release, '20') < 0) and (versioncmp($osmajrelease, '11') >= 0)) {
+            fail("Bareos ${release} is not distributed for Debian ${osmajrelease}")
+          }
           $location = "${url}Debian_${osmajrelease}"
         } else {
           $location = "${url}Debian_${osmajrelease}.0"

@@ -7,6 +7,7 @@ class bareos::params {
   $file_group = 'bareos'
   $config_dir = '/etc/bareos'
   $config_dir_webui = '/etc/bareos-webui'
+  $repo_release = '21'
 
   # service/package specific
   # bconsole
