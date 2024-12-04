@@ -127,7 +127,7 @@
 #   Required: false
 #
 define bareos::storage::messages (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $append = undef,
   $catalog = undef,
   $console = undef,
@@ -149,10 +149,6 @@ define bareos::storage::messages (
 
   $_resource = 'Messages'
   $_resource_dir = 'messages'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

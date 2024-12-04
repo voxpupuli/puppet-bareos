@@ -1,8 +1,10 @@
 # @summary 
 #   To define the set of files to be backed up for each Client.
 #   You may have any number of FileSets but each Job will reference only one.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param description
 #   Description
 #
@@ -39,7 +41,7 @@
 #   Required: false
 #
 define bareos::director::fileset (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $description = undef,
   $enable_vss = undef,
   $exclude = undef,
@@ -50,10 +52,6 @@ define bareos::director::fileset (
 
   $_resource = 'FileSet'
   $_resource_dir = 'fileset'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

@@ -11,14 +11,14 @@
 # @param config_dir
 #
 class bareos::client (
-  $manage_service = $bareos::manage_service,
-  $manage_package = $bareos::manage_package,
-  $package_name   = $bareos::client_package_name,
-  $package_ensure = $bareos::package_ensure,
-  $service_name   = $bareos::client_service_name,
-  $service_ensure = $bareos::service_ensure,
-  $service_enable = $bareos::service_enable,
-  $config_dir     = "${bareos::config_dir}/bareos-fd.d"
+  Boolean $manage_service          = $bareos::manage_service,
+  Boolean $manage_package          = $bareos::manage_package,
+  Array[String[1]] $package_name   = $bareos::client_package_name,
+  String[1] $package_ensure        = $bareos::package_ensure,
+  String[1] $service_name          = $bareos::client_service_name,
+  String[1] $service_ensure        = $bareos::service_ensure,
+  Boolean $service_enable          = $bareos::service_enable,
+  Stdlib::Absolutepath $config_dir = "${bareos::config_dir}/bareos-fd.d"
 ) inherits bareos {
   include bareos::client::client
 

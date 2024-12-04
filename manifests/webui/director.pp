@@ -1,7 +1,9 @@
 # @summary 
 #   Configures an director to use with the webui.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param catalog
 #   Catalog
 #
@@ -49,10 +51,6 @@ define bareos::webui::director (
   Optional[String] $pam_console_password = undef,
 ) {
   include bareos::webui
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     # just for validation

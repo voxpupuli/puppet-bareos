@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param alert_command
 #   Alert Command
 #
@@ -438,7 +439,7 @@
 #   Required: false
 #
 define bareos::storage::device (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $alert_command = undef,
   $always_open = undef,
   $archive_device = undef,
@@ -506,10 +507,6 @@ define bareos::storage::device (
 
   $_resource = 'Device'
   $_resource_dir = 'device'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],
