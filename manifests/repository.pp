@@ -140,8 +140,7 @@ class bareos::repository (
       include apt
       ::apt::source { 'bareos':
         location => $location,
-        release  => '/',
-        repos    => '',
+        repos    => '/',
         key      => $key,
       }
       Apt::Source['bareos'] -> Package <| provider == 'apt' |>
