@@ -27,7 +27,7 @@
 #   Required: false
 #
 define bareos::director::schedule (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $description = undef,
   $enabled = undef,
   $run = undef,
@@ -36,10 +36,6 @@ define bareos::director::schedule (
 
   $_resource = 'Schedule'
   $_resource_dir = 'schedule'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

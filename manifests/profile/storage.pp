@@ -4,10 +4,10 @@
 # @param archive_device
 #
 class bareos::profile::storage (
-  $name_storage = 'bareos-sd',
-  $name_dir = 'bareos-dir',
-  $password = 'BareosStoragePleaseChangeMe',
-  $archive_device = '/var/lib/bareos/storage',
+  String[1] $name_storage              = 'bareos-sd',
+  String[1] $name_dir                  = 'bareos-dir',
+  String[1] $password                  = 'BareosStoragePleaseChangeMe',
+  Stdlib::Absolutepath $archive_device = '/var/lib/bareos/storage',
 ) {
   class { 'bareos::storage::storage':
     name_storage => $name_storage,

@@ -1,8 +1,10 @@
 # @summary 
 #   JobDefs are optional resources for providing defaults for Job resources.
 #   Almost the same like `Job`.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param accurate
 #   Accurate
 #
@@ -591,7 +593,7 @@
 #   Required: false
 #
 define bareos::director::jobdefs (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $accurate = undef,
   $add_prefix = undef,
   $add_suffix = undef,
@@ -680,10 +682,6 @@ define bareos::director::jobdefs (
 
   $_resource = 'JobDefs'
   $_resource_dir = 'jobdefs'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     # set various resource dependencies

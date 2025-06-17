@@ -7,14 +7,14 @@
 # @param storage_password
 #
 class bareos::profile::director (
-  $password = 'MyDirectorPasswordPleaseChange',
-  $name_dir = 'bareos-dir',
-  $catalog_conf = {
+  String[1] $password = 'MyDirectorPasswordPleaseChange',
+  String[1] $name_dir = 'bareos-dir',
+  Hash $catalog_conf = {
     'db_driver' => 'postgresql',
     'db_name'   => 'bareos_mycatalog',
   },
-  $storage_address = 'localhost',
-  $storage_password = 'BareosStoragePleaseChangeMe',
+  Stdlib::Host $storage_address = 'localhost',
+  String[1] $storage_password = 'BareosStoragePleaseChangeMe',
 ) {
   # ensure bconsole is installed and can connect to director
   bareos::console::director { $name_dir:

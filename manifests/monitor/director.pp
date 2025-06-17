@@ -1,7 +1,9 @@
 # @summary 
 #   The Director resource defines the attributes of the Directors that are monitored by this Monitor.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param address
 #   Address
 #
@@ -31,7 +33,7 @@
 #   Required: false
 #
 define bareos::monitor::director (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $address = undef,
   $description = undef,
   $dir_port = undef,
@@ -41,10 +43,6 @@ define bareos::monitor::director (
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

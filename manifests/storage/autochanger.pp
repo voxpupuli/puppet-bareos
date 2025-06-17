@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param changer_command
 #   Changer Command
 #
@@ -33,7 +34,7 @@
 #   Required: true
 #
 define bareos::storage::autochanger (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $changer_command = undef,
   $changer_device = undef,
   $description = undef,
@@ -43,10 +44,6 @@ define bareos::storage::autochanger (
 
   $_resource = 'Autochanger'
   $_resource_dir = 'autochanger'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_resource = [

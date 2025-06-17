@@ -1,8 +1,10 @@
 # @summary 
 #   To define on what physical device the Volumes should be mounted.
 #   You may have one or more Storage definitions.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param address
 #   Address
 #
@@ -237,7 +239,7 @@
 #   Required: false
 #
 define bareos::director::storage (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $address = undef,
   $allow_compression = undef,
   $auth_type = undef,
@@ -276,10 +278,6 @@ define bareos::director::storage (
 
   $_resource = 'Storage'
   $_resource_dir = 'storage'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_storage = $paired_storage ? { undef => undef, default => Bareos::Director::Storage[$paired_storage] }
