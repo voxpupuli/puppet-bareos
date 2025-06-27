@@ -104,6 +104,7 @@ The following parameters are available in the `bareos` class:
 * [`file_group`](#-bareos--file_group)
 * [`file_mode`](#-bareos--file_mode)
 * [`file_dir_mode`](#-bareos--file_dir_mode)
+* [`user_groups`](#-bareos--user_groups)
 * [`console_package_name`](#-bareos--console_package_name)
 * [`monitor_package_name`](#-bareos--monitor_package_name)
 * [`director_package_name`](#-bareos--director_package_name)
@@ -120,7 +121,7 @@ Data type: `String`
 
 The major bareos release version which should be used
 
-Default value: `'21'`
+Default value: `'22'`
 
 ##### <a name="-bareos--repo_subscription"></a>`repo_subscription`
 
@@ -273,6 +274,14 @@ Data type: `Any`
 
 
 Default value: `$bareos::params::file_dir_mode`
+
+##### <a name="-bareos--user_groups"></a>`user_groups`
+
+Data type: `Any`
+
+
+
+Default value: `$bareos::params::user_groups`
 
 ##### <a name="-bareos--console_package_name"></a>`console_package_name`
 
@@ -2227,11 +2236,11 @@ The following parameters are available in the `bareos::repository` class:
 
 ##### <a name="-bareos--repository--release"></a>`release`
 
-Data type: `Enum['19.2', '20', '21']`
+Data type: `Enum['19.2', '20', '21', '22']`
 
 The major bareos release version which should be used
 
-Default value: `'21'`
+Default value: `'22'`
 
 ##### <a name="-bareos--repository--gpg_key_fingerprint"></a>`gpg_key_fingerprint`
 
