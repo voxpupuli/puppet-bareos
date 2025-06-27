@@ -277,11 +277,11 @@ Default value: `$bareos::params::file_dir_mode`
 
 ##### <a name="-bareos--user_groups"></a>`user_groups`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 
 
-Default value: `$bareos::params::user_groups`
+Default value: `[]`
 
 ##### <a name="-bareos--console_package_name"></a>`console_package_name`
 
