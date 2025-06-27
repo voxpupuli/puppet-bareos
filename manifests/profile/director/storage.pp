@@ -3,8 +3,8 @@
 # @param address
 # @param password
 class bareos::profile::director::storage (
-  $address = 'localhost',
-  $password = 'BareosStoragePleaseChangeMe',
+  Stdlib::Host $address = 'localhost',
+  String[1] $password   = 'BareosStoragePleaseChangeMe',
 ) {
   bareos::director::storage { 'File':
     address    => $address,

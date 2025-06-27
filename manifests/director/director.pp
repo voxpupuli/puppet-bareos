@@ -345,7 +345,7 @@
 #   Required: false
 #
 class bareos::director::director (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $absolute_job_timeout = undef,
   $audit_events = undef,
   $auditing = undef,
@@ -363,17 +363,17 @@ class bareos::director::director (
   $maximum_connections = undef,
   $maximum_console_connections = undef,
   $messages = undef,
-  $name_director = 'bareos-dir',
+  String[1] $name_director = 'bareos-dir',
   $ndmp_log_level = undef,
   $ndmp_snooping = undef,
   $omit_defaults = undef,
   $optimize_for_size = undef,
   $optimize_for_speed = undef,
-  $password = 'PleaseChangeMe',
+  String[1] $password = 'PleaseChangeMe',
   $pid_directory = undef,
   $plugin_directory = undef,
   $plugin_names = undef,
-  $query_file = '/usr/lib/bareos/scripts/query.sql',
+  String[1] $query_file = '/usr/lib/bareos/scripts/query.sql',
   $scripts_directory = undef,
   $sd_connect_timeout = undef,
   $secure_erase_command = undef,
@@ -399,10 +399,6 @@ class bareos::director::director (
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Director::Messages[$messages] }

@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param address
 #   Address
 #
@@ -124,33 +125,29 @@
 #   Required: false
 #
 define bareos::console::director (
-  $ensure = present,
-  $address = undef,
-  $description = undef,
-  $dir_port = undef,
-  $heartbeat_interval = undef,
-  $password = undef,
-  $tls_allowed_cn = undef,
-  $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
-  $tls_ca_certificate_file = undef,
-  $tls_certificate = undef,
-  $tls_certificate_revocation_list = undef,
-  $tls_cipher_list = undef,
-  $tls_dh_file = undef,
-  $tls_enable = undef,
-  $tls_key = undef,
-  $tls_require = undef,
-  $tls_verify_peer = undef,
+  Enum['present','absent'] $ensure = present,
+  Optional[String[1]] $address = undef,
+  Optional[String[1]] $description = undef,
+  Optional[Integer[0]] $dir_port = undef,
+  Optional[String[1]] $heartbeat_interval = undef,
+  Optional[String[1]] $password = undef,
+  Optional[Variant[Array[String[1]],String[1]]]$tls_allowed_cn = undef,
+  Optional[Boolean] $tls_authenticate = undef,
+  Optional[String[1]] $tls_ca_certificate_dir = undef,
+  Optional[String[1]] $tls_ca_certificate_file = undef,
+  Optional[String[1]] $tls_certificate = undef,
+  Optional[String[1]] $tls_certificate_revocation_list = undef,
+  Optional[String[1]] $tls_cipher_list = undef,
+  Optional[String[1]] $tls_dh_file = undef,
+  Optional[Boolean] $tls_enable = undef,
+  Optional[String[1]] $tls_key = undef,
+  Optional[Boolean] $tls_require = undef,
+  Optional[Boolean] $tls_verify_peer = undef,
 ) {
   include bareos::console
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

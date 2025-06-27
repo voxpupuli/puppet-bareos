@@ -2,8 +2,10 @@
 #   To define what Client is to be backed up.
 #   You will generally have multiple Client definitions.
 #   Each Job will reference only a single client.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param address
 #   Address
 #
@@ -272,7 +274,7 @@
 #   Required: false
 #
 define bareos::director::client (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $address = undef,
   $auth_type = undef,
   $auto_prune = undef,
@@ -316,10 +318,6 @@ define bareos::director::client (
 
   $_resource = 'Client'
   $_resource_dir = 'client'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_catalog = $catalog ? { undef => undef, default => Bareos::Director::Catalog[$catalog] }

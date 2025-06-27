@@ -1,7 +1,9 @@
 # @summary 
 #   The Director resource defines the name and password of the Directors that are permitted to contact this Client.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param address
 #   Address: Director Network Address. Only required if "Connection From Client To Director" is enabled.
 #
@@ -160,38 +162,34 @@
 #   Required: false
 #
 define bareos::client::director (
-  $ensure = present,
-  $address = undef,
-  $allowed_job_command = undef,
-  $allowed_script_dir = undef,
-  $connection_from_client_to_director = undef,
-  $connection_from_director_to_client = undef,
-  $description = undef,
-  $maximum_bandwidth_per_job = undef,
-  $monitor = undef,
-  $password = undef,
-  $port = undef,
-  $tls_allowed_cn = undef,
-  $tls_authenticate = undef,
-  $tls_ca_certificate_dir = undef,
-  $tls_ca_certificate_file = undef,
-  $tls_certificate = undef,
-  $tls_certificate_revocation_list = undef,
-  $tls_cipher_list = undef,
-  $tls_dh_file = undef,
-  $tls_enable = undef,
-  $tls_key = undef,
-  $tls_require = undef,
-  $tls_verify_peer = undef,
+  Enum['present','absent'] $ensure = present,
+  Optional[String[1]] $address = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $allowed_job_command = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $allowed_script_dir = undef,
+  Optional[Boolean] $connection_from_client_to_director = undef,
+  Optional[Boolean] $connection_from_director_to_client = undef,
+  Optional[String[1]] $description = undef,
+  Optional[String[1]] $maximum_bandwidth_per_job = undef,
+  Optional[Boolean] $monitor = undef,
+  Optional[String[1]] $password = undef,
+  Optional[Stdlib::Port] $port = undef,
+  Optional[Variant[Array[String[1]],String[1]]] $tls_allowed_cn = undef,
+  Optional[Boolean] $tls_authenticate = undef,
+  Optional[String[1]] $tls_ca_certificate_dir = undef,
+  Optional[String[1]] $tls_ca_certificate_file = undef,
+  Optional[String[1]] $tls_certificate = undef,
+  Optional[String[1]] $tls_certificate_revocation_list = undef,
+  Optional[String[1]] $tls_cipher_list = undef,
+  Optional[String[1]] $tls_dh_file = undef,
+  Optional[Boolean] $tls_enable = undef,
+  Optional[String[1]] $tls_key = undef,
+  Optional[Boolean] $tls_require = undef,
+  Optional[Boolean] $tls_verify_peer = undef,
 ) {
   include bareos::client
 
   $_resource = 'Director'
   $_resource_dir = 'director'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

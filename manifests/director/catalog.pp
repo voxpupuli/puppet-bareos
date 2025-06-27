@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param db_address
 #   Db Address
 #
@@ -128,7 +129,7 @@
 #   Required: false
 #
 define bareos::director::catalog (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $db_address = undef,
   $db_driver = undef,
   $db_name = undef,
@@ -151,10 +152,6 @@ define bareos::director::catalog (
 
   $_resource = 'Catalog'
   $_resource_dir = 'catalog'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

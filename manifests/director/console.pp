@@ -3,6 +3,7 @@
 #
 # @param ensure
 #   present or absent the config file.
+#
 # @param catalog_acl
 #   Catalog ACL
 #
@@ -228,10 +229,6 @@ define bareos::director::console (
 
   $_resource = 'Console'
   $_resource_dir = 'console'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_require_res_profiles = $profile ? { undef => undef, default => Bareos::Director::Profile[$profile] }

@@ -1,7 +1,9 @@
 # @summary
 #   The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
+#
 # @param ensure
 #   present or absent the config file.
+#
 # @param address
 #   Address
 #
@@ -52,7 +54,7 @@
 #   Required: false
 #
 define bareos::monitor::storage (
-  $ensure = present,
+  Enum['present','absent'] $ensure = present,
   $address = undef,
   $description = undef,
   $enable_ssl = undef,
@@ -65,10 +67,6 @@ define bareos::monitor::storage (
 
   $_resource = 'Storage'
   $_resource_dir = 'storage'
-
-  unless $ensure in ['present', 'absent'] {
-    fail('Invalid value for ensure')
-  }
 
   if $ensure == 'present' {
     $_settings = bareos_settings([$name, 'Name', 'name', true],

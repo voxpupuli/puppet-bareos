@@ -1,5 +1,6 @@
-# == Class: bareos::profile::director::client
-# Default client, backup bareos director itself
+# @summary 
+#   Default client, backup bareos director itself
+#
 class bareos::profile::director::client {
   $password = fqdn_rand_string(20,'','bareos-fd-password')
 

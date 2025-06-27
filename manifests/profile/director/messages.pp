@@ -1,5 +1,6 @@
-# == Class: bareos::profile::director::messages
-# Default messages
+# @summary 
+#   Default messages
+#
 class bareos::profile::director::messages {
   bareos::director::messages { 'Daemon':
     description  => 'Message delivery for daemon messages (no job).',

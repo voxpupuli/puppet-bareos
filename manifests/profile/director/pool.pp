@@ -1,5 +1,6 @@
-# == Class: bareos::profile::director::pool
-# Some default pools
+# @summary 
+#   Some default pools
+#
 class bareos::profile::director::pool {
   bareos::director::pool { 'Differential':
     pool_type            => 'Backup',
