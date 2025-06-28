@@ -160,7 +160,7 @@ define bareos::director::catalog (
     $_settings = bareos_settings([$name, 'Name', 'name', true],
       [$description, 'Description', 'string', false],
       [$db_address, 'Db Address', 'string', false],
-      [$db_driver, 'Db Driver', 'string', true],
+      [$db_driver, 'Db Driver', 'string', false],
       [$db_name, 'Db Name', 'string', true],
       [$db_password, 'Db Password', 'autopassword', false],
       [$db_port, 'Db Port', 'pint32', false],
