@@ -394,7 +394,7 @@ class bareos::client::client (
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Client::Messages[$messages] }
 
     $_require_resource = delete_undef_values([
-        $_require_res_messages,
+      $_require_res_messages,
     ])
 
     $_settings = bareos_settings([$name_client, 'Name', 'name', true],

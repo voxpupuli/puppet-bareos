@@ -437,7 +437,7 @@ class bareos::storage::storage (
     $_require_res_messages = $messages ? { undef => undef, default => Bareos::Storage::Messages[$messages] }
 
     $_require_resource = delete_undef_values([
-        $_require_res_messages,
+      $_require_res_messages,
     ])
 
     $_settings = bareos_settings([$name_storage, 'Name', 'name', true],

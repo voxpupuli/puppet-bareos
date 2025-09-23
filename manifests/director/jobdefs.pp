@@ -702,15 +702,15 @@ define bareos::director::jobdefs (
     $_require_res_storage = $storage ? { undef => undef, default => Bareos::Director::Storage[$storage] }
 
     $_require_resource = delete_undef_values([
-        $_require_res_catalog,
-        $_require_res_client,
-        $_require_res_file_set,
-        $_require_res_jobs,
-        $_require_res_job_defs,
-        $_require_res_message,
-        $_require_res_pools,
-        $_require_res_schedule,
-        $_require_res_storage,
+      $_require_res_catalog,
+      $_require_res_client,
+      $_require_res_file_set,
+      $_require_res_jobs,
+      $_require_res_job_defs,
+      $_require_res_message,
+      $_require_res_pools,
+      $_require_res_schedule,
+      $_require_res_storage,
     ])
 
     $_settings = bareos_settings([$name, 'Name', 'name', true],

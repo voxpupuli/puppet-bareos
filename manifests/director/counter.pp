@@ -60,7 +60,7 @@ define bareos::director::counter (
     $_require_res_catalog = $catalog ? { undef => undef, default => Bareos::Director::Catalog[$catalog] }
 
     $_require_resource = delete_undef_values([
-        $_require_res_catalog,
+      $_require_res_catalog,
     ])
 
     $_settings = bareos_settings([$name, 'Name', 'name', true],
