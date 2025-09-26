@@ -237,7 +237,7 @@ define bareos::director::console (
     $_require_res_profiles = $profile ? { undef => undef, default => Bareos::Director::Profile[$profile] }
 
     $_require_resource = delete_undef_values([
-        $_require_res_profiles,
+      $_require_res_profiles,
     ])
 
     $_settings = bareos_settings([$name, 'Name', 'name', true],

@@ -285,7 +285,7 @@ define bareos::director::storage (
     $_require_res_storage = $paired_storage ? { undef => undef, default => Bareos::Director::Storage[$paired_storage] }
 
     $_require_resource = delete_undef_values([
-        $_require_res_storage,
+      $_require_res_storage,
     ])
 
     $_settings = bareos_settings([$name, 'Name', 'name', true],
