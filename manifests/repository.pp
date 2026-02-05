@@ -133,7 +133,7 @@ class bareos::repository (
       include apt
       # this keyring is the same from both the .com and .org repos
       $key_ring_fn = 'bareos-keyring.gpg'
-      apt::keyring { 'bareos-keyring':
+      apt::keyring { $key_ring_fn:
         source => "${location}/${key_ring_fn}",
       }
       apt::source { 'bareos':
