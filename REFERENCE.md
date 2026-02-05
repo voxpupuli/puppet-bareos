@@ -122,7 +122,7 @@ Data type: `String`
 
 The major bareos release version which should be used
 
-Default value: `'23'`
+Default value: `'25'`
 
 ##### <a name="-bareos--repo_subscription"></a>`repo_subscription`
 

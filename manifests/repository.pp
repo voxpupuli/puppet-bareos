@@ -15,7 +15,7 @@
 #   Whether https should be used in repo URL
 #
 class bareos::repository (
-  Enum['19.2', '20', '21', '22', '23'] $release             = '23',
+  Enum['19.2', '20', '21', '22', '23', '24', '25'] $release = '25',
   Optional[String[1]]                  $gpg_key_fingerprint = undef,
   Boolean                              $subscription        = false,
   Optional[String]                     $username            = undef,
@@ -32,9 +32,10 @@ class bareos::repository (
       fail('For Bareos subscription repos both username and password are required.')
     }
     # note the .com
-    $address = "download.bareos.com/bareos/release/${release}/"
+    $dl_hostname = 'download.bareos.com'
+    $address = "${dl_hostname}/bareos/release/${release}/"
   } else {
-    $address = "download.bareos.org/bareos/release/${release}/"
+    $address = "download.bareos.org/current/"
   }
 
   $os = $facts['os']['name']
@@ -116,10 +117,12 @@ class bareos::repository (
       }
     }
     /(?i:debian|ubuntu)/: {
+      $url = "${scheme}${address}"
       if $subscription {
-        $url = "${scheme}${username}:${password}@${address}"
-      } else {
-        $url = "${scheme}${address}"
+        apt::auth { $dl_hostname:
+          login    => $username,
+          password => $password,
+        }
       }
       if $os  == 'Ubuntu' {
         $location = "${url}xUbuntu_${osrelease}"
@@ -144,10 +147,16 @@ class bareos::repository (
       }
 
       include apt
-      ::apt::source { 'bareos':
-        location => $location,
-        repos    => '/',
-        key      => $key,
+      # this keyring is the same from both the .com and .org repos
+      $key_ring_fn = 'bareos-keyring.gpg'
+      apt::keyring { 'bareos-keyring':
+        source => "${location}/${key_ring_fn}",
+      }
+      apt::source { 'bareos':
+        location      => [$location],
+        repos         => ['/'],
+        keyring       => "/etc/apt/keyrings/${key_ring_fn}",
+        source_format => 'sources',
       }
       Apt::Source['bareos'] -> Package <| provider == 'apt' |>
       Class['Apt::Update']  -> Package <| provider == 'apt' |>
