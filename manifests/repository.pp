@@ -127,23 +127,7 @@ class bareos::repository (
       if $os  == 'Ubuntu' {
         $location = "${url}xUbuntu_${osrelease}"
       } else {
-        if $osmajrelease == '10' {
-          $location = "${url}Debian_${osmajrelease}"
-        } else {
-          $location = "${url}Debian_${osmajrelease}.0"
-        }
-      }
-      if $subscription {
-        # release key file is not avaiable without login and
-        # apt-key cannot handle username and password in URI
-        $key = {
-          id => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
-        }
-      } else {
-        $key = {
-          id     => regsubst($_gpg_key_fingerprint, ' ', '', 'G'),
-          source => "${location}/Release.key",
-        }
+        $location = "${url}Debian_${osmajrelease}"
       }
 
       include apt
