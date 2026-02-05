@@ -138,7 +138,7 @@ class bareos::repository (
       }
       apt::source { 'bareos':
         location      => [$location],
-        repos         => ['/'],
+        release       => ['/'],
         keyring       => "/etc/apt/keyrings/${key_ring_fn}",
         source_format => 'sources',
       }
