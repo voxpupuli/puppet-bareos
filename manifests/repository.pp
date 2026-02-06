@@ -122,7 +122,7 @@ class bareos::repository (
         }
       } else {
         $apt_keyring_args = {
-          source => "${location}/${key_ring_fn}",
+          source => "${location}/Release.key",
         }
       }
       apt::keyring { $key_ring_fn:
