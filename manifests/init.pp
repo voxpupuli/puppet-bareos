@@ -7,9 +7,13 @@
 # @param repo_subscription
 #   Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
 # @param repo_username
-#   The major bareos release version which should be used
+#   The username is required for accessing subscription content
 # @param repo_password
-#   The major bareos release version which should be used
+#   The password is required for accessing subscription content
+# @param repo_apt_key_content
+#   The apt_key_content is required when using subscription
+# @param repo_apt_key_source
+#   The apt_key_source is required when using subscription
 # @param manage_package
 #   Whether puppet should handle the installation ob bareos packages
 # @param manage_service
@@ -43,6 +47,8 @@ class bareos (
   Boolean $repo_subscription          = false,
   Optional[String[1]]  $repo_username = undef,
   Optional[String[1]]  $repo_password = undef,
+  Optional[String[1]]  $repo_apt_key_content  = undef,
+  Optional[String[1]]  $repo_apt_key_source  = undef,
   Boolean $manage_package             = true,
   Boolean $manage_service             = true,
   Boolean $manage_database            = true,
@@ -66,10 +72,12 @@ class bareos (
 ) inherits bareos::params {
   if $manage_repo {
     class { 'bareos::repository':
-      release      => $repo_release,
-      subscription => $repo_subscription,
-      username     => $repo_username,
-      password     => $repo_password,
+      release         => $repo_release,
+      subscription    => $repo_subscription,
+      username        => $repo_username,
+      password        => $repo_password,
+      apt_key_content => $repo_apt_key_content,
+      apt_key_source  => $repo_apt_key_source,
     }
   }
 

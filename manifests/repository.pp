@@ -13,6 +13,8 @@
 #   Whether https should be used in repo URL
 # @param apt_key_content
 #   Required content for the keyring as it cannot be downloaded here
+# @param apt_key_content
+#   Required source for the keyring as it cannot be downloaded here
 #
 class bareos::repository (
   Enum['19.2', '20', '21', '22', '23', '24', '25'] $release = '25',
@@ -21,6 +23,7 @@ class bareos::repository (
   Optional[String]                     $password            = undef,
   Boolean                              $https               = true,
   Optional[String]                     $apt_key_content     = undef,
+  Optional[String]                     $apt_key_source      = undef,
 ) {
   if $https {
     $scheme = 'https://'
@@ -31,8 +34,8 @@ class bareos::repository (
     if empty($username) or empty($password) {
       fail('For Bareos subscription repos both username and password are required.')
     }
-    if $facts['os']['family'] == 'Debian' and empty($apt_key_content) {
-      fail('For Bareos subscription on Debian based systems, you need to specify the keyring content.')
+    if $facts['os']['family'] == 'Debian' and empty($apt_key_content) and empty($apt_key_source) {
+      fail('For Bareos subscription on Debian based systems, you need to specify the keyring content or source.')
     }
     # note the .com
     $dl_hostname = 'download.bareos.com'
@@ -114,6 +117,7 @@ class bareos::repository (
       $key_ring_fn = 'bareos-keyring.gpg'
       if $subscription {
         $apt_keyring_args = {
+          source  => $apt_key_source,
           content => $apt_key_content,
         }
       } else {
