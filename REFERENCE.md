@@ -88,6 +88,8 @@ The following parameters are available in the `bareos` class:
 * [`repo_subscription`](#-bareos--repo_subscription)
 * [`repo_username`](#-bareos--repo_username)
 * [`repo_password`](#-bareos--repo_password)
+* [`repo_apt_key_content`](#-bareos--repo_apt_key_content)
+* [`repo_apt_key_source`](#-bareos--repo_apt_key_source)
 * [`manage_package`](#-bareos--manage_package)
 * [`manage_service`](#-bareos--manage_service)
 * [`manage_database`](#-bareos--manage_database)
@@ -135,7 +137,7 @@ Default value: `false`
 
 Data type: `Optional[String[1]]`
 
-The major bareos release version which should be used
+The username is required for accessing subscription content
 
 Default value: `undef`
 
@@ -143,7 +145,23 @@ Default value: `undef`
 
 Data type: `Optional[String[1]]`
 
-The major bareos release version which should be used
+The password is required for accessing subscription content
+
+Default value: `undef`
+
+##### <a name="-bareos--repo_apt_key_content"></a>`repo_apt_key_content`
+
+Data type: `Optional[String[1]]`
+
+The apt_key_content is required when using subscription
+
+Default value: `undef`
+
+##### <a name="-bareos--repo_apt_key_source"></a>`repo_apt_key_source`
+
+Data type: `Optional[String[1]]`
+
+The apt_key_source is required when using subscription
 
 Default value: `undef`
 
@@ -2227,27 +2245,20 @@ Manages the bareos repository. Parameters should be configured in the bareos cla
 The following parameters are available in the `bareos::repository` class:
 
 * [`release`](#-bareos--repository--release)
-* [`gpg_key_fingerprint`](#-bareos--repository--gpg_key_fingerprint)
 * [`subscription`](#-bareos--repository--subscription)
 * [`username`](#-bareos--repository--username)
 * [`password`](#-bareos--repository--password)
 * [`https`](#-bareos--repository--https)
+* [`apt_key_content`](#-bareos--repository--apt_key_content)
+* [`apt_key_source`](#-bareos--repository--apt_key_source)
 
 ##### <a name="-bareos--repository--release"></a>`release`
 
-Data type: `Enum['19.2', '20', '21', '22', '23']`
+Data type: `Enum['19.2', '20', '21', '22', '23', '24', '25']`
 
 The major bareos release version which should be used
 
-Default value: `'23'`
-
-##### <a name="-bareos--repository--gpg_key_fingerprint"></a>`gpg_key_fingerprint`
-
-Data type: `Optional[String[1]]`
-
-The GPG fingerprint of the repos key
-
-Default value: `undef`
+Default value: `'25'`
 
 ##### <a name="-bareos--repository--subscription"></a>`subscription`
 
@@ -2280,6 +2291,22 @@ Data type: `Boolean`
 Whether https should be used in repo URL
 
 Default value: `true`
+
+##### <a name="-bareos--repository--apt_key_content"></a>`apt_key_content`
+
+Data type: `Optional[String]`
+
+Required content (or use apt_key_source) for the keyring as it cannot be downloaded here
+
+Default value: `undef`
+
+##### <a name="-bareos--repository--apt_key_source"></a>`apt_key_source`
+
+Data type: `Optional[String]`
+
+Required source (or use apt_key_content) for the keyring as it cannot be downloaded here
+
+Default value: `undef`
 
 ### <a name="bareos--storage"></a>`bareos::storage`
 
