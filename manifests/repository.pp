@@ -12,9 +12,9 @@
 # @param https
 #   Whether https should be used in repo URL
 # @param apt_key_content
-#   Required content for the keyring as it cannot be downloaded here
-# @param apt_key_content
-#   Required source for the keyring as it cannot be downloaded here
+#   Required content (or use apt_key_source) for the keyring as it cannot be downloaded here
+# @param apt_key_source
+#   Required source (or use apt_key_content) for the keyring as it cannot be downloaded here
 #
 class bareos::repository (
   Enum['19.2', '20', '21', '22', '23', '24', '25'] $release = '25',
