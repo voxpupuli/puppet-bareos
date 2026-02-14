@@ -66,12 +66,13 @@ describe 'bareos::repository' do
 
         case facts[:operatingsystemmajrelease]
         when '20'
-          context 'with subscription: true, username: "test", password: "test"' do
+          context 'with subscription: true, username: "test", password: "test", apt_key_content: "test"' do
             let(:params) do
               {
                 subscription: true,
                 username: 'test',
-                password: 'test'
+                password: 'test',
+                apt_key_content: 'test'
               }
             end
 
@@ -79,7 +80,7 @@ describe 'bareos::repository' do
 
             it do
               expect(subject).to contain_apt__source('bareos').
-                with_location('https://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
+                with_location('https://download.bareos.org/current/xUbuntu_24.04')
             end
           end
         end
