@@ -71,7 +71,7 @@ describe 'bareos::repository' do
               {
                 subscription: true,
                 username: 'test',
-                password: 'test'
+                password: 'test',
                 apt_key_content: 'test'
               }
             end

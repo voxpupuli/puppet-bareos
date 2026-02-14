@@ -18,7 +18,7 @@ describe 'bareos' do
           {
             repo_subscription: true,
             repo_username: 'test',
-            repo_password: 'test'
+            repo_password: 'test',
             repo_apt_key_content: 'test_key_content'
           }
         end
@@ -29,7 +29,7 @@ describe 'bareos' do
           expect(subject).to contain_class('bareos::repository').
             with_subscription(true).
             with_username('test').
-            with_password('test')
+            with_password('test'),
             with_apt_key_content('test_key_content')
         end
       end
