@@ -13,12 +13,13 @@ describe 'bareos' do
         it { is_expected.to contain_class('bareos') }
       end
 
-      context 'with repo_subscription: true, repo_username: "test", repo_password: "test"' do
+      context 'with repo_subscription: true, repo_username: "test", repo_password: "test", repo_apt_key_content: "test_key_content"' do
         let(:params) do
           {
             repo_subscription: true,
             repo_username: 'test',
             repo_password: 'test'
+            repo_apt_key_content: 'test_key_content'
           }
         end
 
@@ -29,6 +30,7 @@ describe 'bareos' do
             with_subscription(true).
             with_username('test').
             with_password('test')
+            with_apt_key_content('test_key_content')
         end
       end
     end
