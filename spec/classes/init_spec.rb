@@ -29,8 +29,7 @@ describe 'bareos' do
           expect(subject).to contain_class('bareos::repository').
             with_subscription(true).
             with_username('test').
-            with_password('test'),
-                             with_apt_key_content('test_key_content')
+            with_password('test')
         end
       end
     end
