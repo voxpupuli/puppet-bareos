@@ -46,7 +46,7 @@ class BareosResourceHelper
     when 'addresses', 'include_exclude_item', 'runscript', 'hash'
       sep = ' ' unless type == 'addresses'
       val = {
-        'x' => 'y'
+        'x' => 'y',
       }
       result = '{
     x = y
@@ -84,7 +84,7 @@ class BareosResourceHelper
       'type' => type,
       'val' => val,
       'res' => result.nil? ? val : result,
-      'sep' => sep
+      'sep' => sep,
     }
 
     self

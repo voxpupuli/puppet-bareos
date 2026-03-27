@@ -20,7 +20,7 @@ describe 'bareos::monitor::monitor' do
       context 'with required values' do
         let(:params) do
           {
-            'password' => 'password'
+            'password' => 'password',
           }
         end
 
@@ -33,14 +33,14 @@ describe 'bareos::monitor::monitor' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Monitor')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('dir_connect_timeout', 'Dir Connect Timeout', 'time').
-          param('fd_connect_timeout', 'Fd Connect Timeout', 'time').
-          param('password', 'Password', 'md5password').
-          param('refresh_interval', 'Refresh Interval', 'time').
-          param('require_ssl', 'Require Ssl', 'boolean').
-          param('sd_connect_timeout', 'Sd Connect Timeout', 'time')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('dir_connect_timeout', 'Dir Connect Timeout', 'time')
+           .param('fd_connect_timeout', 'Fd Connect Timeout', 'time')
+           .param('password', 'Password', 'md5password')
+           .param('refresh_interval', 'Refresh Interval', 'time')
+           .param('require_ssl', 'Require Ssl', 'boolean')
+           .param('sd_connect_timeout', 'Sd Connect Timeout', 'time')
 
         let(:params) { res.params }
 

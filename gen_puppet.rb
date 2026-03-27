@@ -89,7 +89,7 @@ res_requires = {}
 res.each do |directive, schema|
   next if directive == 'Name'
 
-  schema['datatype'] = "#{schema['datatype']}_LIST" if schema['datatype'] == 'MESSAGES' || schema['datatype'] == 'SCHEDULE_RUN_COMMAND'
+  schema['datatype'] = "#{schema['datatype']}_LIST" if %w[MESSAGES SCHEDULE_RUN_COMMAND].include?(schema['datatype'])
   if schema['datatype'] =~ %r{_TYPE$}
     enums[directive] = schema
     # overwrite datatype for type checking

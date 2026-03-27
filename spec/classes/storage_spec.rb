@@ -20,28 +20,28 @@ describe 'bareos::storage' do
               test: {
                 changer_command: 'foo',
                 changer_device: '/dev/foo',
-                device: 'dev01'
-              }
+                device: 'dev01',
+              },
             },
             devices: {
               dev01: {
                 archive_device: '/mnt/test',
-                media_type: 'file'
-              }
-            }
+                media_type: 'file',
+              },
+            },
           }
         end
 
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__autochanger('test').
-            with_changer_command('foo').
-            with_changer_device('/dev/foo').
-            with_device('dev01')
-          expect(subject).to contain_bareos__storage__device('dev01').
-            with_archive_device('/mnt/test').
-            with_media_type('file')
+          expect(subject).to contain_bareos__storage__autochanger('test')
+            .with_changer_command('foo')
+            .with_changer_device('/dev/foo')
+            .with_device('dev01')
+          expect(subject).to contain_bareos__storage__device('dev01')
+            .with_archive_device('/mnt/test')
+            .with_media_type('file')
         end
       end
 
@@ -50,17 +50,17 @@ describe 'bareos::storage' do
           {
             directors: {
               test: {
-                password: 'foobar'
-              }
-            }
+                password: 'foobar',
+              },
+            },
           }
         end
 
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__director('test').
-            with_password('foobar')
+          expect(subject).to contain_bareos__storage__director('test')
+            .with_password('foobar')
         end
       end
 
@@ -69,17 +69,17 @@ describe 'bareos::storage' do
           {
             messages: {
               test: {
-                description: 'test'
-              }
-            }
+                description: 'test',
+              },
+            },
           }
         end
 
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__messages('test').
-            with_description('test')
+          expect(subject).to contain_bareos__storage__messages('test')
+            .with_description('test')
         end
       end
 
@@ -89,18 +89,18 @@ describe 'bareos::storage' do
             ndmps: {
               test: {
                 username: 'test',
-                password: 'foobar'
-              }
-            }
+                password: 'foobar',
+              },
+            },
           }
         end
 
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__ndmp('test').
-            with_username('test').
-            with_password('foobar')
+          expect(subject).to contain_bareos__storage__ndmp('test')
+            .with_username('test')
+            .with_password('foobar')
         end
       end
     end

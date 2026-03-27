@@ -23,23 +23,23 @@ describe 'bareos::director::messages' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Messages')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('append', 'Append', 'messages_list').
-          param('catalog', 'Catalog', 'messages_list').
-          param('console', 'Console', 'messages_list').
-          param('director', 'Director', 'messages_list').
-          param('file', 'File', 'messages_list').
-          param('mail_command', 'Mail Command', 'string').
-          param('mail', 'Mail', 'messages_list').
-          param('mail_on_error', 'Mail On Error', 'messages_list').
-          param('mail_on_success', 'Mail On Success', 'messages_list').
-          param('operator_command', 'Operator Command', 'string').
-          param('operator', 'Operator', 'messages_list').
-          param('stderr', 'Stderr', 'messages_list').
-          param('stdout', 'Stdout', 'messages_list').
-          param('syslog', 'Syslog', 'messages_list').
-          param('timestamp_format', 'Timestamp Format', 'string')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('append', 'Append', 'messages_list')
+           .param('catalog', 'Catalog', 'messages_list')
+           .param('console', 'Console', 'messages_list')
+           .param('director', 'Director', 'messages_list')
+           .param('file', 'File', 'messages_list')
+           .param('mail_command', 'Mail Command', 'string')
+           .param('mail', 'Mail', 'messages_list')
+           .param('mail_on_error', 'Mail On Error', 'messages_list')
+           .param('mail_on_success', 'Mail On Success', 'messages_list')
+           .param('operator_command', 'Operator Command', 'string')
+           .param('operator', 'Operator', 'messages_list')
+           .param('stderr', 'Stderr', 'messages_list')
+           .param('stdout', 'Stdout', 'messages_list')
+           .param('syslog', 'Syslog', 'messages_list')
+           .param('timestamp_format', 'Timestamp Format', 'string')
 
         let(:params) { res.params }
 
@@ -47,8 +47,8 @@ describe 'bareos::director::messages' do
         it { is_expected.to contain_file(filename).with_content(res.content) }
 
         it do
-          expect(subject).to contain_file(filename).
-            that_notifies('Service[bareos-dir]')
+          expect(subject).to contain_file(filename)
+            .that_notifies('Service[bareos-dir]')
         end
       end
 

@@ -25,7 +25,7 @@ describe 'bareos::storage::autochanger' do
           {
             'changer_command' => '/bin/command',
             'changer_device' => '/dev/tape',
-            'device' => 'name'
+            'device' => 'name',
           }
         end
         let(:pre_condition) do
@@ -46,11 +46,11 @@ describe 'bareos::storage::autochanger' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Autochanger')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('changer_command', 'Changer Command', 'strname').
-          param('changer_device', 'Changer Device', 'strname').
-          param('device', 'Device', 'resource_list')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('changer_command', 'Changer Command', 'strname')
+           .param('changer_device', 'Changer Device', 'strname')
+           .param('device', 'Device', 'resource_list')
 
         let(:params) { res.params }
         # required resources
@@ -67,9 +67,9 @@ describe 'bareos::storage::autochanger' do
         it { is_expected.to contain_file(filename).with_content(res.content) }
 
         it do
-          expect(subject).to contain_file(filename).
-            that_notifies('Service[bareos-sd]').
-            that_requires('Bareos::Storage::Device[name]')
+          expect(subject).to contain_file(filename)
+            .that_notifies('Service[bareos-sd]')
+            .that_requires('Bareos::Storage::Device[name]')
         end
       end
 

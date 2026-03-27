@@ -21,18 +21,18 @@ describe 'bareos::director' do
             catalogs: {
               test: {
                 db_driver: 'postgresql',
-                db_name: 'test'
-              }
-            }
+                db_name: 'test',
+              },
+            },
           }
         end
 
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__director__catalog('test').
-            with_db_driver('postgresql').
-            with_db_name('test')
+          expect(subject).to contain_bareos__director__catalog('test')
+            .with_db_driver('postgresql')
+            .with_db_name('test')
         end
       end
     end
