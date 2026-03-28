@@ -20,7 +20,7 @@ describe 'bareos::monitor::director' do
       context 'with required values' do
         let(:params) do
           {
-            'address' => 'localhost'
+            'address' => 'localhost',
           }
         end
 
@@ -33,11 +33,11 @@ describe 'bareos::monitor::director' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Director')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('address', 'Address', 'string').
-          param('dir_port', 'Dir Port', 'pint32').
-          param('enable_ssl', 'Enable Ssl', 'boolean')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('address', 'Address', 'string')
+           .param('dir_port', 'Dir Port', 'pint32')
+           .param('enable_ssl', 'Enable Ssl', 'boolean')
 
         let(:params) { res.params }
 

@@ -25,7 +25,7 @@ describe 'bareos::storage::ndmp' do
         let(:params) do
           {
             'username' => 'user',
-            'password' => 'pw'
+            'password' => 'pw',
           }
         end
 
@@ -38,12 +38,12 @@ describe 'bareos::storage::ndmp' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Ndmp')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('auth_type', 'Auth Type', 'auth_type').
-          param('log_level', 'Log Level', 'pint32').
-          param('password', 'Password', 'autopassword').
-          param('username', 'Username', 'string')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('auth_type', 'Auth Type', 'auth_type')
+           .param('log_level', 'Log Level', 'pint32')
+           .param('password', 'Password', 'autopassword')
+           .param('username', 'Username', 'string')
 
         let(:params) { res.params }
 
@@ -51,8 +51,8 @@ describe 'bareos::storage::ndmp' do
         it { is_expected.to contain_file(filename).with_content(res.content) }
 
         it do
-          expect(subject).to contain_file(filename).
-            that_notifies('Service[bareos-sd]')
+          expect(subject).to contain_file(filename)
+            .that_notifies('Service[bareos-sd]')
         end
       end
 

@@ -19,18 +19,18 @@ describe 'bareos::webui' do
             directors: {
               test: {
                 dir_address: 'example.org',
-                catalog: 'MyCatalog'
-              }
-            }
+                catalog: 'MyCatalog',
+              },
+            },
           }
         end
 
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__webui__director('test').
-            with_dir_address('example.org').
-            with_catalog('MyCatalog')
+          expect(subject).to contain_bareos__webui__director('test')
+            .with_dir_address('example.org')
+            .with_catalog('MyCatalog')
         end
       end
     end

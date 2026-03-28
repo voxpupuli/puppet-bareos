@@ -23,12 +23,12 @@ describe 'bareos::director::fileset' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('FileSet')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('enable_vss', 'Enable VSS', 'boolean').
-          param('exclude', 'Exclude', 'include_exclude_item').
-          param('ignore_file_set_changes', 'Ignore File Set Changes', 'boolean').
-          param('include', 'Include', 'include_exclude_item')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('enable_vss', 'Enable VSS', 'boolean')
+           .param('exclude', 'Exclude', 'include_exclude_item')
+           .param('ignore_file_set_changes', 'Ignore File Set Changes', 'boolean')
+           .param('include', 'Include', 'include_exclude_item')
 
         let(:params) { res.params }
 
@@ -36,8 +36,8 @@ describe 'bareos::director::fileset' do
         it { is_expected.to contain_file(filename).with_content(res.content) }
 
         it do
-          expect(subject).to contain_file(filename).
-            that_notifies('Service[bareos-dir]')
+          expect(subject).to contain_file(filename)
+            .that_notifies('Service[bareos-dir]')
         end
       end
 

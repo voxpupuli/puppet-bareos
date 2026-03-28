@@ -21,7 +21,7 @@ describe 'bareos::monitor::client' do
         let(:params) do
           {
             'password' => 'password',
-            'address' => 'localhost'
+            'address' => 'localhost',
           }
         end
 
@@ -34,12 +34,12 @@ describe 'bareos::monitor::client' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Client')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('address', 'Address', 'string').
-          param('enable_ssl', 'Enable Ssl', 'boolean').
-          param('fd_port', 'Fd Port', 'pint32').
-          param('password', 'Password', 'md5password')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('address', 'Address', 'string')
+           .param('enable_ssl', 'Enable Ssl', 'boolean')
+           .param('fd_port', 'Fd Port', 'pint32')
+           .param('password', 'Password', 'md5password')
 
         let(:params) { res.params }
 

@@ -18,17 +18,17 @@ describe 'bareos' do
           {
             repo_subscription: true,
             repo_username: 'test',
-            repo_password: 'test'
+            repo_password: 'test',
           }
         end
 
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_class('bareos::repository').
-            with_subscription(true).
-            with_username('test').
-            with_password('test')
+          expect(subject).to contain_class('bareos::repository')
+            .with_subscription(true)
+            .with_username('test')
+            .with_password('test')
         end
       end
     end

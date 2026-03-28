@@ -21,7 +21,7 @@ describe 'bareos::monitor::storage' do
         let(:params) do
           {
             'password' => 'password',
-            'address' => 'localhost'
+            'address' => 'localhost',
           }
         end
 
@@ -34,14 +34,14 @@ describe 'bareos::monitor::storage' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Storage')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('address', 'Address', 'string').
-          param('enable_ssl', 'Enable Ssl', 'boolean').
-          param('password', 'Password', 'md5password').
-          param('sd_address', 'Sd Address', 'string').
-          param('sd_password', 'Sd Password', 'md5password').
-          param('sd_port', 'Sd Port', 'pint32')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('address', 'Address', 'string')
+           .param('enable_ssl', 'Enable Ssl', 'boolean')
+           .param('password', 'Password', 'md5password')
+           .param('sd_address', 'Sd Address', 'string')
+           .param('sd_password', 'Sd Password', 'md5password')
+           .param('sd_port', 'Sd Port', 'pint32')
 
         let(:params) { res.params }
 

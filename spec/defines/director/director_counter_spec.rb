@@ -26,12 +26,12 @@ describe 'bareos::director::counter' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Counter')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('catalog', 'Catalog', 'res').
-          param('maximum', 'Maximum', 'pint32').
-          param('minimum', 'Minimum', 'int32').
-          param('wrap_counter', 'Wrap Counter', 'res')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('catalog', 'Catalog', 'res')
+           .param('maximum', 'Maximum', 'pint32')
+           .param('minimum', 'Minimum', 'int32')
+           .param('wrap_counter', 'Wrap Counter', 'res')
 
         let(:params) { res.params }
         # required resources
@@ -48,9 +48,9 @@ describe 'bareos::director::counter' do
         it { is_expected.to contain_file(filename).with_content(res.content) }
 
         it do
-          expect(subject).to contain_file(filename).
-            that_notifies('Service[bareos-dir]').
-            that_requires('Bareos::Director::Catalog[name]')
+          expect(subject).to contain_file(filename)
+            .that_notifies('Service[bareos-dir]')
+            .that_requires('Bareos::Director::Catalog[name]')
         end
       end
 

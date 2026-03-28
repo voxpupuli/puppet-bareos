@@ -20,17 +20,17 @@ describe 'bareos::repository' do
             {
               subscription: true,
               username: 'test',
-              password: 'test'
+              password: 'test',
             }
           end
 
           it { is_expected.to compile }
 
           it do
-            expect(subject).to contain_yumrepo('bareos').
-              with_username('test').
-              with_password('test').
-              with_baseurl(%r{^https:})
+            expect(subject).to contain_yumrepo('bareos')
+              .with_username('test')
+              .with_password('test')
+              .with_baseurl(%r{^https:})
           end
         end
 
@@ -44,8 +44,8 @@ describe 'bareos::repository' do
           it { is_expected.to compile }
 
           it do
-            expect(subject).to contain_yumrepo('bareos').
-              with_baseurl(%r{^http:})
+            expect(subject).to contain_yumrepo('bareos')
+              .with_baseurl(%r{^http:})
           end
         end
       when 'Debian'
@@ -59,8 +59,8 @@ describe 'bareos::repository' do
           it { is_expected.to compile }
 
           it do
-            expect(subject).to contain_apt__source('bareos').
-              with_location(%r{^http:})
+            expect(subject).to contain_apt__source('bareos')
+              .with_location(%r{^http:})
           end
         end
 
@@ -71,15 +71,15 @@ describe 'bareos::repository' do
               {
                 subscription: true,
                 username: 'test',
-                password: 'test'
+                password: 'test',
               }
             end
 
             it { is_expected.to compile }
 
             it do
-              expect(subject).to contain_apt__source('bareos').
-                with_location('https://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
+              expect(subject).to contain_apt__source('bareos')
+                .with_location('https://test:test@download.bareos.com/bareos/release/latest/xUbuntu_20.04')
             end
           end
         end

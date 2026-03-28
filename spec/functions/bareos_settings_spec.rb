@@ -140,8 +140,8 @@ describe 'bareos_settings' do
         val = {
           'ip' => {
             'addr' => '1.2.3.4',
-            'port' => '1205'
-          }
+            'port' => '1205',
+          },
         }
         result = "#{indent_default}Test = {
 #{indent_default}#{indent_default}ip = {
@@ -167,8 +167,8 @@ describe 'bareos_settings' do
           'My Directive' => 'content',
           'Array' => %w[a1 b2],
           'Second Hash' => {
-            'Res' => 'Val'
-          }
+            'Res' => 'Val',
+          },
         }
         result = "#{indent_default}Test {
 #{indent_default}#{indent_default}My Directive = content
@@ -430,7 +430,7 @@ describe 'bareos_settings' do
     it 'type is runscript' do
       val = [
         { 'Test A' => 'value' },
-        { 'Test B' => 'value' }
+        { 'Test B' => 'value' },
       ]
       result = "#{indent_default}Test {
 #{indent_default}#{indent_default}Test A = value

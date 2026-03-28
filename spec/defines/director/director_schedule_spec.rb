@@ -23,10 +23,10 @@ describe 'bareos::director::schedule' do
 
       context 'with all params set' do
         res = BareosResourceHelper.new('Schedule')
-        res.param('name', 'Name', 'name').
-          param('description', 'Description', 'string').
-          param('enabled', 'Enabled', 'boolean').
-          param('run', 'Run', 'schedule_run_command_list')
+        res.param('name', 'Name', 'name')
+           .param('description', 'Description', 'string')
+           .param('enabled', 'Enabled', 'boolean')
+           .param('run', 'Run', 'schedule_run_command_list')
 
         let(:params) { res.params }
 
@@ -34,8 +34,8 @@ describe 'bareos::director::schedule' do
         it { is_expected.to contain_file(filename).with_content(res.content) }
 
         it do
-          expect(subject).to contain_file(filename).
-            that_notifies('Service[bareos-dir]')
+          expect(subject).to contain_file(filename)
+            .that_notifies('Service[bareos-dir]')
         end
       end
 
