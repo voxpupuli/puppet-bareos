@@ -9,17 +9,3 @@
 # Offense count: 57
 RSpec/LeakyLocalVariable:
   Enabled: false
-
-# Offense count: 1
-RSpec/SpecFilePathSuffix:
-  Exclude:
-    - 'spec/defines/director/director_catalog.rb'
-
-# Offense count: 2
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowedReceivers.
-# AllowedReceivers: Thread.current
-Style/HashEachMethods:
-  Exclude:
-    - 'gen_puppet.rb'
-    - 'spec/settings_helper.rb'
