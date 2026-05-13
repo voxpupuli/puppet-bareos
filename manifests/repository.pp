@@ -36,9 +36,23 @@ class bareos::repository (
     $url = 'https://download.bareos.org/current/'
   }
 
+  # We claim to support Amazon Linux 2, which behaves like RHEL 7, support for which was dropped in
+  # BareOS 24.  If we encounter versions of Amazon Linux other than 2, where we can't just pretend
+  # it's RHEL 7, BareOS does not offer repository support, and we should fail out.
+  if $os == 'Amazon'
+  and (
+    versioncmp($facts['os']['release']['major'], '2') != 0
+    or versioncmp($release, '24') >= 0
+  ) {
+    fail('Operating system has no repository support!')
+  }
+
   $os = $facts['os']['name']
-  $osrelease = $facts['os']['release']['full']
-  $osmajrelease = $facts['os']['release']['major']
+  # If it's Amazon Linux 2 (which is the only version left at this point), pretend it's RHEL 7.
+  $osmajrelease = $os == 'Amazon' ? {
+    true    => '7',
+    default => $facts['os']['release']['major'],
+  }
 
   $yum_username = $username ? {
     undef   => 'absent',
@@ -51,32 +65,22 @@ class bareos::repository (
 
   case $os {
     /(?i:redhat|centos|rocky|almalinux|fedora|virtuozzolinux|amazon)/: {
-      case $os {
-        'RedHat', 'VirtuozzoLinux': {
-          $location = "${url}RHEL_${osmajrelease}"
+      if $subscription and versioncmp($release, '20') <= 0 {
+        case $os {
+          'RedHat', 'Amazon', 'VirtuozzoLinux': { $location = "${url}RHEL_${osmajrelease}" }
+          'Fedora':                             { $location = "${url}Fedora_${osmajrelease}" }
+          default:                              { $location = "${url}CentOS_${osmajrelease}" }
         }
-        'Centos', 'Rocky', 'AlmaLinux': {
-          if versioncmp($release, '21') >= 0 and versioncmp($osmajrelease, '8') >= 0 {
-            $location = "${url}EL_${osmajrelease}"
-          } else {
-            $location = "${url}CentOS_${osmajrelease}"
-          }
+      } elsif $subscription and versioncmp($release, '21') <= 0 {
+        case $os {
+          'Fedora': { $location = "${url}Fedora_${osmajrelease}" }
+          'Amazon': { $location = "${url}RHEL_7" }
+          default:  { $location = "${url}EL_${osmajrelease}" }
         }
-        'Fedora': {
-          $location = "${url}Fedora_${osmajrelease}"
-        }
-        'Amazon': {
-          case $osmajrelease {
-            '2': {
-              $location = "${url}RHEL_7"
-            }
-            default: {
-              fail('Operatingsystem is not supported by this module')
-            }
-          }
-        }
-        default: {
-          fail('Operatingsystem is not supported by this module')
+      } else {
+        case $os {
+          'Fedora': { $location = "${url}Fedora_${osmajrelease}" }
+          default:  { $location = "${url}EL_${osmajrelease}" }
         }
       }
       yumrepo { 'bareos':
@@ -98,7 +102,7 @@ class bareos::repository (
         }
       }
       if $os  == 'Ubuntu' {
-        $location = "${url}xUbuntu_${osrelease}"
+        $location = "${url}xUbuntu_${osmajrelease}"
       } else {
         $location = "${url}Debian_${osmajrelease}"
       }
@@ -128,8 +132,6 @@ class bareos::repository (
       Apt::Source['bareos'] -> Package <| provider == 'apt' |>
     }
     'windows': {}
-    default: {
-      fail('Operatingsystem is not supported by this module')
-    }
+    default: { fail('Operatingsystem is not supported by this module') }
   }
 }
