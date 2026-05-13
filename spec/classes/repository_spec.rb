@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 describe 'bareos::repository' do
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let :facts do
-        facts
+        os_facts
       end
 
       context 'with default values for all parameters' do
@@ -13,7 +13,7 @@ describe 'bareos::repository' do
         it { is_expected.to contain_class('bareos::repository') }
       end
 
-      case facts[:osfamily]
+      case os_facts[:os]['family']
       when 'RedHat'
         context 'with subscription: true, username: "test", password: "test"' do
           let(:params) do
@@ -58,30 +58,33 @@ describe 'bareos::repository' do
 
           it { is_expected.to compile }
 
-          it do
+          it 'contains the expected source location' do
+            os_xname = facts[:os]['name'] == 'Ubuntu' ? 'xUbuntu' : facts[:os]['name']
+            maj_rel = facts[:os]['release']['major']
+
             expect(subject).to contain_apt__source('bareos')
-              .with_location(%r{^http:})
+              .with_location(["http://download.bareos.org/current/#{os_xname}_#{maj_rel}"])
           end
         end
 
-        case facts[:operatingsystemmajrelease]
-        when '20'
-          context 'with subscription: true, username: "test", password: "test", apt_key_content: "test"' do
-            let(:params) do
-              {
-                subscription: true,
-                username: 'test',
-                password: 'test',
-                apt_key_content: 'test',
-              }
-            end
+        context 'with subscription: true, username: "test", password: "test", apt_key_content: "test"' do
+          let(:params) do
+            {
+              subscription: true,
+              username: 'test',
+              password: 'test',
+              apt_key_content: 'test',
+            }
+          end
 
-            it { is_expected.to compile }
+          it { is_expected.to compile }
 
-            it do
-              expect(subject).to contain_apt__source('bareos')
-                .with_location('https://download.bareos.org/current/xUbuntu_24.04')
-            end
+          it 'contains the expected source location' do
+            os_xname = facts[:os]['name'] == 'Ubuntu' ? 'xUbuntu' : facts[:os]['name']
+            maj_rel = facts[:os]['release']['major']
+
+            expect(subject).to contain_apt__source('bareos')
+              .with_location(["https://download.bareos.com/bareos/release/25/#{os_xname}_#{maj_rel}"])
           end
         end
       end
