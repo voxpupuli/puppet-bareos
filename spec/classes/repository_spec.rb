@@ -10,11 +10,19 @@ describe 'bareos::repository' do
 
       context 'with default values for all parameters' do
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::repository') }
       end
 
       case os_facts[:os]['family']
       when 'RedHat'
+        context 'with subscription unset,' do
+          let(:params) { {} }
+
+          it 'contains the community baseurl' do
+            is_expected.to contain_yumrepo('bareos')
+              .with_baseurl(%r{^https://download\.bareos\.org})
+          end
+        end
+
         context 'with subscription: true, username: "test", password: "test"' do
           let(:params) do
             {
@@ -24,46 +32,27 @@ describe 'bareos::repository' do
             }
           end
 
-          it { is_expected.to compile }
+          it { is_expected.to compile.with_all_deps }
 
-          it do
-            expect(subject).to contain_yumrepo('bareos')
+          it 'contains the subscriber baseurl and credentials' do
+            is_expected.to contain_yumrepo('bareos')
               .with_username('test')
               .with_password('test')
-              .with_baseurl(%r{^https:})
-          end
-        end
-
-        context 'with https: false' do
-          let(:params) do
-            {
-              https: false,
-            }
-          end
-
-          it { is_expected.to compile }
-
-          it do
-            expect(subject).to contain_yumrepo('bareos')
-              .with_baseurl(%r{^http:})
+              .with_baseurl(%r{^https://download\.bareos\.com})
           end
         end
       when 'Debian'
-        context 'with https: false' do
-          let(:params) do
-            {
-              https: false,
-            }
-          end
+        context 'with subscription unset,' do
+          let(:params) { {} }
 
-          it { is_expected.to compile }
-
-          it 'contains the expected source location' do
-            os_xname = facts[:os]['name'] == 'Ubuntu' ? 'xUbuntu' : facts[:os]['name']
+          it 'contains the community source location, but no auth config' do
+            os_xname = (facts[:os]['name'] == 'Ubuntu') ? 'xUbuntu' : facts[:os]['name']
             maj_rel = facts[:os]['release']['major']
 
-            expect(subject).to contain_apt__source('bareos')
-              .with_location(["http://download.bareos.org/current/#{os_xname}_#{maj_rel}"])
+            is_expected.not_to contain_apt__auth('download.bareos.org')
+            is_expected.to contain_apt__keyring('bareos-keyring.gpg')
+            is_expected.to contain_apt__source('bareos')
+              .with_location(["https://download.bareos.org/current/#{os_xname}_#{maj_rel}"])
           end
         end
 
@@ -77,13 +66,15 @@ describe 'bareos::repository' do
             }
           end
 
-          it { is_expected.to compile }
+          it { is_expected.to compile.with_all_deps }
 
-          it 'contains the expected source location' do
-            os_xname = facts[:os]['name'] == 'Ubuntu' ? 'xUbuntu' : facts[:os]['name']
+          it 'contains the subscriber source location and credentials' do
+            os_xname = (facts[:os]['name'] == 'Ubuntu') ? 'xUbuntu' : facts[:os]['name']
             maj_rel = facts[:os]['release']['major']
 
-            expect(subject).to contain_apt__source('bareos')
+            is_expected.to contain_apt__auth('download.bareos.com')
+            is_expected.to contain_apt__keyring('bareos-keyring.gpg')
+            is_expected.to contain_apt__source('bareos')
               .with_location(["https://download.bareos.com/bareos/release/25/#{os_xname}_#{maj_rel}"])
           end
         end

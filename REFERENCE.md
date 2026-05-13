@@ -2249,7 +2249,6 @@ The following parameters are available in the `bareos::repository` class:
 * [`subscription`](#-bareos--repository--subscription)
 * [`username`](#-bareos--repository--username)
 * [`password`](#-bareos--repository--password)
-* [`https`](#-bareos--repository--https)
 * [`apt_key_content`](#-bareos--repository--apt_key_content)
 * [`apt_key_source`](#-bareos--repository--apt_key_source)
 
@@ -2273,7 +2272,7 @@ Default value: `false`
 
 Data type: `Optional[String]`
 
-The major bareos release version which should be used
+The username is required for accessing subscription content
 
 Default value: `undef`
 
@@ -2281,17 +2280,9 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-The major bareos release version which should be used
+The password is required for accessing subscription content
 
 Default value: `undef`
-
-##### <a name="-bareos--repository--https"></a>`https`
-
-Data type: `Boolean`
-
-Whether https should be used in repo URL
-
-Default value: `true`
 
 ##### <a name="-bareos--repository--apt_key_content"></a>`apt_key_content`
 

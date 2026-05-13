@@ -9,8 +9,6 @@
 #   The username is required for accessing subscription content
 # @param password
 #   The password is required for accessing subscription content
-# @param https
-#   Whether https should be used in repo URL
 # @param apt_key_content
 #   Required content (or use apt_key_source) for the keyring as it cannot be downloaded here
 # @param apt_key_source
@@ -21,15 +19,9 @@ class bareos::repository (
   Boolean                              $subscription        = false,
   Optional[String]                     $username            = undef,
   Optional[String]                     $password            = undef,
-  Boolean                              $https               = true,
   Optional[String]                     $apt_key_content     = undef,
   Optional[String]                     $apt_key_source      = undef,
 ) {
-  if $https {
-    $scheme = 'https://'
-  } else {
-    $scheme = 'http://'
-  }
   if $subscription {
     if empty($username) or empty($password) {
       fail('For Bareos subscription repos both username and password are required.')
@@ -39,9 +31,9 @@ class bareos::repository (
     }
     # note the .com
     $dl_hostname = 'download.bareos.com'
-    $address = "${dl_hostname}/bareos/release/${release}/"
+    $url = "https://${dl_hostname}/bareos/release/${release}/"
   } else {
-    $address = 'download.bareos.org/current/'
+    $url = 'https://download.bareos.org/current/'
   }
 
   $os = $facts['os']['name']
@@ -59,7 +51,6 @@ class bareos::repository (
 
   case $os {
     /(?i:redhat|centos|rocky|almalinux|fedora|virtuozzolinux|amazon)/: {
-      $url = "${scheme}${address}"
       case $os {
         'RedHat', 'VirtuozzoLinux': {
           $location = "${url}RHEL_${osmajrelease}"
@@ -100,7 +91,6 @@ class bareos::repository (
       }
     }
     /(?i:debian|ubuntu)/: {
-      $url = "${scheme}${address}"
       if $subscription {
         apt::auth { $dl_hostname:
           login    => $username,
