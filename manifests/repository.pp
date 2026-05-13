@@ -129,7 +129,8 @@ class bareos::repository (
         source_format => 'sources',
         require       => Apt::Keyring[$key_ring_fn],
       }
-      Apt::Source['bareos'] -> Package <| provider == 'apt' |>
+      Apt::Source['bareos'] -> Package <| provider == 'apt' and tag == 'bareos' |>
+      Class['Apt::Update']  -> Package <| provider == 'apt' and tag == 'bareos' |>
     }
     'windows': {}
     default: { fail('Operatingsystem is not supported by this module') }
