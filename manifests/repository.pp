@@ -6,9 +6,9 @@
 # @param subscription
 #   Activate the (paid) subscription repo. Otherwise the opensource repos will be selected
 # @param username
-#   The major bareos release version which should be used
+#   The username is required for accessing subscription content
 # @param password
-#   The major bareos release version which should be used
+#   The password is required for accessing subscription content
 # @param https
 #   Whether https should be used in repo URL
 # @param apt_key_content
