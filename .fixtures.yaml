@@ -2,7 +2,9 @@ fixtures:
   repositories:
     concat: https://github.com/puppetlabs/puppetlabs-concat.git
     stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
-    apt: https://github.com/puppetlabs/puppetlabs-apt.git
+    apt:
+      repo: https://github.com/puppetlabs/puppetlabs-apt.git
+      ref: 'v11.1.0'
     yumrepo_core:
       repo: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
-      puppet_version: ">= 6.0.0"
+      puppet_version: ">= 8.0.0"
