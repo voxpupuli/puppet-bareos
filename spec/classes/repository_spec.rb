@@ -2,17 +2,17 @@
 
 require 'spec_helper'
 describe 'bareos::repository' do
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let :facts do
-        facts
+        os_facts
       end
 
       context 'with default values for all parameters' do
         it { is_expected.to compile.with_all_deps }
       end
 
-      case facts[:os]['family']
+      case os_facts[:os]['family']
       when 'RedHat'
         context 'with subscription unset,' do
           let(:params) { {} }

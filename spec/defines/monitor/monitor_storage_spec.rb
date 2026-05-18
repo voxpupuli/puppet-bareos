@@ -7,10 +7,10 @@ describe 'bareos::monitor::storage' do
 
   filename = '/etc/bareos/tray-monitor.d/storage/name.conf'
 
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let :facts do
-        facts
+        os_facts
       end
 
       context 'with default values for all parameters will fail' do

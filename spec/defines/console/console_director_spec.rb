@@ -8,10 +8,10 @@ describe 'bareos::console::director' do
   end
   let(:title) { 'name' }
 
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let :facts do
-        facts
+        os_facts
       end
 
       filename = '/etc/bareos/bconsole.d/director/name.conf'

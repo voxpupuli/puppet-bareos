@@ -5,10 +5,10 @@ require 'spec_helper'
 describe 'bareos::monitor::director' do
   let(:title) { 'name' }
 
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let :facts do
-        facts
+        os_facts
       end
 
       filename = '/etc/bareos/tray-monitor.d/director/name.conf'

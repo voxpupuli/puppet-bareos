@@ -5,10 +5,10 @@ require 'spec_helper'
 describe 'bareos::client::client' do
   filename = '/etc/bareos/bareos-fd.d/client/bareos-fd.conf'
 
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let :facts do
-        facts
+        os_facts
       end
 
       context 'with default values for all parameters' do

@@ -8,10 +8,10 @@ describe 'bareos::director::job' do
   end
   let(:title) { 'name' }
 
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let :facts do
-        facts
+        os_facts
       end
 
       filename = '/etc/bareos/bareos-dir.d/job/name.conf'
