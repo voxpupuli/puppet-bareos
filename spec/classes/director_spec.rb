@@ -30,7 +30,7 @@ describe 'bareos::director' do
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__director__catalog('test')
+          is_expected.to contain_bareos__director__catalog('test')
             .with_db_driver('postgresql')
             .with_db_name('test')
         end

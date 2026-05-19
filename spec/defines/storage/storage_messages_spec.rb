@@ -47,7 +47,7 @@ describe 'bareos::storage::messages' do
         it { is_expected.to contain_file(filename).with_content(res.content) }
 
         it do
-          expect(subject).to contain_file(filename)
+          is_expected.to contain_file(filename)
             .that_notifies('Service[bareos-sd]')
         end
       end

@@ -26,7 +26,7 @@ describe 'bareos' do
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_class('bareos::repository')
+          is_expected.to contain_class('bareos::repository')
             .with_subscription(true)
             .with_username('test')
             .with_password('test')

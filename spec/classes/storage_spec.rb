@@ -35,11 +35,11 @@ describe 'bareos::storage' do
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__autochanger('test')
+          is_expected.to contain_bareos__storage__autochanger('test')
             .with_changer_command('foo')
             .with_changer_device('/dev/foo')
             .with_device('dev01')
-          expect(subject).to contain_bareos__storage__device('dev01')
+          is_expected.to contain_bareos__storage__device('dev01')
             .with_archive_device('/mnt/test')
             .with_media_type('file')
         end
@@ -59,7 +59,7 @@ describe 'bareos::storage' do
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__director('test')
+          is_expected.to contain_bareos__storage__director('test')
             .with_password('foobar')
         end
       end
@@ -78,7 +78,7 @@ describe 'bareos::storage' do
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__messages('test')
+          is_expected.to contain_bareos__storage__messages('test')
             .with_description('test')
         end
       end
@@ -98,7 +98,7 @@ describe 'bareos::storage' do
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__storage__ndmp('test')
+          is_expected.to contain_bareos__storage__ndmp('test')
             .with_username('test')
             .with_password('foobar')
         end

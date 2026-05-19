@@ -28,7 +28,7 @@ describe 'bareos::webui' do
         it { is_expected.to compile }
 
         it do
-          expect(subject).to contain_bareos__webui__director('test')
+          is_expected.to contain_bareos__webui__director('test')
             .with_dir_address('example.org')
             .with_catalog('MyCatalog')
         end
