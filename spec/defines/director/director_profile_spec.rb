@@ -22,24 +22,28 @@ describe 'bareos::director::profile' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Profile')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('catalog_acl', 'Catalog ACL', 'acl')
-           .param('client_acl', 'Client ACL', 'acl')
-           .param('command_acl', 'Command ACL', 'acl')
-           .param('file_set_acl', 'File Set ACL', 'acl')
-           .param('job_acl', 'Job ACL', 'acl')
-           .param('plugin_options_acl', 'Plugin Options ACL', 'acl')
-           .param('pool_acl', 'Pool ACL', 'acl')
-           .param('schedule_acl', 'Schedule ACL', 'acl')
-           .param('storage_acl', 'Storage ACL', 'acl')
-           .param('where_acl', 'Where ACL', 'acl')
+        def res_helper
+          BareosResourceHelper
+            .new('Profile')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('catalog_acl', 'Catalog ACL', 'acl')
+            .param('client_acl', 'Client ACL', 'acl')
+            .param('command_acl', 'Command ACL', 'acl')
+            .param('file_set_acl', 'File Set ACL', 'acl')
+            .param('job_acl', 'Job ACL', 'acl')
+            .param('plugin_options_acl', 'Plugin Options ACL', 'acl')
+            .param('pool_acl', 'Pool ACL', 'acl')
+            .param('schedule_acl', 'Schedule ACL', 'acl')
+            .param('storage_acl', 'Storage ACL', 'acl')
+            .param('where_acl', 'Where ACL', 'acl')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
 
         it do
           is_expected.to contain_file(filename)

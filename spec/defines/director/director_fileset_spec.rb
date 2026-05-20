@@ -22,18 +22,22 @@ describe 'bareos::director::fileset' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('FileSet')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('enable_vss', 'Enable VSS', 'boolean')
-           .param('exclude', 'Exclude', 'include_exclude_item')
-           .param('ignore_file_set_changes', 'Ignore File Set Changes', 'boolean')
-           .param('include', 'Include', 'include_exclude_item')
+        def res_helper
+          BareosResourceHelper
+            .new('FileSet')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('enable_vss', 'Enable VSS', 'boolean')
+            .param('exclude', 'Exclude', 'include_exclude_item')
+            .param('ignore_file_set_changes', 'Ignore File Set Changes', 'boolean')
+            .param('include', 'Include', 'include_exclude_item')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
 
         it do
           is_expected.to contain_file(filename)

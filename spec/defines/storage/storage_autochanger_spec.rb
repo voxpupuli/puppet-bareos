@@ -40,14 +40,18 @@ describe 'bareos::storage::autochanger' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Autochanger')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('changer_command', 'Changer Command', 'strname')
-           .param('changer_device', 'Changer Device', 'strname')
-           .param('device', 'Device', 'resource_list')
+        def res_helper
+          BareosResourceHelper
+            .new('Autochanger')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('changer_command', 'Changer Command', 'strname')
+            .param('changer_device', 'Changer Device', 'strname')
+            .param('device', 'Device', 'resource_list')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
         # required resources
         let(:pre_condition) { <<~PUPPETCODE }
           bareos::storage::device { "name":
@@ -57,7 +61,7 @@ describe 'bareos::storage::autochanger' do
         PUPPETCODE
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
 
         it do
           is_expected.to contain_file(filename)

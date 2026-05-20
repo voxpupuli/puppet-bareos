@@ -32,17 +32,21 @@ describe 'bareos::monitor::director' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Director')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('address', 'Address', 'string')
-           .param('dir_port', 'Dir Port', 'pint32')
-           .param('enable_ssl', 'Enable Ssl', 'boolean')
+        def res_helper
+          BareosResourceHelper
+            .new('Director')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('address', 'Address', 'string')
+            .param('dir_port', 'Dir Port', 'pint32')
+            .param('enable_ssl', 'Enable Ssl', 'boolean')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
       end
 
       context 'with ensure absent' do

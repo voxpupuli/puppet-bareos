@@ -22,15 +22,19 @@ describe 'bareos::director::counter' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Counter')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('catalog', 'Catalog', 'res')
-           .param('maximum', 'Maximum', 'pint32')
-           .param('minimum', 'Minimum', 'int32')
-           .param('wrap_counter', 'Wrap Counter', 'res')
+        def res_helper
+          BareosResourceHelper
+            .new('Counter')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('catalog', 'Catalog', 'res')
+            .param('maximum', 'Maximum', 'pint32')
+            .param('minimum', 'Minimum', 'int32')
+            .param('wrap_counter', 'Wrap Counter', 'res')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
         # required resources
         let(:pre_condition) { <<~PUPPETCODE }
           bareos::director::catalog { "name":
@@ -40,7 +44,7 @@ describe 'bareos::director::counter' do
         PUPPETCODE
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
 
         it do
           is_expected.to contain_file(filename)

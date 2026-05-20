@@ -28,32 +28,36 @@ describe 'bareos::console::console' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Console')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('director', 'Director', 'string')
-           .param('heartbeat_interval', 'Heartbeat Interval', 'time')
-           .param('history_file', 'History File', 'directory')
-           .param('history_length', 'History Length', 'pint32')
-           .param('password', 'Password', 'md5password')
-           .param('rc_file', 'Rc File', 'directory')
-           .param('tls_allowed_cn', 'Tls Allowed Cn', 'string_list')
-           .param('tls_authenticate', 'Tls Authenticate', 'boolean')
-           .param('tls_ca_certificate_dir', 'Tls Ca Certificate Dir', 'directory')
-           .param('tls_ca_certificate_file', 'Tls Ca Certificate File', 'directory')
-           .param('tls_certificate', 'Tls Certificate', 'directory')
-           .param('tls_certificate_revocation_list', 'Tls Certificate Revocation List', 'directory')
-           .param('tls_cipher_list', 'Tls Cipher List', 'string')
-           .param('tls_dh_file', 'Tls Dh File', 'directory')
-           .param('tls_enable', 'Tls Enable', 'boolean')
-           .param('tls_key', 'Tls Key', 'directory')
-           .param('tls_require', 'Tls Require', 'boolean')
-           .param('tls_verify_peer', 'Tls Verify Peer', 'boolean')
+        def res_helper
+          BareosResourceHelper
+            .new('Console')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('director', 'Director', 'string')
+            .param('heartbeat_interval', 'Heartbeat Interval', 'time')
+            .param('history_file', 'History File', 'directory')
+            .param('history_length', 'History Length', 'pint32')
+            .param('password', 'Password', 'md5password')
+            .param('rc_file', 'Rc File', 'directory')
+            .param('tls_allowed_cn', 'Tls Allowed Cn', 'string_list')
+            .param('tls_authenticate', 'Tls Authenticate', 'boolean')
+            .param('tls_ca_certificate_dir', 'Tls Ca Certificate Dir', 'directory')
+            .param('tls_ca_certificate_file', 'Tls Ca Certificate File', 'directory')
+            .param('tls_certificate', 'Tls Certificate', 'directory')
+            .param('tls_certificate_revocation_list', 'Tls Certificate Revocation List', 'directory')
+            .param('tls_cipher_list', 'Tls Cipher List', 'string')
+            .param('tls_dh_file', 'Tls Dh File', 'directory')
+            .param('tls_enable', 'Tls Enable', 'boolean')
+            .param('tls_key', 'Tls Key', 'directory')
+            .param('tls_require', 'Tls Require', 'boolean')
+            .param('tls_verify_peer', 'Tls Verify Peer', 'boolean')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
       end
 
       context 'with ensure absent' do

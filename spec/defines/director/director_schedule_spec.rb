@@ -22,16 +22,20 @@ describe 'bareos::director::schedule' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Schedule')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('enabled', 'Enabled', 'boolean')
-           .param('run', 'Run', 'schedule_run_command_list')
+        def res_helper
+          BareosResourceHelper
+            .new('Schedule')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('enabled', 'Enabled', 'boolean')
+            .param('run', 'Run', 'schedule_run_command_list')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
 
         it do
           is_expected.to contain_file(filename)

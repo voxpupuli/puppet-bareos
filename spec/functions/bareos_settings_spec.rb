@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-indent_default = '  '
 
 describe 'bareos_settings' do
+  let(:indent_default) { '  ' }
+
   context 'type is an integer' do
     %w[int32 pint16 pint32 port max_blocksize].each do |type|
       it 'runs with compatible values' do

@@ -32,20 +32,24 @@ describe 'bareos::monitor::monitor' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Monitor')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('dir_connect_timeout', 'Dir Connect Timeout', 'time')
-           .param('fd_connect_timeout', 'Fd Connect Timeout', 'time')
-           .param('password', 'Password', 'md5password')
-           .param('refresh_interval', 'Refresh Interval', 'time')
-           .param('require_ssl', 'Require Ssl', 'boolean')
-           .param('sd_connect_timeout', 'Sd Connect Timeout', 'time')
+        def res_helper
+          BareosResourceHelper
+            .new('Monitor')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('dir_connect_timeout', 'Dir Connect Timeout', 'time')
+            .param('fd_connect_timeout', 'Fd Connect Timeout', 'time')
+            .param('password', 'Password', 'md5password')
+            .param('refresh_interval', 'Refresh Interval', 'time')
+            .param('require_ssl', 'Require Ssl', 'boolean')
+            .param('sd_connect_timeout', 'Sd Connect Timeout', 'time')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
       end
 
       context 'with ensure absent' do

@@ -33,18 +33,22 @@ describe 'bareos::storage::ndmp' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Ndmp')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('auth_type', 'Auth Type', 'auth_type')
-           .param('log_level', 'Log Level', 'pint32')
-           .param('password', 'Password', 'autopassword')
-           .param('username', 'Username', 'string')
+        def res_helper
+          BareosResourceHelper
+            .new('Ndmp')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('auth_type', 'Auth Type', 'auth_type')
+            .param('log_level', 'Log Level', 'pint32')
+            .param('password', 'Password', 'autopassword')
+            .param('username', 'Username', 'string')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
 
         it do
           is_expected.to contain_file(filename)

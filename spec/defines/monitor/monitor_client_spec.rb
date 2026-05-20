@@ -33,18 +33,22 @@ describe 'bareos::monitor::client' do
       end
 
       context 'with all params set' do
-        res = BareosResourceHelper.new('Client')
-        res.param('name', 'Name', 'name')
-           .param('description', 'Description', 'string')
-           .param('address', 'Address', 'string')
-           .param('enable_ssl', 'Enable Ssl', 'boolean')
-           .param('fd_port', 'Fd Port', 'pint32')
-           .param('password', 'Password', 'md5password')
+        def res_helper
+          BareosResourceHelper
+            .new('Client')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('address', 'Address', 'string')
+            .param('enable_ssl', 'Enable Ssl', 'boolean')
+            .param('fd_port', 'Fd Port', 'pint32')
+            .param('password', 'Password', 'md5password')
+        end
 
-        let(:params) { res.params }
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(res.content) }
+        it { is_expected.to contain_file(filename).with_content(content) }
       end
 
       context 'with ensure absent' do
