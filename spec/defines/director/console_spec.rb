@@ -24,11 +24,14 @@ describe 'bareos::director::console' do
           }
         end
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::director') }
-        it { is_expected.to contain_file(filename).with_content(%r{^Console \{$}) }
-        it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
-        it { is_expected.to contain_file(filename).with_tag(%w[bareos bareos_director]) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::director')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Console \{$})
+            .with_content(%r{Name = "name"$})
+            .with_tag(%w[bareos bareos_director])
+        end
       end
 
       context 'with all params set' do
@@ -71,11 +74,10 @@ describe 'bareos::director::console' do
           bareos::director::profile { "name": }
         PUPPETCODE
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(content) }
-
         it do
+          is_expected.to compile.with_all_deps
           is_expected.to contain_file(filename)
+            .with_content(content)
             .that_notifies('Service[bareos-dir]')
             .that_requires('Bareos::Director::Profile[name]')
         end

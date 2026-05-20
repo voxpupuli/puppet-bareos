@@ -25,11 +25,14 @@ describe 'bareos::storage::device' do
           }
         end
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::storage') }
-        it { is_expected.to contain_file(filename).with_content(%r{^Device \{$}) }
-        it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
-        it { is_expected.to contain_file(filename).with_tag(%w[bareos bareos_storage]) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::storage')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Device \{$})
+            .with_content(%r{Name = "name"$})
+            .with_tag(%w[bareos bareos_storage])
+        end
       end
 
       context 'with all params set' do
@@ -104,11 +107,10 @@ describe 'bareos::storage::device' do
         let(:params) { res_helper.params }
         let(:content) { res_helper.content }
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(content) }
-
         it do
+          is_expected.to compile.with_all_deps
           is_expected.to contain_file(filename)
+            .with_content(content)
             .that_notifies('Service[bareos-sd]')
         end
       end

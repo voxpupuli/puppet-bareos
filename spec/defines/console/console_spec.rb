@@ -20,11 +20,14 @@ describe 'bareos::console::console' do
       context 'with required values' do
         let(:params) { { 'password' => 'password' } }
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::console') }
-        it { is_expected.to contain_file(filename).with_content(%r{^Console \{$}) }
-        it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
-        it { is_expected.to contain_file(filename).with_tag(%w[bareos bareos_console]) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::console')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Console \{$})
+            .with_content(%r{Name = "name"$})
+            .with_tag(%w[bareos bareos_console])
+        end
       end
 
       context 'with all params set' do
@@ -56,8 +59,11 @@ describe 'bareos::console::console' do
         let(:params) { res_helper.params }
         let(:content) { res_helper.content }
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(content) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_file(filename)
+            .with_content(content)
+        end
       end
 
       context 'with ensure absent' do

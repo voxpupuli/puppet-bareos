@@ -14,11 +14,14 @@ describe 'bareos::director::messages' do
       let(:facts) { os_facts }
 
       context 'with default values for all parameters' do
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::director') }
-        it { is_expected.to contain_file(filename).with_content(%r{^Messages \{$}) }
-        it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
-        it { is_expected.to contain_file(filename).with_tag(%w[bareos bareos_director]) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::director')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Messages \{$})
+            .with_content(%r{Name = "name"$})
+            .with_tag(%w[bareos bareos_director])
+        end
       end
 
       context 'with all params set' do
@@ -47,11 +50,10 @@ describe 'bareos::director::messages' do
         let(:params) { res_helper.params }
         let(:content) { res_helper.content }
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(content) }
-
         it do
+          is_expected.to compile.with_all_deps
           is_expected.to contain_file(filename)
+            .with_content(content)
             .that_notifies('Service[bareos-dir]')
         end
       end

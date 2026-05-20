@@ -14,11 +14,14 @@ describe 'bareos::director::counter' do
       let(:facts) { os_facts }
 
       context 'with default values for all parameters' do
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::director') }
-        it { is_expected.to contain_file(filename).with_content(%r{^Counter \{$}) }
-        it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
-        it { is_expected.to contain_file(filename).with_tag(%w[bareos bareos_director]) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::director')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Counter \{$})
+            .with_content(%r{Name = "name"$})
+            .with_tag(%w[bareos bareos_director])
+        end
       end
 
       context 'with all params set' do
@@ -43,11 +46,10 @@ describe 'bareos::director::counter' do
           }
         PUPPETCODE
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(content) }
-
         it do
+          is_expected.to compile.with_all_deps
           is_expected.to contain_file(filename)
+            .with_content(content)
             .that_notifies('Service[bareos-dir]')
             .that_requires('Bareos::Director::Catalog[name]')
         end

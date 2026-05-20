@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+
 describe 'bareos::repository' do
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
@@ -21,7 +22,7 @@ describe 'bareos::repository' do
           end
         end
 
-        context 'with subscription: true, username: "test", password: "test"' do
+        context 'with a subscription repository configured,' do
           let(:params) do
             {
               subscription: true,
@@ -30,9 +31,8 @@ describe 'bareos::repository' do
             }
           end
 
-          it { is_expected.to compile.with_all_deps }
-
           it 'contains the subscriber baseurl and credentials' do
+            is_expected.to compile.with_all_deps
             is_expected.to contain_yumrepo('bareos')
               .with_username('test')
               .with_password('test')
@@ -54,7 +54,7 @@ describe 'bareos::repository' do
           end
         end
 
-        context 'with subscription: true, username: "test", password: "test", apt_key_content: "test"' do
+        context 'with a subscription repository configured,' do
           let(:params) do
             {
               subscription: true,
@@ -64,12 +64,11 @@ describe 'bareos::repository' do
             }
           end
 
-          it { is_expected.to compile.with_all_deps }
-
           it 'contains the subscriber source location and credentials' do
             os_xname = (facts[:os]['name'] == 'Ubuntu') ? 'xUbuntu' : facts[:os]['name']
             maj_rel = facts[:os]['release']['major']
 
+            is_expected.to compile.with_all_deps
             is_expected.to contain_apt__auth('download.bareos.com')
             is_expected.to contain_apt__keyring('bareos-keyring.gpg')
             is_expected.to contain_apt__source('bareos')

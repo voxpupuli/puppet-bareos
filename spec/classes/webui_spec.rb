@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+
 describe 'bareos::webui' do
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
 
       context 'with default values for all parameters' do
-        it { is_expected.to compile }
-        it { is_expected.to contain_class('bareos') }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos')
+        end
       end
 
-      context 'with directors => { test: { dir_address: "example.org", catalog: "MyCatalog" }}}' do
+      context 'with a director configured,' do
         let(:params) do
           {
             directors: {
@@ -23,9 +26,8 @@ describe 'bareos::webui' do
           }
         end
 
-        it { is_expected.to compile }
-
         it do
+          is_expected.to compile.with_all_deps
           is_expected.to contain_bareos__webui__director('test')
             .with_dir_address('example.org')
             .with_catalog('MyCatalog')

@@ -24,11 +24,14 @@ describe 'bareos::monitor::monitor' do
           }
         end
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::monitor') }
-        it { is_expected.to contain_file(filename).with_content(%r{^Monitor \{$}) }
-        it { is_expected.to contain_file(filename).with_content(%r{Name = "name"$}) }
-        it { is_expected.to contain_file(filename).with_tag(%w[bareos bareos_monitor]) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::monitor')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Monitor \{$})
+            .with_content(%r{Name = "name"$})
+            .with_tag(%w[bareos bareos_monitor])
+        end
       end
 
       context 'with all params set' do
@@ -48,8 +51,11 @@ describe 'bareos::monitor::monitor' do
         let(:params) { res_helper.params }
         let(:content) { res_helper.content }
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(content) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_file(filename)
+            .with_content(content)
+        end
       end
 
       context 'with ensure absent' do

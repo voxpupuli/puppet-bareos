@@ -12,11 +12,14 @@ describe 'bareos::client::client' do
       let(:facts) { os_facts }
 
       context 'with default values for all parameters' do
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('bareos::client') }
-        it { is_expected.to contain_file(filename).with_content(%r{^Client \{$}) }
-        it { is_expected.to contain_file(filename).with_content(%r{Name = "bareos-fd"$}) }
-        it { is_expected.to contain_file(filename).with_tag(%w[bareos bareos_client]) }
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::client')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Client \{$})
+            .with_content(%r{Name = "bareos-fd"$})
+            .with_tag(%w[bareos bareos_client])
+        end
       end
 
       context 'with all params set' do
@@ -78,11 +81,10 @@ describe 'bareos::client::client' do
           bareos::client::messages { "name":}
         PUPPETCODE
 
-        it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file(filename).with_content(content) }
-
         it do
+          is_expected.to compile.with_all_deps
           is_expected.to contain_file(filename)
+            .with_content(content)
             .that_notifies('Service[bareos-fd]')
             .that_requires('Bareos::Client::Messages[name]')
         end
