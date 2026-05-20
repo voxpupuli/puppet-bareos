@@ -111,8 +111,7 @@ describe 'bareos::director::jobdefs' do
 
         let(:params) { res.params }
         # required resources
-        let(:pre_condition) do
-          '
+        let(:pre_condition) { <<~PUPPETCODE }
           bareos::director::pool { "name": }
           bareos::director::catalog { "name":
             db_driver => "postgresql",
@@ -137,8 +136,7 @@ describe 'bareos::director::jobdefs' do
             type     => "backup",
           }
           bareos::director::jobdefs { "name2": }
-          '
-        end
+        PUPPETCODE
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_file(filename).with_content(res.content) }

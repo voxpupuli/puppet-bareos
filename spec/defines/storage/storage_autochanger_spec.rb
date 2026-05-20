@@ -28,14 +28,12 @@ describe 'bareos::storage::autochanger' do
             'device' => 'name',
           }
         end
-        let(:pre_condition) do
-          '
+        let(:pre_condition) { <<~PUPPETCODE }
           bareos::storage::device { "name":
             archive_device => "/dev/tape",
             media_type     => "DLT7000"
           }
-          '
-        end
+        PUPPETCODE
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('bareos::storage') }
@@ -54,14 +52,12 @@ describe 'bareos::storage::autochanger' do
 
         let(:params) { res.params }
         # required resources
-        let(:pre_condition) do
-          '
+        let(:pre_condition) { <<~PUPPETCODE }
           bareos::storage::device { "name":
             archive_device => "/dev/tape",
             media_type     => "DLT7000"
           }
-          '
-        end
+        PUPPETCODE
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_file(filename).with_content(res.content) }

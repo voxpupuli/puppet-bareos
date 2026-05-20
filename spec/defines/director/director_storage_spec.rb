@@ -73,16 +73,14 @@ describe 'bareos::director::storage' do
 
         let(:params) { res.params }
         # required resources
-        let(:pre_condition) do
-          '
+        let(:pre_condition) { <<~PUPPETCODE }
           bareos::director::storage { "name2":
             address => "127.0.0.1",
             device  => "Device",
             media_type => "File",
             password => "pw",
           }
-          '
-        end
+        PUPPETCODE
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_file(filename).with_content(res.content) }

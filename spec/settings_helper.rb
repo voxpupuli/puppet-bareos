@@ -48,9 +48,11 @@ class BareosResourceHelper
       val = {
         'x' => 'y',
       }
-      result = '{
-    x = y
-  }'
+      result = <<~RESULT.chomp
+        {
+            x = y
+          }
+      RESULT
     when 'backup_level'
       val = 'full'
     when 'io_direction'
