@@ -7,9 +7,7 @@ describe 'bareos::monitor::director' do
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
-      let :facts do
-        os_facts
-      end
+      let(:facts) { os_facts }
 
       filename = '/etc/bareos/tray-monitor.d/director/name.conf'
 

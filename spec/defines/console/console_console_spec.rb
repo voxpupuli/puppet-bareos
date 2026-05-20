@@ -3,16 +3,11 @@
 require 'spec_helper'
 
 describe 'bareos::console::console' do
-  let :node do
-    'rspec.puppet.com'
-  end
   let(:title) { 'name' }
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
-      let :facts do
-        os_facts
-      end
+      let(:facts) { os_facts }
 
       filename = '/etc/bareos/bconsole.d/console/name.conf'
 

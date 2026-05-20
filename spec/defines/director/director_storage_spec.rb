@@ -7,9 +7,7 @@ describe 'bareos::director::storage' do
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
-      let :facts do
-        os_facts
-      end
+      let(:facts) { os_facts }
 
       filename = '/etc/bareos/bareos-dir.d/storage/name.conf'
 
