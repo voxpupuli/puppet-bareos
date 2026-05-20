@@ -3,9 +3,11 @@
 require 'spec_helper'
 
 describe 'bareos::monitor::monitor' do
-  let(:title) { 'name' }
+  def filename
+    '/etc/bareos/tray-monitor.d/monitor/name.conf'
+  end
 
-  filename = '/etc/bareos/tray-monitor.d/monitor/name.conf'
+  let(:title) { 'name' }
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do

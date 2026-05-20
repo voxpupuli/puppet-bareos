@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 describe 'bareos::director::director' do
-  filename = '/etc/bareos/bareos-dir.d/director/bareos-dir.conf'
+  def filename
+    '/etc/bareos/bareos-dir.d/director/bareos-dir.conf'
+  end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do

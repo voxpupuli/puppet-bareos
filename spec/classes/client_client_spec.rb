@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 describe 'bareos::client::client' do
-  filename = '/etc/bareos/bareos-fd.d/client/bareos-fd.conf'
+  def filename
+    '/etc/bareos/bareos-fd.d/client/bareos-fd.conf'
+  end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do

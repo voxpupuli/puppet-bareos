@@ -3,13 +3,15 @@
 require 'spec_helper'
 
 describe 'bareos::director::fileset' do
+  def filename
+    '/etc/bareos/bareos-dir.d/fileset/name.conf'
+  end
+
   let(:title) { 'name' }
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
-
-      filename = '/etc/bareos/bareos-dir.d/fileset/name.conf'
 
       context 'with default values for all parameters' do
         it { is_expected.to compile.with_all_deps }

@@ -3,9 +3,11 @@
 require 'spec_helper'
 
 describe 'bareos::storage::device' do
-  let(:title) { 'name' }
+  def filename
+    '/etc/bareos/bareos-sd.d/device/name.conf'
+  end
 
-  filename = '/etc/bareos/bareos-sd.d/device/name.conf'
+  let(:title) { 'name' }
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do

@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 describe 'bareos::storage::storage' do
-  filename = '/etc/bareos/bareos-sd.d/storage/bareos-sd.conf'
+  def filename
+    '/etc/bareos/bareos-sd.d/storage/bareos-sd.conf'
+  end
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do

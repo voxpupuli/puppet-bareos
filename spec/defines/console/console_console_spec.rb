@@ -3,13 +3,15 @@
 require 'spec_helper'
 
 describe 'bareos::console::console' do
+  def filename
+    '/etc/bareos/bconsole.d/console/name.conf'
+  end
+
   let(:title) { 'name' }
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
-
-      filename = '/etc/bareos/bconsole.d/console/name.conf'
 
       context 'with default values for all parameters will fail' do
         it { is_expected.to compile.and_raise_error(%r{.*}) }
