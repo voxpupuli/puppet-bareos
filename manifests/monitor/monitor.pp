@@ -1,5 +1,8 @@
-# @summary  
-#   The Monitor resource defines the attributes of the Monitor running on the network. 0The parameters you define here must be configured as a Director resource in Clients and Storages configuration files, and as a Console resource in Directors configuration files.
+# @summary Manage a Bareos Tray Monitor's Console->Monitor resource
+#
+# The Monitor resource defines the attributes of the Monitor running on the network.  The parameters
+# you define here must be configured as a Director resource in Clients' and Storages' configuration
+# files, and as a Console resource in Director's configuration files.
 #
 # @param ensure
 #   present or absent the config file.

@@ -1,6 +1,7 @@
-# @summary 
-#   To define on what physical device the Volumes should be mounted.
-#   You may have one or more Storage definitions.
+# @summary Manage a Bareos Dir->Storage resource for the Director
+#
+# The Storage resource defines which Storage daemons are available for use by the Director.
+#
 # @param ensure
 #   present or absent the config file.
 # @param address

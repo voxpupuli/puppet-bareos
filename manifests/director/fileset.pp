@@ -1,6 +1,10 @@
-# @summary 
-#   To define the set of files to be backed up for each Client.
-#   You may have any number of FileSets but each Job will reference only one.
+# @summary Manage a Bareos Dir->Fileset resource for the Director
+#
+# The FileSet resource defines what files are to be included or excluded in a backup job. Each
+# backup Job must reference a FileSet resource.  It consists of a list of files or directories to be
+# included, a list of files or directories to be excluded, and the various backup options such as
+# compression, encryption, and signatures that are to be applied to each file.
+#
 # @param ensure
 #   present or absent the config file.
 # @param description

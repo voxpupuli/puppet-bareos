@@ -1,4 +1,4 @@
-# == Class: bareos::params
+# @summary Parameter default setup for the Bareos module
 #
 class bareos::params {
   $file_mode = '0660'

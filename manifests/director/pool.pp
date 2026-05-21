@@ -1,5 +1,8 @@
-# @summary 
-#   To define the pool of Volumes that can be used for a particular Job. Most people use a single default Pool. However, if you have a large number of clients or volumes, you may want to have multiple Pools. Pools allow you to restrict a Job (or a Client) to use only a particular set of Volumes.
+# @summary Manage a Bareos Dir->Pool resource for the Director
+#
+# The Pool resource defines the set of storage Volumes (tapes or files) to be used by Bareos to
+# write the data.  By configuring different Pools, you can determine which set of Volumes (media)
+# receives the backup data.
 #
 # @param ensure
 #   present or absent the config file.

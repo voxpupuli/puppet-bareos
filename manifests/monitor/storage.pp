@@ -1,5 +1,7 @@
-# @summary
-#   The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
+# @summary Manage a Bareos Console->Storage resource for the Tray Monitor
+#
+# The Storage resource defines the attributes of the Storages that are monitored by this Monitor.
+#
 # @param ensure
 #   present or absent the config file.
 # @param address

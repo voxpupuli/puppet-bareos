@@ -1,5 +1,8 @@
-# @summary 
-#   The Director resource defines the name and password of the Directors that are permitted to contact this Client.
+# @summary Manage a Bareos Client's Fd->Director resource
+#
+# The Director resource defines the name and password of the Directors that are permitted to contact
+# this Client.
+#
 # @param ensure
 #   present or absent the config file.
 # @param address

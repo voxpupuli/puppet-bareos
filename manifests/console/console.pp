@@ -1,3 +1,8 @@
+# @summary Manage a Bareos Console's Console->Console resource
+#
+# The Console is used by the administrator or user to interact with the Director.  You may specify
+# as many Console resources as you need in the console's config file.
+#
 # @param ensure
 #   present or absent the config file.
 # @param description

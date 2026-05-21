@@ -3,10 +3,12 @@
 require 'resolv'
 
 module Puppet::Parser::Functions
-  newfunction(:bareos_settings, type: :rvalue, doc: <<-ENDHEREDOC) do |args|
-    Helper function to parse settings for bareos and return prepared lines for config file
-  ENDHEREDOC
+  newfunction(:bareos_settings, type: :rvalue, doc: <<-ENDHEREDOC
+    @summary Helper function to parse settings for bareos and return prepared lines for config file
 
+    @return [String] The rendered line (or lines) of the Bareos configuration
+  ENDHEREDOC
+  ) do |args|
     final_settings = []
     args.each do |setting|
       raise 'Invalid or incomplete setting' unless setting.length > 2 && setting.is_a?(Array)

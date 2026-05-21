@@ -1,5 +1,9 @@
-# @summary
-#   Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters should be configured in the bareos class. This class will be automatically included when a resource is defined. It is not intended to be used directly by external resources like node definitions or other modules.
+# @summary Manage a Bareos Client (File Daemon)
+#
+# Manages the bareos client (file-daemon) service, packages and configuration directory. Parameters
+# should be configured in the bareos class. This class will be automatically included when a
+# resource is defined. It is not intended to be used directly by external resources like node
+# definitions or other modules.
 #
 # @param manage_service
 # @param manage_package

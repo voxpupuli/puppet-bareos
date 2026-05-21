@@ -1,5 +1,8 @@
-# @summary
-#   Configure a **PAM-authenticated Console User**.
+# @summary Manage a Bareos Dir->User resource for the Director
+#
+# Each user who wants to login using PAM needs a dedicated User Resource in the Bareos Director
+# configuration.  The main purpose is to configure ACLs; they are the same as in the Console and
+# Profile resources.
 #
 # @param ensure
 #   Whether the config file should be present or absent.

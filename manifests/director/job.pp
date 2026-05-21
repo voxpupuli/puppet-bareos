@@ -1,5 +1,11 @@
-# @summary
-#   To define the backup/restore Jobs and to tie together the Client, FileSet and Schedule resources to be used for each Job. Normally, you will Jobs of different names corresponding to each client (i.e. one Job per client, but a different one with a different name for each client).
+# @summary Manage a Bareos Dir->Job resource for the Director
+#
+# The Job resource defines a Job (Backup, Restore, etc.) that Bareos must perform.  Each Job resource
+# definition contains the name of a Client and a FileSet to backup, the Schedule for the Job, where
+# the data are to be stored, and what media Pool can be used.  In effect, each Job resource must
+# specify What, Where, How, and When or FileSet, Storage, Backup/Restore/Level, and Schedule
+# respectively.  Note, the FileSet must be specified for a restore job for historical reasons, but
+# it is no longer used.
 #
 # @param ensure
 #   present or absent the config file.

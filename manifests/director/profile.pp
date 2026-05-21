@@ -1,5 +1,7 @@
-# @summary 
-#   Defines a set of ACLs. Console Resources can be tied to one or more profiles, making it easier to use a common set of ACLs.
+# @summary Manage a Bareos Dir->Profile resource for the Director
+#
+# The Profile Resource defines a set of ACLs.  Console Resource can be tied to one or more profiles
+# (`Profile (Dir->Console)`), making it easier to use a common set of ACLs.
 #
 # @param ensure
 #   present or absent the config file.

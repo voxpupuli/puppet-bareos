@@ -1,5 +1,8 @@
-# @summary 
-#   To define in what database to keep the list of files and the Volume names where they are backed up. Most people only use a single catalog. It is possible, however not adviced and not supported to use multiple catalogs.
+# @summary Manage a Bareos Dir->Catalog resource for the Director
+#
+# The Catalog Resource defines what catalog to use for the current job.  The catalog is the database
+# that keeps the list of files and the Volume names where they are backed up.  It is possible,
+# however not advised or supported, to use multiple catalogs.
 #
 # @param ensure
 #   present or absent the config file.

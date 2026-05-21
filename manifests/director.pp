@@ -1,5 +1,8 @@
-# @summary 
-#   Manages the bareos director service, packages and configuration directory. Parameters should be configured in the bareos class.
+# @summary Manage a Bareos Director
+#
+# Manages the bareos director service, packages and configuration directory. Parameters should be
+# configured in the bareos class.
+#
 # @param manage_service
 # @param manage_package
 # @param manage_database

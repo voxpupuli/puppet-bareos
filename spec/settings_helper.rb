@@ -48,9 +48,11 @@ class BareosResourceHelper
       val = {
         'x' => 'y',
       }
-      result = '{
-    x = y
-  }'
+      result = <<~RESULT.chomp
+        {
+            x = y
+          }
+      RESULT
     when 'backup_level'
       val = 'full'
     when 'io_direction'
@@ -109,7 +111,7 @@ class BareosResourceHelper
   # build content to compare with created file
   def content
     tmp = "# This file is managed by puppet\n#{@resource} {\n"
-    @config.each do |_, v|
+    @config.each_value do |v|
       tmp = "#{tmp}  #{v['dir']}#{v['sep']}#{v['res']}\n"
     end
     "#{tmp}}\n"

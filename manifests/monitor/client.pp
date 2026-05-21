@@ -1,5 +1,7 @@
-# @summary 
-#   The Client resource defines the attributes of the Clients that are monitored by this Monitor.
+# @summary Manage a Bareos Console->Client resource for the Tray Monitor
+#
+# The Client resource defines the attributes of the Clients that are monitored by this Monitor.
+#
 # @param ensure
 #   present or absent the config file.
 # @param address

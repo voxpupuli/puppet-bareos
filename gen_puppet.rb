@@ -115,7 +115,7 @@ puts ") {
   if $ensure == 'present' {
 "
 # pre-check enums
-enums.each do |directive, _schema|
+enums.each_key do |directive|
   puts "    unless $#{directive.underscore} == undef or $#{directive.underscore} in [ undef ] {"
   puts "      fail(\"Invalid value for #{directive.underscore}: ${#{directive.underscore}}\")"
   puts '    }'

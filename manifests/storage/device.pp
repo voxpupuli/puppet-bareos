@@ -1,5 +1,8 @@
-# @summary 
-#   The Device Resource specifies the details of each device (normally a tape drive) that can be used by the Storage daemon. There may be multiple Device resources for a single Storage daemon. In general, the properties specified within the Device resource are specific to the Device.
+# @summary Manage a Bareos Sd->Device resource for the Storage Daemon
+#
+# The Device Resource specifies the details of each device (normally a tape drive) that can be used
+# by the Storage daemon.  There may be multiple Device resources for a single Storage daemon.  In
+# general, the properties specified within the Device resource are specific to the Device.
 #
 # @param ensure
 #   present or absent the config file.

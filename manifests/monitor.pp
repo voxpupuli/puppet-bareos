@@ -1,5 +1,7 @@
-# @summary 
-#   Manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured in the bareos class.
+# @summary Manage a Bareos Tray Monitor
+#
+# Manages the bareos (tray-) monitor package and configuration directory. Parameters should be configured in the bareos class.
+#
 # @param manage_package
 # @param package_name
 # @param package_ensure

@@ -1,5 +1,8 @@
-# @summary 
-#   Defines where error and information messages are to be sent or logged. You may define multiple different message resources and hence direct particular classes of messages to different users or locations (files, ...).
+# @summary Manage a Bareos Dir->Messages resource for the Director
+#
+# The Messages resource defines how messages are to be handled and destinations to which they should
+# be sent.  You may define multiple different message resources to direct particular message classes
+# to different users, locations, or files.
 #
 # @param ensure
 #   present or absent the config file.

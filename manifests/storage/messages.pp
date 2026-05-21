@@ -1,5 +1,8 @@
-# @summary 
-#   The Messages resource defines how messages are to be handled and destinations to which they should be sent.
+# @summary Manage a Bareos Sd->Messages resource for the Storage Daemon
+#
+# The Messages resource defines how messages are to be handled and destinations to which they should
+# be sent.
+#
 # @param ensure
 #   present or absent the config file.
 # @param append

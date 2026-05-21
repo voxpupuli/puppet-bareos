@@ -1,0 +1,104 @@
+# frozen_string_literal: true
+
+require 'spec_helper'
+
+describe 'bareos::director::client' do
+  def filename
+    '/etc/bareos/bareos-dir.d/client/name.conf'
+  end
+
+  let(:title) { 'name' }
+
+  on_supported_os.each do |os, os_facts|
+    context "on #{os}" do
+      let(:facts) { os_facts }
+
+      context 'with default values for all parameters will fail' do
+        it { is_expected.to compile.and_raise_error(%r{.*}) }
+      end
+
+      context 'with required values' do
+        let(:params) { { 'password' => 'password', 'address' => '127.0.0.1' } }
+
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_class('bareos::director')
+          is_expected.to contain_file(filename)
+            .with_content(%r{^Client \{$})
+            .with_content(%r{Name = "name"$})
+            .with_tag(%w[bareos bareos_director])
+        end
+      end
+
+      context 'with all params set' do
+        def res_helper
+          BareosResourceHelper
+            .new('Client')
+            .param('name', 'Name', 'name')
+            .param('description', 'Description', 'string')
+            .param('address', 'Address', 'string')
+            .param('auth_type', 'Auth Type', 'auth_type')
+            .param('auto_prune', 'Auto Prune', 'boolean')
+            .param('catalog', 'Catalog', 'res')
+            .param('connection_from_client_to_director', 'Connection From Client To Director', 'boolean')
+            .param('connection_from_director_to_client', 'Connection From Director To Client', 'boolean')
+            .param('enabled', 'Enabled', 'boolean')
+            .param('file_retention', 'File Retention', 'time')
+            .param('hard_quota', 'Hard Quota', 'size64')
+            .param('heartbeat_interval', 'Heartbeat Interval', 'time')
+            .param('job_retention', 'Job Retention', 'time')
+            .param('maximum_bandwidth_per_job', 'Maximum Bandwidth Per Job', 'speed')
+            .param('maximum_concurrent_jobs', 'Maximum Concurrent Jobs', 'pint32')
+            .param('ndmp_block_size', 'Ndmp Block Size', 'pint32')
+            .param('ndmp_log_level', 'Ndmp Log Level', 'pint32')
+            .param('ndmp_use_lmdb', 'Ndmp Use Lmdb', 'boolean')
+            .param('passive', 'Passive', 'boolean')
+            .param('password', 'Password', 'autopassword')
+            .param('port', 'Port', 'pint32')
+            .param('protocol', 'Protocol', 'auth_protocol_type')
+            .param('quota_include_failed_jobs', 'Quota Include Failed Jobs', 'boolean')
+            .param('soft_quota', 'Soft Quota', 'size64')
+            .param('soft_quota_grace_period', 'Soft Quota Grace Period', 'time')
+            .param('strict_quotas', 'Strict Quotas', 'boolean')
+            .param('tls_allowed_cn', 'Tls Allowed Cn', 'string_list')
+            .param('tls_authenticate', 'Tls Authenticate', 'boolean')
+            .param('tls_ca_certificate_dir', 'Tls Ca Certificate Dir', 'directory')
+            .param('tls_ca_certificate_file', 'Tls Ca Certificate File', 'directory')
+            .param('tls_certificate', 'Tls Certificate', 'directory')
+            .param('tls_certificate_revocation_list', 'Tls Certificate Revocation List', 'directory')
+            .param('tls_cipher_list', 'Tls Cipher List', 'string')
+            .param('tls_dh_file', 'Tls Dh File', 'directory')
+            .param('tls_enable', 'Tls Enable', 'boolean')
+            .param('tls_key', 'Tls Key', 'directory')
+            .param('tls_require', 'Tls Require', 'boolean')
+            .param('tls_verify_peer', 'Tls Verify Peer', 'boolean')
+            .param('username', 'Username', 'string')
+        end
+
+        let(:params) { res_helper.params }
+        let(:content) { res_helper.content }
+        # required resources
+        let(:pre_condition) { <<~PUPPETCODE }
+          bareos::director::catalog { "name":
+            db_driver => "postgresql",
+            db_name   => "test",
+          }
+        PUPPETCODE
+
+        it do
+          is_expected.to compile.with_all_deps
+          is_expected.to contain_file(filename)
+            .with_content(content)
+            .that_notifies('Service[bareos-dir]')
+            .that_requires('Bareos::Director::Catalog[name]')
+        end
+      end
+
+      context 'with ensure absent' do
+        let(:params) { { 'ensure' => 'absent' } }
+
+        it { is_expected.to contain_file(filename).with_ensure('absent') }
+      end
+    end
+  end
+end
