@@ -1,5 +1,9 @@
-# @summary
-#   In general, the properties specified under the Storage resource dene global properties of the Storage daemon.
+# @summary Manage a Bareos Storage Daemon's Sd->Storage resource
+#
+# In general, the properties specified under the Storage resource define global properties of the
+# Storage daemon.  Each Storage daemon configuration must have one and only one Storage resource
+# definition.
+#
 # @param ensure
 #   present or absent the config file.
 # @param absolute_job_timeout

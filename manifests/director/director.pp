@@ -1,5 +1,7 @@
-# @summary
-#   To define the director's name and its access password used for authenticating the console program. Only a single director resource definition may appear in the director's configuration file.
+# @summary Manage a Bareos Director's Dir->Director resource
+#
+# The Director resource defines the attributes of the Director's running on the network. Only a
+# single Director resource is allowed.
 #
 # @param ensure
 #   present or absent the config file.

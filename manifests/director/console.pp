@@ -1,5 +1,9 @@
-# @summary
-#   Configure an **Named Console** aka **Restricted Console**. Both the names and the passwords in these two entries must match much as is the case for Client programs.
+# @summary Manage a Bareos Dir->Console resource for the Director
+#
+# Manage the Director's side of a **Named Console** (also called a **Restricted Console**)
+# definition.  The names and passwords in the Director's config and the Console's config must match
+# much as is the case for Client programs.  The Console is used by an administrator or user to
+# interact with the Director.
 #
 # @param ensure
 #   present or absent the config file.

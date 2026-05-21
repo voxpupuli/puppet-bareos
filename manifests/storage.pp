@@ -1,5 +1,8 @@
-# @summary
-#   Manages the bareos storage service, packages and configuration directory. Parameters should be configured in the bareos class.
+# @summary Manage a Bareos Storage Daemon
+#
+# Manages the Bareos Storage Daemon service, packages and configuration directory. Parameters should
+# be configured in the bareos class.
+#
 # @param manage_service
 # @param manage_package
 # @param package_name

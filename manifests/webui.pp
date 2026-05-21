@@ -1,5 +1,7 @@
-# @summary
-#  This class manages the bareos webui service, package and configuration, it will be automatically included when a resource is defined.
+# @summary Manage the Bareos WebUI
+#
+# Manage the Bareos WebUI service, package and configuration.  Automatically included when a
+# resource is defined.
 #
 # @param manage_service
 # @param manage_package

@@ -1,5 +1,7 @@
-# @summary 
-#   Configures an director to use with the webui.
+# @summary Manage a Director for use with the Bareos WebUI
+#
+# Configures a Director to use with the WebUI.
+#
 # @param ensure
 #   present or absent the config file.
 # @param catalog

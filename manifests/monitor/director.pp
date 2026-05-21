@@ -1,5 +1,7 @@
-# @summary 
-#   The Director resource defines the attributes of the Directors that are monitored by this Monitor.
+# @summary Manage a Bareos Console->Director resource for the Tray Monitor
+#
+# The Director resource defines the attributes of the Directors that are monitored by this Monitor.
+#
 # @param ensure
 #   present or absent the config file.
 # @param address

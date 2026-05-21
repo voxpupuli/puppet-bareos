@@ -1,4 +1,4 @@
-# @summary This puppet module configures and manage all aspects of an complex bareos installation
+# @summary Configure and manage all aspects of a complex Bareos installation
 #
 # @author Richard Hillmann <richie@project0.de>
 #

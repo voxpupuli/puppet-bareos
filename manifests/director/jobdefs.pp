@@ -1,6 +1,11 @@
-# @summary
-#   JobDefs are optional resources for providing defaults for Job resources.
-#   Almost the same like `Job`.
+# @summary Manage a Bareos Dir->JobDefs resource for the Director
+#
+# The JobDefs resource permits all the same directives that can appear in a Job resource. However, a
+# JobDefs resource does not create a Job; rather, it can be referenced within a Job to provide
+# defaults for that Job. This permits you to concisely define several nearly identical Jobs, each
+# one referencing a JobDefs resource which contains the defaults. Only the changes from the defaults
+# need to be mentioned in each Job.
+#
 # @param ensure
 #   present or absent the config file.
 # @param accurate

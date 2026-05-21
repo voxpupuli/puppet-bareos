@@ -1,7 +1,9 @@
-# @summary 
-#   To define what Client is to be backed up.
-#   You will generally have multiple Client definitions.
-#   Each Job will reference only a single client.
+# @summary Manage a Bareos Dir->Client resource for the Director
+#
+# A Client resource defines the attributes of one Client served by this Director; that is, one
+# machine that is to be backed up. You will need one Client resource definition for each machine to
+# be backed up.
+#
 # @param ensure
 #   present or absent the config file.
 # @param address

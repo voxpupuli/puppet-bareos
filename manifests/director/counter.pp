@@ -1,5 +1,7 @@
-# @summary 
-#   The Counter Resource defines a counter variable that can be accessed by variable expansion used for creating Volume labels with the Label Format Dir Pool directive.
+# @summary Manage a Bareos Dir->Counter resource for the Director
+#
+# The Counter Resource defines a counter variable that can be accessed by variable expansion used
+# for creating Volume labels with the `Label Format (Dir->Pool)` directive.
 #
 # @param ensure
 #   present or absent the config file.
