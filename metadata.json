@@ -1,6 +1,6 @@
 {
   "name": "puppet-bareos",
-  "version": "1.0.1-rc0",
+  "version": "2.0.0",
   "author": "Vox Pupulii <voxpupuli@groups.io>",
   "summary": "Manage and configure a Bareos installation",
   "license": "Apache-2.0",
