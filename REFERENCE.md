@@ -11365,4 +11365,3 @@ Alias of `Variant[String, Array[String]]`
 Bareos Resource data type
 
 Alias of `Pattern[/(?i:^[a-z][a-z0-9\.\-_ \$]{0,126}$)/]`
-
