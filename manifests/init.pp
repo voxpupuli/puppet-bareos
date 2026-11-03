@@ -117,4 +117,7 @@ class bareos (
     group        => $bareos::file_group,
     tag          => ['bareos', 'bareos_core'],
   }
+
+  # The packages create files in the config dir, so purge it only after they are installed
+  Package <| tag == 'bareos' |> -> File[$config_dir]
 }

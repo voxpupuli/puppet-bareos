@@ -33,6 +33,10 @@ describe 'bareos' do
             .with_apt_key_content('test_key_content')
         end
       end
+
+      it 'purges the config dir after installing the packages' do
+        is_expected.to contain_file('/etc/bareos').that_requires('Package[bareos-common]')
+      end
     end
   end
 end
