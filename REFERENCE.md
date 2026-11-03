@@ -2299,7 +2299,7 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-Required content (or use apt_key_source) for the keyring as it cannot be downloaded here
+Required content (or use apt_key_source) for the ASCII-armored keyring as it cannot be downloaded here
 
 Default value: `undef`
 
@@ -2307,7 +2307,7 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-Required source (or use apt_key_content) for the keyring as it cannot be downloaded here
+Required source (or use apt_key_content) for the ASCII-armored keyring as it cannot be downloaded here
 
 Default value: `undef`
 
