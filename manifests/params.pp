@@ -8,6 +8,11 @@ class bareos::params {
   $config_dir = '/etc/bareos'
   $config_dir_webui = '/etc/bareos-webui'
 
+  $python_plugin = $facts['os']['family'] ? {
+    'Debian' => 'python3-plugin',
+    default  => 'python-plugin',
+  }
+
   # service/package specific
   # bconsole
   $console_package_name = 'bareos-bconsole'
@@ -18,7 +23,7 @@ class bareos::params {
   # director
   $director_package_name = [
     'bareos-director',
-    'bareos-director-python-plugin',
+    "bareos-director-${python_plugin}",
     'bareos-database-common',
     'bareos-database-postgresql',
     'bareos-database-tools',
@@ -42,11 +47,11 @@ class bareos::params {
   ]
 
   # filedaemon/client
-  $client_package_name = ['bareos-filedaemon', 'bareos-filedaemon-python-plugin']
+  $client_package_name = ['bareos-filedaemon', "bareos-filedaemon-${python_plugin}"]
   $client_service_name = 'bareos-fd'
 
   # storage
-  $storage_package_name = ['bareos-storage', 'bareos-storage-python-plugin', 'bareos-tools']
+  $storage_package_name = ['bareos-storage', "bareos-storage-${python_plugin}", 'bareos-tools']
   $storage_service_name = 'bareos-sd'
 
   # webui

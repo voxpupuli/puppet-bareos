@@ -17,6 +17,11 @@ describe 'bareos::client' do
           is_expected.to contain_file('/etc/bareos').that_requires('Package[bareos-filedaemon]')
         end
       end
+
+      it 'installs the python plugin package' do
+        plugin = (os_facts[:os]['family'] == 'Debian') ? 'python3-plugin' : 'python-plugin'
+        is_expected.to contain_package("bareos-filedaemon-#{plugin}")
+      end
     end
   end
 end
