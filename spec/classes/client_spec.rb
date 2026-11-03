@@ -12,6 +12,10 @@ describe 'bareos::client' do
           is_expected.to compile.with_all_deps
           is_expected.to contain_class('bareos')
         end
+
+        it 'purges the config dir after installing the client packages' do
+          is_expected.to contain_file('/etc/bareos').that_requires('Package[bareos-filedaemon]')
+        end
       end
     end
   end
