@@ -98,6 +98,7 @@ class bareos::repository (
         gpgkey   => "${location}/repodata/repomd.xml.key",
         priority => '1',
       }
+      Yumrepo['bareos'] -> Package <| tag == 'bareos' |>
     }
     'Debian': {
       if $subscription {
@@ -135,8 +136,8 @@ class bareos::repository (
         types         => ['deb',],
         require       => Apt::Keyring[$key_ring_fn],
       }
-      Apt::Source['bareos'] -> Package <| provider == 'apt' |>
-      Class['Apt::Update']  -> Package <| provider == 'apt' |>
+      Apt::Source['bareos'] -> Package <| tag == 'bareos' |>
+      Class['Apt::Update']  -> Package <| tag == 'bareos' |>
     }
     'windows': {}
     default: { fail('Operatingsystem is not supported by this module') }
