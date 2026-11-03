@@ -12,6 +12,15 @@ describe 'bareos' do
           is_expected.to compile.with_all_deps
           is_expected.to contain_class('bareos')
         end
+
+        it 'orders the packages after the repository' do
+          case os_facts[:os]['family']
+          when 'Debian'
+            is_expected.to contain_package('bareos-common').that_requires(['Apt::Source[bareos]', 'Class[Apt::Update]'])
+          when 'RedHat'
+            is_expected.to contain_package('bareos-common').that_requires('Yumrepo[bareos]')
+          end
+        end
       end
 
       context 'with a subscription repository configured,' do
