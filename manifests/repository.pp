@@ -14,9 +14,9 @@
 # @param password
 #   The password is required for accessing subscription content
 # @param apt_key_content
-#   Required content (or use apt_key_source) for the keyring as it cannot be downloaded here
+#   Required content (or use apt_key_source) for the ASCII-armored keyring as it cannot be downloaded here
 # @param apt_key_source
-#   Required source (or use apt_key_content) for the keyring as it cannot be downloaded here
+#   Required source (or use apt_key_content) for the ASCII-armored keyring as it cannot be downloaded here
 #
 class bareos::repository (
   Enum['19.2', '20', '21', '22', '23', '24', '25'] $release = '25',
@@ -113,7 +113,7 @@ class bareos::repository (
       }
 
       include apt
-      $key_ring_fn = 'bareos-keyring.gpg'
+      $key_ring_fn = 'bareos-keyring.asc'
       if $subscription {
         $apt_keyring_args = {
           source  => $apt_key_source,
