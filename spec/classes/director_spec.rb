@@ -12,6 +12,11 @@ describe 'bareos::director' do
           is_expected.to compile.with_all_deps
           is_expected.to contain_class('bareos')
         end
+
+        it 'installs the python plugin package' do
+          plugin = (os_facts[:os]['family'] == 'Debian') ? 'python3-plugin' : 'python-plugin'
+          is_expected.to contain_package("bareos-director-#{plugin}")
+        end
       end
 
       context 'with a catalog configured,' do

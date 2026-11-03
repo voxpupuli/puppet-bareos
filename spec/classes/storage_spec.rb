@@ -12,6 +12,11 @@ describe 'bareos::storage' do
           is_expected.to compile.with_all_deps
           is_expected.to contain_class('bareos')
         end
+
+        it 'installs the python plugin package' do
+          plugin = (os_facts[:os]['family'] == 'Debian') ? 'python3-plugin' : 'python-plugin'
+          is_expected.to contain_package("bareos-storage-#{plugin}")
+        end
       end
 
       context 'with an autochanger and a device configured,' do
